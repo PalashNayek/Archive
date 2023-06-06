@@ -1,0 +1,354 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:s2w/presenter/shared_presenter.dart';
+import 'package:s2w/screens/searchPageScreen.dart';
+import 'package:s2w/widget/category_item.dart';
+import 'package:s2w/widget/post_widget.dart';
+
+import '../models/banner_model.dart';
+import '../models/post_list_model.dart';
+import '../models/profile_model.dart';
+import '../presenter/auth_presenter.dart';
+import '../presenter/post_presenter.dart';
+import '../utilities/app_common_helper.dart';
+import '../utils.dart';
+import '../widget/banner_item.dart';
+import 'create_post.dart';
+
+class HomeContent extends StatefulWidget {
+  @override
+  _HomeContentState createState() => _HomeContentState();
+}
+class _HomeContentState extends State<HomeContent> {
+  AuthPresenter _authPresenter = AuthPresenter();
+  SharedPresenter sharedPresenter= SharedPresenter();
+  List<BannerModel> bannerList=[];
+  AuthPresenter authPresenter= AuthPresenter();
+  ProfileModel profileModel=ProfileModel();
+  bool load=false,load2=false;
+  PostPresenter postPresenter= PostPresenter();
+  PostListModel postListModel=new PostListModel();
+  List<PostModelData> postListData=[];
+  int perPage  = 10;
+  int offset=0;
+  int present = 0;
+  @override
+  void initState() {
+    super.initState();
+
+    getData();
+    getPostDat(offset);
+  }
+  void getPostDat(int off){
+    postPresenter.getAllPost("",perPage,off).then((value) {
+      postListModel=value;
+      postListData.addAll(value.result as Iterable<PostModelData>);
+      load2=true;
+      setState(() {
+
+      });
+    });
+  }
+  void getData(){
+    sharedPresenter.getBanner().then((value) {
+      bannerList=value;
+      setState(() {
+
+      });
+    });
+    authPresenter.getProfile().then((value) {
+      profileModel=value;
+      load=true;
+      setState(() {
+
+      });
+    });
+
+  }
+  @override
+  Widget build(context) {
+
+    double baseWidth = 390;
+    double fem = MediaQuery.of(context).size.width / baseWidth;
+    double ffem = fem * 0.97;
+    return RefreshIndicator(child:  SingleChildScrollView (
+        physics: ScrollPhysics(),
+        child:
+        Container(
+          margin: EdgeInsets.only(bottom: 60),
+          width: double.infinity,
+          child: Container(
+            width: double.infinity,
+            decoration: BoxDecoration (
+              color: Color(0xffffffff),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Opacity(
+                  opacity: 0.99,
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(15*fem, 40*fem, 25*fem, 7*fem),
+                    width: double.infinity,
+                    height: 76*fem,
+                    decoration: BoxDecoration (
+                      color: Color(0xff080053),
+                      borderRadius: BorderRadius.only (
+                        bottomRight: Radius.circular(38*fem),
+                        bottomLeft: Radius.circular(38*fem),
+                      ),
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 155*fem, 0*fem),
+                          width: 126*fem,
+                          height: 47*fem,
+                          child: Image.asset(
+                            'assets/page-1/images/app_logo.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        IconButton(onPressed: (){
+                          Navigator.push(context,MaterialPageRoute(builder: (context) =>SearchPage()));
+
+                        }, icon:Icon(Icons.search,color: Colors.white,size: AppCommonHelper.isTablet(context)?40: 24,))
+                    
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(6*fem, 6*fem, 4*fem, 0*fem),
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(4*fem, 0*fem, 9*fem, 6*fem),
+                        width: double.infinity,
+                        height: 283*fem,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                              left: 5*fem,
+                              top: 0*fem,
+                              child:
+                              Container(
+                                width: 367*fem,
+                                height: 150*fem,
+                                child: bannerList.length>0? CarouselSlider.builder(itemCount: bannerList.length,
+                                      itemBuilder: (BuildContext context, int index, int realIdx) {
+                                      return BannerItem(bannerList.elementAt(index).image!);
+                                     },
+                                    options:  CarouselOptions(
+                                      height: AppCommonHelper.isTablet(context)?400:140.0,
+                                      enlargeCenterPage: true,
+                                      autoPlay: true,
+                                      aspectRatio: 16 / 9,
+                                      autoPlayCurve: Curves.fastOutSlowIn,
+                                      enableInfiniteScroll: true,
+                                      autoPlayAnimationDuration: Duration(milliseconds: 1000),
+                                      viewportFraction: 0.8,
+                                    ),):Image( width: 367*fem, height: 150*fem, image: AssetImage("assets/page-1/images/bannerdefaultimage.png"),),
+                              )
+
+                            ),
+
+                            //category Items
+
+                            Positioned(
+                              left: 0*fem,
+                              top: 143*fem,
+                              child: Container(
+                                width: 367*fem,
+                                height: 140*fem,
+                                decoration: BoxDecoration (
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0x0f2c3039),
+                                      offset: Offset(0*fem, 24*fem),
+                                      blurRadius: 32*fem,
+                                    ),
+                                  ],
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      left: 0*fem,
+                                      top: 11.5791015625*fem,
+                                      child: Align(
+                                        child: SizedBox(
+                                          width: 367*fem,
+                                          height: 128.42*fem,
+                                          child: Container(
+                                            decoration: BoxDecoration (
+                                              borderRadius: BorderRadius.circular(5*fem),
+                                              border: Border.all(color: Color(0xffe7e7e7)),
+                                              color: Color(0xffffffff),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      left: 16*fem,
+                                      top: 17*fem,
+                                      child: Align(
+                                        child: SizedBox(
+                                          width: 124*fem,
+                                          height: 15*fem,
+                                          child: Text(
+                                            'Moments cover for you',
+                                            style: SafeGoogleFont (
+                                              'Lato',
+                                              fontSize: 12*ffem,
+                                              fontWeight: FontWeight.w700,
+                                              height: 1.2*ffem/fem,
+                                              color: Color(0xff404040),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+
+                                    Positioned(
+                                      left: 16*fem,
+                                      top: 44*fem,
+                                      child: Container(
+                                        width: 342*fem,
+                                        height: 90*fem,
+                                        child: Row(
+                                          crossAxisAlignment: CrossAxisAlignment.end,
+                                          children: [
+                                            GestureDetector(
+                                            onTap: (){
+                                             Navigator.push(context,MaterialPageRoute(builder: (context) =>CreatePostScreen()));
+                                             },
+                                            child:
+                                            Container(
+                                               margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 16*fem, 0*fem),
+                                              width: 75*fem,
+                                              height: double.infinity,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  Container(
+                                                       margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 6*fem),
+                                                    width: double.infinity,
+                                                    height: 60*fem,
+                                                    child: Stack(
+                                                      children: [
+                                                        Positioned(
+                                                          left: 3*fem,
+                                                          top: 3*fem,
+                                                          child: Align(
+                                                            child: SizedBox(
+                                                              width: 54*fem,
+                                                              height: 54*fem,
+                                                              child: Container(
+                                                                decoration: BoxDecoration (
+                                                                  borderRadius: BorderRadius.circular(27*fem),
+                                                                  color: Color(0xff080053),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+
+                                                        Positioned(
+                                                          left: 9*fem,
+                                                          top: 9*fem,
+                                                          child: Align(
+                                                            child: SizedBox(
+                                                              width: 42*fem,
+                                                              height: 42*fem,
+                                                              child: TextButton(
+                                                                onPressed: () {
+                                                                  Navigator.push(context,MaterialPageRoute(builder: (context) =>CreatePostScreen()));
+
+                                                                },
+                                                                style: TextButton.styleFrom (
+                                                                  padding: EdgeInsets.zero,
+                                                                ),
+                                                                child: Image.asset(
+                                                                  'assets/page-1/images/add.png',
+                                                                  fit: BoxFit.cover,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  Center(
+                                                    child: Text(
+                                                      'ADD POST'.tr(),
+                                                      textAlign: TextAlign.center,
+                                                      style: SafeGoogleFont (
+                                                        'Lato',
+                                                        fontSize: 14*ffem,
+                                                        fontWeight: FontWeight.w400,
+                                                        height: 1*ffem/fem,
+                                                        color: Color(0xff000000),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )),
+
+                                           load? CategoryItem(profileModel.user!.primaryInetrest!.name.toString(),profileModel.user!.primaryInetrest!.image.toString()):Container(),
+                                            load?  CategoryItem(profileModel.user!.secondaryInetrest!.name.toString(),profileModel.user!.secondaryInetrest!.image.toString()):Container(),
+                                           load? CategoryItem(profileModel.user!.thirdInetrest!.name.toString(),profileModel.user!.thirdInetrest!.image.toString()):Container(),
+
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    
+
+                    ],
+                  ),
+                ),
+                
+               load2? ListView.builder(itemCount:   postListData.length+1 ,
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, i) {
+                    return (i ==postListData.length ) ?
+                    Container(
+                        margin: EdgeInsets.only(left: 20,right: 20),
+                        child:ElevatedButton(
+                        child: Text("Load More"),
+                        onPressed: () {
+                          offset=offset+perPage;
+                          getPostDat(offset);
+                        },
+                    ))
+                        :PostWidgetItem(postListData.elementAt(i),profileModel);
+                  },):CircularProgressIndicator()
+              ],
+            ),
+          ),
+        )),onRefresh: _pullRefresh,);
+  }
+  Future<void> _pullRefresh() async {
+    getData();
+    getPostDat(0);
+  }
+
+}

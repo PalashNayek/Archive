@@ -1,0 +1,38 @@
+{
+  "data": [
+    {
+      "language": "English",
+      "languageCode": "en"
+    },
+    {
+      "language": "Hindi",
+      "languageCode": "hi"
+    },
+    {
+      "language": "Bengali",
+      "languageCode": "bn"
+    },
+    {
+      "language": "kannada",
+      "languageCode": "kn"
+    },
+    {
+      "language": "Urdu",
+      "languageCode": "ar"
+    },
+    {
+      "language": "Telugu",
+      "languageCode": "te"
+    },
+    {
+      "language": "Tamil",
+      "languageCode": "ta"
+    },{
+      "language": "Punjabi",
+      "languageCode": "pa"
+    },{
+      "language": "Marathi",
+      "languageCode": "mr"
+    }
+  ]
+}
