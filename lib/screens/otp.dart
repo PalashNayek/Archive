@@ -90,6 +90,7 @@ class OTPScreen extends StatefulWidget{
     return
       Scaffold(resizeToAvoidBottomInset:true,
         body: SingleChildScrollView(child: Container(
+          padding: EdgeInsets.only(top: 7),
            width: double.infinity,
            child: Container(
          width: double.infinity,
@@ -137,7 +138,7 @@ class OTPScreen extends StatefulWidget{
             ),
           Container(
             width: width,
-            height: AppCommonHelper.isTablet(context)?700:300*fem,
+            height: AppCommonHelper.isTablet(context)?700:380*fem,
             decoration: BoxDecoration (
             border: Border.all(color: Color(0xffd0cbff)),
             color: Color(0xffffffff),
@@ -161,7 +162,7 @@ class OTPScreen extends StatefulWidget{
                 left:30*fem,
                 top: AppCommonHelper.isTablet(context)?230:109*fem,
                 child: Container(
-                 width: AppCommonHelper.isTablet(context)?width:327*fem,
+                 width: AppCommonHelper.isTablet(context)?width:500*fem,
                  height: 60*fem,
                  decoration: BoxDecoration (
                  borderRadius: BorderRadius.circular(5*fem),
@@ -176,11 +177,11 @@ class OTPScreen extends StatefulWidget{
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   OtpInput(_fieldOne, true),
-                  SizedBox(width: AppCommonHelper.isTablet(context)?50: 20,),// auto focus
+                  SizedBox(width: AppCommonHelper.isTablet(context)?30: 20,),// auto focus
                   OtpInput(_fieldTwo, false),
-                  SizedBox(width: AppCommonHelper.isTablet(context)?50:20,),
+                  SizedBox(width: AppCommonHelper.isTablet(context)?30:20,),
                   OtpInput(_fieldThree, false),
-                  SizedBox(width: AppCommonHelper.isTablet(context)?50:20,),
+                  SizedBox(width: AppCommonHelper.isTablet(context)?30:20,),
                   OtpInput(_fieldFour, false)
                      ],
                     ),

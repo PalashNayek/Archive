@@ -46,8 +46,7 @@ class _NotificationContentState extends State<NotificationContent> {
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
-    return
-      Container(
+    return Container(
       width: double.infinity,
       color: Colors.white,
       child: Container(

@@ -25,7 +25,7 @@ class LoginScreen extends StatefulWidget{
 
   TextEditingController mobileController=TextEditingController();
   bool term=true;
-  PhoneNumber phoneNumber= new PhoneNumber(countryISOCode: 'IN', countryCode: 'IN', number: '');
+  PhoneNumber phoneNumber= PhoneNumber(countryISOCode: 'IN', countryCode: 'IN', number: '');
   FocusNode focusNodeMobile= FocusNode();
   @override
   Widget build(BuildContext context) {
@@ -37,12 +37,13 @@ class LoginScreen extends StatefulWidget{
     return  Scaffold(
         resizeToAvoidBottomInset:true,
         body: SingleChildScrollView(
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             child: Container(
+              padding: EdgeInsets.only(top: 7),
              width: double.infinity,
              child: Container(
               width: double.infinity,
-              decoration: BoxDecoration (
+              decoration: const BoxDecoration (
                 color: Color(0xffffffff),
               ),
              child: Column(
@@ -67,10 +68,14 @@ class LoginScreen extends StatefulWidget{
                     ),
                     width:AppCommonHelper.isTablet(context)?width: 169*fem,
                     height: 40*fem,
-                    child: Image.asset(
-                      'assets/page-1/images/app_logo.png',
-                      fit: AppCommonHelper.isTablet(context)?BoxFit.contain:BoxFit.cover,
-                    ),
+                    child: Container(
+
+                      child: Image.asset(
+
+                        'assets/page-1/images/app_logo.png',
+                        fit: AppCommonHelper.isTablet(context)?BoxFit.contain:BoxFit.cover,
+                      ),
+                    )
                   ),
                   Container(
                     width: 326*fem,
@@ -88,7 +93,7 @@ class LoginScreen extends StatefulWidget{
             Container(
               padding: EdgeInsets.fromLTRB(21*fem, 23*fem, 10*fem, 10*fem),
               width: double.infinity,
-              height: AppCommonHelper.isTablet(context)?700:600*fem,
+              height: AppCommonHelper.isTablet(context)?700:380*fem,
               decoration: BoxDecoration (
                 border: Border.all(color: Color(0xffd0cbff)),
                 color: Color(0xffffffff),
@@ -282,19 +287,24 @@ class LoginScreen extends StatefulWidget{
   }
   Widget _buildAboutDialog(BuildContext context) {
     return new AlertDialog(
-      title:  Text('Terms & Conditions'.tr()),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      title:  Text('Terms & Conditions'.tr(),),
       content: new Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text("By accepting all terms and conditions for privacy and data security visit our link: https://way2success.team/userpolicy.html",style: TextStyle(fontSize: AppCommonHelper.isTablet(context)?16 :8, color: Colors.grey),)
+          Text("By accepting all terms and conditions for privacy and data security visit our link: https://way2success.team/userpolicy.html",style: TextStyle(fontSize: AppCommonHelper.isTablet(context)?30 :13, color: Colors.grey),)
         ],
       ),
       actions: <Widget>[
         new ElevatedButton(
+
           onPressed: () {
             Navigator.of(context).pop();
             showDialog(
+
               context: context,
               builder: (BuildContext context) => _buildAboutDialog2(context),
             );
@@ -305,25 +315,30 @@ class LoginScreen extends StatefulWidget{
     );
   }
   Widget _buildAboutDialog2(BuildContext context) {
-    return new AlertDialog(
-      title: const Text('End User Licence Agreement'),
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(AppConstants.terms,style: TextStyle(fontSize: AppCommonHelper.isTablet(context)?16 :8, color: Colors.grey),)
+    return SingleChildScrollView(
+      child: AlertDialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(20),
+        ),
+        title: const Text('End User Licence Agreement'),
+        content: new Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(AppConstants.terms,style: TextStyle(fontSize: AppCommonHelper.isTablet(context)?30 :10, color: Colors.grey),)
+          ],
+        ),
+        actions: <Widget>[
+          new ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => OTPScreen(phoneNumber.number.toString())));
+            },
+            child: const Text('Agree'),
+          ),
         ],
       ),
-      actions: <Widget>[
-        new ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-            Navigator.push(context, MaterialPageRoute(
-                builder: (context) => OTPScreen(phoneNumber.number.toString())));
-          },
-          child: const Text('Agree'),
-        ),
-      ],
     );
   }
 }
