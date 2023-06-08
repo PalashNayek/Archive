@@ -15,7 +15,7 @@ class AuthPresenter {
   AuthService? _authService;
 
   AuthPresenter() {
-    _authService = new AuthService();
+    _authService = AuthService();
   }
 
   Future<AuthInfo> sendOtp(String mobile, BuildContext context) async {
@@ -24,42 +24,55 @@ class AuthPresenter {
 
     return _authService!.sendOtp(mobile,"1234567890", context);
   }
+
   Future<List<BlockListModel>> getBlockList() async {
     return _authService!.getBlockList();
   }
+
   Future<bool> unBlockUser(String userId) {
     return _authService!.unBlockUser(userId);
   }
+
   Future<bool> verifyOtp(String mobileNumber,String otp, BuildContext context) {
     return _authService!.verifyOtp(mobileNumber,otp.trim(),context);
   }
+
   Future<bool> registerUser(RegisterModel registerModel) {
     return _authService!.registerUser(registerModel);
   }
+
   Future<bool> updateUser(String userId,RegisterModel registerModel) {
     return _authService!.updateUser(userId,registerModel);
   }
+
   Future<ProfileModel> getProfile() {
     return _authService!.getProfile();
   }
+
   Future<OtherProfileModel> getOtherProfile(String id) {
     return _authService!.getOtherProfile(id);
   }
+
   Future<FollowerModel> follow(String id) {
     return _authService!.follow(id);
   }
+
   Future<bool> unFollow(String id) {
     return _authService!.unFollow(id);
   }
+
   Future<bool> checkProfile() {
     return _authService!.checkProfile();
   }
+
   Future<bool> putImageUpload(File image) async {
     return _authService!.putImageUpload(image);
   }
+
   Future<bool> putCoverImageUpload(File image) async {
     return _authService!.putCoverImageUpload(image);
   }
+
   /*Future<bool> regVerifyOtp(String mobileNumber,String otp, BuildContext context) {
     return _authService.regVerifyOtp(mobileNumber ,otp.trim(), context);
   }

@@ -152,7 +152,7 @@ class ApiClient with RouteAware {
     return http.post(Uri.parse(baseUrl + url), body: content,headers: _headers).then(
           (response) {
 
-            print(response.body.toString());
+            print("HelloMyRes"+response.body.toString());
         return _responseManager(response);
       },
     ).catchError((e) {

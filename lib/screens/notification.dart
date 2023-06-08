@@ -13,9 +13,9 @@ class NotificationContent extends StatefulWidget {
 }
 
 class _NotificationContentState extends State<NotificationContent> {
-  AuthPresenter authPresenter= AuthPresenter();
+  //AuthPresenter authPresenter= AuthPresenter();
   PostPresenter postPresenter= PostPresenter();
-  TextEditingController messageTextController= new TextEditingController();
+  TextEditingController messageTextController= TextEditingController();
   bool load=false;
   List<NotificationModel> notificationModel=[];
   @override
@@ -91,7 +91,7 @@ class _NotificationContentState extends State<NotificationContent> {
                 ),
               ),
             ),
-          load? notificationModel.length>0? ListView.builder(itemCount: notificationModel.length,
+          load? notificationModel.isNotEmpty? ListView.builder(itemCount: notificationModel.length,
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
               itemBuilder: (context, i) {

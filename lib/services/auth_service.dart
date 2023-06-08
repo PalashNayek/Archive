@@ -24,13 +24,13 @@ class AuthService extends ApiClient with UiHelper {
   final String _followerUrl = "followers";
   final String _unfollowUrl = "followers/unfollow/";
   final String _blockUrl  ="user-block/";
+
   Future<AuthInfo> sendOtp(String mobileNumber,String deviceId, BuildContext context) {
    print(json.encode({"loginId": mobileNumber,"deviceId":deviceId,"longitude":"123",
      "latitude":"123",}));
     return postLoginRequest(_sendOtpUrl, json.encode({"loginId": mobileNumber,"deviceId":deviceId,"longitude":"123",
       "latitude":"123",}))
         .then((response) async {
-      print(response.body);
       if (response != null) {
         print(response.body);
         var result = json.decode(response.body);
@@ -46,18 +46,19 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
-  Future<bool> putImageUpload(File file) async {
 
+  Future<bool> putImageUpload(File file) async {
     return multipartImageUpload(_profileUrl,file).then((response) async {
       return response;
     });
   }
-  Future<bool> putCoverImageUpload(File file) async {
 
+  Future<bool> putCoverImageUpload(File file) async {
     return multipartImageUpload(_coverUrl,file).then((response) async {
       return response;
     });
   }
+
   Future<bool> verifyOtp(String mobileNumber,String otp, BuildContext context) async {
    print( json.encode({
      'loginId':mobileNumber,
@@ -87,8 +88,8 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
-  Future<List<BlockListModel>> getBlockList() {
 
+  Future<List<BlockListModel>> getBlockList() {
     return getRequest(_blockUrl+"blocked-list?limit=10&offset=0", "",isCompleteUrl: false).then((response) {
       if (response != null) {
         print(response.body);
@@ -102,9 +103,8 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
+
   Future<bool> registerUser(RegisterModel registerModel) async {
-
-
     return postRequest(
         _registerUrl,jsonEncode(registerModel)).then((response) async {
       if (response != null) {
@@ -121,9 +121,8 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
+
   Future<bool> unBlockUser(String userId) async {
-
-
     return deleteRequest(_blockUrl+userId,"").then((response) async {
       if (response != null) {
         print(response.body);
@@ -139,9 +138,8 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
+
   Future<bool> updateUser(String userId, RegisterModel registerModel) async {
-
-
     return patchRequest(
         _registerUrl+"/"+userId,jsonEncode(registerModel)).then((response) async {
       if (response != null) {
@@ -158,6 +156,7 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
+
   Future<bool> unFollow(String id) async {
     print(_unfollowUrl);
     return deleteRequest(_unfollowUrl+id,"").then((response) async {
@@ -174,6 +173,7 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
+
   Future<FollowerModel> follow(String id) async {
     print(_followerUrl);
     return postRequest(_followerUrl,jsonEncode({"followingId":id})).then((response) async {
@@ -191,6 +191,7 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
+
   Future<OtherProfileModel> getOtherProfile(String id) async {
     print(_profileUrl);
     return getRequest(_profileUrl+"/"+id,"",isCompleteUrl: true).then((response) async {
@@ -208,6 +209,7 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
+
   Future<ProfileModel> getProfile() async {
     print(_profileUrl);
     return getRequest(_profileUrl,"",isCompleteUrl: true).then((response) async {
@@ -225,6 +227,7 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
+
   Future<bool> checkProfile() async {
     print(_profileUrl);
     return getRequest(_profileUrl,"",isCompleteUrl: true).then((response) async {
@@ -240,6 +243,7 @@ class AuthService extends ApiClient with UiHelper {
       }
     });
   }
+
  /* Future<bool> regVerifyOtp(String mobileNumber,String otp, BuildContext context) async {
     print(_newRegVerifyOtpUrl);
     return postLoginRequest(

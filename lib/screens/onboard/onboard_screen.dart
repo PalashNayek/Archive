@@ -66,83 +66,85 @@ class _OnBoardState extends State<OnBoardScreen> {
                                 bottomLeft: Radius.circular(0),
                               ),
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
+                            child: SingleChildScrollView(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
 
 
-                                SizedBox(height: 20,),
-                                Container(
-                                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                      constraints: BoxConstraints (
-                                        maxWidth: 343,
-                                      ),
-                                      child: Text(slides.elementAt(index).header.toString(),
-                                        textAlign: TextAlign.center,
-                                        style: SafeGoogleFont (
-                                          'Lato',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.black,
+                                  SizedBox(height: 20,),
+                                  Container(
+                                      margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                        constraints: BoxConstraints (
+                                          maxWidth: 343,
                                         ),
-                                  ),
-                                ),
-                                SizedBox(height: 10,),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  constraints: BoxConstraints (
-                                    maxWidth: 343,
-                                  ),
-                                  child: Text(slides.elementAt(index).description.toString(),
-                                    textAlign: TextAlign.center,
-                                    style: SafeGoogleFont (
-                                      'Lato',
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.grey,
+                                        child: Text(slides.elementAt(index).header.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: SafeGoogleFont (
+                                            'Lato',
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.black,
+                                          ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(height: 20,),
-                                Container(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: List.generate(slides.length, (index) => buildDot(index, context),
+                                  SizedBox(height: 10,),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                    constraints: BoxConstraints (
+                                      maxWidth: 343,
+                                    ),
+                                    child: Text(slides.elementAt(index).description.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: SafeGoogleFont (
+                                        'Lato',
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w400,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                currentIndex == slides.length - 1 ?   Container(
-                                  height: 60,
-                                  margin: EdgeInsets.all(10),
-                                  width: double.infinity,
-                                  decoration: BoxDecoration (
-                                    color: primary,
-                                    borderRadius: BorderRadius.only (
-                                      topLeft: Radius.circular(10),
-                                      topRight: Radius.circular(10),
-                                      bottomRight: Radius.circular(10),
-                                      bottomLeft: Radius.circular(10),
+                                  SizedBox(height: 20,),
+                                  Container(
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: List.generate(slides.length, (index) => buildDot(index, context),
+                                      ),
                                     ),
                                   ),
-                                  child: TextButton(
-                                    child:  Text(
-                                      currentIndex == slides.length - 1 ? "Lets Start": "Next",style: TextStyle(color: Colors.white,),),
-                                    onPressed: (){
-                                      if(currentIndex == slides.length - 1){
-                                         AppLocalDataUtil().setOnBoard(true);
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginScreen()),
-                                        );
-                                      }
-                                      else {
-                                        _controller.nextPage(duration: Duration(
-                                            milliseconds: 100),
-                                            curve: Curves.bounceIn);
-                                      }
-                                      },
-                                  )
-                                ):SizedBox(width: 1,),
+                                  currentIndex == slides.length - 1 ?   Container(
+                                    height: 40,
+                                    margin: EdgeInsets.all(10),
+                                    width: double.infinity,
+                                    decoration: BoxDecoration (
+                                      color: primary,
+                                      borderRadius: BorderRadius.only (
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
+                                        bottomRight: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10),
+                                      ),
+                                    ),
+                                    child: TextButton(
+                                      child:  Text(
+                                        currentIndex == slides.length - 1 ? "Lets Start": "Next",style: TextStyle(color: Colors.white,),),
+                                      onPressed: (){
+                                        if(currentIndex == slides.length - 1){
+                                           AppLocalDataUtil().setOnBoard(true);
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginScreen()),
+                                          );
+                                        }
+                                        else {
+                                          _controller.nextPage(duration: Duration(
+                                              milliseconds: 100),
+                                              curve: Curves.bounceIn);
+                                        }
+                                        },
+                                    )
+                                  ):SizedBox(width: 1,),
 
-                              ],
+                                ],
+                              ),
                             ),
                           ),),
 

@@ -1,6 +1,8 @@
+import 'package:custom_alert_dialog_box/custom_alert_dialog_box.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 //import 'package:fluttertoast/fluttertoast.dart';
@@ -233,23 +235,32 @@ class LoginScreen extends StatefulWidget{
                                   });
                                 }
                             ),
-                            GestureDetector(onTap: (){
+                            /*GestureDetector(onTap: (){
                               showDialog(
                                 context: context,
                                 builder: (BuildContext context) => _buildAboutDialog(context),
                               );
-                            }, child:Text('I agree with Terms & Conditions and privacy policy'.tr(),style: TextStyle(color: Colors.grey,fontSize:AppCommonHelper.isTablet(context)?14 :10),)),
-                          ]
+                            },*/
+                      Text('I agree with Terms & Conditions and privacy policy'.tr(),style: TextStyle(color: Colors.grey,fontSize:AppCommonHelper.isTablet(context)?14 :10),),
+            ]
                       )),
                  GestureDetector(
-                    onTap: (){
+                    onTap: () async {
                       if(phoneNumber.number.length==10) {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) => _buildAboutDialog(context),
-                        );
-                      }else if(!term){
-                        showCustomSnackBar("Please accept our Terms & Conditions".tr(),context);
+                        if(!term){
+                          showCustomSnackBar("Please accept our Terms & Conditions".tr(),context);
+                        }else{
+                             /*InternetConnectionChecker().hasConnection.then((value) {
+                             var internetConnection=value;
+                             setState(() {
+                               print(internetConnection);
+                             }
+                             });*/
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) => _buildAboutDialog(context),
+                          );
+                        }
                       }
                       else{
                         showCustomSnackBar("Enter 10 digit mobile no".tr(),context);
@@ -286,7 +297,7 @@ class LoginScreen extends StatefulWidget{
     ))));
   }
   Widget _buildAboutDialog(BuildContext context) {
-    return new AlertDialog(
+    return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
