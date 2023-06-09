@@ -11,11 +11,20 @@ import '../models/following_list_model.dart';
 import '../models/other_profile_model.dart';
 import '../services/auth_service.dart';
 
+
 class AuthPresenter {
   AuthService? _authService;
 
   AuthPresenter() {
     _authService = AuthService();
+  }
+
+  bool _loading = false ;
+  bool get loading => _loading ;
+
+  setLoading(bool value){
+    _loading = value;
+
   }
 
   Future<AuthInfo> sendOtp(String mobile, BuildContext context) async {
