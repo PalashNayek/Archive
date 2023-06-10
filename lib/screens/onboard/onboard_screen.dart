@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:s2w/main.dart';
 import 'package:s2w/screens/login_screen.dart';
+import 'package:s2w/screens/register_screen.dart';
 import 'package:s2w/theme/color.dart';
 
 import '../../page-1/main-screen-of-app-starts-.dart';
@@ -18,6 +19,15 @@ class _OnBoardState extends State<OnBoardScreen> {
   List<SliderModel> slides = <SliderModel>[];
   int currentIndex = 0;
   PageController _controller=PageController(initialPage: 0);
+
+  var _isLoading = false;
+  void _onSubmit() {
+    setState(() => _isLoading = true);
+    Future.delayed(
+      const Duration(seconds: 2),
+          () => setState(() => _isLoading = false),
+    );
+  }
 
   @override
   void initState() {
@@ -105,6 +115,7 @@ class _OnBoardState extends State<OnBoardScreen> {
                                     ),
                                   ),
                                   SizedBox(height: 20,),
+
                                   Container(
                                     child: Row(
                                       mainAxisAlignment: MainAxisAlignment.center,
@@ -112,7 +123,11 @@ class _OnBoardState extends State<OnBoardScreen> {
                                       ),
                                     ),
                                   ),
-                                  currentIndex == slides.length - 1 ?   Container(
+
+                                  currentIndex == slides.length - 1 ?
+
+
+                                  Container(
                                     height: 40,
                                     margin: EdgeInsets.all(10),
                                     width: double.infinity,
@@ -126,12 +141,23 @@ class _OnBoardState extends State<OnBoardScreen> {
                                       ),
                                     ),
                                     child: TextButton(
-                                      child:  Text(
+                                      child:_isLoading
+                                      ? Container(
+                                      width: 24,
+                                      height: 24,
+                                      padding: const EdgeInsets.all(2.0),
+                                      child: const CircularProgressIndicator(
+                                        color: Colors.white,
+                                        strokeWidth: 3,
+                                      ),
+                                    ):Text(
                                         currentIndex == slides.length - 1 ? "Lets Start": "Next",style: TextStyle(color: Colors.white,),),
                                       onPressed: (){
+                                        _isLoading ? null : _onSubmit();
+
                                         if(currentIndex == slides.length - 1){
                                            AppLocalDataUtil().setOnBoard(true);
-                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LoginScreen()),
+                                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> RegisterScreen()),//LoginScreen()
                                           );
                                         }
                                         else {
@@ -140,7 +166,7 @@ class _OnBoardState extends State<OnBoardScreen> {
                                               curve: Curves.bounceIn);
                                         }
                                         },
-                                    )
+                                    ),
                                   ):SizedBox(width: 1,),
 
                                 ],
