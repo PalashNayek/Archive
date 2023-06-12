@@ -107,9 +107,12 @@ class AuthService extends ApiClient with UiHelper {
   Future<bool> registerUser(RegisterModel registerModel) async {
     return postRequest(
         _registerUrl,jsonEncode(registerModel)).then((response) async {
+
       if (response != null) {
+
         print(response.body);
         var result = json.decode(response.body);
+        //print("hi Palash $result");
         if (response.statusCode==201) {
            return true;
         } else {

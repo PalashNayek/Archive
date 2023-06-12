@@ -33,8 +33,14 @@ class _HomeContentState extends State<HomeContent> {
   int perPage  = 10;
   int offset=0;
   int present = 0;
+
+  //bool loader = false;
+  bool internetConnection = true;
+
+
   @override
   void initState() {
+    //loader = true;
     super.initState();
 
     getData();
@@ -51,9 +57,11 @@ class _HomeContentState extends State<HomeContent> {
     });
   }
   void getData(){
+    //loader = true;
     sharedPresenter.getBanner().then((value) {
       bannerList=value;
       setState(() {
+        //if
 
       });
     });

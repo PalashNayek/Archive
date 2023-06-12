@@ -19,14 +19,6 @@ class AuthPresenter {
     _authService = AuthService();
   }
 
-  bool _loading = false ;
-  bool get loading => _loading ;
-
-  setLoading(bool value){
-    _loading = value;
-
-  }
-
   Future<AuthInfo> sendOtp(String mobile, BuildContext context) async {
     String onlyMobileNo = mobile.trim().substring(mobile.trim().length - 10);
   //  FirebaseMessaging _fm = FirebaseMessaging.instance;

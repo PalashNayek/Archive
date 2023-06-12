@@ -39,6 +39,7 @@ class _AccountContentState extends State<AccountContent> {
   void getData(){
     authPresenter.getProfile().then((value) {
       profileModel=value;
+      //print("HiProfile$");
       load=true;
       setState(() {
 
@@ -366,8 +367,8 @@ class _AccountContentState extends State<AccountContent> {
                 ),*/
 
                 Positioned(
-                  right: 20*fem,
-                  top: 30*fem,
+                  right: 15*fem,
+                  top: 40*fem,
                   child: CircleAvatar(
                     backgroundColor: Colors.grey,
                     child: Center(
