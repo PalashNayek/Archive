@@ -1,6 +1,10 @@
 
 
+import 'dart:async';
+
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:s2w/page-1/internet-connection-.dart';
@@ -29,9 +33,14 @@ class _DashBoardScreen extends State {
   bool internetConnection=true;
   AuthPresenter authPresenter= AuthPresenter();
   ProfileModel profileModel=ProfileModel();
+  late ConnectivityResult result;
+  late StreamSubscription subscription;
+  var isConnected = false;
+
   @override
   void initState() {
     _child = HomeContent();
+    startSteaming();
     InternetConnectionChecker().hasConnection.then((value) {
       internetConnection=value;
       setState(() {
@@ -48,6 +57,46 @@ class _DashBoardScreen extends State {
 
     });
     super.initState();
+  }
+
+  startSteaming() {
+    subscription = Connectivity().onConnectivityChanged.listen((event) async {
+      checkInternet();
+    });
+  }
+
+  checkInternet() async {
+    result = await Connectivity().checkConnectivity();
+    if (result != ConnectivityResult.none) {
+      isConnected = true;
+
+    } else {
+      isConnected = false;
+
+      /*showCustomSnackBar(
+          "No internet connection".tr(),
+          context);*/
+      showDialogBox();
+    }
+    setState(() {});
+  }
+
+  showDialogBox() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+          title: const Text("No internet connection"),
+          content: const Text("Please check your internet connection"),
+          actions: [
+            CupertinoButton.filled(
+                child: const Text("Retry"),
+                onPressed: () {
+                  Navigator.pop(context);
+                  checkInternet();
+                })
+          ],
+        ));
   }
 
   @override

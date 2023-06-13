@@ -685,39 +685,39 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     onPressed: () {
                                       if (userNameController.text.isEmpty) {
                                         showCustomSnackBar(
-                                            "please enter your username",
+                                            "Please enter your username",
                                             context);
                                       } else if (fullNameController
                                           .text.isEmpty) {
                                         showCustomSnackBar(
-                                            "please enter your full name",
+                                            "Please enter your full name",
                                             context);
                                       } else if (emailController.text.isEmpty) {
                                         showCustomSnackBar(
-                                            "please enter email-id", context);
+                                            "Please enter email-id", context);
                                       } else if (dobController.text.isEmpty) {
                                         showCustomSnackBar(
-                                            "please select date-of-birth",
+                                            "Please select date-of-birth",
                                             context);
                                       } else if (dropdownValue1 ==
                                           "Select Sport") {
                                         showCustomSnackBar(
-                                            "please select first category",
+                                            "please select first sports interest",
                                             context);
                                       } else if (dropdownValue2 ==
                                           "Select Sport") {
                                         showCustomSnackBar(
-                                            "please select second category",
+                                            "please select second sports interest",
                                             context);
                                       } else if (dropdownValue3 ==
                                           "Select Sport") {
                                         showCustomSnackBar(
-                                            "please select third category",
+                                            "Please select third sports interest",
                                             context);
                                       } else if (dropdownValue4 ==
                                           "Select Language") {
                                         showCustomSnackBar(
-                                            "please select comfortable language",
+                                            "Please select comfortable language",
                                             context);
                                       } else {
                                         InternetConnectionChecker()
@@ -727,7 +727,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 });
                                         if (internetConnection == false) {
                                           showCustomSnackBar(
-                                              "no internet connection".tr(),
+                                              "No internet connection".tr(),
                                               context);
                                         } else {
                                           final df =

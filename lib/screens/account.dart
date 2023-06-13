@@ -8,6 +8,7 @@ import 'package:s2w/screens/login_screen.dart';
 import 'package:s2w/screens/my_follower_list.dart';
 import 'package:s2w/screens/my_following_list.dart';
 import 'package:s2w/theme/color.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../models/post_list_model.dart';
 import '../utilities/app_common_helper.dart';
@@ -24,182 +25,210 @@ class AccountContent extends StatefulWidget {
 }
 
 class _AccountContentState extends State<AccountContent> {
+  AuthPresenter authPresenter = AuthPresenter();
+  PostPresenter postPresenter = PostPresenter();
+  ProfileModel profileModel = ProfileModel();
+  bool load = false, load2 = false;
+  PostListModel postListModel = new PostListModel();
+  bool isLoaded = false;
 
-  AuthPresenter authPresenter= AuthPresenter();
-  PostPresenter postPresenter= PostPresenter();
-  ProfileModel profileModel=ProfileModel();
-  bool load=false, load2=false;
-  PostListModel postListModel=new PostListModel();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    Future.delayed(const Duration(seconds: 3000), () {
+      isLoaded = true;
+    });
     getData();
   }
-  void getData(){
-    authPresenter.getProfile().then((value) {
-      profileModel=value;
-      //print("HiProfile$");
-      load=true;
-      setState(() {
 
-      });
+  void getData() {
+    authPresenter.getProfile().then((value) {
+      profileModel = value;
+      print("MyEmailId");
+      print(profileModel.user!.emailId);
+      load = true;
+      setState(() {});
     });
     postPresenter.getMyPost().then((value) {
-      postListModel=value;
-      load2=true;
-      setState(() {
-
-      });
+      postListModel = value;
+      load2 = true;
+      setState(() {});
     });
   }
 
   @override
   Widget build(BuildContext context) {
-
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
-    return
-      SingleChildScrollView(
-          physics: ScrollPhysics(),
-          child: Container(
-          decoration: BoxDecoration (
-          color: Color(0xfff7f7f7),
-          ),
-          child:Column(children: [
-            Container(
-                height:AppCommonHelper.isTablet(context)?1000: 375,
-                width: double.infinity,
-                child:Stack(
-                 children: [
-                //cover Image
-                load?Positioned(
-                  left: 0*fem,
-                  top: 0*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 390*fem,
-                      height: AppCommonHelper.isTablet(context)?600:263*fem,
-                      child:  profileModel.user!.cover==null?   Image.asset (
-                            'assets/page-1/images/bannerdefaultimage.png',
-                            fit: BoxFit.cover,
-                          ): Image.network(profileModel.user!.cover.toString()),
-                      ),
-                  ),
-                ):Container(),
-                Positioned(
-                  left: 0*fem,
-                  top: 213*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 390*fem,
-                      height:  AppCommonHelper.isTablet(context)?1486*fem:160,
-                      child: Container(
-                        decoration: BoxDecoration (
-                          borderRadius: BorderRadius.circular(50*fem),
-                          color: Color(0xffffffff),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-
-                //user Image
-                load?   Positioned(
-                  left: 129*fem,
-                  top: 125*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 131*fem,
-                      height: 131*fem,
-                      child: Container(
-                        decoration: BoxDecoration (
-                          borderRadius: BorderRadius.circular(65.5*fem),
-                          border: Border.all(color: Color(0xffffffff)),
-                          image: profileModel.user!.profile==null?  DecorationImage (
-                            fit: BoxFit.cover,
-                            image:profileModel.user!.gender=="Male"? AssetImage (
-                              'assets/page-1/images/user_profile_male.png',
-                            ):AssetImage (
-                              'assets/page-1/images/user_profile_female.png',
-                            ),
-                          ):DecorationImage (
-                            fit: BoxFit.cover,
-                            image: NetworkImage(profileModel.user!.profile.toString()),
-                          ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0*fem, 4*fem),
-                              blurRadius: 2*fem,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ):Container(),
-
-                //Full Name
-                load? Positioned(
-                  left: 94*fem,
-                  top: 267*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 203*fem,
-                      height: 24*fem,
-                      child: Text(profileModel.user!.firstName.toString(),
-                        textAlign: TextAlign.center,
-                        style: SafeGoogleFont (
-                          'Lato',
-                          fontSize: 20*ffem,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2*ffem/fem,
-                          color: Color(0xff000000),
-                        ),
-                      ),
-                    ),
-                  ),
-                ):SizedBox(),
-                //username
-                load? Positioned(
-                  left: 133*fem,
-                  top: 291*fem,
-                  child: Container(
-                    width: 124*fem,
-                    height: 18*fem,
+    return SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Container(
+            decoration: BoxDecoration(
+              color: Color(0xfff7f7f7),
+            ),
+            child: Column(
+              children: [
+                Container(
+                    height: AppCommonHelper.isTablet(context) ? 1000 : 375,
+                    width: double.infinity,
                     child: Stack(
                       children: [
-
+                        //cover Image
+                        load
+                            ? Positioned(
+                                left: 0 * fem,
+                                top: 0 * fem,
+                                child: Align(
+                                  child: SizedBox(
+                                    width: 390 * fem,
+                                    height: AppCommonHelper.isTablet(context)
+                                        ? 600
+                                        : 263 * fem,
+                                    child: profileModel.user!.cover == null
+                                        ? Image.asset(
+                                            'assets/page-1/images/bannerdefaultimage.png',
+                                            fit: BoxFit.cover,
+                                          )
+                                        : Image.network(profileModel.user!.cover
+                                            .toString()),
+                                  ),
+                                ),
+                              )
+                            : Container(),
                         Positioned(
-                           left: 0*fem,
-                          top: 0*fem,
+                          left: 0 * fem,
+                          top: 213 * fem,
                           child: Align(
                             child: SizedBox(
-                              width: 124*fem,
-                              height: 18*fem,
-                              child: Text(
-                                '@'+profileModel.user!.lastName.toString(),
-                                textAlign: TextAlign.center,
-                                style: SafeGoogleFont (
-                                  'Lato',
-                                  fontSize: 15*ffem,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.2*ffem/fem,
-                                  color: Color(0xff000000),
+                              width: 390 * fem,
+                              height: AppCommonHelper.isTablet(context)
+                                  ? 1486 * fem
+                                  : 160,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50 * fem),
+                                  color: Color(0xffffffff),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                ):Container(),
 
+                        //user Image
+                        load
+                            ? Positioned(
+                                left: 129 * fem,
+                                top: 125 * fem,
+                                child: Align(
+                                  child: SizedBox(
+                                    width: 131 * fem,
+                                    height: 131 * fem,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(65.5 * fem),
+                                        border: Border.all(
+                                            color: Color(0xffffffff)),
+                                        image: profileModel.user!.profile ==
+                                                null
+                                            ? DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image:
+                                                    profileModel.user!.gender ==
+                                                            "Male"
+                                                        ? AssetImage(
+                                                            'assets/page-1/images/user_profile_male.png',
+                                                          )
+                                                        : AssetImage(
+                                                            'assets/page-1/images/user_profile_female.png',
+                                                          ),
+                                              )
+                                            : DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: NetworkImage(profileModel
+                                                    .user!.profile
+                                                    .toString()),
+                                              ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color(0x3f000000),
+                                            offset: Offset(0 * fem, 4 * fem),
+                                            blurRadius: 2 * fem,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : Container(),
 
-               /* //post Header
+                        //Full Name
+                        load
+                            ? Positioned(
+                                left: 94 * fem,
+                                top: 267 * fem,
+                                child: Align(
+                                  child: SizedBox(
+                                    width: 203 * fem,
+                                    height: 24 * fem,
+                                    child: Text(
+                                      profileModel.user!.firstName.toString(),
+                                      textAlign: TextAlign.center,
+                                      style: SafeGoogleFont(
+                                        'Lato',
+                                        fontSize: 25 * ffem,
+                                        fontWeight: FontWeight.w700,
+                                        height: 1.2 * ffem / fem,
+                                        color: Color(0xff000000),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            : SizedBox(),
+                        //username
+                        load
+                            ? Positioned(
+                                left: 133 * fem,
+                                top: 291 * fem,
+                                child: Container(
+                                  width: 124 * fem,
+                                  height: 18 * fem,
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                        left: 0 * fem,
+                                        top: 0 * fem,
+                                        child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: SizedBox(
+                                            width: 124 * fem,
+                                            height: 18 * fem,
+                                            child: Text(
+                                              profileModel.user!.emailId
+                                                  .toString(),
+                                              textAlign: TextAlign.center,
+                                              style: SafeGoogleFont(
+                                                'Lato',
+                                                fontSize: 10 * ffem,
+                                                fontWeight: FontWeight.w400,
+                                                height: 1.2 * ffem / fem,
+                                                color: Color(0xff000000),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : Container(),
+
+                        /* //post Header
                 Positioned(
                   left: 24*fem,
                   top: 400*fem,
@@ -237,115 +266,146 @@ class _AccountContentState extends State<AccountContent> {
                     ),
                   ),
                 ),*/
-                //user Post,follower,following
-                Positioned(
-                  left: 48.6691894531*fem,
-                  top: 324*fem,
-                  child: Container(
-                    width: 300*fem,
-                    height: 50*fem,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 65.83*fem, 0*fem),
-                          child:
-                          Column(children: [
-                            Text(
-                              'Post',
-                              textAlign: TextAlign.center,
-                              style: SafeGoogleFont (
-                                'Lato',
-                                fontSize: 15*ffem,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2*ffem/fem,
-                                color: Color(0xff000000),
-                              ),
+                        //user Post,follower,following
+                        Positioned(
+                          left: 48.6691894531 * fem,
+                          top: 324 * fem,
+                          child: Container(
+                            width: 300 * fem,
+                            height: 50 * fem,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                    margin: EdgeInsets.fromLTRB(
+                                        0 * fem, 0 * fem, 65.83 * fem, 0 * fem),
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          'Post',
+                                          textAlign: TextAlign.center,
+                                          style: SafeGoogleFont(
+                                            'Lato',
+                                            fontSize: 15 * ffem,
+                                            fontWeight: FontWeight.w700,
+                                            height: 1.2 * ffem / fem,
+                                            color: Color(0xff000000),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        load
+                                            ? Text(
+                                                profileModel
+                                                    .user!.account!.postCount
+                                                    .toString(),
+                                                style: SafeGoogleFont(
+                                                  'Lato',
+                                                  fontSize: 15 * ffem,
+                                                  fontWeight: FontWeight.w700,
+                                                  height: 1.2 * ffem / fem,
+                                                  color: Color(0x8c080053),
+                                                ),
+                                              )
+                                            : Container(),
+                                      ],
+                                    )),
+                                GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MyFollowerListContent(
+                                                    type: "my",
+                                                    userId: profileModel
+                                                        .user!.id
+                                                        .toString(),
+                                                  )));
+                                    },
+                                    child: Container(
+                                        margin: EdgeInsets.fromLTRB(0 * fem,
+                                            0 * fem, 63.82 * fem, 0 * fem),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Followers',
+                                              textAlign: TextAlign.center,
+                                              style: SafeGoogleFont(
+                                                'Lato',
+                                                fontSize: 15 * ffem,
+                                                fontWeight: FontWeight.w700,
+                                                height: 1.2 * ffem / fem,
+                                                color: Color(0xff000000),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              profileModel.follower.toString(),
+                                              style: SafeGoogleFont(
+                                                'Lato',
+                                                fontSize: 15 * ffem,
+                                                fontWeight: FontWeight.w700,
+                                                height: 1.2 * ffem / fem,
+                                                color: Color(0x8c080053),
+                                              ),
+                                            ),
+                                          ],
+                                        ))),
+                                GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  MyFollowingListContent(
+                                                    type: "my",
+                                                    userId: profileModel
+                                                        .user!.id
+                                                        .toString(),
+                                                  )));
+                                    },
+                                    child: Container(
+                                        margin: EdgeInsets.fromLTRB(
+                                            0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'Following',
+                                              textAlign: TextAlign.center,
+                                              style: SafeGoogleFont(
+                                                'Lato',
+                                                fontSize: 15 * ffem,
+                                                fontWeight: FontWeight.w700,
+                                                height: 1.2 * ffem / fem,
+                                                color: Color(0xff000000),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            Text(
+                                              profileModel.following.toString(),
+                                              style: SafeGoogleFont(
+                                                'Lato',
+                                                fontSize: 15 * ffem,
+                                                fontWeight: FontWeight.w700,
+                                                height: 1.2 * ffem / fem,
+                                                color: Color(0x8c080053),
+                                              ),
+                                            ),
+                                          ],
+                                        ))),
+                              ],
                             ),
-                            SizedBox(height: 10,),
-                            load?Text(profileModel.user!.account!.postCount.toString(),
-                              style: SafeGoogleFont (
-                                'Lato',
-                                fontSize: 15*ffem,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2*ffem/fem,
-                                color: Color(0x8c080053),
-                              ),
-                            ):Container(),
-                          ],)
-
+                          ),
                         ),
-                       GestureDetector(
-                        onTap: (){
-                          Navigator.push(context,MaterialPageRoute(builder: (context) =>MyFollowerListContent(type: "my",userId: profileModel.user!.id.toString(),)));
 
-                        },
-                       child: Container(
-                          margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 63.82*fem, 0*fem),
-                          child:
-                          Column(children: [
-                            Text(
-                              'Followers',
-                              textAlign: TextAlign.center,
-                              style: SafeGoogleFont (
-                                'Lato',
-                                fontSize: 15*ffem,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2*ffem/fem,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                            SizedBox(height: 10,),
-                            Text(profileModel.follower.toString(),
-                              style: SafeGoogleFont (
-                                'Lato',
-                                fontSize: 15*ffem,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2*ffem/fem,
-                                color: Color(0x8c080053),
-                              ),
-                            ),
-                          ],)
-                        )),
-                       GestureDetector(
-                           onTap: (){
-                             Navigator.push(context,MaterialPageRoute(builder: (context) =>MyFollowingListContent(type: "my",userId: profileModel.user!.id.toString(),)));
-
-                           },
-                           child:Container(
-                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 0*fem),
-                            child:
-                            Column(children: [
-                              Text(
-                                'Following',
-                                textAlign: TextAlign.center,
-                                style: SafeGoogleFont (
-                                  'Lato',
-                                  fontSize: 15*ffem,
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.2*ffem/fem,
-                                  color: Color(0xff000000),
-                                ),
-                              ),
-                              SizedBox(height: 10,),
-                              Text(profileModel.following.toString(),
-                                style: SafeGoogleFont (
-                                  'Lato',
-                                  fontSize: 15*ffem,
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.2*ffem/fem,
-                                  color: Color(0x8c080053),
-                                ),
-                              ),
-                            ],)
-                        )),
-                      ],
-                    ),
-                  ),
-                ),
-
-                //top Header
-               /* Positioned(
+                        //top Header
+                        /* Positioned(
                   left: 56*fem,
                   top: 11*fem,
                   child: Align(
@@ -366,21 +426,28 @@ class _AccountContentState extends State<AccountContent> {
                   ),
                 ),*/
 
-                Positioned(
-                  right: 15*fem,
-                  top: 40*fem,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    child: Center(
-                      child: IconButton(icon: Icon(Icons.settings,color: primary,), onPressed: () {
-                       // Navigator.push(context,MaterialPageRoute(builder: (context) =>EditProfileScreen()));
-                        Navigator.push(context,MaterialPageRoute(builder: (context) =>SettingsPage()));
-
-                      },)
-                    ),
-                  ),
-                ),
-              /*  Positioned(
+                        Positioned(
+                          right: 15 * fem,
+                          top: 40 * fem,
+                          child: CircleAvatar(
+                            backgroundColor: Colors.grey,
+                            child: Center(
+                                child: IconButton(
+                              icon: Icon(
+                                Icons.settings,
+                                color: primary,
+                              ),
+                              onPressed: () {
+                                // Navigator.push(context,MaterialPageRoute(builder: (context) =>EditProfileScreen()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SettingsPage()));
+                              },
+                            )),
+                          ),
+                        ),
+                        /*  Positioned(
                   left: 20*fem,
                   top: 10*fem,
                   child: CircleAvatar(
@@ -392,16 +459,75 @@ class _AccountContentState extends State<AccountContent> {
                     ),
                   ),
                 ),*/
+                      ],
+                    )),
+                isLoaded
+                    ? ListView.builder(
+                        itemCount: postListModel.result!.length,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, i) {
+                          return MyPostWidgetItem(
+                              postListModel.result!.elementAt(i),
+                              profileModel.user!.accountId.toString());
+                        },
+                      )
+                    : getShimmerLoading()
               ],
-            ) ) ,
-          load2? ListView.builder(itemCount: postListModel.result!.length,
-             physics: NeverScrollableScrollPhysics(),
-             shrinkWrap: true,
-             itemBuilder: (context, i) {
-               return MyPostWidgetItem(postListModel.result!.elementAt(i),profileModel.user!.accountId.toString());
-             },):Container()
-         ],)
-    ));
+            )));
   }
 
+  Shimmer getShimmerLoading() {
+    return Shimmer.fromColors(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 100,
+              width: 100,
+              color: Colors.white,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+                child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(
+                  height: 8,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 10.0,
+                  color: Colors.white,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 14.0,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 18.0,
+                  color: Colors.white,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 18.0,
+                  color: Colors.white,
+                ),
+              ],
+            )),
+          ],
+        ),
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!);
+  }
 }

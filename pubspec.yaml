@@ -65,6 +65,8 @@ dependencies:
   #fancy_dialog: ^1.0.0
   lottie: ^1.4.3
   skeleton_text: ^3.0.0
+  shimmer: ^2.0.0
+  connectivity_plus: ^4.0.1
 
 
 dev_dependencies:

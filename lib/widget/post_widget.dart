@@ -33,6 +33,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
   int activePage = 0;
   PageController _pageController = PageController(viewportFraction: 1,initialPage: 0);
   PostPresenter postPresenter= PostPresenter();
+
   @override
   void initState() {
     super.initState();

@@ -18,6 +18,8 @@ import '../utilities/app_common_helper.dart';
 import '../widget/otp_input.dart';
 import 'package:custom_alert_dialog_box/custom_alert_dialog_box.dart';
 
+import 'dashboard/fluid_nav_bar.dart';
+
 class OTPScreen extends StatefulWidget {
   String mobileNo;
 
@@ -36,6 +38,7 @@ class _OTPScreenState extends State<OTPScreen> {
   AuthInfo authInfo = AuthInfo();
   FocusNode focusNodeOTP = FocusNode();
   String message = "";
+  late bool updateUser;
   Timer? countdownTimer;
   Duration myDuration = Duration(seconds: 30);
   bool click = true;
@@ -89,6 +92,7 @@ class _OTPScreenState extends State<OTPScreen> {
       loader = true;
       setState(() {
         message = authInfo.message!;
+        updateUser = authInfo.latest!;
         if(message.isNotEmpty){
           loader = false;
         }
@@ -364,7 +368,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                                   });
                                           if (internetConnection == false) {
                                             showCustomSnackBar(
-                                                "no internet connection".tr(),
+                                                "No internet connection".tr(),
                                                 context);
                                           } else {
                                             String otp = _fieldOne.text +
@@ -376,11 +380,19 @@ class _OTPScreenState extends State<OTPScreen> {
                                                     context)
                                                 .then((value) {
                                               if (value) {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            SuccessScreen()));
+                                                if(!updateUser){
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              DashBoardScreen()));
+                                                }else {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              SuccessScreen()));
+                                                }
                                               }
                                             });
                                           }
