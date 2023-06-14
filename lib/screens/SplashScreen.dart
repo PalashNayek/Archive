@@ -32,10 +32,10 @@ class SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-
+    startSteaming();
     //print("PKNayek->$isConnected");
     super.initState();
-    startSteaming();
+
     setState(() {
 
     });
@@ -63,7 +63,7 @@ class SplashScreenState extends State<SplashScreen> {
     showDialog(
         barrierDismissible: false,
         context: context,
-        builder: (context) => AlertDialog(
+        builder: (context) => CupertinoAlertDialog(
               title: const Text("No internet connection"),
               content: const Text("Please check your internet connection"),
               actions: [
@@ -205,21 +205,30 @@ class SplashScreenState extends State<SplashScreen> {
             ),
             Positioned(
               left: 164 * fem,
-              top: AppCommonHelper.isTablet(context) ? height - 150 : 724 * fem,
+              top: AppCommonHelper.isTablet(context) ? height - 150 : 680 * fem,
               child: Align(
                 child: SizedBox(
                   width: 60 * fem,
-                  height: 12 * fem,
-                  child: Text(
-                    'Beta V',
-                    textAlign: TextAlign.center,
-                    style: SafeGoogleFont(
-                      'Lato',
-                      fontSize: 12 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.2 * ffem / fem,
-                      color: Color(0xffc5c5c5),
-                    ),
+                  height: 80 * fem,
+                  child: Column(
+                    children: [
+                      const CircularProgressIndicator(strokeWidth: 3,color: Colors.white, ),
+                      SizedBox(
+                        width: 10 * fem,
+                        height: 10 * fem,
+                      ),
+                      Text(
+                        'Beta V',
+                        textAlign: TextAlign.center,
+                        style: SafeGoogleFont(
+                          'Lato',
+                          fontSize: 12 * ffem,
+                          fontWeight: FontWeight.w700,
+                          height: 1.2 * ffem / fem,
+                          color: Color(0xffc5c5c5),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

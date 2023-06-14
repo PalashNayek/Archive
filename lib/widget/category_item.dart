@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../utils.dart';
 
 class CategoryItem extends StatelessWidget{
+
   CategoryItem(this.name,this.image);
   String name;
   String image;

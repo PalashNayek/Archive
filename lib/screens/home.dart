@@ -159,7 +159,7 @@ class _HomeContentState extends State<HomeContent> {
                                     width: 367 * fem,
                                     height: 150 * fem,
                                     child: bannerList.length > 0
-                                        ? CarouselSlider.builder(
+                                        ? isLoaded? CarouselSlider.builder(
                                             itemCount: bannerList.length,
                                             itemBuilder: (BuildContext context,
                                                 int index, int realIdx) {
@@ -182,7 +182,7 @@ class _HomeContentState extends State<HomeContent> {
                                                   Duration(milliseconds: 1000),
                                               viewportFraction: 0.8,
                                             ),
-                                          )
+                                          ):getShimmerLoading()
                                         : Image(
                                             width: 367 * fem,
                                             height: 150 * fem,
@@ -217,7 +217,7 @@ class _HomeContentState extends State<HomeContent> {
                                           child: SizedBox(
                                             width: 367 * fem,
                                             height: 128.42 * fem,
-                                            child: Container(
+                                            child: isLoaded? Container(
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(
@@ -226,7 +226,7 @@ class _HomeContentState extends State<HomeContent> {
                                                     color: Color(0xffe7e7e7)),
                                                 color: Color(0xffffffff),
                                               ),
-                                            ),
+                                            ): getShimmerLoading(),
                                           ),
                                         ),
                                       ),

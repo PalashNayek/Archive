@@ -1,5 +1,6 @@
 import 'package:custom_alert_dialog_box/custom_alert_dialog_box.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
@@ -266,32 +267,31 @@ class _loginScreenState extends State<LoginScreen> {
                                                 : 10),
                                       ),
                                     ])),
-
                             GestureDetector(
                                 onTap: () async {
-
-                                  InternetConnectionChecker().hasConnection.then((value) => {
-                                    internetConnection=value,
-                                  });
+                                  InternetConnectionChecker()
+                                      .hasConnection
+                                      .then((value) => {
+                                            internetConnection = value,
+                                          });
                                   if (phoneNumber.number.length == 10) {
-
-                                    if(internetConnection==false){
+                                    if (internetConnection == false) {
                                       showCustomSnackBar(
-                                          "no internet connection"
-                                              .tr(),
+                                          "no internet connection".tr(),
                                           context);
-
-                                    }else if (!term) {
+                                    } else if (!term) {
                                       showCustomSnackBar(
                                           "Please accept our Terms & Conditions"
                                               .tr(),
                                           context);
                                     } else {
-                                      showDialog(
+                                      /* showDialog(
                                         context: context,
                                         builder: (BuildContext context) =>
+
                                             _buildAboutDialog(context),
-                                      );
+                                      );*/
+                                      showDialogBox();
                                     }
                                   } else {
                                     showCustomSnackBar(
@@ -331,7 +331,7 @@ class _loginScreenState extends State<LoginScreen> {
                 ))));
   }
 
-  Widget _buildAboutDialog(BuildContext context) {
+  /*Widget _buildAboutDialog(BuildContext context) {
     return AlertDialog(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
@@ -364,9 +364,65 @@ class _loginScreenState extends State<LoginScreen> {
         ),
       ],
     );
+  }*/
+
+  showDialogBox() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+              title: const Text("Terms & Conditions"),
+              content: Text(
+                  "By accepting all terms and conditions for privacy and data security visit our link: https://way2success.team/userpolicy.html",
+                  style: TextStyle(
+                    fontSize: AppCommonHelper.isTablet(context) ? 30 : 12,
+                  )),
+              actions: [
+                CupertinoButton.filled(
+                  child: Text(
+                    "Accept",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                    showDialogBox2();
+                    //checkInternet();
+                  },
+                )
+              ],
+            ));
   }
 
-  Widget _buildAboutDialog2(BuildContext context) {
+  showDialogBox2() {
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+              title: const Text("End User Licence Agreement"),
+              content: Text(AppConstants.terms,
+                  style: TextStyle(
+                      fontSize: AppCommonHelper.isTablet(context) ? 30 : 12,
+                      )),
+              actions: [
+                CupertinoButton.filled(
+                    child: const Text(
+                      "Agree",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  OTPScreen(phoneNumber.number.toString())));
+                      //checkInternet();
+                    })
+              ],
+            ));
+  }
+
+/*Widget _buildAboutDialog2(BuildContext context) {
     return SingleChildScrollView(
       child: AlertDialog(
         shape: RoundedRectangleBorder(
@@ -400,5 +456,5 @@ class _loginScreenState extends State<LoginScreen> {
         ],
       ),
     );
-  }
+  }*/
 }
