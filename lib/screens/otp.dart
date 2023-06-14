@@ -384,7 +384,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                               //loader = true;
                                               //CircularProgressIndicator();
                                               if (value) {
-                                                if (updateUser) {
+                                                if (!updateUser) {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
