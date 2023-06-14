@@ -10,7 +10,7 @@ import '../utilities/api-client.dart';
 
 class SharedService extends ApiClient {
   String _bannerUrl = "slider/list?limit=10&offset=0&keyword=0&status=Active";
-  String _interestUrl = "interests/list?limit=10&offset=0&keyword=&status=Active";
+  String _interestUrl = "interests/list?limit=30&offset=0&keyword=&status=Active";
   String _pageUrl="pages/";
 
 

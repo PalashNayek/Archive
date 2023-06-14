@@ -84,15 +84,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void getData() {
     loader = true;
     sharedPresenter.getInterest().then((value) {
-
       interestList.add(InterestListModel(
-          id: "Select Sport", image: "", imageName: "", name: "Select Sport"));
+          id: "Select Sport",
+          image: "https://socialstorage.b-cdn.net/icons/1686642607485.png",
+          imageName: "",
+          name: "Select Sport"));
       interestList1.add(InterestListModel(
-          id: "Select Sport", image: "", imageName: "", name: "Select Sport"));
+          id: "Select Sport",
+          image: "https://socialstorage.b-cdn.net/icons/1686642607485.png",
+          imageName: "",
+          name: "Select Sport"));
       interestList2.add(InterestListModel(
-          id: "Select Sport", image: "", imageName: "", name: "Select Sport"));
+          id: "Select Sport", image: "https://socialstorage.b-cdn.net/icons/1686642607485.png", imageName: "", name: "Select Sport"));
       interestList3.add(InterestListModel(
-          id: "Select Sport", image: "", imageName: "", name: "Select Sport"));
+          id: "Select Sport", image: "https://socialstorage.b-cdn.net/icons/1686642607485.png", imageName: "", name: "Select Sport"));
       value.forEach((element) {
         interestList.add(element);
         interestList1.add(element);
@@ -461,15 +466,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     height: 60 * fem,
                                     child: Center(
                                       child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
-                                        children: [
+                                        children: <Widget>[
                                           interestList1.length > 0
                                               ? Container(
-                                                  width: 150,
+                                                  width: 165,
                                                   margin: EdgeInsets.only(
-                                                      left: 10, bottom: 10),
-                                                  padding: EdgeInsets.all(6),
+                                                      left: 5, bottom: 10),
+                                                  padding: EdgeInsets.all(1),
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -489,20 +496,33 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                         value: value.id,
                                                         child: Row(
                                                           children: [
-                                                            /*Image.network(
-                                                              value.image as String,
-                                                              width: 24,
-                                                              height: 24,
-                                                            ),*/
-
-                                                            Text(
-                                                              value.name.toString(),
-                                                              style: TextStyle(
-                                                                  fontSize: 12),
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(left: 5.0),
+                                                              child: Image.network(
+                                                                value.image
+                                                                    as String,
+                                                                width: 20,
+                                                                height: 20,
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left:
+                                                                          5.0),
+                                                              child: Align(
+                                                                child: Text(
+                                                                  value.name
+                                                                      .toString(),
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          12),
+                                                                ),
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
-
                                                       );
                                                     }).toList(),
                                                     // Step 5.
@@ -511,7 +531,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                       setState(() {
                                                         dropdownValue1 =
                                                             newValue!;
-                                                        print("Hari->$newValue");
                                                         interestList2.removeWhere(
                                                             (item) =>
                                                                 item.id ==
@@ -525,13 +544,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   ))
                                               : SizedBox(),
                                           SizedBox(
-                                            width: 40,
+                                            width: 1,
                                           ),
+                                          ////////////////////////////////////////////////////////////////////////////////////////////
                                           interestList2.length > 0
                                               ? Container(
-                                                  width: 150,
-                                                  margin: EdgeInsets.only(bottom: 10),
-                                                  padding: EdgeInsets.all(6),
+                                                  width: 165,
+                                              margin: EdgeInsets.only(
+                                                  right: 5, bottom: 10),
+                                                  padding: EdgeInsets.all(1),
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
@@ -549,10 +570,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                       return DropdownMenuItem<
                                                           String>(
                                                         value: value.id,
-                                                        child: Text(
-                                                          value.name.toString(),
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+
+                                                        child: Row(
+                                                          children: [
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(left: 5.0),
+                                                              child: Image.network(
+                                                                value.image
+                                                                as String,
+                                                                width: 20,
+                                                                height: 20,
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left:
+                                                                  5.0),
+                                                              child: Align(
+                                                                child: Text(
+                                                                  value.name
+                                                                      .toString(),
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                      12),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       );
                                                     }).toList(),
@@ -582,25 +628,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     width: double.infinity,
                                     height: 60 * fem,
                                     child: Center(
-
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceEvenly,
-                                        children: [
+                                        children: <Widget>[
                                           interestList3.length > 0
                                               ? Container(
-                                              width: 150,
+                                                  width: 165,
                                                   margin: EdgeInsets.only(
-                                                      left: 10, bottom: 10),
-                                                  padding: EdgeInsets.all(6),
+                                                      left: 5, bottom: 10),
+                                                  padding: EdgeInsets.all(1),
                                                   decoration: BoxDecoration(
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               5 * fem),
                                                       color: Color(0xfff3f3f3),
                                                       border: Border.all(
-                                                          color:
-                                                              Color(0x59000000))),
+                                                          color: Color(
+                                                              0x59000000))),
                                                   child: DropdownButton<String>(
                                                     value: dropdownValue3,
                                                     underline: SizedBox(),
@@ -610,10 +655,34 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                       return DropdownMenuItem<
                                                           String>(
                                                         value: value.id,
-                                                        child: Text(
-                                                          value.name.toString(),
-                                                          style: TextStyle(
-                                                              fontSize: 12),
+                                                        child: Row(
+                                                          children: [
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(left: 5.0),
+                                                              child: Image.network(
+                                                                value.image
+                                                                as String,
+                                                                width: 20,
+                                                                height: 20,
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                              const EdgeInsets
+                                                                  .only(
+                                                                  left:
+                                                                  5.0),
+                                                              child: Align(
+                                                                child: Text(
+                                                                  value.name
+                                                                      .toString(),
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                      12),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       );
                                                     }).toList(),
@@ -636,39 +705,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                   ))
                                               : SizedBox(),
                                           SizedBox(
-                                            width: 40,
+                                            width: 1,
                                           ),
                                           Center(
                                             child: Container(
-                                                width: 150,
+                                                width: 165,
                                                 margin: EdgeInsets.only(
-                                                    bottom: 10),
-                                                padding: EdgeInsets.all(6),
+                                                    right: 5, bottom: 10),
+                                                padding: EdgeInsets.all(3),
                                                 decoration: BoxDecoration(
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             5 * fem),
                                                     color: Color(0xfff3f3f3),
                                                     border: Border.all(
-                                                        color: Color(0x59000000))),
+                                                        color:
+                                                            Color(0x59000000))),
                                                 child: DropdownButton<String>(
                                                   value: dropdownValue4,
                                                   underline: SizedBox(),
-                                                  items:
-                                                      language.map((String value) {
-                                                    return DropdownMenuItem<String>(
+                                                  items: language
+                                                      .map((String value) {
+                                                    return DropdownMenuItem<
+                                                        String>(
                                                       value: value,
-                                                      child: Text(
-                                                        value,
-                                                        style:
-                                                            TextStyle(fontSize: 12),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.only(left: 15.0),
+                                                        child: Text(
+                                                          value,
+                                                          style: TextStyle(
+                                                              fontSize: 12),
+                                                        ),
                                                       ),
                                                     );
                                                   }).toList(),
                                                   // Step 5.
-                                                  onChanged: (String? newValue) {
+                                                  onChanged:
+                                                      (String? newValue) {
                                                     setState(() {
-                                                      dropdownValue4 = newValue!;
+                                                      dropdownValue4 =
+                                                          newValue!;
                                                     });
                                                   },
                                                 )),
@@ -677,7 +753,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                   ),
-
                                   TextButton(
                                     onPressed: () {
                                       if (userNameController.text.isEmpty) {
