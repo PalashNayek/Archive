@@ -158,8 +158,8 @@ class _HomeContentState extends State<HomeContent> {
                                   child: Container(
                                     width: 367 * fem,
                                     height: 150 * fem,
-                                    child: bannerList.length > 0
-                                        ? isLoaded? CarouselSlider.builder(
+                                    child: bannerList.isNotEmpty
+                                        ?  CarouselSlider.builder(
                                             itemCount: bannerList.length,
                                             itemBuilder: (BuildContext context,
                                                 int index, int realIdx) {
@@ -182,7 +182,7 @@ class _HomeContentState extends State<HomeContent> {
                                                   Duration(milliseconds: 1000),
                                               viewportFraction: 0.8,
                                             ),
-                                          ):getShimmerLoading()
+                                          )
                                         : Image(
                                             width: 367 * fem,
                                             height: 150 * fem,

@@ -1,15 +1,14 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:s2w/main.dart';
 import 'package:s2w/screens/login_screen.dart';
-import 'package:s2w/screens/register_screen.dart';
 import 'package:s2w/theme/color.dart';
 
 import '../../page-1/main-screen-of-app-starts-.dart';
 import '../../utilities/app_local_data_util.dart';
 import '../../utils.dart';
-import '../../widget/custom_snackbar.dart';
 import 'slider_model.dart';
 
 class OnBoardScreen extends StatefulWidget {
@@ -21,48 +20,62 @@ class _OnBoardState extends State<OnBoardScreen> {
   List<SliderModel> slides = <SliderModel>[];
   int currentIndex = 0;
   PageController _controller = PageController(initialPage: 0);
-
-  bool internetConnection = true;
-
-  var _isLoading = false;
-
-  void _onSubmit() {
-    setState(() => _isLoading = true);
-    Future.delayed(
-      const Duration(seconds: 3),
-      () => setState(
-        () => _isLoading = false,
-      ),
-    );
-
-    /*InternetConnectionChecker().hasConnection.then((value) => {
-      internetConnection = value,
-    });
-    if (internetConnection == false) {
-      showCustomSnackBar("no internet connection".tr(), context);
-    } else {
-      */ /*if (currentIndex == slides.length - 1) {
-        AppLocalDataUtil().setOnBoard(true);
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => RegisterScreen()), //LoginScreen()
-        );
-      }*/ /*
-    }*/
-  }
+  Timer? _timer;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _controller = PageController(initialPage: 0);
     slides = getSlides();
+    _timer = Timer.periodic(Duration(seconds: 5), (Timer timer) {
+      if (currentIndex < 2) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+
+      _controller.animateToPage(
+        currentIndex,
+        duration: Duration(milliseconds: 350),
+        curve: Curves.easeIn,
+      );
+    });
+    /*int totalPage = slides.length;
+    print("MyTotalPages$totalPage");*/
+
+    /*if (currentIndex == slides.length - 1) {
+      AppLocalDataUtil().setOnBoard(true);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                LoginScreen()),
+      );
+
+    } else {
+      _controller.nextPage(
+          duration:
+          Duration(milliseconds: 2000),
+          curve: Curves.bounceIn);
+    }*/
+    /*Timer.periodic(Duration(seconds: 3), (Timer timer) {
+      if (currentIndex ==  3) {
+        currentIndex++;
+        _controller.animateToPage(
+          currentIndex,
+          duration: Duration(milliseconds: 350),
+          curve: Curves.easeIn,
+        );
+      } else {
+        currentIndex = slides.length;
+      }
+    });*/
   }
 
   @override
   void dispose() {
     _controller.dispose();
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -73,9 +86,29 @@ class _OnBoardState extends State<OnBoardScreen> {
         children: [
           PageView.builder(
               scrollDirection: Axis.horizontal,
+              controller: _controller,
               onPageChanged: (value) {
                 setState(() {
                   currentIndex = value;
+                  if(currentIndex==2){
+                    _timer?.cancel();
+                  }
+                  print("MyIndex->$currentIndex");
+                  /*if (currentIndex == slides.length - 1) {
+                    AppLocalDataUtil().setOnBoard(true);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              LoginScreen()),
+                    );
+
+                  } else {
+                    _controller.nextPage(
+                        duration:
+                        Duration(milliseconds: 2000),
+                        curve: Curves.bounceIn);
+                  }*/
                 });
               },
               itemCount: slides.length,
@@ -105,140 +138,104 @@ class _OnBoardState extends State<OnBoardScreen> {
                             bottomLeft: Radius.circular(0),
                           ),
                         ),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 20,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            /*SizedBox(
+                              height: 10,
+                            ),*/
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              constraints: BoxConstraints(
+                                maxWidth: 350,
                               ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                constraints: BoxConstraints(
-                                  maxWidth: 343,
-                                ),
-                                child: Text(
-                                  slides.elementAt(index).header.toString(),
-                                  textAlign: TextAlign.center,
-                                  style: SafeGoogleFont(
-                                    'Lato',
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.black,
-                                  ),
+                              child: Text(
+                                slides.elementAt(index).header.toString(),
+                                textAlign: TextAlign.center,
+                                style: SafeGoogleFont(
+                                  'Lato',
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black,
                                 ),
                               ),
-                              SizedBox(
-                                height: 10,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              constraints: BoxConstraints(
+                                maxWidth: 343,
                               ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                constraints: BoxConstraints(
-                                  maxWidth: 343,
-                                ),
-                                child: Text(
-                                  slides
-                                      .elementAt(index)
-                                      .description
-                                      .toString(),
-                                  textAlign: TextAlign.center,
-                                  style: SafeGoogleFont(
-                                    'Lato',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.grey,
-                                  ),
+                              child: Text(
+                                slides.elementAt(index).description.toString(),
+                                textAlign: TextAlign.center,
+                                style: SafeGoogleFont(
+                                  'Lato',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.grey,
                                 ),
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Container(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: List.generate(
-                                    slides.length,
-                                    (index) => buildDot(index, context),
-                                  ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: List.generate(
+                                  slides.length,
+                                  (index) => buildDot(index, context),
                                 ),
                               ),
-                              currentIndex == slides.length - 1
-                                  ? Container(
-                                      height: 40,
-                                      margin: EdgeInsets.all(10),
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: primary,
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(10),
-                                          topRight: Radius.circular(10),
-                                          bottomRight: Radius.circular(10),
-                                          bottomLeft: Radius.circular(10),
+                            ),
+                            currentIndex == slides.length - 1
+                                ? Container(
+                                    height: 60,
+                                    margin: EdgeInsets.all(10),
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: primary,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(10),
+                                        topRight: Radius.circular(10),
+                                        bottomRight: Radius.circular(10),
+                                        bottomLeft: Radius.circular(10),
+                                      ),
+                                    ),
+                                    child: TextButton(
+                                      child: Text(
+                                        currentIndex == slides.length - 1
+                                            ? "Lets Start"
+                                            : "Next",
+                                        style: TextStyle(
+                                          color: Colors.white,
                                         ),
                                       ),
-                                      child: TextButton(
-                                        child: _isLoading
-                                            ? Container(
-                                                width: 24,
-                                                height: 24,
-                                                padding:
-                                                    const EdgeInsets.all(2.0),
-                                                child:
-                                                    const CircularProgressIndicator(
-                                                  color: Colors.white,
-                                                  strokeWidth: 3,
-                                                ),
-                                              )
-                                            : Text(
-                                                currentIndex ==
-                                                        slides.length - 1
-                                                    ? "Lets Start"
-                                                    : "Next",
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                        onPressed: () {
-                                          _isLoading ? null : _onSubmit();
-                                          /*if(_isLoading){
-                                            showCustomSnackBar("hahahahahaha".tr(), context);
-                                          }*/
+                                      onPressed: () {
+                                         if (currentIndex == slides.length - 1) {
+                                          AppLocalDataUtil().setOnBoard(true);
+                                          Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    LoginScreen()),
+                                          );
 
-                                          InternetConnectionChecker()
-                                              .hasConnection
-                                              .then((value) => {
-                                                    internetConnection = value,
-                                                  });
-                                          if (internetConnection == false) {
-                                            showCustomSnackBar(
-                                                "no internet connection".tr(),
-                                                context);
-                                          } else {
-                                            if (currentIndex ==
-                                                slides.length - 1) {
-                                              AppLocalDataUtil()
-                                                  .setOnBoard(true);
-                                              Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        LoginScreen()), //LoginScreen()
-                                              );
-                                            } else {
-                                              _controller.nextPage(
-                                                  duration: Duration(
-                                                      milliseconds: 100),
-                                                  curve: Curves.bounceIn);
-                                            }
-                                          }
-                                        },
-                                      ),
-                                    )
-                                  : SizedBox(
-                                      width: 1,
-                                    ),
-                            ],
-                          ),
+                                        } else {
+                                          _controller.nextPage(
+                                              duration:
+                                                   Duration(seconds: 2000),
+                                              curve: Curves.bounceIn);
+                                        }
+                                      },
+                                    ))
+                                : SizedBox(
+                                    width: 1,
+                                  ),
+                          ],
                         ),
                       ),
                     ),

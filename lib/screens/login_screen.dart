@@ -285,6 +285,7 @@ class _loginScreenState extends State<LoginScreen> {
                                               .tr(),
                                           context);
                                     } else {
+                                      //CircularProgressIndicator();
                                       /* showDialog(
                                         context: context,
                                         builder: (BuildContext context) =>
@@ -416,7 +417,6 @@ class _loginScreenState extends State<LoginScreen> {
                           MaterialPageRoute(
                               builder: (context) =>
                                   OTPScreen(phoneNumber.number.toString())));
-                      //checkInternet();
                     })
               ],
             ));

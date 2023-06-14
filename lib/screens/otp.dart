@@ -9,6 +9,7 @@ import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:s2w/models/auth_model.dart';
+import 'package:s2w/screens/register_screen.dart';
 import 'package:s2w/utils.dart';
 import 'package:s2w/widget/custom_snackbar.dart';
 
@@ -44,6 +45,7 @@ class _OTPScreenState extends State<OTPScreen> {
   bool click = true;
   bool loader = false;
   bool internetConnection = true;
+  late bool verifyOTPResponse;
 
   @override
   void initState() {
@@ -89,11 +91,11 @@ class _OTPScreenState extends State<OTPScreen> {
     startTimer();
     _authPresenter.sendOtp(widget.mobileNo, context).then((value) {
       authInfo = value;
-      loader = true;
+      print("hahy->$authInfo");
       setState(() {
         message = authInfo.message!;
         updateUser = authInfo.latest!;
-        if(message.isNotEmpty){
+        if (message.isNotEmpty) {
           loader = false;
         }
       });
@@ -112,9 +114,9 @@ class _OTPScreenState extends State<OTPScreen> {
         body: SingleChildScrollView(
             child: loader
                 ? Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
-                child: Center(child: CircularProgressIndicator()))
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height,
+                    child: Center(child: CircularProgressIndicator()))
                 : Container(
                     padding: const EdgeInsets.only(top: 7),
                     width: double.infinity,
@@ -346,7 +348,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                     top: AppCommonHelper.isTablet(context)
                                         ? 500
                                         : 219 * fem,
-                                    child: TextButton(
+                                    child:  TextButton(
                                       onPressed: () {
                                         if (_fieldOne.text.isEmpty) {
                                           showCustomSnackBar(
@@ -379,19 +381,21 @@ class _OTPScreenState extends State<OTPScreen> {
                                                 .verifyOtp(widget.mobileNo, otp,
                                                     context)
                                                 .then((value) {
+                                              //loader = true;
+                                              //CircularProgressIndicator();
                                               if (value) {
-                                                if(!updateUser){
+                                                if (!updateUser) {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
                                                               DashBoardScreen()));
-                                                }else {
+                                                } else {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                           builder: (context) =>
-                                                              SuccessScreen()));
+                                                              RegisterScreen()));
                                                 }
                                               }
                                             });
@@ -410,7 +414,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                               BorderRadius.circular(5 * fem),
                                         ),
                                         child: Center(
-                                          child: Text(
+                                          child:  Text(
                                             'Submit',
                                             textAlign: TextAlign.center,
                                             style: SafeGoogleFont(
@@ -420,7 +424,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                               height: 1.2 * ffem / fem,
                                               color: Color(0xffffffff),
                                             ),
-                                          ),
+                                          ) ,
                                         ),
                                       ),
                                     ),

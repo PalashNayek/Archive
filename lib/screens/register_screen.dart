@@ -11,6 +11,7 @@ import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
 import 'package:s2w/models/interest_list_model.dart';
 import 'package:s2w/models/register_post_model.dart';
+import 'package:s2w/page-1/succss.dart';
 import 'package:s2w/screens/dashboard/fluid_nav_bar.dart';
 import 'package:s2w/screens/interest_screen.dart';
 import 'package:s2w/utils.dart';
@@ -83,6 +84,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   void getData() {
     loader = true;
     sharedPresenter.getInterest().then((value) {
+
       interestList.add(InterestListModel(
           id: "Select Sport", image: "", imageName: "", name: "Select Sport"));
       interestList1.add(InterestListModel(
@@ -97,6 +99,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         interestList2.add(element);
         interestList3.add(element);
       });
+
       setState(() {
         loader = false;
       });
@@ -463,7 +466,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         children: [
                                           interestList1.length > 0
                                               ? Container(
-                                                  width: 140,
+                                                  width: 150,
                                                   margin: EdgeInsets.only(
                                                       left: 10, bottom: 10),
                                                   padding: EdgeInsets.all(6),
@@ -486,17 +489,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                         value: value.id,
                                                         child: Row(
                                                           children: [
-
-                                                            /*if(value.image.isEmpty){
-
-                                                            }else{
-
-                                                            },*/
-
                                                             /*Image.network(
                                                               value.image as String,
-                                                              width: 5,
-                                                              height: 5,
+                                                              width: 24,
+                                                              height: 24,
                                                             ),*/
 
                                                             Text(
@@ -515,6 +511,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                       setState(() {
                                                         dropdownValue1 =
                                                             newValue!;
+                                                        print("Hari->$newValue");
                                                         interestList2.removeWhere(
                                                             (item) =>
                                                                 item.id ==
@@ -532,9 +529,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           ),
                                           interestList2.length > 0
                                               ? Container(
-                                                  width: 140,
-                                                  margin: EdgeInsets.only(
-                                                      left: 5, bottom: 10),
+                                                  width: 150,
+                                                  margin: EdgeInsets.only(bottom: 10),
                                                   padding: EdgeInsets.all(6),
                                                   decoration: BoxDecoration(
                                                       borderRadius:
@@ -593,7 +589,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         children: [
                                           interestList3.length > 0
                                               ? Container(
-                                              width: 140,
+                                              width: 150,
                                                   margin: EdgeInsets.only(
                                                       left: 10, bottom: 10),
                                                   padding: EdgeInsets.all(6),
@@ -644,9 +640,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           ),
                                           Center(
                                             child: Container(
-                                                width: 140,
+                                                width: 150,
                                                 margin: EdgeInsets.only(
-                                                    left: 5, bottom: 10),
+                                                    bottom: 10),
                                                 padding: EdgeInsets.all(6),
                                                 decoration: BoxDecoration(
                                                     borderRadius:
@@ -681,6 +677,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                     ),
                                   ),
+
                                   TextButton(
                                     onPressed: () {
                                       if (userNameController.text.isEmpty) {
@@ -776,7 +773,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            DashBoardScreen()));
+                                                            SuccessScreen()));
                                               } else {
                                                 _authPresenter
                                                     .registerUser(registerModel)

@@ -462,7 +462,7 @@ class _AccountContentState extends State<AccountContent> {
                       ],
                     )),
                 isLoaded
-                    ? ListView.builder(
+                    ?  ListView.builder(
                         itemCount: postListModel.result!.length,
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,

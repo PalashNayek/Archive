@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'dart:ui';
@@ -13,6 +14,7 @@ import '../presenter/auth_presenter.dart';
 import '../screens/dashboard/fluid_nav_bar.dart';
 import '../screens/login_screen.dart';
 import '../utilities/app_local_data_util.dart';
+import '../widget/custom_snackbar.dart';
 import 'succss-Qmn.dart';
 
 class SuccessScreen extends StatefulWidget {
@@ -35,8 +37,11 @@ class _SuccessScreenState extends State<SuccessScreen> {
       await AppLocalDataUtil().getToken().then((value) {
         authPresenter.checkProfile().then((value) {
           if (!value) {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => RegisterScreen()));
+            /*Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => RegisterScreen()));*/
+            showCustomSnackBar(
+                "please remove this msg".tr(),
+                context);
           } else {
             Navigator.pushReplacement(context,
                 MaterialPageRoute(builder: (context) => DashBoardScreen()));

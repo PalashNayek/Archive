@@ -93,7 +93,9 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
           //header
          Row(
            crossAxisAlignment: CrossAxisAlignment.start,
-           children: [
+           mainAxisAlignment: MainAxisAlignment.start,
+
+           children: <Widget>[
              //user
            GestureDetector(onTap: (){
              Navigator.push(context,MaterialPageRoute(builder: (context) => OtherAccountContent(widget.postModelData.account!.id.toString())));
