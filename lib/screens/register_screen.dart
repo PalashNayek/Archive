@@ -86,18 +86,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
     sharedPresenter.getInterest().then((value) {
       interestList.add(InterestListModel(
           id: "Select Sport",
-          image: "https://socialstorage.b-cdn.net/icons/1686642607485.png",
+          image: "https://socialstorage.b-cdn.net/profile/1685080113894.jpg",
           imageName: "",
           name: "Select Sport"));
       interestList1.add(InterestListModel(
           id: "Select Sport",
-          image: "https://socialstorage.b-cdn.net/icons/1686642607485.png",
+          image: "https://socialstorage.b-cdn.net/profile/1685080113894.jpg",
           imageName: "",
           name: "Select Sport"));
       interestList2.add(InterestListModel(
-          id: "Select Sport", image: "https://socialstorage.b-cdn.net/icons/1686642607485.png", imageName: "", name: "Select Sport"));
+          id: "Select Sport", image: "https://socialstorage.b-cdn.net/profile/1685080113894.jpg", imageName: "", name: "Select Sport"));
       interestList3.add(InterestListModel(
-          id: "Select Sport", image: "https://socialstorage.b-cdn.net/icons/1686642607485.png", imageName: "", name: "Select Sport"));
+          id: "Select Sport", image: "https://socialstorage.b-cdn.net/profile/1685080113894.jpg", imageName: "", name: "Select Sport"));
       value.forEach((element) {
         interestList.add(element);
         interestList1.add(element);

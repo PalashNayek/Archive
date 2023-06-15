@@ -103,36 +103,38 @@ class _NotificationContentState extends State<NotificationContent> {
                         },
                       )
                     : Center(
-                        child: Container(
-                        margin: EdgeInsets.fromLTRB(
-                            5 * fem, 100 * fem, 0 * fem, 11 * fem),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/page-1/images/nonotification.png',
-                              fit: BoxFit.cover,
-                              height: 150,
-                              width: 150,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              'No Notification found At this moment',
-                              textAlign: TextAlign.center,
-                              style: SafeGoogleFont(
-                                'Lato',
-                                fontSize: 20 * ffem,
-                                fontWeight: FontWeight.w800,
-                                height: 1.2 * ffem / fem,
-                                color: Colors.grey,
+                        child: Center(
+                          child: Container(
+                          margin: EdgeInsets.fromLTRB(
+                              5 * fem, 100 * fem, 0 * fem, 11 * fem),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/page-1/images/nonotification.png',
+                                fit: BoxFit.cover,
+                                height: 150,
+                                width: 150,
                               ),
-                            ),
-                          ],
-                        ),
-                      ))
+                              SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                'No Notification found At this moment',
+                                textAlign: TextAlign.center,
+                                style: SafeGoogleFont(
+                                  'Lato',
+                                  fontSize: 20 * ffem,
+                                  fontWeight: FontWeight.w800,
+                                  height: 1.2 * ffem / fem,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ],
+                          ),
+                      ),
+                        ))
                 : Center(
                     child: Container(
                         margin: EdgeInsets.fromLTRB(

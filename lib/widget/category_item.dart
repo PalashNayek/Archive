@@ -8,11 +8,13 @@ class CategoryItem extends StatelessWidget{
   CategoryItem(this.name,this.image);
   String name;
   String image;
+
   @override
   Widget build(BuildContext context){
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
+
     return  Container(
       margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 10*fem, 0*fem),
       width: 70*fem,
@@ -38,8 +40,9 @@ class CategoryItem extends StatelessWidget{
                           borderRadius: BorderRadius.circular(27*fem),
                           image: DecorationImage (
                             fit: BoxFit.cover,
-                            image: NetworkImage (image
+                            image: NetworkImage (image,
                             ),
+
                           ),
                         ),
                       ),

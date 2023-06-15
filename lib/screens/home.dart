@@ -54,8 +54,9 @@ class _HomeContentState extends State<HomeContent> {
     postPresenter.getAllPost("", perPage, off).then((value) {
       postListModel = value;
       postListData.addAll(value.result as Iterable<PostModelData>);
-      isLoaded=true;
-      setState(() {});
+      setState(() {
+        isLoaded=true;
+      });
     });
   }
 
@@ -78,409 +79,568 @@ class _HomeContentState extends State<HomeContent> {
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
-    return RefreshIndicator(
-      onRefresh: _pullRefresh,
-      child: SingleChildScrollView(
-          physics: ScrollPhysics(),
+    return SingleChildScrollView(
+        physics: ScrollPhysics(),
+        child: Container(
+          margin: EdgeInsets.only(bottom: 60),
+          width: double.infinity,
           child: Container(
-            margin: EdgeInsets.only(bottom: 60),
             width: double.infinity,
-            child: Container(
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Color(0xffffffff),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Opacity(
-                    opacity: 0.99,
-                    child: Container(
-                      padding: EdgeInsets.fromLTRB(
-                          15 * fem, 40 * fem, 25 * fem, 7 * fem),
-                      width: double.infinity,
-                      height: 76 * fem,
-                      decoration: BoxDecoration(
-                        color: Color(0xff080053),
-                        borderRadius: BorderRadius.only(
-                          bottomRight: Radius.circular(38 * fem),
-                          bottomLeft: Radius.circular(38 * fem),
-                        ),
-                      ),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            margin: EdgeInsets.fromLTRB(
-                                0 * fem, 0 * fem, 155 * fem, 0 * fem),
-                            width: 126 * fem,
-                            height: 47 * fem,
-                            child: Image.asset(
-                              'assets/page-1/images/app_logo.png',
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          IconButton(
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => SearchPage()));
-                              },
-                              icon: Icon(
-                                Icons.search,
-                                color: Colors.white,
-                                size:
-                                    AppCommonHelper.isTablet(context) ? 40 : 24,
-                              ))
-                        ],
+            decoration: BoxDecoration(
+              color: Color(0xffffffff),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Opacity(
+                  opacity: 0.99,
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(
+                        15 * fem, 40 * fem, 25 * fem, 7 * fem),
+                    width: double.infinity,
+                    height: 76 * fem,
+                    decoration: BoxDecoration(
+                      color: Color(0xff080053),
+                      borderRadius: BorderRadius.only(
+                        bottomRight: Radius.circular(38 * fem),
+                        bottomLeft: Radius.circular(38 * fem),
                       ),
                     ),
-                  ),
-                  Container(
-                    padding:
-                        EdgeInsets.fromLTRB(6 * fem, 6 * fem, 4 * fem, 0 * fem),
-                    width: double.infinity,
-                    child: Column(
+                    child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
                           margin: EdgeInsets.fromLTRB(
-                              4 * fem, 0 * fem, 9 * fem, 6 * fem),
-                          width: double.infinity,
-                          height: 283 * fem,
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                  left: 5 * fem,
-                                  top: 0 * fem,
-                                  child: Container(
-                                    width: 367 * fem,
-                                    height: 150 * fem,
-                                    child: bannerList.isNotEmpty
-                                        ?  CarouselSlider.builder(
-                                            itemCount: bannerList.length,
-                                            itemBuilder: (BuildContext context,
-                                                int index, int realIdx) {
-                                              return BannerItem(bannerList
-                                                  .elementAt(index)
-                                                  .image!);
-                                            },
-                                            options: CarouselOptions(
-                                              height: AppCommonHelper.isTablet(
-                                                      context)
-                                                  ? 400
-                                                  : 140.0,
-                                              enlargeCenterPage: true,
-                                              autoPlay: true,
-                                              aspectRatio: 16 / 9,
-                                              autoPlayCurve:
-                                                  Curves.fastOutSlowIn,
-                                              enableInfiniteScroll: true,
-                                              autoPlayAnimationDuration:
-                                                  Duration(milliseconds: 1000),
-                                              viewportFraction: 0.8,
-                                            ),
-                                          )
-                                        : Image(
-                                            width: 367 * fem,
-                                            height: 150 * fem,
-                                            image: AssetImage(
-                                                "assets/page-1/images/bannerdefaultimage.png"),
-                                          ),
-                                  )),
-
-                              //category Items
-
-                              Positioned(
-                                left: 0 * fem,
-                                top: 143 * fem,
-                                child: Container(
-                                  width: 367 * fem,
-                                  height: 140 * fem,
-                                  decoration: BoxDecoration(
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Color(0x0f2c3039),
-                                        offset: Offset(0 * fem, 24 * fem),
-                                        blurRadius: 32 * fem,
-                                      ),
-                                    ],
-                                  ),
-                                  child: Stack(
-                                    children: [
-                                      Positioned(
-                                        left: 0 * fem,
-                                        top: 11.5791015625 * fem,
-                                        child: Align(
-                                          child: SizedBox(
-                                            width: 367 * fem,
-                                            height: 128.42 * fem,
-                                            child: isLoaded? Container(
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        5 * fem),
-                                                border: Border.all(
-                                                    color: Color(0xffe7e7e7)),
-                                                color: Color(0xffffffff),
-                                              ),
-                                            ): getShimmerLoading(),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        left: 16 * fem,
-                                        top: 17 * fem,
-                                        child: Align(
-                                          child: SizedBox(
-                                            width: 124 * fem,
-                                            height: 15 * fem,
-                                            child: Text(
-                                              'Moments cover for you',
-                                              style: SafeGoogleFont(
-                                                'Lato',
-                                                fontSize: 12 * ffem,
-                                                fontWeight: FontWeight.w700,
-                                                height: 1.2 * ffem / fem,
-                                                color: Color(0xff404040),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      Positioned(
-                                        left: 16 * fem,
-                                        top: 44 * fem,
-                                        child: Container(
-                                          width: 342 * fem,
-                                          height: 90 * fem,
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              GestureDetector(
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                CreatePostScreen()));
-                                                  },
-                                                  child: Container(
-                                                    margin: EdgeInsets.fromLTRB(
-                                                        0 * fem,
-                                                        0 * fem,
-                                                        16 * fem,
-                                                        0 * fem),
-                                                    width: 75 * fem,
-                                                    height: double.infinity,
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Container(
-                                                          margin: EdgeInsets
-                                                              .fromLTRB(
-                                                                  0 * fem,
-                                                                  0 * fem,
-                                                                  0 * fem,
-                                                                  6 * fem),
-                                                          width:
-                                                              double.infinity,
-                                                          height: 60 * fem,
-                                                          child: Stack(
-                                                            children: [
-                                                              Positioned(
-                                                                left: 3 * fem,
-                                                                top: 3 * fem,
-                                                                child: Align(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 54 *
-                                                                        fem,
-                                                                    height: 54 *
-                                                                        fem,
-                                                                    child:
-                                                                        Container(
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(27 *
-                                                                                fem),
-                                                                        color: Color(
-                                                                            0xff080053),
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                              Positioned(
-                                                                left: 9 * fem,
-                                                                top: 9 * fem,
-                                                                child: Align(
-                                                                  child:
-                                                                      SizedBox(
-                                                                    width: 42 *
-                                                                        fem,
-                                                                    height: 42 *
-                                                                        fem,
-                                                                    child:
-                                                                        TextButton(
-                                                                      onPressed:
-                                                                          () {
-                                                                        Navigator.push(
-                                                                            context,
-                                                                            MaterialPageRoute(builder: (context) => CreatePostScreen()));
-                                                                      },
-                                                                      style: TextButton
-                                                                          .styleFrom(
-                                                                        padding:
-                                                                            EdgeInsets.zero,
-                                                                      ),
-                                                                      child: Image
-                                                                          .asset(
-                                                                        'assets/page-1/images/add.png',
-                                                                        fit: BoxFit
-                                                                            .cover,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Center(
-                                                          child: Text(
-                                                            'ADD POST'.tr(),
-                                                            textAlign: TextAlign
-                                                                .center,
-                                                            style:
-                                                                SafeGoogleFont(
-                                                              'Lato',
-                                                              fontSize:
-                                                                  14 * ffem,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400,
-                                                              height: 1 *
-                                                                  ffem /
-                                                                  fem,
-                                                              color: Color(
-                                                                  0xff000000),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  )),
-
-                                              isLoaded?
-                                              CategoryItem(
-                                                  profileModel.user!
-                                                      .primaryInetrest!.name
-                                                      .toString(),
-                                                  profileModel.user!
-                                                      .primaryInetrest!.image
-                                                      .toString()) :Container(),
-                                              isLoaded?
-                                              CategoryItem(
-                                                  profileModel.user!
-                                                      .secondaryInetrest!.name
-                                                      .toString(),
-                                                  profileModel.user!
-                                                      .secondaryInetrest!.image
-                                                      .toString()) :Container(),
-                                              isLoaded?
-                                              CategoryItem(
-                                                  profileModel
-                                                      .user!.thirdInetrest!.name
-                                                      .toString(),
-                                                  profileModel.user!
-                                                      .thirdInetrest!.image
-                                                      .toString()) :Container(),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
+                              0 * fem, 0 * fem, 155 * fem, 0 * fem),
+                          width: 126 * fem,
+                          height: 47 * fem,
+                          child: Image.asset(
+                            'assets/page-1/images/app_logo.png',
+                            fit: BoxFit.cover,
                           ),
                         ),
+                        IconButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SearchPage()));
+                            },
+                            icon: Icon(
+                              Icons.search,
+                              color: Colors.white,
+                              size:
+                                  AppCommonHelper.isTablet(context) ? 40 : 24,
+                            ))
                       ],
                     ),
                   ),
-                  isLoaded ? ListView.builder(
-                    itemCount: postListData.length + 1,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, i) {
-                      return (i == postListData.length)
-                          ? Container(
-                              margin: EdgeInsets.only(left: 20, right: 20),
-                              child: ElevatedButton(
-                                child: Text("Load More"),
-                                onPressed: () {
-                                  offset = offset + perPage;
-                                  getPostDat(offset);
-                                },
-                              ))
-                          : PostWidgetItem(
-                              postListData.elementAt(i), profileModel);
-                    },
-                  ) : getShimmerLoading() /*:CircularProgressIndicator()*/
-                ],
-              ),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.fromLTRB(6 * fem, 6 * fem, 4 * fem, 0 * fem),
+                  width: double.infinity,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.fromLTRB(
+                            4 * fem, 0 * fem, 9 * fem, 6 * fem),
+                        width: double.infinity,
+                        height: 283 * fem,
+                        child: Stack(
+                          children: [
+                            Positioned(
+                                left: 5 * fem,
+                                top: 0 * fem,
+                                child: Container(
+                                  width: 367 * fem,
+                                  height: 150 * fem,
+                                  child: bannerList.isNotEmpty
+                                      ?  CarouselSlider.builder(
+                                          itemCount: bannerList.length,
+                                          itemBuilder: (BuildContext context,
+                                              int index, int realIdx) {
+                                            return BannerItem(bannerList
+                                                .elementAt(index)
+                                                .image!);
+                                          },
+                                          options: CarouselOptions(
+                                            height: AppCommonHelper.isTablet(
+                                                    context)
+                                                ? 400
+                                                : 140.0,
+                                            enlargeCenterPage: true,
+                                            autoPlay: true,
+                                            aspectRatio: 16 / 9,
+                                            autoPlayCurve:
+                                                Curves.fastOutSlowIn,
+                                            enableInfiniteScroll: true,
+                                            autoPlayAnimationDuration:
+                                                Duration(milliseconds: 1000),
+                                            viewportFraction: 0.8,
+                                          ),
+                                        )
+                                      : Image(
+                                          width: 367 * fem,
+                                          height: 150 * fem,
+                                          image: AssetImage(
+                                              "assets/page-1/images/bannerdefaultimage.png"),
+                                        ),
+                                )),
+
+                            //category Items
+
+                            Positioned(
+                              left: 0 * fem,
+                              top: 143 * fem,
+                              child: Container(
+                                width: 367 * fem,
+                                height: 140 * fem,
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Color(0x0f2c3039),
+                                      offset: Offset(0 * fem, 24 * fem),
+                                      blurRadius: 32 * fem,
+                                    ),
+                                  ],
+                                ),
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      left: 0 * fem,
+                                      top: 11.5791015625 * fem,
+                                      child: Align(
+                                        child: SizedBox(
+                                          width: 367 * fem,
+                                          height: 128.42 * fem,
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      5 * fem),
+                                              border: Border.all(
+                                                  color: Color(0xffe7e7e7)),
+                                              color: Color(0xffffffff),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      left: 16 * fem,
+                                      top: 17 * fem,
+                                      child: Align(
+                                        child: SizedBox(
+                                          width: 124 * fem,
+                                          height: 15 * fem,
+                                          child: Text(
+                                            'Moments cover for you',
+                                            style: SafeGoogleFont(
+                                              'Lato',
+                                              fontSize: 12 * ffem,
+                                              fontWeight: FontWeight.w700,
+                                              height: 1.2 * ffem / fem,
+                                              color: Color(0xff404040),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Positioned(
+                                      left: 16 * fem,
+                                      top: 44 * fem,
+                                      child: Container(
+                                        width: 342 * fem,
+                                        height: 90 * fem,
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            GestureDetector(
+                                                onTap: () {
+                                                  Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (context) =>
+                                                              CreatePostScreen()));
+                                                },
+                                                child: Container(
+                                                  margin: EdgeInsets.fromLTRB(
+                                                      0 * fem,
+                                                      0 * fem,
+                                                      16 * fem,
+                                                      0 * fem),
+                                                  width: 75 * fem,
+                                                  height: double.infinity,
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Container(
+                                                        margin: EdgeInsets
+                                                            .fromLTRB(
+                                                                0 * fem,
+                                                                0 * fem,
+                                                                0 * fem,
+                                                                6 * fem),
+                                                        width:
+                                                            double.infinity,
+                                                        height: 60 * fem,
+                                                        child: Stack(
+                                                          children: [
+                                                            Positioned(
+                                                              left: 3 * fem,
+                                                              top: 3 * fem,
+                                                              child: Align(
+                                                                child:
+                                                                    SizedBox(
+                                                                  width: 54 *
+                                                                      fem,
+                                                                  height: 54 *
+                                                                      fem,
+                                                                  child:
+                                                                      Container(
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(27 *
+                                                                              fem),
+                                                                      color: Color(
+                                                                          0xff080053),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            Positioned(
+                                                              left: 9 * fem,
+                                                              top: 9 * fem,
+                                                              child: Align(
+                                                                child:
+                                                                    SizedBox(
+                                                                  width: 42 *
+                                                                      fem,
+                                                                  height: 42 *
+                                                                      fem,
+                                                                  child:
+                                                                      TextButton(
+                                                                    onPressed:
+                                                                        () {
+                                                                      Navigator.push(
+                                                                          context,
+                                                                          MaterialPageRoute(builder: (context) => CreatePostScreen()));
+                                                                    },
+                                                                    style: TextButton
+                                                                        .styleFrom(
+                                                                      padding:
+                                                                          EdgeInsets.zero,
+                                                                    ),
+                                                                    child: Image
+                                                                        .asset(
+                                                                      'assets/page-1/images/add.png',
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      Center(
+                                                        child: Text(
+                                                          'ADD POST'.tr(),
+                                                          textAlign: TextAlign
+                                                              .center,
+                                                          style:
+                                                              SafeGoogleFont(
+                                                            'Lato',
+                                                            fontSize:
+                                                                14 * ffem,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w400,
+                                                            height: 1 *
+                                                                ffem /
+                                                                fem,
+                                                            color: Color(
+                                                                0xff000000),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )),
+
+                                            isLoaded?
+                                            CategoryItem(
+
+                                        profileModel.user!
+                                                    .primaryInetrest!.name
+                                                    .toString(),
+                                                profileModel.user!
+                                                    .primaryInetrest!.image
+                                                    .toString()) : Container(),
+
+                                            isLoaded?
+                                            CategoryItem(
+                                                profileModel.user!
+                                                    .secondaryInetrest!.name
+                                                    .toString(),
+                                                profileModel.user!
+                                                    .secondaryInetrest!.image
+                                                    .toString()) :Container(),
+
+                                            isLoaded?
+                                            CategoryItem(
+                                                profileModel
+                                                    .user!.thirdInetrest!.name
+                                                    .toString(),
+                                                profileModel.user!
+                                                    .thirdInetrest!.image
+                                                    .toString()) :Container(),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                isLoaded ? ListView.builder(
+                  itemCount: postListData.length + 1,
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemBuilder: (context, i) {
+                    return (i == postListData.length)
+                        ? Container(
+                            margin: EdgeInsets.only(left: 20, right: 20),
+                            child: ElevatedButton(
+                              child: Text("Load More"),
+                              onPressed: () {
+                                offset = offset + perPage;
+                                getPostDat(offset);
+                              },
+                            ))
+                        : PostWidgetItem(
+                            postListData.elementAt(i), profileModel);
+                  },
+                ) : getShimmerLoading() /*:CircularProgressIndicator()*/
+              ],
             ),
-          )),
-    );
+          ),
+        ));
   }
 
-  Future<void> _pullRefresh() async {
+  /*Future<void> _pullRefresh() async {
     getData();
     getPostDat(0);
-  }
+  }*/
 
   Shimmer getShimmerLoading() {
     return Shimmer.fromColors(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           children: [
-            Container(
-              height: 100,
-              width: 100,
-              color: Colors.white,
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-                child: Column(
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
+              children: [
                 Container(
-                  width: double.infinity,
-                  height: 18.0,
+                  height: 100,
+                  width: 100,
                   color: Colors.white,
-
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 14.0,
-                  color: Colors.white,
-
+                const SizedBox(
+                  width: 10,
                 ),
+                Expanded(
+                    child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
+
               ],
-            )),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    )),
+
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    )),
+
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    )),
+
+              ],
+            ),
 
           ],
         ),

@@ -6,18 +6,18 @@ class ProfileModel {
   ProfileModel({this.user, this.follower, this.following});
 
   ProfileModel.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
     follower = json['follower'];
     following = json['following'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.user != null) {
-      data['user'] = this.user!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (user != null) {
+      data['user'] = user!.toJson();
     }
-    data['follower'] = this.follower;
-    data['following'] = this.following;
+    data['follower'] = follower;
+    data['following'] = following;
     return data;
   }
 }
@@ -117,58 +117,58 @@ class User {
     thirdInetrestId = json['thirdInetrestId'];
     ageGroupId = json['ageGroupId'];
     account =
-    json['account'] != null ? new Account.fromJson(json['account']) : null;
+    json['account'] != null ? Account.fromJson(json['account']) : null;
     primaryInetrest = json['primaryInetrest'] != null
-        ? new PrimaryInetrest.fromJson(json['primaryInetrest'])
+        ? PrimaryInetrest.fromJson(json['primaryInetrest'])
         : null;
     secondaryInetrest = json['secondaryInetrest'] != null
-        ? new PrimaryInetrest.fromJson(json['secondaryInetrest'])
+        ? PrimaryInetrest.fromJson(json['secondaryInetrest'])
         : null;
     thirdInetrest = json['thirdInetrest'] != null
-        ? new PrimaryInetrest.fromJson(json['thirdInetrest'])
+        ? PrimaryInetrest.fromJson(json['thirdInetrest'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['firstName'] = this.firstName;
-    data['lastName'] = this.lastName;
-    data['emailId'] = this.emailId;
-    data['phoneNumber'] = this.phoneNumber;
-    data['address'] = this.address;
-    data['streetAddress1'] = this.streetAddress1;
-    data['streetAddress2'] = this.streetAddress2;
-    data['city'] = this.city;
-    data['state'] = this.state;
-    data['pincode'] = this.pincode;
-    data['country'] = this.country;
-    data['profile'] = this.profile;
-    data['profileName'] = this.profileName;
-    data['cover'] = this.cover;
-    data['coverName'] = this.coverName;
-    data['gender'] = this.gender;
-    data['joinFor'] = this.joinFor;
-    data['dob'] = this.dob;
-    data['desc'] = this.desc;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['accountId'] = this.accountId;
-    data['primaryInetrestId'] = this.primaryInetrestId;
-    data['secondaryInetrestId'] = this.secondaryInetrestId;
-    data['thirdInetrestId'] = this.thirdInetrestId;
-    data['ageGroupId'] = this.ageGroupId;
-    if (this.account != null) {
-      data['account'] = this.account!.toJson();
+    data['id'] = id;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['emailId'] = emailId;
+    data['phoneNumber'] = phoneNumber;
+    data['address'] = address;
+    data['streetAddress1'] = streetAddress1;
+    data['streetAddress2'] = streetAddress2;
+    data['city'] = city;
+    data['state'] = state;
+    data['pincode'] = pincode;
+    data['country'] = country;
+    data['profile'] = profile;
+    data['profileName'] = profileName;
+    data['cover'] = cover;
+    data['coverName'] = coverName;
+    data['gender'] = gender;
+    data['joinFor'] = joinFor;
+    data['dob'] = dob;
+    data['desc'] = desc;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['accountId'] = accountId;
+    data['primaryInetrestId'] = primaryInetrestId;
+    data['secondaryInetrestId'] = secondaryInetrestId;
+    data['thirdInetrestId'] = thirdInetrestId;
+    data['ageGroupId'] = ageGroupId;
+    if (account != null) {
+      data['account'] = account!.toJson();
     }
-    if (this.primaryInetrest != null) {
-      data['primaryInetrest'] = this.primaryInetrest!.toJson();
+    if (primaryInetrest != null) {
+      data['primaryInetrest'] = primaryInetrest!.toJson();
     }
-    if (this.secondaryInetrest != null) {
-      data['secondaryInetrest'] = this.secondaryInetrest!.toJson();
+    if (secondaryInetrest != null) {
+      data['secondaryInetrest'] = secondaryInetrest!.toJson();
     }
-    if (this.thirdInetrest != null) {
-      data['thirdInetrest'] = this.thirdInetrest!.toJson();
+    if (thirdInetrest != null) {
+      data['thirdInetrest'] = thirdInetrest!.toJson();
     }
     return data;
   }
@@ -221,20 +221,20 @@ class Account {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['phoneNumber'] = this.phoneNumber;
-    data['password'] = this.password;
-    data['deviceId'] = this.deviceId;
-    data['socketId'] = this.socketId;
-    data['activeAt'] = this.activeAt;
-    data['lastStatus'] = this.lastStatus;
-    data['createdBy'] = this.createdBy;
-    data['roles'] = this.roles;
-    data['status'] = this.status;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['postCount'] = this.postCount;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['phoneNumber'] = phoneNumber;
+    data['password'] = password;
+    data['deviceId'] = deviceId;
+    data['socketId'] = socketId;
+    data['activeAt'] = activeAt;
+    data['lastStatus'] = lastStatus;
+    data['createdBy'] = createdBy;
+    data['roles'] = roles;
+    data['status'] = status;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['postCount'] = postCount;
     return data;
   }
 }
@@ -258,12 +258,12 @@ class PrimaryInetrest {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['image'] = this.image;
-    data['imageName'] = this.imageName;
-    data['status'] = this.status;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['image'] = image;
+    data['imageName'] = imageName;
+    data['status'] = status;
     return data;
   }
 }

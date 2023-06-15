@@ -51,6 +51,9 @@ class _OTPScreenState extends State<OTPScreen> {
   void initState() {
     loader = true;
     super.initState();
+    setState(() {
+      loader = true;
+    });
 
     getData();
   }
@@ -91,7 +94,7 @@ class _OTPScreenState extends State<OTPScreen> {
     startTimer();
     _authPresenter.sendOtp(widget.mobileNo, context).then((value) {
       authInfo = value;
-      print("hahy->$authInfo");
+
       setState(() {
         message = authInfo.message!;
         updateUser = authInfo.latest!;
@@ -348,7 +351,10 @@ class _OTPScreenState extends State<OTPScreen> {
                                     top: AppCommonHelper.isTablet(context)
                                         ? 500
                                         : 219 * fem,
-                                    child:  TextButton(
+                                    child: TextButton(
+                                      style: TextButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                      ),
                                       onPressed: () {
                                         if (_fieldOne.text.isEmpty) {
                                           showCustomSnackBar(
@@ -402,9 +408,6 @@ class _OTPScreenState extends State<OTPScreen> {
                                           }
                                         }
                                       },
-                                      style: TextButton.styleFrom(
-                                        padding: EdgeInsets.zero,
-                                      ),
                                       child: Container(
                                         width: 346 * fem,
                                         height: 64 * fem,
@@ -414,7 +417,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                               BorderRadius.circular(5 * fem),
                                         ),
                                         child: Center(
-                                          child:  Text(
+                                          child: Text(
                                             'Submit',
                                             textAlign: TextAlign.center,
                                             style: SafeGoogleFont(
@@ -424,7 +427,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                               height: 1.2 * ffem / fem,
                                               color: Color(0xffffffff),
                                             ),
-                                          ) ,
+                                          ),
                                         ),
                                       ),
                                     ),

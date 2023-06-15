@@ -28,31 +28,35 @@ class _AccountContentState extends State<AccountContent> {
   AuthPresenter authPresenter = AuthPresenter();
   PostPresenter postPresenter = PostPresenter();
   ProfileModel profileModel = ProfileModel();
-  bool load = false, load2 = false;
-  PostListModel postListModel = new PostListModel();
-  bool isLoaded = false;
+  //bool load = false, load2 = false;
+  PostListModel postListModel = PostListModel();
+  bool loader = false;
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(seconds: 3000), () {
-      isLoaded = true;
+    setState(() {
+      loader = true;
     });
     getData();
   }
 
   void getData() {
+    loader = true;
     authPresenter.getProfile().then((value) {
       profileModel = value;
       print("MyEmailId");
       print(profileModel.user!.emailId);
-      load = true;
-      setState(() {});
+      //load = true;
+      String? profileResponse = profileModel.user!.emailId;
+      setState(() {
+        if(profileResponse!.isNotEmpty){
+          loader = false;
+        }
+      });
     });
     postPresenter.getMyPost().then((value) {
       postListModel = value;
-      load2 = true;
       setState(() {});
     });
   }
@@ -76,8 +80,8 @@ class _AccountContentState extends State<AccountContent> {
                     child: Stack(
                       children: [
                         //cover Image
-                        load
-                            ? Positioned(
+                        /*load
+                            ?*/ Positioned(
                                 left: 0 * fem,
                                 top: 0 * fem,
                                 child: Align(
@@ -96,7 +100,7 @@ class _AccountContentState extends State<AccountContent> {
                                   ),
                                 ),
                               )
-                            : Container(),
+                            /*: Container()*/,
                         Positioned(
                           left: 0 * fem,
                           top: 213 * fem,
@@ -117,8 +121,8 @@ class _AccountContentState extends State<AccountContent> {
                         ),
 
                         //user Image
-                        load
-                            ? Positioned(
+                        /*load
+                            ?*/ Positioned(
                                 left: 129 * fem,
                                 top: 125 * fem,
                                 child: Align(
@@ -163,11 +167,11 @@ class _AccountContentState extends State<AccountContent> {
                                   ),
                                 ),
                               )
-                            : Container(),
+                            /*: Container()*/,
 
                         //Full Name
-                        load
-                            ? Positioned(
+                        /*load
+                            ?*/ Positioned(
                                 left: 94 * fem,
                                 top: 267 * fem,
                                 child: Align(
@@ -188,10 +192,10 @@ class _AccountContentState extends State<AccountContent> {
                                   ),
                                 ),
                               )
-                            : SizedBox(),
+                            /*: SizedBox()*/,
                         //username
-                        load
-                            ? Positioned(
+                        /*load
+                            ?*/ Positioned(
                                 left: 133 * fem,
                                 top: 291 * fem,
                                 child: Container(
@@ -226,7 +230,7 @@ class _AccountContentState extends State<AccountContent> {
                                   ),
                                 ),
                               )
-                            : Container(),
+                            /*: Container()*/,
 
                         /* //post Header
                 Positioned(
@@ -295,8 +299,8 @@ class _AccountContentState extends State<AccountContent> {
                                         SizedBox(
                                           height: 10,
                                         ),
-                                        load
-                                            ? Text(
+                                        /*load
+                                            ?*/ Text(
                                                 profileModel
                                                     .user!.account!.postCount
                                                     .toString(),
@@ -308,7 +312,7 @@ class _AccountContentState extends State<AccountContent> {
                                                   color: Color(0x8c080053),
                                                 ),
                                               )
-                                            : Container(),
+                                            /*: Container()*/,
                                       ],
                                     )),
                                 GestureDetector(
@@ -461,10 +465,9 @@ class _AccountContentState extends State<AccountContent> {
                 ),*/
                       ],
                     )),
-                isLoaded
-                    ?  ListView.builder(
+                  ListView.builder(
                         itemCount: postListModel.result!.length,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, i) {
                           return MyPostWidgetItem(
@@ -472,62 +475,7 @@ class _AccountContentState extends State<AccountContent> {
                               profileModel.user!.accountId.toString());
                         },
                       )
-                    : getShimmerLoading()
               ],
             )));
-  }
-
-  Shimmer getShimmerLoading() {
-    return Shimmer.fromColors(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 100,
-              width: 100,
-              color: Colors.white,
-            ),
-            const SizedBox(
-              width: 10,
-            ),
-            Expanded(
-                child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(
-                  height: 8,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 10.0,
-                  color: Colors.white,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 14.0,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 18.0,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: double.infinity,
-                  height: 18.0,
-                  color: Colors.white,
-                ),
-              ],
-            )),
-          ],
-        ),
-        baseColor: Colors.grey[300]!,
-        highlightColor: Colors.grey[100]!);
   }
 }
