@@ -49,7 +49,7 @@ class _OTPScreenState extends State<OTPScreen> {
 
   @override
   void initState() {
-    loader = true;
+    //loader = true;
     super.initState();
     setState(() {
       loader = true;
@@ -303,6 +303,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                           GestureDetector(
                                             onTap: () {
                                               if (!click) {
+                                                resetTimer();
                                                 showCustomSnackBar(
                                                     "OTP Resent Successfully"
                                                         .tr(),
