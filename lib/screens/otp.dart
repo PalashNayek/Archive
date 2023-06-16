@@ -35,13 +35,13 @@ class _OTPScreenState extends State<OTPScreen> {
   final TextEditingController _fieldTwo = TextEditingController();
   final TextEditingController _fieldThree = TextEditingController();
   final TextEditingController _fieldFour = TextEditingController();
-  AuthPresenter _authPresenter = AuthPresenter();
+  final AuthPresenter _authPresenter = AuthPresenter();
   AuthInfo authInfo = AuthInfo();
-  FocusNode focusNodeOTP = FocusNode();
+  //FocusNode focusNodeOTP = FocusNode();
   String message = "";
   late bool updateUser;
   Timer? countdownTimer;
-  Duration myDuration = Duration(seconds: 30);
+  Duration myDuration = const Duration(seconds: 30);
   bool click = true;
   bool loader = false;
   bool internetConnection = true;
