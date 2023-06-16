@@ -30,34 +30,30 @@ class _AccountContentState extends State<AccountContent> {
   ProfileModel profileModel = ProfileModel();
   //bool load = false, load2 = false;
   PostListModel postListModel = PostListModel();
-  bool loader = false;
+  bool load = false;
+  int? resultLenth;
 
   @override
   void initState() {
     super.initState();
     setState(() {
-      loader = true;
     });
     getData();
   }
 
   void getData() {
-    loader = true;
     authPresenter.getProfile().then((value) {
       profileModel = value;
-      print("MyEmailId");
-      print(profileModel.user!.emailId);
-      //load = true;
-      String? profileResponse = profileModel.user!.emailId;
-      setState(() {
-        if(profileResponse!.isNotEmpty){
-          loader = false;
-        }
-      });
     });
     postPresenter.getMyPost().then((value) {
       postListModel = value;
-      setState(() {});
+      load = true;
+      resultLenth = value.result?.length;
+      if(value.result?.length==""){
+        setState(() {});
+      }else {
+        setState(() {});
+      }
     });
   }
 
@@ -75,6 +71,7 @@ class _AccountContentState extends State<AccountContent> {
             child: Column(
               children: [
                 Container(
+                  padding: EdgeInsets.only(top: 50),
                     height: AppCommonHelper.isTablet(context) ? 1000 : 375,
                     width: double.infinity,
                     child: Stack(
@@ -89,11 +86,11 @@ class _AccountContentState extends State<AccountContent> {
                                     width: 390 * fem,
                                     height: AppCommonHelper.isTablet(context)
                                         ? 600
-                                        : 263 * fem,
+                                        : 363 * fem,
                                     child: profileModel.user!.cover == null
                                         ? Image.asset(
                                             'assets/page-1/images/bannerdefaultimage.png',
-                                            fit: BoxFit.cover,
+                                            fit: BoxFit.fill,
                                           )
                                         : Image.network(profileModel.user!.cover
                                             .toString()),
@@ -432,7 +429,6 @@ class _AccountContentState extends State<AccountContent> {
 
                         Positioned(
                           right: 15 * fem,
-                          top: 40 * fem,
                           child: CircleAvatar(
                             backgroundColor: Colors.grey,
                             child: Center(
@@ -465,7 +461,7 @@ class _AccountContentState extends State<AccountContent> {
                 ),*/
                       ],
                     )),
-                  ListView.builder(
+                  load? resultLenth! > 0 ? ListView.builder(
                         itemCount: postListModel.result!.length,
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
@@ -474,7 +470,21 @@ class _AccountContentState extends State<AccountContent> {
                               postListModel.result!.elementAt(i),
                               profileModel.user!.accountId.toString());
                         },
-                      )
+                      ):Center(
+                        child: Container(
+                          margin: EdgeInsets.fromLTRB(
+                              5 * fem, 100 * fem, 0 * fem, 11 * fem),
+                          child: Text('No post available',
+                            textAlign: TextAlign.center,
+                            style: SafeGoogleFont(
+                              'Lato',
+                              fontSize: 15 * ffem,
+                              fontWeight: FontWeight.w700,
+                              height: 1.2 * ffem / fem,
+                              color: Color(0xff000000),
+                            ),),
+                        ),
+                      ):CircularProgressIndicator()
               ],
             )));
   }

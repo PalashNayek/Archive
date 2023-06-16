@@ -304,10 +304,11 @@ class PostService extends ApiClient with UiHelper {
   }
 
   Future<PostListModel> getAllPost(String keyword,int limit,int offset) {
-
+    print("getAllPostURL");
+    print(_allPostListUrl);
     return getRequest(_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&keyword="+keyword, "",isCompleteUrl: false).then((response) {
       if (response != null) {
-        print(response.body);
+        print("MyURL$response.request");
         var result = json.decode(response.body);
         return PostListModel.fromJson(result);
         /* Iterable iterable = result;

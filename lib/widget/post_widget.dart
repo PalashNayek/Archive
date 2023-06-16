@@ -42,7 +42,6 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
   bool isLoading = false;
   double progress = 0.0;
 
-
   @override
   void initState() {
     super.initState();
@@ -93,7 +92,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
         Container(
       margin: EdgeInsets.fromLTRB(6 * fem, 0 * fem, 7 * fem, 7 * fem),
       width: double.infinity,
-      height: 440 * fem,
+      height: 450 * fem,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7 * fem),
         border: Border.all(color: Color(0x99d6d6d6)),
@@ -102,133 +101,138 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
       child: Column(
         children: [
           //header
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              //user
-              GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => OtherAccountContent(
-                                widget.postModelData.account!.id.toString())));
-                  },
-                  child: Container(
-                      margin: EdgeInsets.all(5.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(30.0),
-                        child: widget.postModelData.account!.personalDetail!
-                                    .elementAt(0)
-                                    .profile ==
-                                null
-                            ? Image.asset("assets/page-1/images/user.png",
-                                width: 50 * fem,
-                                height: 50 * fem,
-                                fit: BoxFit.cover)
-                            : Image.network(
-                                widget.postModelData.account!.personalDetail!
-                                    .elementAt(0)
-                                    .profile
-                                    .toString(),
-                                width: 50 * fem,
-                                height: 50 * fem,
-                                fit: BoxFit.cover,
-                                loadingBuilder: (BuildContext context,
-                                    Widget child,
-                                    ImageChunkEvent? loadingProgress) {
-                                  if(loadingProgress == null){
+          Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: Row(
+
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: <Widget>[
+                //user
+                GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OtherAccountContent(
+                                  widget.postModelData.account!.id.toString())));
+                    },
+                    child: Container(
+                        margin: EdgeInsets.all(5.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(30.0),
+                          child: widget.postModelData.account!.personalDetail!
+                                      .elementAt(0)
+                                      .profile ==
+                                  null
+                              ? Image.asset("assets/page-1/images/user.png",
+                                  width: 50 * fem,
+                                  height: 50 * fem,
+                                  fit: BoxFit.cover)
+                              : Image.network(
+                                  widget.postModelData.account!.personalDetail!
+                                      .elementAt(0)
+                                      .profile
+                                      .toString(),
+                                  width: 50 * fem,
+                                  height: 50 * fem,
+                                  fit: BoxFit.cover, loadingBuilder:
+                                      (BuildContext context, Widget child,
+                                          ImageChunkEvent? loadingProgress) {
+                                  if (loadingProgress == null) {
                                     isLoading = false;
                                     return child;
-                                  }else{
+                                  } else {
                                     isLoading = true;
                                     return CircularProgressIndicator(
-                                      value: loadingProgress.expectedTotalBytes != null
-                                          ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                      value: loadingProgress.expectedTotalBytes !=
+                                              null
+                                          ? loadingProgress
+                                                  .cumulativeBytesLoaded /
+                                              loadingProgress.expectedTotalBytes!
                                           : null,
                                     );
                                   }
                                 }),
-                      ))),
-              if (isLoading)
-                CircularProgressIndicator(),
+                        ))),
+                if (isLoading) CircularProgressIndicator(),
 
-              Expanded(
-                  child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 10, top: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        RichText(
-                          text: TextSpan(
-                            style: SafeGoogleFont(
-                              'Netflix Sans',
-                              fontSize: 16 * ffem,
-                              fontWeight: FontWeight.w500,
-                              height: 1.171875 * ffem / fem,
-                              color: Color(0xff000000),
-                            ),
-                            children: [
-                              TextSpan(
-                                text: widget
-                                    .postModelData.account!.personalDetail!
-                                    .elementAt(0)
-                                    .firstName,
-                                style: SafeGoogleFont(
-                                  'Lato',
-                                  fontSize: 16 * ffem,
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.2 * ffem / fem,
-                                  color: Color(0xff000000),
-                                ),
+                Expanded(
+                    child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(left: 10, top: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              style: SafeGoogleFont(
+                                'Netflix Sans',
+                                fontSize: 16 * ffem,
+                                fontWeight: FontWeight.w500,
+                                height: 1.171875 * ffem / fem,
+                                color: Color(0xff000000),
                               ),
-                            ],
+                              children: [
+                                TextSpan(
+                                  text: widget
+                                      .postModelData.account!.personalDetail!
+                                      .elementAt(0)
+                                      .firstName,
+                                  style: SafeGoogleFont(
+                                    'Lato',
+                                    fontSize: 16 * ffem,
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.2 * ffem / fem,
+                                    color: Color(0xff000000),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          AppCommonHelper.timeAgoCustom(
-                              widget.postModelData.createdAt.toString()),
-                          style: SafeGoogleFont(
-                            'Lato',
-                            fontSize: 9 * ffem,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2 * ffem / fem,
-                            color: Color(0xff9496a1),
+                          SizedBox(
+                            height: 5,
                           ),
-                        ),
-                      ],
+                          Text(
+                            AppCommonHelper.timeAgoCustom(
+                                widget.postModelData.createdAt.toString()),
+                            style: SafeGoogleFont(
+                              'Lato',
+                              fontSize: 9 * ffem,
+                              fontWeight: FontWeight.w400,
+                              height: 1.2 * ffem / fem,
+                              color: Color(0xff9496a1),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
 
-                  //option/more icon
-                  widget.postModelData.account!.id !=
-                          widget.profileModel.user!.accountId.toString()
-                      ? GestureDetector(
-                          child: Container(
-                              margin: EdgeInsets.only(right: 10),
-                              child: Icon(
-                                Icons.more_vert,
-                                size:
-                                    AppCommonHelper.isTablet(context) ? 40 : 24,
-                              )),
-                          onTapDown: (details) {
-                            showPopupMenu(context, details);
-                          },
-                        )
-                      : SizedBox(
-                          width: 1,
-                        )
-                ],
-              ))
-              //username
-            ],
+                    //option/more icon
+                    widget.postModelData.account!.id !=
+                            widget.profileModel.user!.accountId.toString()
+                        ? GestureDetector(
+                            child: Container(
+                                margin: EdgeInsets.only(right: 10),
+                                child: Icon(
+                                  Icons.more_vert,
+                                  size:
+                                      AppCommonHelper.isTablet(context) ? 40 : 24,
+                                )),
+                            onTapDown: (details) {
+                              showPopupMenu(context, details);
+                            },
+                          )
+                        : SizedBox(
+                            width: 1,
+                          )
+                  ],
+                ))
+                //username
+              ],
+            ),
           ),
           //header End
           SizedBox(
@@ -300,58 +304,58 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                         .image
                                         .toString(),
                                     width: double.infinity,
-                                    fit: BoxFit.fill,
-                                loadingBuilder: (BuildContext context,
-                                    Widget child,
-                                    ImageChunkEvent? loadingProgress) {
-                                  if(loadingProgress == null){
-                                    isLoading = false;
-                                    return child;
-                                  }else{
-                                    isLoading = true;
-                                    progress = loadingProgress.expectedTotalBytes != null
-                                        ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                                        : 0.0;
-                                    return Stack(
-                                      alignment: Alignment.center,
-                                      children: [
-                                        child,
-                                        /*CircularProgressIndicator(
+                                    fit: BoxFit.fill, loadingBuilder:
+                                        (BuildContext context, Widget child,
+                                            ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      isLoading = false;
+                                      return child;
+                                    } else {
+                                      isLoading = true;
+                                      progress =
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : 0.0;
+                                      return Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          child,
+                                          /*CircularProgressIndicator(
                                           value: progress,
                                         ),*/
-                                        SizedBox(
-                                          child: Center(
-                                              child: CircularProgressIndicator(
-                                                value: progress,
-                                              )
-
+                                          SizedBox(
+                                            child: Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                              value: progress,
+                                            )),
+                                            height: 100.0,
+                                            width: 100.0,
                                           ),
-                                          height: 100.0,
-                                          width: 100.0,
-                                        ),
-                                        Text(
-                                          '${(progress * 100).toStringAsFixed(1)}%',
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
+                                          Text(
+                                            '${(progress * 100).toStringAsFixed(1)}%',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    );
+                                        ],
+                                      );
 
-                                    /*CircularProgressIndicator(
+                                      /*CircularProgressIndicator(
                                       value: loadingProgress.expectedTotalBytes != null
                                           ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
                                           : null,
                                     );*/
-                                  }
-                                }
-
-                                  ),
+                                    }
+                                  }),
                           ),
-                            if (isLoading)
-                              CircularProgressIndicator(),
+                          if (isLoading) CircularProgressIndicator(),
                           getFileExtension(widget.postModelData.postImage!
                                       .elementAt(0)
                                       .image
@@ -372,8 +376,11 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                                         .toString(),
                                                   )));
                                     },
-                                    icon: Icon(Icons.play_circle,
-                                        size: 50, color: third),
+
+                                    icon: Center(
+                                      child: Icon(Icons.play_circle,
+                                          size: 50, color: third),
+                                    ),
                                   ))
                               : SizedBox(
                                   width: 1,
@@ -460,13 +467,18 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
             Align(alignment: Alignment.center, child:Text(widget.postModelData.desc.toString(),style: TextStyle(color: Colors.black),)),
 
           ),*/
-            )
-
-            ,
+            ),
+          ),
+          Divider(
+            height: 1,
+            color: Colors.grey,
+          ),
+          SizedBox(
+            height: 5,
           ),
           Container(
             width: double.infinity,
-            height: 24.00 * fem,
+            height: 25.00 * fem,
             margin: EdgeInsets.only(left: 20, right: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

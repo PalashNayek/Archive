@@ -32,8 +32,8 @@ class _HomeContentState extends State<HomeContent> {
   PostPresenter postPresenter = PostPresenter();
   PostListModel postListModel = new PostListModel();
   List<PostModelData> postListData = [];
-  int perPage = 10;
-  int offset = 0;
+  int perPage = 10;//default- perPage = 10;
+  int offset = 0; //default- offset = 0;
   int present = 0;
 
   bool isLoaded = false;
@@ -426,13 +426,13 @@ class _HomeContentState extends State<HomeContent> {
                     return (i == postListData.length)
                         ? Container(
                             margin: EdgeInsets.only(left: 20, right: 20),
-                            child: ElevatedButton(
+                            /*child: ElevatedButton(
                               child: Text("Load More"),
                               onPressed: () {
                                 offset = offset + perPage;
                                 getPostDat(offset);
                               },
-                            ))
+                            )*/)
                         : PostWidgetItem(
                             postListData.elementAt(i), profileModel);
                   },

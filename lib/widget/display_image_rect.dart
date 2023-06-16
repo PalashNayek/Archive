@@ -31,14 +31,14 @@ class DisplayImageRect extends StatelessWidget {
   // Builds Profile Image
   Widget buildImage(Color color) {
     final image = imagePath.contains('https://')
-        ? Image.network(imagePath,fit: BoxFit.fill,)
+        ? Image.network(imagePath, fit: BoxFit.fill,)
         :imagePath.contains('assets') ?Image.asset (imagePath,fit: BoxFit.fill,): Image.file(File(imagePath),fit: BoxFit.fill,);
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(10.0),//or 15.0
       child: Container(
-        height: 140.0,
-        width: 350.0,
+        height: 200.0,
+        width: 280.0,
         color: Color(0xffFF0E58),
         child: image,
       ),
@@ -55,7 +55,7 @@ class DisplayImageRect extends StatelessWidget {
 
   // Builds Edit Icon on Profile Picture
   Widget buildEditIcon(Color color) => buildCircle(
-      all: 5,
+      all: 35,
       child: GestureDetector(
           onTap: onPressed,
           child: Icon(

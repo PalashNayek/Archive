@@ -35,7 +35,7 @@ class DisplayImage extends StatelessWidget {
         :imagePath.contains('assets') ?AssetImage (imagePath): FileImage(File(imagePath));
 
     return CircleAvatar(
-      radius: 55,
+      radius: 50,
       backgroundColor: color,
       child: CircleAvatar(
         backgroundImage: image as ImageProvider,

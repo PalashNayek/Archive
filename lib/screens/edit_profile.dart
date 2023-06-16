@@ -125,6 +125,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                    Positioned(
                     top: 1*fem,
                     left: 10,
+                    right: 10,
                     child: Align(
                     child:  InkWell(
                         onTap: () {
