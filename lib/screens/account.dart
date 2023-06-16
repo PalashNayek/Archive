@@ -86,7 +86,7 @@ class _AccountContentState extends State<AccountContent> {
                                     width: 390 * fem,
                                     height: AppCommonHelper.isTablet(context)
                                         ? 600
-                                        : 363 * fem,
+                                        : 163 * fem,
                                     child: profileModel.user!.cover == null
                                         ? Image.asset(
                                             'assets/page-1/images/bannerdefaultimage.png',

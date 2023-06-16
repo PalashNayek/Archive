@@ -55,7 +55,7 @@ class DisplayImageRect extends StatelessWidget {
 
   // Builds Edit Icon on Profile Picture
   Widget buildEditIcon(Color color) => buildCircle(
-      all: 35,
+      all: 15,
       child: GestureDetector(
           onTap: onPressed,
           child: Icon(
