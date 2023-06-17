@@ -160,6 +160,8 @@ class User {
     data['ageGroupId'] = ageGroupId;
     if (account != null) {
       data['account'] = account!.toJson();
+    }else{
+
     }
     if (primaryInetrest != null) {
       data['primaryInetrest'] = primaryInetrest!.toJson();

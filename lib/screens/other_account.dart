@@ -6,6 +6,7 @@ import 'package:s2w/presenter/post_presenter.dart';
 import 'package:s2w/screens/dashboard/fluid_nav_bar.dart';
 import 'package:s2w/screens/edit_profile.dart';
 import 'package:s2w/screens/follower_list.dart';
+import 'package:s2w/screens/setting_screen.dart';
 import 'package:s2w/theme/color.dart';
 import 'package:s2w/widget/my_post_widget.dart';
 
@@ -438,6 +439,27 @@ class _OtherAccountContentState extends State<OtherAccountContent> {
                       ),
                     ),
                   ),
+                    Positioned(
+                      right: 20 * fem,
+                      top: 60*fem,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey,
+                        child: Center(
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.settings,
+                                color: primary,
+                              ),
+                              onPressed: () {
+                                // Navigator.push(context,MaterialPageRoute(builder: (context) =>EditProfileScreen()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => SettingsPage()));
+                              },
+                            )),
+                      ),
+                    ),
                  /* Positioned(
                     right: 20*fem,
                     top: 10*fem,

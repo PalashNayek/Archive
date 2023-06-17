@@ -248,9 +248,7 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                       color: Color(0xff000000),
                     ),
                   ))),
-          SizedBox(
-            height: 5,
-          ),
+
           GestureDetector(
             onTap: () {
               Navigator.push(
@@ -361,141 +359,104 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                           fontSize: AppCommonHelper.isTablet(context) ? 40 : 24,
                         ),
                       )),
-
-              /* ClipRRect(
-            borderRadius: BorderRadius.circular(5.0),
-            child:
-
-            widget.postModelData.postImage!.length>0? widget.postModelData.postImage!.length==1?
-               // Center(child:Stack(children: [
-                  Image.network(widget.postModelData.postImage!.elementAt(0).image.toString(),
-                    fit: BoxFit.cover,)
-                  */ /* Align(
-                    alignment: Alignment.center,
-                    child:  IconButton(onPressed: (){
-                    Navigator.push(context,MaterialPageRoute(builder: (context) =>VideoApp()));
-                  }, icon:   Icon(Icons.play_circle,
-                      size: 50,
-                      color: third
-                  ),))*/ /*
-
-             //   ],))
-            :
-            Stack(children: [
-              PageView.builder(
-                  itemCount: widget.postModelData.postImage!.length,
-                  pageSnapping: true,
-                  controller: _pageController,
-                  onPageChanged: (page) {
-                    setState(() {
-                      activePage = page;
-                    });
-                  },
-                  itemBuilder: (context,pagePosition){
-                    return  Image.network(widget.postModelData.postImage!.elementAt(pagePosition).image.toString(),fit: BoxFit.cover,);
-                  }),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child:  Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: indicators(widget.postModelData.postImage!.length,activePage)))
-            ],) :
-            Align(alignment: Alignment.center, child:Text(widget.postModelData.desc.toString(),style: TextStyle(color: Colors.black),)),
-
-          ),*/
             ),
           ),
+
+          Divider(
+            height: 1,
+            color: Colors.grey,
+          ),
+
           Container(
             width: double.infinity,
-            height: 24.00 * fem,
+            height: 20.00 * fem,
             margin: EdgeInsets.only(left: 20, right: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                GestureDetector(
-                    onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Icon(Icons.thumb_up,
+                                size: AppCommonHelper.isTablet(context) ? 40 : 24,
+                                color: primary),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              widget.postModelData.shareCount.toString(),
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: AppCommonHelper.isTablet(context)
+                                      ? 30
+                                      : 16),
+                            )
+                          ],
+                        ),
+
+                      )),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  CommentScreen(widget.postModelData)));
+                    },
                     child: Container(
                       child: Row(
+
                         children: [
-                          Icon(Icons.thumb_up,
-                              size: AppCommonHelper.isTablet(context) ? 40 : 24,
-                              color: primary),
+                          Icon(
+                            Icons.comment,
+                            size: AppCommonHelper.isTablet(context) ? 40 : 24,
+                          ),
                           SizedBox(
                             width: 5,
                           ),
                           Text(
-                            widget.postModelData.shareCount.toString(),
+                            widget.postModelData.commentCount.toString(),
                             style: TextStyle(
                                 color: Colors.grey,
-                                fontSize: AppCommonHelper.isTablet(context)
-                                    ? 30
-                                    : 16),
+                                fontSize:
+                                    AppCommonHelper.isTablet(context) ? 30 : 16),
                           )
                         ],
                       ),
-                    )),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                CommentScreen(widget.postModelData)));
-                  },
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.comment,
-                          size: AppCommonHelper.isTablet(context) ? 40 : 24,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          widget.postModelData.commentCount.toString(),
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize:
-                                  AppCommonHelper.isTablet(context) ? 30 : 16),
-                        )
-                      ],
                     ),
                   ),
-                ),
-                /*Container(child: Row(children: [
-                    Icon(Icons.remove_red_eye_sharp,
-                      size: 24,
-                    ),
-                    SizedBox(width: 5,),
-                    Text("12K",style: TextStyle(color: Colors.grey),)
-                  ],),),*/
-                GestureDetector(
-                    onTapDown: (down) {
-                      if (widget.postModelData.postImage!.length > 0) {
-                        shareNetworkImage(widget.postModelData.postImage!
-                            .elementAt(0)
-                            .image
-                            .toString());
-                      } else {
-                        shareText(widget.postModelData.desc.toString());
-                      }
-                    },
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.ios_share_outlined,
-                            size: AppCommonHelper.isTablet(context) ? 40 : 24,
-                          ),
-                          // SizedBox(width: 5,),
-                          // Text(widget.postModelData.shareCount.toString(),style: TextStyle(color: Colors.grey),)
-                        ],
-                      ),
-                    )),
-              ],
+                  GestureDetector(
+                      onTapDown: (down) {
+                        if (widget.postModelData.postImage!.length > 0) {
+                          shareNetworkImage(widget.postModelData.postImage!
+                              .elementAt(0)
+                              .image
+                              .toString());
+                        } else {
+                          shareText(widget.postModelData.desc.toString());
+                        }
+                      },
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.ios_share_outlined,
+                              size: AppCommonHelper.isTablet(context) ? 40 : 24,
+                            ),
+                            // SizedBox(width: 5,),
+                            // Text(widget.postModelData.shareCount.toString(),style: TextStyle(color: Colors.grey),)
+                          ],
+                        ),
+                      )),
+                ],
+              ),
             ),
+
           ),
         ],
       ),

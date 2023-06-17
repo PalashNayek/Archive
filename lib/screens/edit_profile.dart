@@ -7,6 +7,7 @@ import 'package:flutter/gestures.dart';
 import 'dart:ui';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:s2w/screens/setting_screen.dart';
 import 'package:s2w/theme/color.dart';
 import 'package:s2w/utils.dart';
 import 'package:s2w/widget/display_image_rect.dart';
@@ -61,7 +62,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       dobController.text=profileModel.user!.dob.toString();
       mobileController.text=profileModel.user!.account!.phoneNumber.toString();
 
-
       setState(() {
 
       });
@@ -69,9 +69,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   }
   @override
   Widget build(BuildContext context) {
+
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
+    double width = MediaQuery.of(context).size.width;
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         body: SingleChildScrollView(
@@ -101,20 +104,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   children: [
                 Container(
                 margin: EdgeInsets.only(left: 20,top: 10),
-                    child:Text(
-                     'Edit Profile',
-                     style: SafeGoogleFont (
-                       'Lato',
-                       fontSize: 16*ffem,
-                       fontWeight: FontWeight.w700,
-                       height: 1.2*ffem/fem,
-                       color: Color(0xffcacaca),
-                     ),
-                      )),
+                    child:Center(
+                      child: Text(
+                       'Edit Profile',
+                       style: SafeGoogleFont (
+                         'Lato',
+                         fontSize: 16*ffem,
+                         fontWeight: FontWeight.w700,
+                         height: 1.2*ffem/fem,
+                         color: Color(0xffcacaca),
+                       ),
+                        ),
+                    )),
                   ],
                 ),
               ),
-            load? Container(
+            Container(
               //padding: EdgeInsets.fromLTRB(10*fem, 20*fem, 10*fem, 10*fem),
               width: double.infinity,
               child: Column(
@@ -212,41 +217,39 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),),
 
                   ),
-                  SingleChildScrollView(
-                    child: Container(
-                      margin: EdgeInsets.fromLTRB(10*fem, 0*fem, 10*fem, 10*fem),
-                      width: double.infinity,
-                      height: 60*fem,
-                      decoration: BoxDecoration (
-                        borderRadius: BorderRadius.circular(5*fem),
-                      ),
-                      child: TextField(
-                        autocorrect: true,
-                        focusNode: focusNodeTitle,
-                        controller: fullnameController,
-
-                        decoration: InputDecoration(
-                          hintText: 'Full Name',
-                          hintStyle: SafeGoogleFont (
-                            'Lato',
-                            fontSize: 14*ffem,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2*ffem/fem,
-                            color: Color(0xff000000),
-                          ),
-                          filled: true,
-                          fillColor: Color(0xfff3f3f3),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide: BorderSide(color: Color(0x59000000), width: 1),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide: BorderSide(color: Color(0x59000000)),
-                          ),
-                        ),),
-
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10*fem, 0*fem, 10*fem, 10*fem),
+                    width: double.infinity,
+                    height: 60*fem,
+                    decoration: BoxDecoration (
+                      borderRadius: BorderRadius.circular(5*fem),
                     ),
+                    child: TextField(
+                      autocorrect: true,
+                      focusNode: focusNodeTitle,
+                      controller: fullnameController,
+
+                      decoration: InputDecoration(
+                        hintText: 'Full Name',
+                        hintStyle: SafeGoogleFont (
+                          'Lato',
+                          fontSize: 14*ffem,
+                          fontWeight: FontWeight.w400,
+                          height: 1.2*ffem/fem,
+                          color: Color(0xff000000),
+                        ),
+                        filled: true,
+                        fillColor: Color(0xfff3f3f3),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(color: Color(0x59000000), width: 1),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          borderSide: BorderSide(color: Color(0x59000000)),
+                        ),
+                      ),),
+
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(10*fem, 0*fem, 10*fem, 10*fem),
@@ -384,135 +387,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),),
 
                   ),
-               /*   Container(
-                    width: double.infinity,
-                    height: 60*fem,
-                    child:
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                            margin: EdgeInsets.only(left: 10,bottom: 10),
-                            padding: EdgeInsets.all(6),
-                            decoration: BoxDecoration (
-                                borderRadius: BorderRadius.circular(5*fem),
-                                color: Color(0xfff3f3f3),
-                                border: Border.all(color:Color(0x59000000))
-                            ),
-                            child: DropdownButton<String>(
-                              value: dropdownValue,
-                              underline: SizedBox(),
-                              items: <String>["Select Sport","Cricket", "Football", "Tenis", "Chess"]
-                                  .map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                );
-                              }).toList(),
-                              // Step 5.
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  dropdownValue = newValue!;
-                                });
-                              },
-                            )),
-                        Container(
-                            margin: EdgeInsets.only(right: 10,left: 10,bottom: 10),
-                            padding: EdgeInsets.all(6),
-                            decoration: BoxDecoration (
-                                borderRadius: BorderRadius.circular(5*fem),
-                                color: Color(0xfff3f3f3),
-                                border: Border.all(color:Color(0x59000000))
-                            ),
-                            child: DropdownButton<String>(
-                              value: dropdownValue,
-                              underline: SizedBox(),
-                              items: <String>["Select Sport","Cricket", "Football", "Tenis", "Chess"]
-                                  .map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                );
-                              }).toList(),
-                              // Step 5.
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  dropdownValue = newValue!;
-                                });
-                              },
-                            )),
-                        Container(
-                            margin: EdgeInsets.only(right: 10,bottom: 10),
-                            padding: EdgeInsets.all(6),
-                            decoration: BoxDecoration (
-                                borderRadius: BorderRadius.circular(5*fem),
-                                color: Color(0xfff3f3f3),
-                                border: Border.all(color:Color(0x59000000))
-                            ),
-                            child: DropdownButton<String>(
-                              value: dropdownValue,
-                              underline: SizedBox(),
-                              items: <String>["Select Sport","Cricket", "Football", "Tenis", "Chess"]
-                                  .map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(
-                                    value,
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                );
-                              }).toList(),
-                              // Step 5.
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  dropdownValue = newValue!;
-                                });
-                              },
-                            )),
-                      ],),
-                  ),*/
-                  /*if(result != null)
-                    Container(
-                      height: 150,
-                      width: double.infinity,
-                      margin: EdgeInsets.all(5),
-                      padding: const EdgeInsets.all(8.0),
-                      child:  ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              itemCount: result?.files.length ?? 0,
-                              itemBuilder: (context, index) {
-                                File f= File(result!.files[index].path.toString());
-                                return Image.file(f,height: 100,width: 100,);
-                               // return Text(result?.files[index].name ?? '', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold));
-                              })),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () async{
-                        result = await FilePicker.platform.pickFiles(allowMultiple: true ,type: FileType.custom,
-                          allowedExtensions: ['jpg', 'png','jpeg', 'mp4'],);
-                        if (result == null) {
-                          print("No file selected");
-                        } else {
-                          setState(() {
-                          });
-                          result?.files.forEach((element) {
-                            print(element.name);
-                          });
-                        }
-                      },
-                      child: const Text("File Picker"),
-                    ),
-                  ),*/
                 ],
               ),
-            ):Center(child: CircularProgressIndicator(),),
+            ),
             load? Container(
               margin: EdgeInsets.fromLTRB(22*fem, 0*fem, 16*fem, 0*fem),
               child: TextButton(
@@ -551,7 +428,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
                       authPresenter.updateUser(profileModel.user!.accountId.toString(),registerModel).then((value) {
                        // Fluttertoast.showToast(msg: "Update Successfully");
-                        Navigator.push(context,MaterialPageRoute(builder: (context) =>DashBoardScreen()));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) =>SettingsPage()));
 
                       });
 
