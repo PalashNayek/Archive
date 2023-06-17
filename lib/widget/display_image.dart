@@ -22,8 +22,8 @@ class DisplayImage extends StatelessWidget {
           buildImage(color),
           Positioned(
             child: buildEditIcon(color),
-            right: 1,
-            top: 3,
+            left: 55,
+            top: 110,
           )
         ]));
   }
@@ -34,12 +34,18 @@ class DisplayImage extends StatelessWidget {
         ? NetworkImage(imagePath)
         :imagePath.contains('assets') ?AssetImage (imagePath): FileImage(File(imagePath));
 
-    return CircleAvatar(
-      radius: 50,
-      backgroundColor: color,
-      child: CircleAvatar(
-        backgroundImage: image as ImageProvider,
-        radius: 50,
+    return Padding(
+      padding: EdgeInsets.only(left: 20,top: 20, right: 20),
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: CircleAvatar(
+          radius: 50,
+          backgroundColor: color,
+          child: CircleAvatar(
+            backgroundImage: image as ImageProvider,
+            radius: 50,
+          ),
+        ),
       ),
     );
   }
@@ -47,13 +53,16 @@ class DisplayImage extends StatelessWidget {
   // Builds Edit Icon on Profile Picture
   Widget buildEditIcon(Color color) => buildCircle(
       all: 5,
-      child: GestureDetector(
-          onTap: onPressed,
-          child: Icon(
-          Icons.edit,
-          color: color,
-          size: 25,
-      ))
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: GestureDetector(
+            onTap: onPressed,
+            child: Icon(
+            Icons.edit,
+            color: color,
+            size: 25,
+        )),
+      )
   );
 
   // Builds/Makes Circle for Edit Icon on Profile Picture

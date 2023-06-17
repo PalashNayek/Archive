@@ -115,7 +115,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 ),
               ),
             load? Container(
-              padding: EdgeInsets.fromLTRB(10*fem, 20*fem, 10*fem, 10*fem),
+              //padding: EdgeInsets.fromLTRB(10*fem, 20*fem, 10*fem, 10*fem),
               width: double.infinity,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -159,7 +159,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         child: DisplayImage(
                           imagePath: result != null?result!.files[0].path.toString():load?profileModel.user!.profile!=null?profileModel.user!.profile.toString() :
                           profileModel.user!.gender=="Male"?'assets/page-1/images/user_profile_male.png':'assets/page-1/images/user_profile_female.png' :
-                          profileModel.user!.gender=="Male"?'assets/page-1/images/user_profile_male.png':'assets/page-1/images/user_profile_female.png',
+                          profileModel.user!.gender=="Malle"?'assets/page-1/images/user_profile_male.png':'assets/page-1/images/user_profile_female.png',
                           onPressed: () async {
                             result = await FilePicker.platform.pickFiles(allowMultiple: false ,type: FileType.custom,
                                 allowedExtensions: ['jpg', 'png','jpeg']);
@@ -212,39 +212,41 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       ),),
 
                   ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10*fem, 0*fem, 10*fem, 10*fem),
-                    width: double.infinity,
-                    height: 60*fem,
-                    decoration: BoxDecoration (
-                      borderRadius: BorderRadius.circular(5*fem),
+                  SingleChildScrollView(
+                    child: Container(
+                      margin: EdgeInsets.fromLTRB(10*fem, 0*fem, 10*fem, 10*fem),
+                      width: double.infinity,
+                      height: 60*fem,
+                      decoration: BoxDecoration (
+                        borderRadius: BorderRadius.circular(5*fem),
+                      ),
+                      child: TextField(
+                        autocorrect: true,
+                        focusNode: focusNodeTitle,
+                        controller: fullnameController,
+
+                        decoration: InputDecoration(
+                          hintText: 'Full Name',
+                          hintStyle: SafeGoogleFont (
+                            'Lato',
+                            fontSize: 14*ffem,
+                            fontWeight: FontWeight.w400,
+                            height: 1.2*ffem/fem,
+                            color: Color(0xff000000),
+                          ),
+                          filled: true,
+                          fillColor: Color(0xfff3f3f3),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            borderSide: BorderSide(color: Color(0x59000000), width: 1),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(5)),
+                            borderSide: BorderSide(color: Color(0x59000000)),
+                          ),
+                        ),),
+
                     ),
-                    child: TextField(
-                      autocorrect: true,
-                      focusNode: focusNodeTitle,
-                      controller: fullnameController,
-
-                      decoration: InputDecoration(
-                        hintText: 'Full Name',
-                        hintStyle: SafeGoogleFont (
-                          'Lato',
-                          fontSize: 14*ffem,
-                          fontWeight: FontWeight.w400,
-                          height: 1.2*ffem/fem,
-                          color: Color(0xff000000),
-                        ),
-                        filled: true,
-                        fillColor: Color(0xfff3f3f3),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: Color(0x59000000), width: 1),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: Color(0x59000000)),
-                        ),
-                      ),),
-
                   ),
                   Container(
                     margin: EdgeInsets.fromLTRB(10*fem, 0*fem, 10*fem, 10*fem),

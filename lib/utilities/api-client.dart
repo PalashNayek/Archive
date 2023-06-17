@@ -252,7 +252,8 @@ class ApiClient with RouteAware {
       throw errors;
     } else if (response.statusCode == 500) {
       var errors = json.decode(response.body);
-    //  Fluttertoast.showToast(msg:"Sorry we are unable to process now!");
+      //showCustomSnackBar( "Username Required",context);
+     // Fluttertoast.showToast(msg:"Sorry we are unable to process now!");
       throw errors;
     }else {
       //Fluttertoast.showToast(msg: response.body);

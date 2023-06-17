@@ -70,156 +70,165 @@ class _OtherAccountContentState extends State<OtherAccountContent> {
     return Scaffold(body:
       SingleChildScrollView(
           physics: ScrollPhysics(),
-          child: Container(
-           decoration: BoxDecoration (
-           color: Color(0xfff7f7f7),
-           ),
-           child:Column(children: [
-           load? Container(
-                height: 490,
-                width: double.infinity,
-                child:Stack(
-                children: [
-                //cover Image
-                Positioned(
-                  left: 0*fem,
-                  top: 0*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 390*fem,
-                      height: 263*fem,
-                      child:  profileModel.user!.cover==null?   Image.asset (
-                        'assets/page-1/images/cover2.png',fit: BoxFit.fill
-                      ): Image.network(profileModel.user!.cover.toString(),fit: BoxFit.fill,),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 0*fem,
-                  top: 213*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 390*fem,
-                      height: 1486*fem,
-                      child: Container(
-                        decoration: BoxDecoration (
-                          borderRadius: BorderRadius.circular(50*fem),
-                          color: Color(0xffffffff),
-                        ),
+          child: Center(
+            child: Container(
+             decoration: BoxDecoration (
+             color: Color(0xfff7f7f7),
+             ),
+             child:Column(children: [
+             load? Container(
+                  height: 490,
+                  width: double.infinity,
+                  child:Stack(
+                  children: [
+                  //cover Image
+                  Positioned(
+                    left: 0*fem,
+                    top: 0*fem,
+                    child: Align(
+                      child: SizedBox(
+                        width: 390*fem,
+                        height: 280*fem,
+                        child:  profileModel.user!.cover==null?   Image.asset (
+                          'assets/page-1/images/cover2.png',fit: BoxFit.cover
+                        ): Image.network(profileModel.user!.cover.toString(),fit: BoxFit.cover,),
                       ),
                     ),
                   ),
-                ),
-
-                //user Image
-                Positioned(
-                  left: 129*fem,
-                  top: 125*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 131*fem,
-                      height: 131*fem,
-                      child: Container(
-                        decoration: BoxDecoration (
-                          borderRadius: BorderRadius.circular(65.5*fem),
-                          border: Border.all(color: Color(0xffffffff)),
-                          image: profileModel.user!.profile==null?  DecorationImage (
-                            fit: BoxFit.cover,
-                            image: profileModel.user!.gender=="Male"? AssetImage (
-                              'assets/page-1/images/user_profile_male.png',
-                            ):AssetImage (
-                              'assets/page-1/images/user_profile_female.png',
-                            ),
-                          ):DecorationImage (
-                            fit: BoxFit.cover,
-                            image: NetworkImage(profileModel.user!.profile.toString()),
+                  Positioned(
+                    left: 0*fem,
+                    top: 213*fem,
+                    child: Align(
+                      child: SizedBox(
+                        width: 390*fem,
+                        height: 1486*fem,
+                        child: Container(
+                          decoration: BoxDecoration (
+                            borderRadius: BorderRadius.circular(50*fem),
+                            color: Color(0xffffffff),
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Color(0x3f000000),
-                              offset: Offset(0*fem, 4*fem),
-                              blurRadius: 2*fem,
+                        ),
+                      ),
+                    ),
+                  ),
+                  //user Image
+                  Positioned(
+                    left: 129*fem,
+                    top: 180*fem,
+                    child: Align(
+                      child: SizedBox(
+                        width: 131*fem,
+                        height: 131*fem,
+                        child: Container(
+                          decoration: BoxDecoration (
+                            borderRadius: BorderRadius.circular(65.5*fem),
+                            border: Border.all(color: Color(0xffffffff)),
+                            image: profileModel.user!.profile==null?  DecorationImage (
+                              fit: BoxFit.cover,
+                              image: profileModel.user!.gender=="Male"? AssetImage (
+                                'assets/page-1/images/user_profile_male.png',
+                              ):AssetImage (
+                                'assets/page-1/images/user_profile_female.png',
+                              ),
+                            ):DecorationImage (
+                              fit: BoxFit.cover,
+                              image: NetworkImage(profileModel.user!.profile.toString(), ),
                             ),
-                          ],
+                            boxShadow: [
+                              BoxShadow(
+                                color: Color(0x3f000000),
+                                offset: Offset(0*fem, 4*fem),
+                                blurRadius: 2*fem,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-
-                //Full Name
-               load? Positioned(
-                  left: 94*fem,
-                  top: 267*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 203*fem,
-                      height: 24*fem,
-                      child: Text(profileModel.user!.firstName.toString(),
-                        textAlign: TextAlign.center,
-                        style: SafeGoogleFont (
-                          'Lato',
-                          fontSize: 20*ffem,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2*ffem/fem,
-                          color: Color(0xff000000),
+                  //Full Name
+                 load? Positioned(
+                    left: 94*fem,
+                    top: 267*fem,
+                    child: Align(
+                      child: SizedBox(
+                        width: 203*fem,
+                        height: 24*fem,
+                        child: Text(profileModel.user!.firstName.toString(),
+                          textAlign: TextAlign.center,
+                          style: SafeGoogleFont (
+                            'Lato',
+                            fontSize: 20*ffem,
+                            fontWeight: FontWeight.w700,
+                            height: 1.2*ffem/fem,
+                            color: Color(0xff000000),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ):SizedBox(),
-                //username
-                Positioned(
-                  // group2JDn (12:2527)
-                  left: 133*fem,
-                  top: 291*fem,
-                  child: Container(
-                    width: 124*fem,
-                    height: 18*fem,
-                    child: Stack(
-                      children: [
+                  ):SizedBox(),
+                  //username
+                  Positioned(
+                    // group2JDn (12:2527)
+                    left: 133*fem,
+                    top: 291*fem,
+                    child: Container(
+                      width: 224*fem,
+                      height: 18*fem,
+                      child: Stack(
+                        children: [
 
-                        Positioned(
-                           left: 0*fem,
-                          top: 0*fem,
-                          child: Align(
-                            child: SizedBox(
-                              width: 124*fem,
-                              height: 18*fem,
-                              child: Text(
-                                '@'+profileModel.user!.lastName.toString(),
-                                textAlign: TextAlign.center,
-                                style: SafeGoogleFont (
-                                  'Lato',
-                                  fontSize: 15*ffem,
-                                  fontWeight: FontWeight.w400,
-                                  height: 1.2*ffem/fem,
-                                  color: Color(0xff000000),
+                          Positioned(
+                             left: 0*fem,
+                            top: 0*fem,
+                            child: Align(
+                              child: SizedBox(
+                                width: 124*fem,
+                                height: 18*fem,
+                                child: Text(
+                                  '@'+profileModel.user!.lastName.toString(),
+                                  textAlign: TextAlign.center,
+                                  style: SafeGoogleFont (
+                                    'Lato',
+                                    fontSize: 15*ffem,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.2*ffem/fem,
+                                    color: Color(0xff000000),
+                                  ),
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-
-
-                //post Header
-                Positioned(
-                  left: 24*fem,
-                  top: 450*fem,
-                  child: Container(
-                    width: 342*fem,
-                    height: 18*fem,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 262*fem, 0*fem),
-                          child: Text(
-                            'All Post'.tr(),
+                  //post Header
+                  Positioned(
+                    left: 24*fem,
+                    top: 450*fem,
+                    child: Container(
+                      width: 342*fem,
+                      height: 18*fem,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 262*fem, 0*fem),
+                            child: Text(
+                              'All Post'.tr(),
+                              style: SafeGoogleFont (
+                                'Lato',
+                                fontSize: 15*ffem,
+                                fontWeight: FontWeight.w400,
+                                height: 1.2*ffem/fem,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                          ),
+                         /* Text(
+                            'view all',
+                            textAlign: TextAlign.center,
                             style: SafeGoogleFont (
                               'Lato',
                               fontSize: 15*ffem,
@@ -227,106 +236,28 @@ class _OtherAccountContentState extends State<OtherAccountContent> {
                               height: 1.2*ffem/fem,
                               color: Color(0xff000000),
                             ),
-                          ),
-                        ),
-                       /* Text(
-                          'view all',
-                          textAlign: TextAlign.center,
-                          style: SafeGoogleFont (
-                            'Lato',
-                            fontSize: 15*ffem,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2*ffem/fem,
-                            color: Color(0xff000000),
-                          ),
-                        ),*/
-                      ],
+                          ),*/
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                //user Post,follower,following
-                Positioned(
-                  left: 48.6691894531*fem,
-                  top: 324*fem,
-                  child: Container(
-                    width: 295.65*fem,
-                    height: 50*fem,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                  //user Post,follower,following
+                  Positioned(
+                    left: 48.6691894531*fem,
+                    top: 324*fem,
+                    child: Container(
+                      width: 295.65*fem,
+                      height: 50*fem,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
 
-                        Container(
-                          margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 65.83*fem, 0*fem),
-                          child:
-                          Column(children: [
-                            Text(
-                              'Post',
-                              textAlign: TextAlign.center,
-                              style: SafeGoogleFont (
-                                'Lato',
-                                fontSize: 15*ffem,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2*ffem/fem,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                            SizedBox(height: 10,),
-                            Text(profileModel.user!.account!.postCount.toString(),
-                              style: SafeGoogleFont (
-                                'Lato',
-                                fontSize: 15*ffem,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2*ffem/fem,
-                                color: Color(0x8c080053),
-                              ),
-                            ),
-                          ],)
-
-                        ),
-                       GestureDetector(
-                        onTap: (){
-                         // Navigator.push(context,MaterialPageRoute(builder: (context) =>FollowerListContent()));
-                          Navigator.push(context,MaterialPageRoute(builder: (context) =>MyFollowerListContent(type: "other",userId: profileModel.user!.accountId.toString(),)));
-
-                        },
-                       child: Container(
-                          margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 63.82*fem, 0*fem),
-                          child:
-                          Column(children: [
-                            Text(
-                              'Followers',
-                              textAlign: TextAlign.center,
-                              style: SafeGoogleFont (
-                                'Lato',
-                                fontSize: 15*ffem,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2*ffem/fem,
-                                color: Color(0xff000000),
-                              ),
-                            ),
-                            SizedBox(height: 10,),
-                            Text(profileModel.follower.toString(),
-                              style: SafeGoogleFont (
-                                'Lato',
-                                fontSize: 15*ffem,
-                                fontWeight: FontWeight.w700,
-                                height: 1.2*ffem/fem,
-                                color: Color(0x8c080053),
-                              ),
-                            ),
-                          ],)
-                        )),
-                       GestureDetector(
-                           onTap: (){
-                             Navigator.push(context,MaterialPageRoute(builder: (context) =>MyFollowingListContent(type: "other",userId: profileModel.user!.accountId.toString(),)));
-
-                           },
-                           child:Container(
-                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 1.82*fem, 0*fem),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 65.83*fem, 0*fem),
                             child:
                             Column(children: [
                               Text(
-                                'Following',
+                                'Post',
                                 textAlign: TextAlign.center,
                                 style: SafeGoogleFont (
                                   'Lato',
@@ -337,7 +268,7 @@ class _OtherAccountContentState extends State<OtherAccountContent> {
                                 ),
                               ),
                               SizedBox(height: 10,),
-                              Text(profileModel.following.toString(),
+                              Text(profileModel.user!.account!.postCount.toString(),
                                 style: SafeGoogleFont (
                                   'Lato',
                                   fontSize: 15*ffem,
@@ -347,128 +278,190 @@ class _OtherAccountContentState extends State<OtherAccountContent> {
                                 ),
                               ),
                             ],)
-                        )),
-                      ],
+
+                          ),
+                         GestureDetector(
+                          onTap: (){
+                           // Navigator.push(context,MaterialPageRoute(builder: (context) =>FollowerListContent()));
+                            Navigator.push(context,MaterialPageRoute(builder: (context) =>MyFollowerListContent(type: "other",userId: profileModel.user!.accountId.toString(),)));
+
+                          },
+                         child: Container(
+                            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 63.82*fem, 0*fem),
+                            child:
+                            Column(children: [
+                              Text(
+                                'Followers',
+                                textAlign: TextAlign.center,
+                                style: SafeGoogleFont (
+                                  'Lato',
+                                  fontSize: 15*ffem,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.2*ffem/fem,
+                                  color: Color(0xff000000),
+                                ),
+                              ),
+                              SizedBox(height: 10,),
+                              Text(profileModel.follower.toString(),
+                                style: SafeGoogleFont (
+                                  'Lato',
+                                  fontSize: 15*ffem,
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.2*ffem/fem,
+                                  color: Color(0x8c080053),
+                                ),
+                              ),
+                            ],)
+                          )),
+                         GestureDetector(
+                             onTap: (){
+                               Navigator.push(context,MaterialPageRoute(builder: (context) =>MyFollowingListContent(type: "other",userId: profileModel.user!.accountId.toString(),)));
+
+                             },
+                             child:Container(
+                              margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 1.82*fem, 0*fem),
+                              child:
+                              Column(children: [
+                                Text(
+                                  'Following',
+                                  textAlign: TextAlign.center,
+                                  style: SafeGoogleFont (
+                                    'Lato',
+                                    fontSize: 15*ffem,
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.2*ffem/fem,
+                                    color: Color(0xff000000),
+                                  ),
+                                ),
+                                SizedBox(height: 10,),
+                                Text(profileModel.following.toString(),
+                                  style: SafeGoogleFont (
+                                    'Lato',
+                                    fontSize: 15*ffem,
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.2*ffem/fem,
+                                    color: Color(0x8c080053),
+                                  ),
+                                ),
+                              ],)
+                          )),
+                        ],
+                      ),
                     ),
                   ),
-                ),
 
-                //follow header
-                Positioned(
-                  left: 21*fem,
-                  top: 387*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 266*fem,
-                      height: 53*fem,
-                      child: GestureDetector(
-                      onTap: (){
-                        if(profileModel.user!.account!.userFollow!.length>0) {
+                  //follow header
+                  Positioned(
+                    left: 21*fem,
+                    top: 387*fem,
+                    child: Align(
+                      child: SizedBox(
+                        width: 266*fem,
+                        height: 53*fem,
+                        child: GestureDetector(
+                        onTap: (){
+                          if(profileModel.user!.account!.userFollow!.length>0) {
 
-                          authPresenter.unFollow(profileModel.user!.accountId.toString()).then((value) {
+                            authPresenter.unFollow(profileModel.user!.accountId.toString()).then((value) {
 
-                            showCustomSnackBar( "User UnFollowed",context);
+                              showCustomSnackBar( "User UnFollowed",context);
 
-                            getData();
-                          });
-                        }else{
-                          authPresenter.follow(profileModel.user!.accountId.toString()).then((
-                              value) {
-                            showCustomSnackBar("User Followed",context,isError: false);
-                            getData();
-                          });
-                        }
+                              getData();
+                            });
+                          }else{
+                            authPresenter.follow(profileModel.user!.accountId.toString()).then((
+                                value) {
+                              showCustomSnackBar("User Followed",context,isError: false);
+                              getData();
+                            });
+                          }
 
-                      },
-                      child: Container(
-                        decoration: BoxDecoration (
-                          borderRadius: BorderRadius.circular(5*fem),
-                          border: Border.all(color: Color(0xff080053)),
-                          color: Color(0xfff1f1f1),
+                        },
+                        child: Container(
+                          decoration: BoxDecoration (
+                            borderRadius: BorderRadius.circular(5*fem),
+                            border: Border.all(color: Color(0xff080053)),
+                            color: Color(0xfff1f1f1),
 
+                          ),
+                          child: Align(
+                            alignment: Alignment.center,
+                            child: Text(followData
+                             ,
+                            style: SafeGoogleFont (
+                              'Lato',
+                              fontSize: 15*ffem,
+                              fontWeight: FontWeight.w700,
+                              height: 1.2*ffem/fem,
+                              color: Color(0xff080053),
+                            ),
+                          ),)
                         ),
-                        child: Align(
-                          alignment: Alignment.center,
-                          child: Text(followData
-                           ,
-                          style: SafeGoogleFont (
-                            'Lato',
-                            fontSize: 15*ffem,
-                            fontWeight: FontWeight.w700,
-                            height: 1.2*ffem/fem,
+                        )
+                      ),
+                    ),
+                  ),
+                 Positioned(
+                    left: 313*fem,
+                    top: 387*fem,
+                    child: Align(
+                      child: SizedBox(
+                        width: 56*fem,
+                        height: 53*fem,
+                        child: GestureDetector(onTap: (){
+                          emit2(SocketConstants.createPrivateRoom,widget.id.toString() );
+                         // Navigator.push(context,MaterialPageRoute(builder: (context) =>ChatScreen(name:profileModel.user!.firstName.toString(),roomId: profileModel.user!.primaryInetrestId.toString(),)));
+
+                        }, child: Container(padding: EdgeInsets.all(10),
+                          decoration: BoxDecoration (
+                            borderRadius: BorderRadius.circular(5*fem),
                             color: Color(0xff080053),
                           ),
-                        ),)
-                      ),
-                      )
-                    ),
-                  ),
-                ),
-               Positioned(
-                  left: 313*fem,
-                  top: 387*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 56*fem,
-                      height: 53*fem,
-                      child: GestureDetector(onTap: (){
-                        emit2(SocketConstants.createPrivateRoom,widget.id.toString() );
-                       // Navigator.push(context,MaterialPageRoute(builder: (context) =>ChatScreen(name:profileModel.user!.firstName.toString(),roomId: profileModel.user!.primaryInetrestId.toString(),)));
-
-                      }, child: Container(padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration (
-                          borderRadius: BorderRadius.circular(5*fem),
-                          color: Color(0xff080053),
-                        ),
-                        child: Image.asset(
-                          'assets/page-1/images/-6LY.png',
-                          fit: BoxFit.cover,
+                          child: Image.asset(
+                            'assets/page-1/images/-6LY.png',
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
+                  )),
+                  Positioned(
+                    left: 20*fem,
+                    top: 60*fem,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      child: Center(
+                          child: IconButton(icon: Icon(Icons.arrow_back,color: primary,), onPressed: () {
+                           // Navigator.push(context,MaterialPageRoute(builder: (context) =>DashBoardScreen()));
+                            Navigator.pop(context);
+                          },)
+                      ),
+                    ),
                   ),
-                )),
+                 /* Positioned(
+                    right: 20*fem,
+                    top: 10*fem,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey,
+                      child: Center(
+                        child: IconButton(icon: Icon(Icons.edit,color: primary,), onPressed: () {
+                          Navigator.push(context,MaterialPageRoute(builder: (context) =>EditProfileScreen()));
 
-
-
-
-
-                Positioned(
-                  left: 20*fem,
-                  top: 20*fem,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    child: Center(
-                        child: IconButton(icon: Icon(Icons.arrow_back,color: primary,), onPressed: () {
-                         // Navigator.push(context,MaterialPageRoute(builder: (context) =>DashBoardScreen()));
-                          Navigator.pop(context);
                         },)
+                      ),
                     ),
-                  ),
-                ),
-               /* Positioned(
-                  right: 20*fem,
-                  top: 10*fem,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.grey,
-                    child: Center(
-                      child: IconButton(icon: Icon(Icons.edit,color: primary,), onPressed: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) =>EditProfileScreen()));
+                  ),*/
 
-                      },)
-                    ),
-                  ),
-                ),*/
-
-              ],
-            ) ):CircularProgressIndicator() ,
-          load2? ListView.builder(itemCount: postListModel.result!.length,
-             physics: NeverScrollableScrollPhysics(),
-             shrinkWrap: true,
-             itemBuilder: (context, i) {
-               return MyPostWidgetItem(postListModel.result!.elementAt(i),accountId);
-             },):Container()
+                ],
+              ) ):CircularProgressIndicator() ,
+            load2? ListView.builder(itemCount: postListModel.result!.length,
+               physics: NeverScrollableScrollPhysics(),
+               shrinkWrap: true,
+               itemBuilder: (context, i) {
+                 return MyPostWidgetItem(postListModel.result!.elementAt(i),accountId);
+               },):Container()
          ],)
-    )));
+    ),
+          )));
   }
 }

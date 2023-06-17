@@ -37,7 +37,7 @@ class SplashScreenState extends State<SplashScreen> {
     super.initState();
 
     setState(() {
-
+      startSteaming();
     });
   }
 
