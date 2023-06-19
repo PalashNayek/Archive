@@ -91,7 +91,7 @@ class _AccountContentState extends State<AccountContent> {
                                 height: 280 * fem,
                                 child: profileModel.user!.cover == null
                                     ? Image.asset(
-                                        'assets/page-1/images/cover2.png',
+                                        'assets/page-1/images/bannerdefaultimage.png',
                                         fit: BoxFit.cover)
                                     : Image.network(
                                         profileModel.user!.cover.toString(),
@@ -147,6 +147,7 @@ class _AccountContentState extends State<AccountContent> {
                                           )
                                         : DecorationImage(
                                             fit: BoxFit.cover,
+                                            filterQuality: FilterQuality.low,
                                             image: NetworkImage(
                                               profileModel.user!.profile
                                                   .toString(),

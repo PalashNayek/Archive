@@ -67,6 +67,7 @@ dependencies:
   skeleton_text: ^3.0.0
   shimmer: ^2.0.0
   connectivity_plus: ^4.0.1
+  quickalert: ^1.0.1
 
 
 dev_dependencies:

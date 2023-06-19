@@ -23,7 +23,7 @@ class DisplayImageRect extends StatelessWidget {
       Positioned(
         child: buildEditIcon(color),
         right: 1,
-
+        top: 5,
       )
     ]));
   }
@@ -50,7 +50,7 @@ class DisplayImageRect extends StatelessWidget {
       borderRadius: BorderRadius.circular(10.0), //or 15.0
       child: Container(
         height: 200.0,
-        width: 330.0,
+        width: double.infinity,
         color: Color(0xffFF0E58),
         child: image,
       ),
@@ -67,13 +67,13 @@ class DisplayImageRect extends StatelessWidget {
 
   // Builds Edit Icon on Profile Picture
   Widget buildEditIcon(Color color) => buildCircle(
-      all: 15,
+      all: 10,
       child: GestureDetector(
           onTap: onPressed,
           child: Icon(
             Icons.edit,
             color: color,
-            size: 25,
+            size: 20,
           )));
 
   // Builds/Makes Circle for Edit Icon on Profile Picture

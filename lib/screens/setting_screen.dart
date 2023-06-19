@@ -12,6 +12,7 @@ import '../widget/custom_snackbar.dart';
 import '../widget/item_card.dart';
 import 'edit_profile.dart';
 import 'login_screen.dart';
+import 'package:quickalert/quickalert.dart';
 
 class SettingsPage extends StatefulWidget {
   @override
@@ -234,6 +235,23 @@ class _SettingstContentState extends State<SettingsPage> {
     );
   }
   showAlert(){
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.confirm,
+      text: 'Are you sure want to logout?',
+      confirmBtnText: 'Yes',
+      onConfirmBtnTap: () async {
+        Navigator.of(context).pop();
+        await AppLocalDataUtil().removeToken().then((value) {
+          Navigator.pushReplacement(context,
+              MaterialPageRoute(builder: (context) => LoginScreen()));
+        });
+      },
+      cancelBtnText: 'No',
+      confirmBtnColor: Colors.green,
+    );
+  }
+  /*showAlert(){
     showDialog(context: context, builder: (_) =>
         AlertDialog(
           title:  Text("Logout Alert!".tr()),
@@ -257,7 +275,7 @@ class _SettingstContentState extends State<SettingsPage> {
             )
           ],
         ));
-  }
+  }*/
   deleteAlert(){
     showDialog(context: context, builder: (_) =>
         AlertDialog(
