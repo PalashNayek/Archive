@@ -134,7 +134,7 @@ class _AccountContentState extends State<AccountContent> {
                               child: SizedBox(
                                 width: 390 * fem,
                                 height: 280 * fem,
-                                child: profileModel.user!.cover == null
+                                child: profileModel.user?.cover == null
                                     ? Image.asset(
                                     'assets/page-1/images/bannerdefaultimage.png',
                                     fit: BoxFit.cover)
@@ -191,12 +191,12 @@ class _AccountContentState extends State<AccountContent> {
                                         BorderRadius.circular(65.5 * fem),
                                     border:
                                         Border.all(color: Color(0xffffffff)),
-                                    image: profileModel.user!.profile == null
+                                    image: profileModel.user?.profile == null
                                         ? DecorationImage(
                                       fit: BoxFit.cover,
 
                                       filterQuality: FilterQuality.low,
-                                      image: profileModel.user!.gender ==
+                                      image: profileModel.user?.gender ==
                                           "Male"
                                           ? AssetImage(
                                         'assets/page-1/images/user_profile_male.png',
@@ -461,12 +461,13 @@ class _AccountContentState extends State<AccountContent> {
                         ],
                       )),
                   ListView.builder(
-                          itemCount: postListModel.result!.length,
+                          itemCount: postListModel.result?.length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, i) {
                             return MyPostWidgetItem(
-                                postListModel.result!.elementAt(i),
+                                //postListModel.result!.elementAt(i),
+                              postListModel.result!.elementAt(i),
                                 profileModel.user!.accountId.toString());
                           },
                         )
