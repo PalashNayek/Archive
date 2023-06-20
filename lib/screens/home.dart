@@ -6,6 +6,7 @@ import 'package:s2w/screens/searchPageScreen.dart';
 import 'package:s2w/widget/category_item.dart';
 import 'package:s2w/widget/post_widget.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import '../models/banner_model.dart';
 import '../models/post_list_model.dart';
@@ -32,17 +33,19 @@ class _HomeContentState extends State<HomeContent> {
   PostPresenter postPresenter = PostPresenter();
   PostListModel postListModel = new PostListModel();
   List<PostModelData> postListData = [];
-  int perPage = 10;//default- perPage = 10;
+  int perPage = 10; //default- perPage = 10;
   int offset = 0; //default- offset = 0;
   int present = 0;
+  bool moreLoadPostCircleProgressbar = false;
 
   bool isLoaded = false;
   bool internetConnection = true;
+  int totalPostLength = 0;
 
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3000),(){
+    Future.delayed(const Duration(seconds: 3000), () {
       isLoaded = true;
     });
 
@@ -54,8 +57,10 @@ class _HomeContentState extends State<HomeContent> {
     postPresenter.getAllPost("", perPage, off).then((value) {
       postListModel = value;
       postListData.addAll(value.result as Iterable<PostModelData>);
+      totalPostLength = postListData.length.toInt();
+      print("postTotal->$totalPostLength");
       setState(() {
-        isLoaded=true;
+        isLoaded = true;
       });
     });
   }
@@ -69,7 +74,7 @@ class _HomeContentState extends State<HomeContent> {
     });
     authPresenter.getProfile().then((value) {
       profileModel = value;
-      isLoaded=true;
+      isLoaded = true;
       setState(() {});
     });
   }
@@ -130,8 +135,7 @@ class _HomeContentState extends State<HomeContent> {
                             icon: Icon(
                               Icons.search,
                               color: Colors.white,
-                              size:
-                                  AppCommonHelper.isTablet(context) ? 40 : 24,
+                              size: AppCommonHelper.isTablet(context) ? 40 : 24,
                             ))
                       ],
                     ),
@@ -158,7 +162,7 @@ class _HomeContentState extends State<HomeContent> {
                                   width: 367 * fem,
                                   height: 150 * fem,
                                   child: bannerList.isNotEmpty
-                                      ?  CarouselSlider.builder(
+                                      ? CarouselSlider.builder(
                                           itemCount: bannerList.length,
                                           itemBuilder: (BuildContext context,
                                               int index, int realIdx) {
@@ -174,8 +178,7 @@ class _HomeContentState extends State<HomeContent> {
                                             enlargeCenterPage: true,
                                             autoPlay: true,
                                             aspectRatio: 16 / 9,
-                                            autoPlayCurve:
-                                                Curves.fastOutSlowIn,
+                                            autoPlayCurve: Curves.fastOutSlowIn,
                                             enableInfiniteScroll: true,
                                             autoPlayAnimationDuration:
                                                 Duration(milliseconds: 1000),
@@ -281,14 +284,13 @@ class _HomeContentState extends State<HomeContent> {
                                                             .center,
                                                     children: [
                                                       Container(
-                                                        margin: EdgeInsets
-                                                            .fromLTRB(
+                                                        margin:
+                                                            EdgeInsets.fromLTRB(
                                                                 0 * fem,
                                                                 0 * fem,
                                                                 0 * fem,
                                                                 6 * fem),
-                                                        width:
-                                                            double.infinity,
+                                                        width: double.infinity,
                                                         height: 60 * fem,
                                                         child: Stack(
                                                           children: [
@@ -296,12 +298,11 @@ class _HomeContentState extends State<HomeContent> {
                                                               left: 3 * fem,
                                                               top: 3 * fem,
                                                               child: Align(
-                                                                child:
-                                                                    SizedBox(
-                                                                  width: 54 *
-                                                                      fem,
-                                                                  height: 54 *
-                                                                      fem,
+                                                                child: SizedBox(
+                                                                  width:
+                                                                      54 * fem,
+                                                                  height:
+                                                                      54 * fem,
                                                                   child:
                                                                       Container(
                                                                     decoration:
@@ -320,24 +321,25 @@ class _HomeContentState extends State<HomeContent> {
                                                               left: 9 * fem,
                                                               top: 9 * fem,
                                                               child: Align(
-                                                                child:
-                                                                    SizedBox(
-                                                                  width: 42 *
-                                                                      fem,
-                                                                  height: 42 *
-                                                                      fem,
+                                                                child: SizedBox(
+                                                                  width:
+                                                                      42 * fem,
+                                                                  height:
+                                                                      42 * fem,
                                                                   child:
                                                                       TextButton(
                                                                     onPressed:
                                                                         () {
                                                                       Navigator.push(
                                                                           context,
-                                                                          MaterialPageRoute(builder: (context) => CreatePostScreen()));
+                                                                          MaterialPageRoute(
+                                                                              builder: (context) => CreatePostScreen()));
                                                                     },
                                                                     style: TextButton
                                                                         .styleFrom(
                                                                       padding:
-                                                                          EdgeInsets.zero,
+                                                                          EdgeInsets
+                                                                              .zero,
                                                                     ),
                                                                     child: Image
                                                                         .asset(
@@ -355,19 +357,15 @@ class _HomeContentState extends State<HomeContent> {
                                                       Center(
                                                         child: Text(
                                                           'ADD POST'.tr(),
-                                                          textAlign: TextAlign
-                                                              .center,
-                                                          style:
-                                                              SafeGoogleFont(
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: SafeGoogleFont(
                                                             'Lato',
-                                                            fontSize:
-                                                                14 * ffem,
+                                                            fontSize: 14 * ffem,
                                                             fontWeight:
-                                                                FontWeight
-                                                                    .w400,
-                                                            height: 1 *
-                                                                ffem /
-                                                                fem,
+                                                                FontWeight.w400,
+                                                            height:
+                                                                1 * ffem / fem,
                                                             color: Color(
                                                                 0xff000000),
                                                           ),
@@ -376,34 +374,35 @@ class _HomeContentState extends State<HomeContent> {
                                                     ],
                                                   ),
                                                 )),
-
-                                            isLoaded?
-                                            CategoryItem(
-
-                                        profileModel.user!
-                                                    .primaryInetrest!.name
-                                                    .toString(),
-                                                profileModel.user!
-                                                    .primaryInetrest!.image
-                                                    .toString()) : Container(),
-
-                                            isLoaded?
-                                            CategoryItem(
-                                                profileModel.user!
-                                                    .secondaryInetrest!.name
-                                                    .toString(),
-                                                profileModel.user!
-                                                    .secondaryInetrest!.image
-                                                    .toString()) :Container(),
-
-                                            isLoaded?
-                                            CategoryItem(
-                                                profileModel
-                                                    .user!.thirdInetrest!.name
-                                                    .toString(),
-                                                profileModel.user!
-                                                    .thirdInetrest!.image
-                                                    .toString()) :Container(),
+                                            isLoaded
+                                                ? CategoryItem(
+                                                    profileModel.user!
+                                                        .primaryInetrest!.name
+                                                        .toString(),
+                                                    profileModel.user!
+                                                        .primaryInetrest!.image
+                                                        .toString())
+                                                : Container(),
+                                            isLoaded
+                                                ? CategoryItem(
+                                                    profileModel.user!
+                                                        .secondaryInetrest!.name
+                                                        .toString(),
+                                                    profileModel
+                                                        .user!
+                                                        .secondaryInetrest!
+                                                        .image
+                                                        .toString())
+                                                : Container(),
+                                            isLoaded
+                                                ? CategoryItem(
+                                                    profileModel.user!
+                                                        .thirdInetrest!.name
+                                                        .toString(),
+                                                    profileModel.user!
+                                                        .thirdInetrest!.image
+                                                        .toString())
+                                                : Container(),
                                           ],
                                         ),
                                       ),
@@ -418,25 +417,62 @@ class _HomeContentState extends State<HomeContent> {
                     ],
                   ),
                 ),
-                isLoaded ? ListView.builder(
-                  itemCount: postListData.length + 1,
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemBuilder: (context, i) {
-                    return (i == postListData.length)
-                        ? Container(
-                            margin: EdgeInsets.only(left: 20, right: 20),
-                            /*child: ElevatedButton(
-                              child: Text("Load More"),
-                              onPressed: () {
-                                offset = offset + perPage;
-                                getPostDat(offset);
-                              },
-                            )*/)
-                        : PostWidgetItem(
-                            postListData.elementAt(i), profileModel);
-                  },
-                ) : getShimmerLoading() /*:CircularProgressIndicator()*/
+                isLoaded
+                    ? ListView.builder(
+                        itemCount: postListData.length + 1,
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, i) {
+                          return (i == postListData.length)
+                              ? Container(
+                                  margin: EdgeInsets.only(left: 20, right: 20),
+                                  child: /*moreLoadPostCircleProgressbar? postListData.length < totalPostLength ?*/
+                                      VisibilityDetector(
+                                    key: Key('your_button_key'),
+                                    // Provide a unique key to the widget
+                                    onVisibilityChanged: (visibilityInfo) {
+                                      if (visibilityInfo.visibleFraction ==
+                                          1.0) {
+                                        moreLoadPostCircleProgressbar = true;
+                                        offset = offset + perPage;
+                                        getPostDat(offset);
+                                      } else {
+                                        moreLoadPostCircleProgressbar = false;
+                                      }
+                                    },
+                                    child: moreLoadPostCircleProgressbar
+                                        ? postListData.length > totalPostLength
+                                            ? Text("data")
+                                            : Center(
+                                                child:
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(top: 25),
+                                                      child: Text('No post available',
+                                                        style: SafeGoogleFont(
+                                                          'Lato',
+                                                          fontSize: 12 * ffem,
+                                                          fontWeight: FontWeight.w700,
+                                                          height: 1.2 * ffem / fem,
+                                                          color: Color(0xff404040),
+                                                        ),),
+                                                    ))
+                                        : const SizedBox(
+                                      height: 64.0,
+                                      width: 24.0,
+                                      child: Center(
+                                          child: Padding(
+                                            padding: EdgeInsets.only(top: 25),
+                                            child: CircularProgressIndicator(),
+                                          )
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              : PostWidgetItem(
+                                  postListData.elementAt(i), profileModel);
+                        },
+                      )
+                    : getShimmerLoading() /*:CircularProgressIndicator()*/
               ],
             ),
           ),
@@ -475,7 +511,6 @@ class _HomeContentState extends State<HomeContent> {
                       height: 18.0,
                       color: Colors.white,
                     ),
-
                     SizedBox(
                       height: 10,
                     ),
@@ -494,7 +529,6 @@ class _HomeContentState extends State<HomeContent> {
                     ),
                   ],
                 )),
-
               ],
             ),
             SizedBox(
@@ -513,36 +547,34 @@ class _HomeContentState extends State<HomeContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
-
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
             SizedBox(
@@ -561,36 +593,34 @@ class _HomeContentState extends State<HomeContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
-
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
             SizedBox(
@@ -609,39 +639,36 @@ class _HomeContentState extends State<HomeContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
-
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
-
           ],
         ),
         baseColor: Colors.grey[300]!,
