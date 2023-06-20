@@ -48,6 +48,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   AuthPresenter authPresenter = AuthPresenter();
   ProfileModel profileModel = ProfileModel();
   bool load = false;
+  var gender;
 
   @override
   void initState() {
@@ -59,13 +60,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     authPresenter.getProfile().then((value) {
       profileModel = value;
       load = true;
-      usernameController.text = profileModel.user!.lastName.toString();
-      fullnameController.text = profileModel.user!.firstName.toString();
+      usernameController.text = profileModel.user!.firstName.toString();
+
+      fullnameController.text = profileModel.user!.lastName.toString();
+
       emailController.text = profileModel.user!.emailId.toString();
+
       bioController.text = profileModel.user!.desc == null
           ? ""
           : profileModel.user!.desc.toString();
+
       dobController.text = profileModel.user!.dob.toString();
+      try{
+
+      }catch(error){
+        gender = profileModel.user!.gender;
+      }
       mobileController.text =
           profileModel.user!.account!.phoneNumber.toString();
 
@@ -162,7 +172,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                                               "Male"
                                                           ? 'assets/page-1/images/user_profile_male.png'
                                                           : 'assets/page-1/images/user_profile_female.png'
-                                                  : profileModel.user!.gender ==
+                                                  : gender ==
                                                           "Malle"
                                                       ? 'assets/page-1/images/user_profile_male.png'
                                                       : 'assets/page-1/images/user_profile_female.png',
@@ -428,30 +438,35 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                             showCustomSnackBar("Email id Required", context);
                           }else if (mobileController.text.isEmpty) {
                             showCustomSnackBar("Mobile No Required", context);
+                          }else if (bioController.text.isEmpty) {
+                            showCustomSnackBar("Bio Required", context);
                           } else if (dobController.text.isEmpty) {
                             showCustomSnackBar("DOB Required", context);
                           }
                           else {
                             RegisterModel registerModel = RegisterModel();
+
                             registerModel.emailId = emailController.text;
-                            registerModel.phoneNumber = profileModel
-                                .user!.account!.phoneNumber
-                                .toString();
-                            registerModel.firstName =
-                                usernameController.text.toString();
-                            registerModel.lastName =
-                                fullnameController.text.toString();
+
+                            registerModel.phoneNumber = profileModel.user!.account!.phoneNumber.toString();
+
+                            registerModel.firstName = usernameController.text.toString();
+
+                            registerModel.lastName = fullnameController.text.toString();
+
                             registerModel.dob = dobController.text.toString();
-                            registerModel.gender =
-                                profileModel.user!.gender.toString();
+
+                            registerModel.desc = bioController.text.toString();
+
+                            registerModel.gender = profileModel.user!.gender.toString();
+
                             registerModel.joinFor = "Participants";
-                            registerModel.primaryInetrestId =
-                                profileModel.user!.primaryInetrestId.toString();
-                            registerModel.secondaryInetrestId = profileModel
-                                .user!.secondaryInetrestId
-                                .toString();
-                            registerModel.thirdInetrestId =
-                                profileModel.user!.thirdInetrestId.toString();
+
+                            registerModel.primaryInetrestId = profileModel.user!.primaryInetrestId.toString();
+
+                            registerModel.secondaryInetrestId = profileModel.user!.secondaryInetrestId.toString();
+
+                            registerModel.thirdInetrestId = profileModel.user!.thirdInetrestId.toString();
 
                             authPresenter
                                 .updateUser(
@@ -460,10 +475,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 .then((value) {
                               showCustomSnackBar("Update Successful", context,
                                   isError: false);
-                              Navigator.push(
+                              /*Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => DashBoardScreen()));
+                                      builder: (context) => DashBoardScreen()));*/
                             });
                           }
                         },

@@ -157,7 +157,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                   }
                                 }),
                         ))),
-                if (isLoading) CircularProgressIndicator(),
+                /*if (isLoading) CircularProgressIndicator(),*/
 
                 Expanded(
                     child: Row(
@@ -357,7 +357,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                     }
                                   }),
                           ),
-                          if (isLoading) CircularProgressIndicator(),
+                          /*if (isLoading) CircularProgressIndicator(),*/
                           getFileExtension(widget.postModelData.postImage!
                                       .elementAt(0)
                                       .image

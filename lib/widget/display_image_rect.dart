@@ -28,12 +28,28 @@ class DisplayImageRect extends StatelessWidget {
     ]));
   }
 
+  @override
+  Widget buildTwo(BuildContext context) {
+    final color = Color.fromRGBO(64, 105, 225, 1);
+
+    return Center(
+        child: Stack(children: [
+          buildImage(color),
+          Positioned(
+            child: backPressIcon(color),
+            left: 1,
+            top: 5,
+          )
+        ]));
+  }
+
   // Builds Profile Image
   Widget buildImage(Color color) {
     final image = imagePath.contains('https://')
         ? Image.network(
             imagePath,
             fit: BoxFit.cover,
+      filterQuality: FilterQuality.low,
           )
         : imagePath.contains('assets')
             ? Image.asset(
@@ -64,6 +80,16 @@ class DisplayImageRect extends StatelessWidget {
       ),
     );*/
   }
+  // Builds Edit Icon on Profile Picture
+  Widget backPressIcon(Color color) => buildCircle(
+      all: 10,
+      child: GestureDetector(
+          onTap: onPressed,
+          child: Icon(
+            Icons.arrow_back,
+            color: color,
+            size: 20,
+          )));
 
   // Builds Edit Icon on Profile Picture
   Widget buildEditIcon(Color color) => buildCircle(

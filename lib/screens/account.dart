@@ -9,6 +9,7 @@ import 'package:s2w/screens/login_screen.dart';
 import 'package:s2w/screens/my_follower_list.dart';
 import 'package:s2w/screens/my_following_list.dart';
 import 'package:s2w/theme/color.dart';
+import 'package:s2w/utils/images.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../models/post_list_model.dart';
@@ -36,32 +37,76 @@ class _AccountContentState extends State<AccountContent> {
   PostListModel postListModel = PostListModel();
   bool load = false;
   int? resultLenth;
+  var coverImg;
+  var userProfile;
+  var userGender;
+  var postCount;
+  var itemCountLen;
+  var postListResult;
 
   @override
   void initState() {
+    authPresenter = AuthPresenter();
+    postPresenter = PostPresenter();
+    profileModel = ProfileModel();
     super.initState();
-    setState(() {});
-    getData();
+    if (mounted) {
+      setState(() {
+        getData();
+      });
+    }
   }
 
   void getData() {
-    authPresenter.getProfile().then((value) {
-      profileModel = value;
-      print("MyVal$value");
-      /*setState(() {
+    try{
+      load = true;
+      postCount = profileModel.user!.account!.postCount;
+      authPresenter.getProfile().then((value) {
+        profileModel = value;
+        userProfile = profileModel.user!.profile;
+        userGender = profileModel.user!.gender;
+
+        postListResult = postListModel.result!;
+        itemCountLen = postListModel.result!.length;
+
+
+        if(itemCountLen){
+          itemCountLen = postListModel.result!.length;
+        }else{
+          itemCountLen = 0;
+          //len = 0; //return value if str is null
+        }
+
+        /*setState(() {
         String userResponse = profileModel.user! as String;
       });*/
-    });
-    postPresenter.getMyPost().then((value) {
-      postListModel = value;
-      load = true;
-      resultLenth = value.result?.length;
-      if (value.result?.length == "") {
-        setState(() {});
-      } else {
-        setState(() {});
-      }
-    });
+      });
+      postPresenter.getMyPost().then((value) {
+        postListModel = value;
+
+        resultLenth = value.result?.length;
+        coverImg = profileModel.user!.cover;
+        if (value.result?.length == "") {
+          setState(() {});
+        } else {
+          setState(() {});
+        }
+      });
+    }catch (error) {
+      load = false;
+    }
+
+  }
+
+  @override
+  void dispose() {
+    coverImg.cancel();
+    userProfile.cancel();
+    userGender.cancel();
+    postCount.cancel();
+    itemCountLen.cancel();
+    postListResult.cancel();
+    super.dispose();
   }
 
   @override
@@ -71,7 +116,7 @@ class _AccountContentState extends State<AccountContent> {
     double ffem = fem * 0.97;
     return Scaffold(
         body: SingleChildScrollView(
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             child: Center(
               child: Container(
                   child: Column(
@@ -91,12 +136,25 @@ class _AccountContentState extends State<AccountContent> {
                                 height: 280 * fem,
                                 child: profileModel.user!.cover == null
                                     ? Image.asset(
-                                        'assets/page-1/images/bannerdefaultimage.png',
-                                        fit: BoxFit.cover)
+                                    'assets/page-1/images/bannerdefaultimage.png',
+                                    fit: BoxFit.cover)
                                     : Image.network(
-                                        profileModel.user!.cover.toString(),
-                                        fit: BoxFit.cover,
+                                  profileModel.user!.cover.toString(),
+                                  fit: BoxFit.cover,
+                                  filterQuality: FilterQuality.low,
+                                  loadingBuilder: (BuildContext context, Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) return child;
+                                    return Center(
+                                      child: CircularProgressIndicator(
+                                        value: loadingProgress.expectedTotalBytes != null
+                                            ? loadingProgress.cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                            : null,
                                       ),
+                                    );
+                                  },
+                                ),
                               ),
                             ),
                           ),
@@ -135,24 +193,38 @@ class _AccountContentState extends State<AccountContent> {
                                         Border.all(color: Color(0xffffffff)),
                                     image: profileModel.user!.profile == null
                                         ? DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: profileModel.user!.gender ==
-                                                    "Male"
-                                                ? AssetImage(
-                                                    'assets/page-1/images/user_profile_male.png',
-                                                  )
-                                                : AssetImage(
-                                                    'assets/page-1/images/user_profile_female.png',
-                                                  ),
-                                          )
+                                      fit: BoxFit.cover,
+
+                                      filterQuality: FilterQuality.low,
+                                      image: profileModel.user!.gender ==
+                                          "Male"
+                                          ? AssetImage(
+                                        'assets/page-1/images/user_profile_male.png',
+                                      )
+                                          : AssetImage(
+                                        'assets/page-1/images/user_profile_female.png',
+                                      ),
+                                    )
                                         : DecorationImage(
-                                            fit: BoxFit.cover,
-                                            filterQuality: FilterQuality.low,
-                                            image: NetworkImage(
-                                              profileModel.user!.profile
-                                                  .toString(),
-                                            ),
+                                      fit: BoxFit.cover,
+                                      /*loadingBuilder: (BuildContext context, Widget child,
+                                          ImageChunkEvent? loadingProgress) {
+                                        if (loadingProgress == null) return child;
+                                        return Center(
+                                          child: CircularProgressIndicator(
+                                            value: loadingProgress.expectedTotalBytes != null
+                                                ? loadingProgress.cumulativeBytesLoaded /
+                                                loadingProgress.expectedTotalBytes!
+                                                : null,
                                           ),
+                                        );
+                                      },*/
+                                      filterQuality: FilterQuality.low,
+                                      image: NetworkImage(
+                                        userProfile
+                                            .toString(),
+                                      ),
+                                    ),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Color(0x3f000000),
@@ -256,10 +328,7 @@ class _AccountContentState extends State<AccountContent> {
                                           SizedBox(
                                             height: 10,
                                           ),
-                                          Text(
-                                            profileModel
-                                                .user!.account!.postCount
-                                                .toString(),
+                                     Text(userGender.toString(),
                                             style: SafeGoogleFont(
                                               'Lato',
                                               fontSize: 15 * ffem,
@@ -391,14 +460,16 @@ class _AccountContentState extends State<AccountContent> {
                           ),
                         ],
                       )),
-                  load? ListView.builder(itemCount: postListModel.result!.length,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, i) {
-                      return MyPostWidgetItem(postListModel.result!.elementAt(i),
-                          profileModel.user!.accountId
-                              .toString());
-                    },):Container()
+                  ListView.builder(
+                          itemCount: postListModel.result!.length,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, i) {
+                            return MyPostWidgetItem(
+                                postListModel.result!.elementAt(i),
+                                profileModel.user!.accountId.toString());
+                          },
+                        )
                 ],
               )),
             )));

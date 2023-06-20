@@ -60,6 +60,7 @@ class CategoryItem extends StatelessWidget{
                         'assets/page-1/images/ellipse-BLL.png',
                         width: 60*fem,
                         height: 60*fem,
+                        filterQuality: FilterQuality.low,
                       ),
                     ),
                   ),

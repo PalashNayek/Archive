@@ -72,7 +72,7 @@ class _SettingstContentState extends State<SettingsPage> {
                       color: (brightness == Brightness.light) ? Colors.white : Theme.of(context).scaffoldBackgroundColor,
                       rightWidget: Icon(Icons.edit,color: primary,),
                       callback: () {
-                        Navigator.push(context,MaterialPageRoute(builder: (context) =>EditProfileScreen()));
+                        Navigator.push(context,MaterialPageRoute(builder: (context) => EditProfileScreen()));
                       },
                     ),
 
@@ -251,31 +251,7 @@ class _SettingstContentState extends State<SettingsPage> {
       confirmBtnColor: Colors.green,
     );
   }
-  /*showAlert(){
-    showDialog(context: context, builder: (_) =>
-        AlertDialog(
-          title:  Text("Logout Alert!".tr()),
-          content: Text("Are you sure want to logout?".tr()),
-          actions: <Widget>[
-            TextButton(
-              child:  Text("Yes".tr()),
-              onPressed: () async {
-                Navigator.of(context).pop();
-                await AppLocalDataUtil().removeToken().then((value) {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()));
-                });
-              },
-            ),
-            TextButton(
-              child:  Text("No".tr()),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            )
-          ],
-        ));
-  }*/
+
   deleteAlert(){
     showDialog(context: context, builder: (_) =>
         AlertDialog(

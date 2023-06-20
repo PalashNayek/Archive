@@ -472,7 +472,7 @@ class _HomeContentState extends State<HomeContent> {
                                   postListData.elementAt(i), profileModel);
                         },
                       )
-                    : getShimmerLoading() /*:CircularProgressIndicator()*/
+                    : getShimmerLoading()
               ],
             ),
           ),

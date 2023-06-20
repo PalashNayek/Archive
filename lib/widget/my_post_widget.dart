@@ -143,6 +143,7 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                                     .toString(),
                                 width: 50 * fem,
                                 height: 50 * fem,
+                                filterQuality: FilterQuality.low,
                                 fit: BoxFit.cover),
                       ))),
 
@@ -289,6 +290,7 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                                         .elementAt(0)
                                         .image
                                         .toString(),
+                                    filterQuality: FilterQuality.low,
                                     width: double.infinity,
                                     fit: BoxFit.fill,
                                   ),
