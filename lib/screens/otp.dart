@@ -37,6 +37,7 @@ class _OTPScreenState extends State<OTPScreen> {
   final TextEditingController _fieldFour = TextEditingController();
   final AuthPresenter _authPresenter = AuthPresenter();
   AuthInfo authInfo = AuthInfo();
+
   //FocusNode focusNodeOTP = FocusNode();
   String message = "";
   late bool updateUser;
@@ -290,7 +291,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                         ? 400
                                         : 185 * fem,
                                     child: Container(
-                                      width: 203 * fem,
+                                      width: 403 * fem,
                                       height: 18 * fem,
                                       child: Row(
                                         crossAxisAlignment:
@@ -346,6 +347,50 @@ class _OTPScreenState extends State<OTPScreen> {
                                                     ),
                                                   ),
                                                 ],
+                                              ),
+                                            ),
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              OtpInput(_fieldFour, true);
+                                              _fieldFour.clear();
+
+                                              OtpInput(_fieldThree, false);
+                                              _fieldThree.clear();
+
+                                              OtpInput(_fieldTwo, false);
+                                              _fieldTwo.clear();
+
+                                              OtpInput(_fieldOne, false);
+                                              _fieldOne.clear();
+                                            },
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 55),
+                                              child: RichText(
+                                                text: TextSpan(
+                                                  style: SafeGoogleFont(
+                                                    'Lato',
+                                                    fontSize: 15 * ffem,
+                                                    fontWeight: FontWeight.w400,
+                                                    height: 1.2 * ffem / fem,
+                                                    color: Color(0xff1c1b1b),
+                                                  ),
+                                                  children: [
+                                                    TextSpan(
+                                                      text: 'Clear OTP ',
+                                                      style: SafeGoogleFont(
+                                                        'Lato',
+                                                        fontSize: 15 * ffem,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        height:
+                                                            1.2 * ffem / fem,
+                                                        color: Colors.red,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
                                           ),
