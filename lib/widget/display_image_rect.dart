@@ -23,7 +23,7 @@ class DisplayImageRect extends StatelessWidget {
       Positioned(
         child: buildEditIcon(color),
         right: 1,
-        top: 5,
+        top: 0,
       )
     ]));
   }
@@ -34,22 +34,22 @@ class DisplayImageRect extends StatelessWidget {
 
     return Center(
         child: Stack(children: [
-          buildImage(color),
-          Positioned(
-            child: backPressIcon(color),
-            left: 1,
-            top: 5,
-          )
-        ]));
+      buildImage(color),
+      Positioned(
+        child: backPressIcon(color),
+        left: 1,
+        top: 5,
+      )
+    ]));
   }
 
   // Builds Profile Image
   Widget buildImage(Color color) {
     final image = imagePath.contains('https://')
         ? Image.network(
+            filterQuality: FilterQuality.low,
             imagePath,
             fit: BoxFit.cover,
-      filterQuality: FilterQuality.low,
           )
         : imagePath.contains('assets')
             ? Image.asset(
@@ -58,12 +58,12 @@ class DisplayImageRect extends StatelessWidget {
               )
             : Image.file(
                 File(imagePath),
+                filterQuality: FilterQuality.low,
                 fit: BoxFit.cover,
-      filterQuality: FilterQuality.low,
               );
 
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10.0), //or 15.0
+      //or 15.0
       child: Container(
         height: 200.0,
         width: double.infinity,
@@ -80,6 +80,7 @@ class DisplayImageRect extends StatelessWidget {
       ),
     );*/
   }
+
   // Builds Edit Icon on Profile Picture
   Widget backPressIcon(Color color) => buildCircle(
       all: 10,

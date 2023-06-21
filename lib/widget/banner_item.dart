@@ -19,6 +19,7 @@ class BannerItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.0),
         image: DecorationImage(
           image: NetworkImage(item),
+          filterQuality: FilterQuality.low,
           fit: AppCommonHelper.isTablet(context) ? BoxFit.cover : BoxFit.fill,
         ),
       ),

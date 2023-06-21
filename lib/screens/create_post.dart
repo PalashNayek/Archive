@@ -37,10 +37,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   FocusNode focusNodeDescription = FocusNode();
   AuthPresenter authPresenter = AuthPresenter();
   ProfileModel profileModel = ProfileModel();
-  bool load = false;
   String selected = "";
   List<File> x = [];
   bool term = true;
+  bool loader = false;
+  String userIntersetedValue = "";
 
   void _onLoading(BuildContext context) {
     showDialog(
@@ -83,11 +84,17 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   }
 
   void getData() {
+    loader = true;
     authPresenter.getProfile().then((value) {
       profileModel = value;
       selected = profileModel.user!.primaryInetrest!.id.toString();
-      load = true;
-      setState(() {});
+      setState(() {
+        userIntersetedValue = profileModel.user!.primaryInetrest!.id
+            .toString();
+        if (userIntersetedValue.isNotEmpty) {
+          loader = false;
+        }
+      });
     });
   }
 
@@ -97,7 +104,15 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
+
       resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        backgroundColor: primary,
+        title: Text(
+          "Create Post",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 9 * fem),
@@ -105,10 +120,15 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           decoration: BoxDecoration(
             color: Color(0xffffffff),
           ),
-          child: Column(
+          child: loader
+              ? Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              child: Center(child: CircularProgressIndicator()))
+              : Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
+              /*Container(
                 width: double.infinity,
                 height: 76 * fem,
                 decoration: BoxDecoration(
@@ -118,7 +138,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     bottomLeft: Radius.circular(38 * fem),
                   ),
                 ),
-                child: Row(
+                *//*child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -136,8 +156,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ),
                         )),
                   ],
-                ),
-              ),
+                ),*//*
+              ),*/
               Container(
                 padding: EdgeInsets.fromLTRB(
                     10 * fem,
@@ -354,8 +374,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 style: TextStyle(
                     fontSize: AppCommonHelper.isTablet(context) ? 30 : 14),
               ),
-              load
-                  ? Container(
+               Container(
                       height: AppCommonHelper.isTablet(context) ? 120 : 85,
                       margin: EdgeInsets.all(
                           AppCommonHelper.isTablet(context) ? 1 : 10),
@@ -418,8 +437,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               : Container(),
                         ],
                       ),
-                    )
-                  : Container(),
+                    ),
+
               Container(
                   margin: EdgeInsets.fromLTRB(
                       5 * fem,

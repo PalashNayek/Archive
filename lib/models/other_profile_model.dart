@@ -6,9 +6,13 @@ class OtherProfileModel {
   OtherProfileModel({this.user, this.follower, this.following});
 
   OtherProfileModel.fromJson(Map<String, dynamic> json) {
-    user = json['user'] != null ? new User.fromJson(json['user']) : null;
-    follower = json['follower'];
-    following = json['following'];
+    try {
+      user = json['user'] != null ? User.fromJson(json['user']) : null;
+      follower = json['follower'];
+      following = json['following'];
+    } on Exception catch (e) {
+         print("Error->$e");
+    }
   }
 
   Map<String, dynamic> toJson() {

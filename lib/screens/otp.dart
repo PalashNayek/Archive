@@ -49,11 +49,8 @@ class _OTPScreenState extends State<OTPScreen> {
 
   @override
   void initState() {
-    //loader = true;
     super.initState();
-    setState(() {
-      loader = true;
-    });
+    setState(() {});
 
     getData();
   }
@@ -388,7 +385,6 @@ class _OTPScreenState extends State<OTPScreen> {
                                                 .verifyOtp(widget.mobileNo, otp,
                                                     context)
                                                 .then((value) {
-                                              //loader = true;
                                               //CircularProgressIndicator();
                                               if (value) {
                                                 if (!updateUser) {

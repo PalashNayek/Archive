@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 //import 'package:fluttertoast/fluttertoast.dart';
@@ -256,7 +257,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                     textAlign: TextAlign.left,
                     style: SafeGoogleFont(
                       'Lato',
-                      fontSize: 16 * ffem,
+                      fontSize: 18 * ffem,
                       fontWeight: FontWeight.w700,
                       height: 1.2 * ffem / fem,
                       color: Color(0xff000000),
@@ -649,10 +650,10 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          return CupertinoAlertDialog(
               title: Text('Report Post'),
               content: Container(
-                  height: 150,
+                  height: double.infinity,
                   width: 200,
                   child: Column(
                     children: [

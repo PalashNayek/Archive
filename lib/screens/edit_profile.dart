@@ -91,6 +91,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     double width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: primary,
+        title: Text(
+          "Edit & Update Profile",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
       body: SingleChildScrollView(
         physics: const ScrollPhysics(),
         child: SingleChildScrollView(
@@ -105,13 +112,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   children: [
                     Container(
                       width: double.infinity,
-                      height: 240,
+                      height: 200,
                       child: Stack(
                         children: [
                           Positioned(
-                              top: 35 * fem,
-                              left: 10,
-                              right: 10,
                               child: Align(
                                   child: InkWell(
                                 onTap: () {
@@ -202,7 +206,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     ),
                     Container(
                       margin: EdgeInsets.fromLTRB(
-                          10 * fem, 0 * fem, 10 * fem, 10 * fem),
+                          10 * fem, 10 * fem, 10 * fem, 10 * fem),
                       width: double.infinity,
                       height: 60 * fem,
                       decoration: BoxDecoration(
@@ -487,7 +491,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         ),
                         child: Container(
                           width: double.infinity,
-                          height: 60 * fem,
+                          height: 50 * fem,
                           decoration: BoxDecoration(
                             color: Color(0xff080053),
                             borderRadius: BorderRadius.circular(5 * fem),

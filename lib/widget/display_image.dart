@@ -23,7 +23,7 @@ class DisplayImage extends StatelessWidget {
           Positioned(
             child: buildEditIcon(color),
             left: 55,
-            top: 110,
+            top: 65,
           )
         ]));
   }
@@ -35,9 +35,9 @@ class DisplayImage extends StatelessWidget {
         :imagePath.contains('assets') ?AssetImage (imagePath): FileImage(File(imagePath));
 
     return Padding(
-      padding: EdgeInsets.only(left: 20,top: 20, right: 20),
+      padding: EdgeInsets.only(left: 20, right: 20),
       child: Align(
-        alignment: Alignment.centerLeft,
+        alignment: Alignment.topLeft,
         child: CircleAvatar(
           radius: 50,
           backgroundColor: color,

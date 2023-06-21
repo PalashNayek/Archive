@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:s2w/models/profile_model.dart';
@@ -40,6 +40,7 @@ class _AccountContentState extends State<AccountContent> {
   bool load = false, load2 = false;
 
   bool isLoaded = false;
+  int? myCount;
   //int? resultLenth;
 
   @override
@@ -58,7 +59,8 @@ class _AccountContentState extends State<AccountContent> {
       print("getProfile->$profileModel");
       print(profileModel.user!.emailId);
       setState(() {
-
+        myCount = profileModel.user!.account?.postCount!;
+        print("MyCount$myCount");
       });
     });
     postPresenter.getMyPost().then((value) {
@@ -68,6 +70,7 @@ class _AccountContentState extends State<AccountContent> {
         isLoaded = true;
       });
     });
+
   }
 
   @override
@@ -234,11 +237,8 @@ class _AccountContentState extends State<AccountContent> {
                                           SizedBox(
                                             height: 10,
                                           ),
-                                          load
-                                              ? Text(
-                                            profileModel
-                                                .user!.account!.postCount
-                                                .toString(),
+                                          Text(
+                                            myCount.toString(),
                                             style: SafeGoogleFont(
                                               'Lato',
                                               fontSize: 15 * ffem,
@@ -247,7 +247,7 @@ class _AccountContentState extends State<AccountContent> {
                                               color: Color(0x8c080053),
                                             ),
                                           )
-                                              : Container(),
+                                              ,
                                         ],
                                       )),
                                   GestureDetector(
@@ -384,52 +384,189 @@ class _AccountContentState extends State<AccountContent> {
   }
   Shimmer getShimmerLoading() {
     return Shimmer.fromColors(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           children: [
-            Container(
-              height: 100,
-              width: 100,
-              color: Colors.white,
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    )),
+              ],
             ),
-            const SizedBox(
-              width: 10,
+            SizedBox(
+              height: 20,
             ),
-            Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 10.0,
-                      color: Colors.white,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 14.0,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 18.0,
-                      color: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 18.0,
-                      color: Colors.white,
-                    ),
-                  ],
-                )),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    )),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    )),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    )),
+              ],
+            ),
           ],
         ),
         baseColor: Colors.grey[300]!,

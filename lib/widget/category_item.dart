@@ -39,6 +39,7 @@ class CategoryItem extends StatelessWidget{
                         decoration: BoxDecoration (
                           borderRadius: BorderRadius.circular(27*fem),
                           image: DecorationImage (
+                            filterQuality: FilterQuality.low,
                             fit: BoxFit.cover,
                             image: NetworkImage (image,
                             ),

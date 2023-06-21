@@ -87,7 +87,6 @@ class _HomeContentState extends State<HomeContent> {
     return SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Container(
-          margin: EdgeInsets.only(bottom: 60),
           width: double.infinity,
           child: Container(
             width: double.infinity,
@@ -479,10 +478,10 @@ class _HomeContentState extends State<HomeContent> {
         ));
   }
 
-  /*Future<void> _pullRefresh() async {
+  Future<void> _pullRefresh() async {
     getData();
     getPostDat(0);
-  }*/
+  }
 
   Shimmer getShimmerLoading() {
     return Shimmer.fromColors(
