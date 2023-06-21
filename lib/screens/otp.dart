@@ -102,6 +102,15 @@ class _OTPScreenState extends State<OTPScreen> {
     });
   }
 
+  void getResendOtp() {
+    startTimer();
+    _authPresenter.sendOtp(widget.mobileNo, context).then((value) {
+      authInfo = value;
+
+      setState(() {});
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double baseWidth = 390;
@@ -307,7 +316,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                                     context,
                                                     isError: false);
 
-                                                getData();
+                                                getResendOtp();
                                               }
                                             },
                                             child: RichText(
@@ -339,7 +348,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                                 ],
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),

@@ -402,7 +402,7 @@ class _loginScreenState extends State<LoginScreen> {
               title: const Text("End User Licence Agreement"),
               content: Text(AppConstants.terms,
                   style: TextStyle(
-                      fontSize: AppCommonHelper.isTablet(context) ? 30 : 12,
+                      fontSize: AppCommonHelper.isTablet(context) ? 30 : 15,
                       )),
               actions: [
                 CupertinoButton.filled(
