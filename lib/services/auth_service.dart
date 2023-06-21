@@ -217,8 +217,9 @@ class AuthService extends ApiClient with UiHelper {
     print(_profileUrl);
     return getRequest(_profileUrl,"",isCompleteUrl: true).then((response) async {
       if (response != null) {
-        print(response.body);
+
         var result = json.decode(response.body);
+        print("palashProfile->$result");
         if (response.statusCode==200) {
           ProfileModel profileModel = ProfileModel.fromJson(result);
           return profileModel;

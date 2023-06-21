@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:s2w/models/profile_model.dart';
@@ -35,77 +36,48 @@ class _AccountContentState extends State<AccountContent> {
   ProfileModel profileModel = ProfileModel();
 
   PostListModel postListModel = PostListModel();
-  bool load = false;
-  int? resultLenth;
-  var coverImg;
-  var userProfile;
-  var userGender;
-  var postCount;
-  var itemCountLen;
-  var postListResult;
+  //bool load = false;
+  bool load = false, load2 = false;
+
+  bool isLoaded = false;
+  //int? resultLenth;
 
   @override
   void initState() {
-    authPresenter = AuthPresenter();
-    postPresenter = PostPresenter();
-    profileModel = ProfileModel();
+    // TODO: implement initState
     super.initState();
-    if (mounted) {
-      setState(() {
-        getData();
-      });
-    }
+    Future.delayed(const Duration(seconds: 3000), () {
+      isLoaded = true;
+    });
+    getData();
   }
 
   void getData() {
-    try{
-      load = true;
-      postCount = profileModel.user!.account!.postCount;
-      authPresenter.getProfile().then((value) {
-        profileModel = value;
-        userProfile = profileModel.user!.profile;
-        userGender = profileModel.user!.gender;
+    authPresenter.getProfile().then((value) {
+      profileModel = value;
+      print("getProfile->$profileModel");
+      print(profileModel.user!.emailId);
+      setState(() {
 
-        postListResult = postListModel.result!;
-        itemCountLen = postListModel.result!.length;
-
-
-        if(itemCountLen){
-          itemCountLen = postListModel.result!.length;
-        }else{
-          itemCountLen = 0;
-          //len = 0; //return value if str is null
-        }
-
-        /*setState(() {
-        String userResponse = profileModel.user! as String;
-      });*/
       });
-      postPresenter.getMyPost().then((value) {
-        postListModel = value;
-
-        resultLenth = value.result?.length;
-        coverImg = profileModel.user!.cover;
-        if (value.result?.length == "") {
-          setState(() {});
-        } else {
-          setState(() {});
-        }
+    });
+    postPresenter.getMyPost().then((value) {
+      postListModel = value;
+      print("getMyPost->$postListModel.");
+      setState(() {
+        isLoaded = true;
       });
-    }catch (error) {
-      load = false;
-    }
-
+    });
   }
 
   @override
   void dispose() {
-    coverImg.cancel();
-    userProfile.cancel();
-    userGender.cancel();
-    postCount.cancel();
-    itemCountLen.cancel();
-    postListResult.cancel();
+    //coverImg.cancel();
+    //userProfile.cancel();
+    //userGender.cancel();
+    //postCount.cancel();
+    //itemCountLen.cancel();
+    /*postListResult.cancel();*/
     super.dispose();
   }
 
@@ -117,9 +89,9 @@ class _AccountContentState extends State<AccountContent> {
     return Scaffold(
         body: SingleChildScrollView(
             physics: const ScrollPhysics(),
-            child: Center(
-              child: Container(
-                  child: Column(
+            child:  Center(
+              child:  Container(
+                  child:  Column(
                 children: [
                   Container(
                       height: 360,
@@ -155,6 +127,13 @@ class _AccountContentState extends State<AccountContent> {
                                     );
                                   },
                                 ),
+                                /*CachedNetworkImage(
+                                  fit: BoxFit.cover,
+                                  filterQuality: FilterQuality.low,
+                                  imageUrl: profileModel.user!.cover.toString(),
+                                  placeholder: (context, url) => CircularProgressIndicator(),
+                                  errorWidget: (context, url, error) => Icon(Icons.error),
+                                ),*/
                               ),
                             ),
                           ),
@@ -207,21 +186,9 @@ class _AccountContentState extends State<AccountContent> {
                                     )
                                         : DecorationImage(
                                       fit: BoxFit.cover,
-                                      /*loadingBuilder: (BuildContext context, Widget child,
-                                          ImageChunkEvent? loadingProgress) {
-                                        if (loadingProgress == null) return child;
-                                        return Center(
-                                          child: CircularProgressIndicator(
-                                            value: loadingProgress.expectedTotalBytes != null
-                                                ? loadingProgress.cumulativeBytesLoaded /
-                                                loadingProgress.expectedTotalBytes!
-                                                : null,
-                                          ),
-                                        );
-                                      },*/
                                       filterQuality: FilterQuality.low,
                                       image: NetworkImage(
-                                        userProfile
+                                        profileModel.user!.profile
                                             .toString(),
                                       ),
                                     ),
@@ -238,80 +205,19 @@ class _AccountContentState extends State<AccountContent> {
                             ),
                           ),
 
-                          //Full Name
-                          /*Positioned(
-                            left: 94 * fem,
-                            top: 267 * fem,
-                            child: Align(
-                              child: SizedBox(
-                                width: 203 * fem,
-                                height: 24 * fem,
-                                child: Text(
-                                  profileModel.user!.firstName.toString(),
-                                  textAlign: TextAlign.center,
-                                  style: SafeGoogleFont(
-                                    'Lato',
-                                    fontSize: 20 * ffem,
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.2 * ffem / fem,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),*/
-
-                          //username
-                          /*Positioned(
-                            // group2JDn (12:2527)
-                            left: 133 * fem,
-                            top: 291 * fem,
-                            child: Container(
-                              width: 224 * fem,
-                              height: 18 * fem,
-                              child: Stack(
-                                children: [
-                                  Positioned(
-                                    left: 0 * fem,
-                                    top: 0 * fem,
-                                    child: Align(
-                                      child: SizedBox(
-                                        width: 124 * fem,
-                                        height: 18 * fem,
-                                        child: Text(
-                                          '@' +
-                                              profileModel.user!.lastName
-                                                  .toString(),
-                                          textAlign: TextAlign.center,
-                                          style: SafeGoogleFont(
-                                            'Lato',
-                                            fontSize: 15 * ffem,
-                                            fontWeight: FontWeight.w400,
-                                            height: 1.2 * ffem / fem,
-                                            color: Color(0xff000000),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),*/
-
                           //user Post,follower,following
                           Positioned(
                             left: 48.6691894531 * fem,
                             top: 324 * fem,
                             child: Container(
-                              width: 295.65 * fem,
+                              width: 300 * fem,
                               height: 50 * fem,
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                      margin: EdgeInsets.fromLTRB(0 * fem,
-                                          0 * fem, 65.83 * fem, 0 * fem),
+                                      margin: EdgeInsets.fromLTRB(
+                                          0 * fem, 0 * fem, 65.83 * fem, 0 * fem),
                                       child: Column(
                                         children: [
                                           Text(
@@ -328,7 +234,11 @@ class _AccountContentState extends State<AccountContent> {
                                           SizedBox(
                                             height: 10,
                                           ),
-                                     Text(userGender.toString(),
+                                          load
+                                              ? Text(
+                                            profileModel
+                                                .user!.account!.postCount
+                                                .toString(),
                                             style: SafeGoogleFont(
                                               'Lato',
                                               fontSize: 15 * ffem,
@@ -336,20 +246,20 @@ class _AccountContentState extends State<AccountContent> {
                                               height: 1.2 * ffem / fem,
                                               color: Color(0x8c080053),
                                             ),
-                                          ),
+                                          )
+                                              : Container(),
                                         ],
                                       )),
                                   GestureDetector(
                                       onTap: () {
-                                        // Navigator.push(context,MaterialPageRoute(builder: (context) =>FollowerListContent()));
                                         Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     MyFollowerListContent(
-                                                      type: "other",
+                                                      type: "my",
                                                       userId: profileModel
-                                                          .user!.accountId
+                                                          .user!.id
                                                           .toString(),
                                                     )));
                                       },
@@ -373,8 +283,7 @@ class _AccountContentState extends State<AccountContent> {
                                                 height: 10,
                                               ),
                                               Text(
-                                                profileModel.follower
-                                                    .toString(),
+                                                profileModel.follower.toString(),
                                                 style: SafeGoogleFont(
                                                   'Lato',
                                                   fontSize: 15 * ffem,
@@ -392,15 +301,15 @@ class _AccountContentState extends State<AccountContent> {
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     MyFollowingListContent(
-                                                      type: "other",
+                                                      type: "my",
                                                       userId: profileModel
-                                                          .user!.accountId
+                                                          .user!.id
                                                           .toString(),
                                                     )));
                                       },
                                       child: Container(
-                                          margin: EdgeInsets.fromLTRB(0 * fem,
-                                              0 * fem, 1.82 * fem, 0 * fem),
+                                          margin: EdgeInsets.fromLTRB(
+                                              0 * fem, 0 * fem, 0 * fem, 0 * fem),
                                           child: Column(
                                             children: [
                                               Text(
@@ -418,8 +327,7 @@ class _AccountContentState extends State<AccountContent> {
                                                 height: 10,
                                               ),
                                               Text(
-                                                profileModel.following
-                                                    .toString(),
+                                                profileModel.following.toString(),
                                                 style: SafeGoogleFont(
                                                   'Lato',
                                                   fontSize: 15 * ffem,
@@ -460,19 +368,71 @@ class _AccountContentState extends State<AccountContent> {
                           ),
                         ],
                       )),
-                  ListView.builder(
+                  isLoaded? ListView.builder(
                           itemCount: postListModel.result?.length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, i) {
                             return MyPostWidgetItem(
-                                //postListModel.result!.elementAt(i),
-                              postListModel.result!.elementAt(i),
+                                postListModel.result!.elementAt(i),
                                 profileModel.user!.accountId.toString());
                           },
-                        )
+                        ): getShimmerLoading()
                 ],
               )),
             )));
+  }
+  Shimmer getShimmerLoading() {
+    return Shimmer.fromColors(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 100,
+              width: 100,
+              color: Colors.white,
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 8,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 10.0,
+                      color: Colors.white,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 14.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
+          ],
+        ),
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!);
   }
 }
