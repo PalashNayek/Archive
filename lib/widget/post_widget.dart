@@ -650,10 +650,10 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
     return showDialog(
         context: context,
         builder: (context) {
-          return CupertinoAlertDialog(
+          return AlertDialog(
               title: Text('Report Post'),
               content: Container(
-                  height: double.infinity,
+                  height: 150,
                   width: 200,
                   child: Column(
                     children: [
