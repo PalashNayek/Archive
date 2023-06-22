@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:s2w/models/profile_model.dart';
@@ -12,6 +11,7 @@ import 'package:s2w/screens/my_following_list.dart';
 import 'package:s2w/theme/color.dart';
 import 'package:s2w/utils/images.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import '../models/post_list_model.dart';
 import '../socket/socket_constants.dart';
@@ -36,11 +36,13 @@ class _AccountContentState extends State<AccountContent> {
   ProfileModel profileModel = ProfileModel();
 
   PostListModel postListModel = PostListModel();
+
   //bool load = false;
   bool load = false, load2 = false;
 
   bool isLoaded = false;
   int? myCount;
+  bool moreLoadPostCircleProgressbar = false;
   //int? resultLenth;
 
   @override
@@ -70,7 +72,6 @@ class _AccountContentState extends State<AccountContent> {
         isLoaded = true;
       });
     });
-
   }
 
   @override
@@ -92,9 +93,9 @@ class _AccountContentState extends State<AccountContent> {
     return Scaffold(
         body: SingleChildScrollView(
             physics: const ScrollPhysics(),
-            child:  Center(
-              child:  Container(
-                  child:  Column(
+            child: Center(
+              child: Container(
+                  child: Column(
                 children: [
                   Container(
                       height: 360,
@@ -111,25 +112,31 @@ class _AccountContentState extends State<AccountContent> {
                                 height: 280 * fem,
                                 child: profileModel.user?.cover == null
                                     ? Image.asset(
-                                    'assets/page-1/images/bannerdefaultimage.png',
-                                    fit: BoxFit.cover)
+                                        'assets/page-1/images/bannerdefaultimage.png',
+                                        fit: BoxFit.cover)
                                     : Image.network(
-                                  profileModel.user!.cover.toString(),
-                                  fit: BoxFit.cover,
-                                  filterQuality: FilterQuality.low,
-                                  loadingBuilder: (BuildContext context, Widget child,
-                                      ImageChunkEvent? loadingProgress) {
-                                    if (loadingProgress == null) return child;
-                                    return Center(
-                                      child: CircularProgressIndicator(
-                                        value: loadingProgress.expectedTotalBytes != null
-                                            ? loadingProgress.cumulativeBytesLoaded /
-                                            loadingProgress.expectedTotalBytes!
-                                            : null,
+                                        profileModel.user!.cover.toString(),
+                                        fit: BoxFit.cover,
+                                        filterQuality: FilterQuality.low,
+                                        loadingBuilder: (BuildContext context,
+                                            Widget child,
+                                            ImageChunkEvent? loadingProgress) {
+                                          if (loadingProgress == null)
+                                            return child;
+                                          return Center(
+                                            child: CircularProgressIndicator(
+                                              value: loadingProgress
+                                                          .expectedTotalBytes !=
+                                                      null
+                                                  ? loadingProgress
+                                                          .cumulativeBytesLoaded /
+                                                      loadingProgress
+                                                          .expectedTotalBytes!
+                                                  : null,
+                                            ),
+                                          );
+                                        },
                                       ),
-                                    );
-                                  },
-                                ),
                                 /*CachedNetworkImage(
                                   fit: BoxFit.cover,
                                   filterQuality: FilterQuality.low,
@@ -175,26 +182,25 @@ class _AccountContentState extends State<AccountContent> {
                                         Border.all(color: Color(0xffffffff)),
                                     image: profileModel.user?.profile == null
                                         ? DecorationImage(
-                                      fit: BoxFit.cover,
-
-                                      filterQuality: FilterQuality.low,
-                                      image: profileModel.user?.gender ==
-                                          "Male"
-                                          ? AssetImage(
-                                        'assets/page-1/images/user_profile_male.png',
-                                      )
-                                          : AssetImage(
-                                        'assets/page-1/images/user_profile_female.png',
-                                      ),
-                                    )
+                                            fit: BoxFit.cover,
+                                            filterQuality: FilterQuality.low,
+                                            image: profileModel.user?.gender ==
+                                                    "Male"
+                                                ? AssetImage(
+                                                    'assets/page-1/images/user_profile_male.png',
+                                                  )
+                                                : AssetImage(
+                                                    'assets/page-1/images/user_profile_female.png',
+                                                  ),
+                                          )
                                         : DecorationImage(
-                                      fit: BoxFit.cover,
-                                      filterQuality: FilterQuality.low,
-                                      image: NetworkImage(
-                                        profileModel.user!.profile
-                                            .toString(),
-                                      ),
-                                    ),
+                                            fit: BoxFit.cover,
+                                            filterQuality: FilterQuality.low,
+                                            image: NetworkImage(
+                                              profileModel.user!.profile
+                                                  .toString(),
+                                            ),
+                                          ),
                                     boxShadow: [
                                       BoxShadow(
                                         color: Color(0x3f000000),
@@ -219,8 +225,8 @@ class _AccountContentState extends State<AccountContent> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Container(
-                                      margin: EdgeInsets.fromLTRB(
-                                          0 * fem, 0 * fem, 65.83 * fem, 0 * fem),
+                                      margin: EdgeInsets.fromLTRB(0 * fem,
+                                          0 * fem, 65.83 * fem, 0 * fem),
                                       child: Column(
                                         children: [
                                           Text(
@@ -246,8 +252,7 @@ class _AccountContentState extends State<AccountContent> {
                                               height: 1.2 * ffem / fem,
                                               color: Color(0x8c080053),
                                             ),
-                                          )
-                                              ,
+                                          ),
                                         ],
                                       )),
                                   GestureDetector(
@@ -283,7 +288,8 @@ class _AccountContentState extends State<AccountContent> {
                                                 height: 10,
                                               ),
                                               Text(
-                                                profileModel.follower.toString(),
+                                                profileModel.follower
+                                                    .toString(),
                                                 style: SafeGoogleFont(
                                                   'Lato',
                                                   fontSize: 15 * ffem,
@@ -308,8 +314,8 @@ class _AccountContentState extends State<AccountContent> {
                                                     )));
                                       },
                                       child: Container(
-                                          margin: EdgeInsets.fromLTRB(
-                                              0 * fem, 0 * fem, 0 * fem, 0 * fem),
+                                          margin: EdgeInsets.fromLTRB(0 * fem,
+                                              0 * fem, 0 * fem, 0 * fem),
                                           child: Column(
                                             children: [
                                               Text(
@@ -327,7 +333,8 @@ class _AccountContentState extends State<AccountContent> {
                                                 height: 10,
                                               ),
                                               Text(
-                                                profileModel.following.toString(),
+                                                profileModel.following
+                                                    .toString(),
                                                 style: SafeGoogleFont(
                                                   'Lato',
                                                   fontSize: 15 * ffem,
@@ -368,20 +375,35 @@ class _AccountContentState extends State<AccountContent> {
                           ),
                         ],
                       )),
-                  isLoaded? ListView.builder(
+                  isLoaded
+                      ? ListView.builder(
                           itemCount: postListModel.result?.length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, i) {
-                            return MyPostWidgetItem(
-                                postListModel.result!.elementAt(i),
-                                profileModel.user!.accountId.toString());
+                            return /*(profileModel.user!.account!.postCount! == 0)
+                                ? Center(
+                                child:
+                                Text('No post',
+                                  style: SafeGoogleFont(
+                                    'Lato',
+                                    fontSize: 120 * ffem,
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.2 * ffem / fem,
+                                    color: Color(0xff404040),
+                                  ),))
+                                :*/
+                              MyPostWidgetItem(
+                                    postListModel.result!.elementAt(i),
+                                    profileModel.user!.accountId.toString());
                           },
-                        ): getShimmerLoading()
+                        )
+                      : getShimmerLoading()
                 ],
               )),
             )));
   }
+
   Shimmer getShimmerLoading() {
     return Shimmer.fromColors(
         child: Column(
@@ -399,34 +421,34 @@ class _AccountContentState extends State<AccountContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
             SizedBox(
@@ -445,34 +467,34 @@ class _AccountContentState extends State<AccountContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
             SizedBox(
@@ -491,34 +513,34 @@ class _AccountContentState extends State<AccountContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
             SizedBox(
@@ -537,34 +559,34 @@ class _AccountContentState extends State<AccountContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
           ],

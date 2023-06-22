@@ -53,7 +53,9 @@ class _OtherAccountContentState extends State<OtherAccountContent> {
     authPresenter.getOtherProfile(widget.id).then((value) {
       profileModel = value;
       //String myResult = profileModel.user!.account!.
-      followData = profileModel.user!.account!.userFollow!.length > 0
+      int userFollow = profileModel.user!.account!.userFollow!.length;
+      print("userFollowPk$userFollow");
+      followData = userFollow > 0
           ? "Following"
           : 'Follow Now';
       accountId = profileModel.user!.accountId.toString();
@@ -160,6 +162,8 @@ class _OtherAccountContentState extends State<OtherAccountContent> {
                                             image: profileModel.user!.profile ==
                                                     null
                                                 ? DecorationImage(
+                                                    filterQuality:
+                                                        FilterQuality.low,
                                                     fit: BoxFit.cover,
                                                     image: profileModel
                                                                 .user!.gender ==
@@ -173,7 +177,8 @@ class _OtherAccountContentState extends State<OtherAccountContent> {
                                                   )
                                                 : DecorationImage(
                                                     fit: BoxFit.cover,
-                                                    filterQuality: FilterQuality.low,
+                                                    filterQuality:
+                                                        FilterQuality.low,
                                                     image: NetworkImage(
                                                       profileModel.user!.profile
                                                           .toString(),

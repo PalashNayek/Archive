@@ -418,7 +418,7 @@ class _HomeContentState extends State<HomeContent> {
                 ),
                 isLoaded
                     ? ListView.builder(
-                        itemCount: postListData.length + 1,
+                        itemCount: postListData.length+1,//+1
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, i) {
@@ -441,7 +441,7 @@ class _HomeContentState extends State<HomeContent> {
                                     },
                                     child: moreLoadPostCircleProgressbar
                                         ? postListData.length > totalPostLength
-                                            ? Text("data")
+                                            ? Text("")
                                             : Center(
                                                 child:
                                                     Padding(
