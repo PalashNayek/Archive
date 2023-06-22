@@ -314,8 +314,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               itemBuilder: (context, index) {
                                 return Image.file(
                                   x.elementAt(index),
-                                  height: 80,
-                                  width: 80,
+                                  height: 120,
+                                  width: 120,
                                   fit: BoxFit.cover,
                                   alignment: Alignment.topCenter,
                                   frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
@@ -353,6 +353,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 });
                               } else {
                                 x.add(File(element.path.toString()));
+                                //x.clear();
                                 setState(() {});
                               }
                             });
