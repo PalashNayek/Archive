@@ -37,37 +37,36 @@ class _AccountContentState extends State<AccountContent> {
 
   PostListModel postListModel = PostListModel();
 
-  //bool load = false;
-  bool load = false, load2 = false;
-
   bool isLoaded = false;
   int? myCount;
   bool moreLoadPostCircleProgressbar = false;
-  //int? resultLenth;
+  bool loader = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    Future.delayed(const Duration(seconds: 3000), () {
-      isLoaded = true;
-    });
-    getData();
+loader = true;
+    //if(profileModel.user!.firstName==null){
+      Future.delayed(const Duration(seconds: 3000), () {
+        isLoaded = true;
+      });
+      getData();
+   // }
   }
 
   void getData() {
     authPresenter.getProfile().then((value) {
       profileModel = value;
-      print("getProfile->$profileModel");
-      print(profileModel.user!.emailId);
       setState(() {
+        if(profileModel.user!.firstName!=null){
+          loader = false;
+        }
         myCount = profileModel.user!.account?.postCount!;
-        print("MyCount$myCount");
       });
     });
     postPresenter.getMyPost().then((value) {
       postListModel = value;
-      print("getMyPost->$postListModel.");
       setState(() {
         isLoaded = true;
       });
@@ -93,12 +92,17 @@ class _AccountContentState extends State<AccountContent> {
     return Scaffold(
         body: SingleChildScrollView(
             physics: const ScrollPhysics(),
-            child: Center(
+            child: loader? Center(
+                child: Padding(
+                  padding: EdgeInsets.only(top: 250),
+                  child: CircularProgressIndicator(),
+                )
+            ): Center(
               child: Container(
                   child: Column(
                 children: [
                   Container(
-                      height: 360,
+                      height: 380,
                       width: double.infinity,
                       child: Stack(
                         children: [
@@ -137,13 +141,6 @@ class _AccountContentState extends State<AccountContent> {
                                           );
                                         },
                                       ),
-                                /*CachedNetworkImage(
-                                  fit: BoxFit.cover,
-                                  filterQuality: FilterQuality.low,
-                                  imageUrl: profileModel.user!.cover.toString(),
-                                  placeholder: (context, url) => CircularProgressIndicator(),
-                                  errorWidget: (context, url, error) => Icon(Icons.error),
-                                ),*/
                               ),
                             ),
                           ),
@@ -214,10 +211,46 @@ class _AccountContentState extends State<AccountContent> {
                             ),
                           ),
 
+                          //Full Name
+                          Positioned(
+                            left: 133*fem,
+                            top: 311*fem,
+                            child: Container(
+                              width: 204*fem,
+                              height: 38*fem,
+                              child: Stack(
+                                children: [
+
+                                  Positioned(
+                                    left: 0*fem,
+                                    top: 0*fem,
+                                    child: Align(
+                                      child: SizedBox(
+                                        width: 124*fem,
+                                        height: 28*fem,
+                                        child: Text(
+                                          profileModel.user!.firstName.toString(),
+                                          textAlign: TextAlign.center,
+                                          style: SafeGoogleFont (
+                                            'Lato',
+                                            fontSize: 25*ffem,
+                                            fontWeight: FontWeight.w400,
+                                            height: 1.2*ffem/fem,
+                                            color: Color(0xff000000),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
                           //user Post,follower,following
                           Positioned(
                             left: 48.6691894531 * fem,
-                            top: 324 * fem,
+                            top: 344 * fem,
                             child: Container(
                               width: 300 * fem,
                               height: 50 * fem,
@@ -376,24 +409,40 @@ class _AccountContentState extends State<AccountContent> {
                         ],
                       )),
                   isLoaded
-                      ? ListView.builder(
-                          itemCount: postListModel.result?.length,
+                      ? myCount == 0 ?  Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 100),
+                        child: Text('No post',
+                          style: SafeGoogleFont(
+                            'Lato',
+                            fontSize: 18 * ffem,
+                            fontWeight: FontWeight.w700,
+                            height: 1.2 * ffem / fem,
+                            color: Color(0xff404040),
+                          ),),
+                      )
+
+                  ) : ListView.builder(
+                          itemCount: postListModel.result!.length,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, i) {
-                            return /*(profileModel.user!.account!.postCount! == 0)
+                            return /*( 0 == profileModel.user!.account?.postCount!)
                                 ? Center(
-                                child:
-                                Text('No post',
-                                  style: SafeGoogleFont(
-                                    'Lato',
-                                    fontSize: 120 * ffem,
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.2 * ffem / fem,
-                                    color: Color(0xff404040),
-                                  ),))
-                                :*/
-                              MyPostWidgetItem(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(25),
+                                  child: Text('No post',
+                                    style: SafeGoogleFont(
+                                      'Lato',
+                                      fontSize: 18 * ffem,
+                                      fontWeight: FontWeight.w700,
+                                      height: 1.2 * ffem / fem,
+                                      color: Color(0xff404040),
+                                    ),),
+                                )
+
+                            )
+                                :*/ MyPostWidgetItem(
                                     postListModel.result!.elementAt(i),
                                     profileModel.user!.accountId.toString());
                           },

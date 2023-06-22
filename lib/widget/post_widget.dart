@@ -307,7 +307,8 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                         .image
                                         .toString(),
                                     width: double.infinity,
-                                    fit: BoxFit.fill, loadingBuilder:
+                                    fit: BoxFit.fill,
+                                    loadingBuilder:
                                         (BuildContext context, Widget child,
                                             ImageChunkEvent? loadingProgress) {
                                     if (loadingProgress == null) {
