@@ -317,6 +317,23 @@ class PostService extends ApiClient with UiHelper {
       }
     });
   }
+
+  //filter post
+  Future<PostListModel> getFilterPost(String interestId,int limit,int offset) {
+    return getRequest(_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&interestId="+interestId, "",isCompleteUrl: false).then((response) {
+      if (response != null) {
+        var result = json.decode(response.body);
+        return PostListModel.fromJson(result);
+        /* Iterable iterable = result;
+        return iterable
+            .map((element) => PostListModel.fromJson(element))
+            .toList();*/
+      } else {
+        return PostListModel();
+      }
+    });
+  }
+
   Future<List<NotificationModel>> getNotification() {
 
     return getRequest(_notificationUrl, "",isCompleteUrl: false).then((response) {

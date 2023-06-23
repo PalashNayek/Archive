@@ -361,11 +361,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
 
                                           },
                                         ),
-                                          /*Positioned(
+                                          Positioned(
                                             right: 10 * fem,
                                             top: 10 * fem,
                                             child: CircleAvatar(
-                                              backgroundColor: Colors.grey,
+                                              backgroundColor: Colors.red,
                                               child: Center(
                                                   child: IconButton(
                                                     icon: Icon(
@@ -373,11 +373,25 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                                       color: primary,
                                                     ),
                                                     onPressed: () {
-
+                                                      result?.files.forEach((element) {
+                                                        print("PNayek->"+element.name);
+                                                        if (element.extension == "mp4") {
+                                                          _generateThumbnail(
+                                                              element.path.toString())
+                                                              .then((value) {
+                                                            x.clear();
+                                                            setState(() {});
+                                                          });
+                                                        } else {
+                                                          //x.add(File(element.path.toString()));
+                                                          x.clear();
+                                                          setState(() {});
+                                                        }
+                                                      });
                                                     },
                                                   )),
                                             ),
-                                          ),*/
+                                          ),
                                         ]
                                       );
 

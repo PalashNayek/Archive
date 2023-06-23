@@ -33,6 +33,12 @@ class PostPresenter {
   Future<PostListModel> getAllPost(String keyword,int limit,int offset) {
     return _postService!.getAllPost(keyword,limit,offset);
   }
+
+  //get filter ........
+  Future<PostListModel> getFilterPost(String interestId,int limit,int offset) {
+    return _postService!.getFilterPost(interestId,limit,offset);
+  }
+
   Future<List<NotificationModel>> getNotification() {
     return _postService!.getNotification();
   }

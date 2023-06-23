@@ -20,6 +20,7 @@ class BannerItem extends StatelessWidget {
         image: DecorationImage(
           image: NetworkImage(item),
           filterQuality: FilterQuality.low,
+          onError: (exception, stackTrace) => Icon(Icons.error),
           fit: AppCommonHelper.isTablet(context) ? BoxFit.cover : BoxFit.fill,
         ),
       ),

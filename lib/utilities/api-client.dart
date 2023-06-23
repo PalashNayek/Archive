@@ -166,7 +166,7 @@ class ApiClient with RouteAware {
   Future<http.Response> getRequest(String url, String content,
       {required bool isCompleteUrl}) async {
     await getToken();
-    print("url"+baseUrl + url + content);
+    print("urlPalash"+baseUrl + url + content);
     return http.get((isCompleteUrl == null || isCompleteUrl == false)
                 ? Uri.parse(baseUrl + url + content)
                 :Uri.parse(baseUrl+url + content), headers: _headers)

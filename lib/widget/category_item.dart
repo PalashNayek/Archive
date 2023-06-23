@@ -1,11 +1,13 @@
 
 import 'package:flutter/material.dart';
 
+import '../screens/filter_interest.dart';
 import '../utils.dart';
 
 class CategoryItem extends StatelessWidget{
 
-  CategoryItem(this.name,this.image);
+  CategoryItem(this.id, this.name,this.image);
+  String id;
   String name;
   String image;
 
@@ -22,51 +24,62 @@ class CategoryItem extends StatelessWidget{
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Container(
-            margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 6*fem),
-            width: double.infinity,
-            height: 60*fem,
-            child: Stack(
-              children: [
-                Positioned(
-                  left: 3*fem,
-                  top: 3*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 54*fem,
-                      height: 54*fem,
-                      child: Container(
-                        decoration: BoxDecoration (
-                          borderRadius: BorderRadius.circular(27*fem),
-                          image: DecorationImage (
-                            filterQuality: FilterQuality.low,
-                            fit: BoxFit.cover,
-                            image: NetworkImage (image,
-                            ),
+          GestureDetector(
+            onTap: (){
+              print("PalashInter->$id");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                      FilterIntestScreen(interest_name: name, interest_id: id))
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.fromLTRB(0*fem, 0*fem, 0*fem, 6*fem),
+              width: double.infinity,
+              height: 60*fem,
 
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 3*fem,
+                    top: 3*fem,
+                    child: Align(
+                      child: SizedBox(
+                        width: 54*fem,
+                        height: 54*fem,
+                        child: Container(
+                          decoration: BoxDecoration (
+                            borderRadius: BorderRadius.circular(27*fem),
+                            image: DecorationImage (
+                              filterQuality: FilterQuality.low,
+                              fit: BoxFit.cover,
+                              image: NetworkImage (image,),
+
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                Positioned(
-                  left: 0*fem,
-                  top: 0*fem,
-                  child: Align(
-                    child: SizedBox(
-                      width: 60*fem,
-                      height: 60*fem,
-                      child: Image.asset(
-                        'assets/page-1/images/ellipse-BLL.png',
+                  Positioned(
+                    left: 0*fem,
+                    top: 0*fem,
+                    child: Align(
+                      child: SizedBox(
                         width: 60*fem,
                         height: 60*fem,
-                        filterQuality: FilterQuality.low,
+                        child: Image.asset(
+                          'assets/page-1/images/ellipse-BLL.png',
+                          width: 60*fem,
+                          height: 60*fem,
+                          filterQuality: FilterQuality.low,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Center(

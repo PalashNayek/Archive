@@ -72,9 +72,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                 widget.postModelData.postImage!.elementAt(0).image.toString())
             .then((value) {
           files.add(value);
-          setState(() {
-
-          });
+          setState(() {});
         });
       }
     }
@@ -107,7 +105,6 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
           Padding(
             padding: const EdgeInsets.all(3.0),
             child: Row(
-
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
@@ -117,8 +114,9 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => OtherAccountContent(
-                                  widget.postModelData.account!.id.toString())));
+                              builder: (context) => OtherAccountContent(widget
+                                  .postModelData.account!.id
+                                  .toString())));
                     },
                     child: Container(
                         margin: EdgeInsets.all(5.0),
@@ -139,6 +137,13 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                       .toString(),
                                   width: 50 * fem,
                                   height: 50 * fem,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Image.asset("assets/page-1/images/user_profile_male.png",
+                                        width: 50 * fem,
+                                        height: 50 * fem,
+                                        fit: BoxFit.cover);
+
+                                  },
                                   fit: BoxFit.cover, loadingBuilder:
                                       (BuildContext context, Widget child,
                                           ImageChunkEvent? loadingProgress) {
@@ -148,15 +153,18 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                   } else {
                                     isLoading = true;
                                     return CircularProgressIndicator(
-                                      value: loadingProgress.expectedTotalBytes !=
-                                              null
-                                          ? loadingProgress
-                                                  .cumulativeBytesLoaded /
-                                              loadingProgress.expectedTotalBytes!
-                                          : null,
+                                      value:
+                                          loadingProgress.expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
                                     );
                                   }
-                                }),
+                                }
+                                ),
                         ))),
                 /*if (isLoading) CircularProgressIndicator(),*/
 
@@ -221,8 +229,9 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                 margin: EdgeInsets.only(right: 10),
                                 child: Icon(
                                   Icons.more_vert,
-                                  size:
-                                      AppCommonHelper.isTablet(context) ? 40 : 24,
+                                  size: AppCommonHelper.isTablet(context)
+                                      ? 40
+                                      : 24,
                                 )),
                             onTapDown: (details) {
                               showPopupMenu(context, details);
@@ -307,8 +316,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                         .image
                                         .toString(),
                                     width: double.infinity,
-                                    fit: BoxFit.fill,
-                                    loadingBuilder:
+                                    fit: BoxFit.fill, loadingBuilder:
                                         (BuildContext context, Widget child,
                                             ImageChunkEvent? loadingProgress) {
                                     if (loadingProgress == null) {
@@ -380,7 +388,6 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                                         .toString(),
                                                   )));
                                     },
-
                                     icon: Center(
                                       child: Icon(Icons.play_circle,
                                           size: 50, color: third),

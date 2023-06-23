@@ -39,6 +39,7 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
   PageController _pageController =
       PageController(viewportFraction: 1, initialPage: 0);
   PostPresenter postPresenter = PostPresenter();
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -132,7 +133,8 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                                     .elementAt(0)
                                     .profile ==
                                 null
-                            ? Image.asset("assets/page-1/images/user_profile_male.png",
+                            ? Image.asset(
+                                "assets/page-1/images/user_profile_male.png",
                                 width: 50 * fem,
                                 height: 50 * fem,
                                 fit: BoxFit.cover)
@@ -144,7 +146,31 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                                 width: 50 * fem,
                                 height: 50 * fem,
                                 filterQuality: FilterQuality.low,
-                                fit: BoxFit.cover),
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                return Image.asset(
+                                    "assets/page-1/images/user_profile_male.png",
+                                    width: 50 * fem,
+                                    height: 50 * fem,
+                                    fit: BoxFit.cover);
+                              }, loadingBuilder: (BuildContext context,
+                                    Widget child,
+                                    ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) {
+                                  isLoading = false;
+                                  return child;
+                                } else {
+                                  isLoading = true;
+                                  return CircularProgressIndicator(
+                                    value: loadingProgress.expectedTotalBytes !=
+                                            null
+                                        ? loadingProgress
+                                                .cumulativeBytesLoaded /
+                                            loadingProgress.expectedTotalBytes!
+                                        : null,
+                                  );
+                                }
+                              }),
                       ))),
 
               Expanded(
@@ -235,11 +261,13 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
             height: 3,
           ),
           Padding(
-              padding: EdgeInsets.only(left: 10,),
+              padding: EdgeInsets.only(
+                left: 10,
+              ),
               child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                   /* widget.postModelData.name.toString(),
+                    /* widget.postModelData.name.toString(),
                     textAlign: TextAlign.left,
                     style: SafeGoogleFont(
                       'Lato',
@@ -299,9 +327,26 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                                         .elementAt(0)
                                         .image
                                         .toString(),
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) return child;
+                                      return Center(
+                                        child: CircularProgressIndicator(
+                                          value: loadingProgress
+                                                      .expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                        ),
+                                      );
+                                    },
                                     filterQuality: FilterQuality.low,
                                     width: double.infinity,
-                                    fit: BoxFit.fill,
+                                    fit: BoxFit.cover,
                                   ),
                           ),
                           getFileExtension(widget.postModelData.postImage!
@@ -394,7 +439,8 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                         child: Row(
                           children: [
                             Icon(Icons.thumb_up,
-                                size: AppCommonHelper.isTablet(context) ? 40 : 24,
+                                size:
+                                    AppCommonHelper.isTablet(context) ? 40 : 24,
                                 color: primary),
                             SizedBox(
                               width: 5,
@@ -409,7 +455,6 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                             )
                           ],
                         ),
-
                       )),
                   GestureDetector(
                     onTap: () {
@@ -421,7 +466,6 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                     },
                     child: Container(
                       child: Row(
-
                         children: [
                           Icon(
                             Icons.comment,
@@ -434,8 +478,9 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                             widget.postModelData.commentCount.toString(),
                             style: TextStyle(
                                 color: Colors.grey,
-                                fontSize:
-                                    AppCommonHelper.isTablet(context) ? 30 : 16),
+                                fontSize: AppCommonHelper.isTablet(context)
+                                    ? 30
+                                    : 16),
                           )
                         ],
                       ),
@@ -467,7 +512,6 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                 ],
               ),
             ),
-
           ),
         ],
       ),

@@ -49,8 +49,10 @@ class _HomeContentState extends State<HomeContent> {
       isLoaded = true;
     });
 
-    getData();
-    getPostDat(offset);
+    setState(() {
+      getData();
+      getPostDat(offset);
+    });
   }
 
   void getPostDat(int off) {
@@ -89,6 +91,7 @@ class _HomeContentState extends State<HomeContent> {
         child: Container(
           width: double.infinity,
           child: Container(
+
             width: double.infinity,
             decoration: BoxDecoration(
               color: Color(0xffffffff),
@@ -376,6 +379,9 @@ class _HomeContentState extends State<HomeContent> {
                                             isLoaded
                                                 ? CategoryItem(
                                                     profileModel.user!
+                                                        .primaryInetrest!.id
+                                                        .toString(),
+                                                    profileModel.user!
                                                         .primaryInetrest!.name
                                                         .toString(),
                                                     profileModel.user!
@@ -384,6 +390,9 @@ class _HomeContentState extends State<HomeContent> {
                                                 : Container(),
                                             isLoaded
                                                 ? CategoryItem(
+                                                    profileModel.user!
+                                                        .secondaryInetrest!.id
+                                                        .toString(),
                                                     profileModel.user!
                                                         .secondaryInetrest!.name
                                                         .toString(),
@@ -395,12 +404,16 @@ class _HomeContentState extends State<HomeContent> {
                                                 : Container(),
                                             isLoaded
                                                 ? CategoryItem(
+                                                    profileModel
+                                                        .user!.thirdInetrest!.id
+                                                        .toString(),
                                                     profileModel.user!
                                                         .thirdInetrest!.name
                                                         .toString(),
                                                     profileModel.user!
                                                         .thirdInetrest!.image
-                                                        .toString())
+                                                        .toString(),
+                                                  )
                                                 : Container(),
                                           ],
                                         ),
@@ -418,7 +431,7 @@ class _HomeContentState extends State<HomeContent> {
                 ),
                 isLoaded
                     ? ListView.builder(
-                        itemCount: postListData.length+1,
+                        itemCount: postListData.length + 1,
                         physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemBuilder: (context, i) {
@@ -443,28 +456,30 @@ class _HomeContentState extends State<HomeContent> {
                                         ? postListData.length > totalPostLength
                                             ? Text("")
                                             : Center(
-                                                child:
-                                                    Padding(
-                                                      padding: const EdgeInsets.only(top: 25),
-                                                      child: Text('No post available',
-                                                        style: SafeGoogleFont(
-                                                          'Lato',
-                                                          fontSize: 12 * ffem,
-                                                          fontWeight: FontWeight.w700,
-                                                          height: 1.2 * ffem / fem,
-                                                          color: Color(0xff404040),
-                                                        ),),
-                                                    ))
+                                                child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 25),
+                                                child: Text(
+                                                  'No post available',
+                                                  style: SafeGoogleFont(
+                                                    'Lato',
+                                                    fontSize: 12 * ffem,
+                                                    fontWeight: FontWeight.w700,
+                                                    height: 1.2 * ffem / fem,
+                                                    color: Color(0xff404040),
+                                                  ),
+                                                ),
+                                              ))
                                         : const SizedBox(
-                                      height: 64.0,
-                                      width: 24.0,
-                                      child: Center(
-                                          child: Padding(
-                                            padding: EdgeInsets.only(top: 25),
-                                            child: CircularProgressIndicator(),
-                                          )
-                                      ),
-                                    ),
+                                            height: 64.0,
+                                            width: 24.0,
+                                            child: Center(
+                                                child: Padding(
+                                              padding: EdgeInsets.only(top: 25),
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            )),
+                                          ),
                                   ),
                                 )
                               : PostWidgetItem(

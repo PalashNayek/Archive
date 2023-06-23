@@ -30,7 +30,10 @@ class SharedService extends ApiClient {
       }
     });
   }
+
+
   Future<List<InterestListModel>> getInterest(String keyword) {
+    print("object");
 
     return getRequest(_interestUrl+keyword, "",isCompleteUrl: false).then((response) {
       if (response != null) {
@@ -46,6 +49,8 @@ class SharedService extends ApiClient {
       }
     });
   }
+
+
   Future<PageModel> getPage(int i) {
 
     return getRequest(_pageUrl+i.toString(), "",isCompleteUrl: false).then((response) {
