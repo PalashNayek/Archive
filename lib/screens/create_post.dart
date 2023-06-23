@@ -7,6 +7,7 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:ui';
 import 'package:s2w/models/post_request_model.dart';
 import 'package:s2w/presenter/post_presenter.dart';
+import 'package:s2w/screens/setting_screen.dart';
 import 'package:s2w/theme/color.dart';
 import 'package:s2w/utils.dart';
 import 'package:s2w/utils/app_constants.dart';
@@ -89,8 +90,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
       profileModel = value;
       selected = profileModel.user!.primaryInetrest!.id.toString();
       setState(() {
-        userIntersetedValue = profileModel.user!.primaryInetrest!.id
-            .toString();
+        userIntersetedValue = profileModel.user!.primaryInetrest!.id.toString();
         if (userIntersetedValue.isNotEmpty) {
           loader = false;
         }
@@ -104,7 +104,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
     return Scaffold(
-
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         backgroundColor: primary,
@@ -122,13 +121,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           ),
           child: loader
               ? Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              child: Center(child: CircularProgressIndicator()))
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height,
+                  child: Center(child: CircularProgressIndicator()))
               : Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              /*Container(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    /*Container(
                 width: double.infinity,
                 height: 76 * fem,
                 decoration: BoxDecoration(
@@ -138,7 +137,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     bottomLeft: Radius.circular(38 * fem),
                   ),
                 ),
-                *//*child: Row(
+                */ /*child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -156,226 +155,287 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                           ),
                         )),
                   ],
-                ),*//*
+                ),*/ /*
               ),*/
-              Container(
-                padding: EdgeInsets.fromLTRB(
-                    10 * fem,
-                    AppCommonHelper.isTablet(context) ? 10 : 20 * fem,
-                    10 * fem,
-                    10 * fem),
-                width: double.infinity,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
                     Container(
-                      margin: EdgeInsets.fromLTRB(
+                      padding: EdgeInsets.fromLTRB(
                           10 * fem,
-                          AppCommonHelper.isTablet(context) ? 1 : 20 * fem,
+                          AppCommonHelper.isTablet(context) ? 10 : 20 * fem,
                           10 * fem,
-                          AppCommonHelper.isTablet(context) ? 1 : 10 * fem),
+                          10 * fem),
                       width: double.infinity,
-                      height: 60 * fem,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5 * fem),
-                      ),
-                      child: TextField(
-                        autocorrect: true,
-                        focusNode: focusNodeTitle,
-                        controller: titleController,
-                        style: SafeGoogleFont(
-                          'Lato',
-                          fontSize: 14 * ffem,
-                          fontWeight: FontWeight.w400,
-                          height: 1.2 * ffem / fem,
-                          color: Color(0xff000000),
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Title',
-                          hintStyle: SafeGoogleFont(
-                            'Lato',
-                            fontSize: 14 * ffem,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2 * ffem / fem,
-                            color: Color(0xff000000),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            margin: EdgeInsets.fromLTRB(
+                                10 * fem,
+                                AppCommonHelper.isTablet(context)
+                                    ? 1
+                                    : 20 * fem,
+                                10 * fem,
+                                AppCommonHelper.isTablet(context)
+                                    ? 1
+                                    : 10 * fem),
+                            width: double.infinity,
+                            height: 60 * fem,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5 * fem),
+                            ),
+                            child: TextField(
+                              autocorrect: true,
+                              focusNode: focusNodeTitle,
+                              controller: titleController,
+                              style: SafeGoogleFont(
+                                'Lato',
+                                fontSize: 14 * ffem,
+                                fontWeight: FontWeight.w400,
+                                height: 1.2 * ffem / fem,
+                                color: Color(0xff000000),
+                              ),
+                              decoration: InputDecoration(
+                                hintText: 'Title',
+                                hintStyle: SafeGoogleFont(
+                                  'Lato',
+                                  fontSize: 14 * ffem,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.2 * ffem / fem,
+                                  color: Color(0xff000000),
+                                ),
+                                filled: true,
+                                fillColor: Color(0xfff3f3f3),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide: BorderSide(
+                                      color: Color(0x59000000), width: 1),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide:
+                                      BorderSide(color: Color(0x59000000)),
+                                ),
+                              ),
+                            ),
                           ),
-                          filled: true,
-                          fillColor: Color(0xfff3f3f3),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(color: Color(0x59000000), width: 1),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(
+                                10 * fem,
+                                0 * fem,
+                                10 * fem,
+                                AppCommonHelper.isTablet(context)
+                                    ? 1
+                                    : 10 * fem),
+                            width: double.infinity,
+                            height: 60 * fem,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5 * fem),
+                            ),
+                            child: TextField(
+                              autocorrect: true,
+                              focusNode: focusNodeHasTag,
+                              controller: hasTagController,
+                              style: SafeGoogleFont(
+                                'Lato',
+                                fontSize: 14 * ffem,
+                                fontWeight: FontWeight.w400,
+                                height: 1.2 * ffem / fem,
+                                color: Color(0xff000000),
+                              ),
+                              decoration: InputDecoration(
+                                hintText: 'HasTag upto 30',
+                                hintStyle: SafeGoogleFont(
+                                  'Lato',
+                                  fontSize: 14 * ffem,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.2 * ffem / fem,
+                                  color: Color(0xff000000),
+                                ),
+                                filled: true,
+                                fillColor: Color(0xfff3f3f3),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide: BorderSide(
+                                      color: Color(0x59000000), width: 1),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide:
+                                      BorderSide(color: Color(0x59000000)),
+                                ),
+                              ),
+                            ),
                           ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide: BorderSide(color: Color(0x59000000)),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(
+                                10 * fem,
+                                0 * fem,
+                                10 * fem,
+                                AppCommonHelper.isTablet(context)
+                                    ? 1
+                                    : 10 * fem),
+                            width: double.infinity,
+                            height: 100 * fem,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5 * fem),
+                            ),
+                            child: TextField(
+                              autocorrect: true,
+                              maxLines: 4,
+                              minLines: 4,
+                              keyboardType: TextInputType.multiline,
+                              focusNode: focusNodeDescription,
+                              controller: descriptionController,
+                              style: SafeGoogleFont(
+                                'Lato',
+                                fontSize: 14 * ffem,
+                                fontWeight: FontWeight.w400,
+                                height: 1.2 * ffem / fem,
+                                color: const Color(0xff000000),
+                              ),
+                              decoration: InputDecoration(
+                                hintText: 'Description',
+                                hintStyle: SafeGoogleFont(
+                                  'Lato',
+                                  fontSize: 14 * ffem,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.2 * ffem / fem,
+                                  color: const Color(0xff000000),
+                                ),
+                                filled: true,
+                                fillColor: const Color(0xfff3f3f3),
+                                enabledBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide: BorderSide(
+                                      color: Color(0x59000000), width: 1),
+                                ),
+                                focusedBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)),
+                                  borderSide:
+                                      BorderSide(color: Color(0x59000000)),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(10 * fem, 0 * fem, 10 * fem,
-                          AppCommonHelper.isTablet(context) ? 1 : 10 * fem),
-                      width: double.infinity,
-                      height: 60 * fem,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5 * fem),
-                      ),
-                      child: TextField(
-                        autocorrect: true,
-                        focusNode: focusNodeHasTag,
-                        controller: hasTagController,
-                        style: SafeGoogleFont(
-                          'Lato',
-                          fontSize: 14 * ffem,
-                          fontWeight: FontWeight.w400,
-                          height: 1.2 * ffem / fem,
-                          color: Color(0xff000000),
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'HasTag upto 30',
-                          hintStyle: SafeGoogleFont(
-                            'Lato',
-                            fontSize: 14 * ffem,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2 * ffem / fem,
-                            color: Color(0xff000000),
-                          ),
-                          filled: true,
-                          fillColor: Color(0xfff3f3f3),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(color: Color(0x59000000), width: 1),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide: BorderSide(color: Color(0x59000000)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.fromLTRB(10 * fem, 0 * fem, 10 * fem,
-                          AppCommonHelper.isTablet(context) ? 1 : 10 * fem),
-                      width: double.infinity,
-                      height: 100 * fem,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5 * fem),
-                      ),
-                      child: TextField(
-                        autocorrect: true,
-                        maxLines: 4,
-                        minLines: 4,
-                        keyboardType: TextInputType.multiline,
-                        focusNode: focusNodeDescription,
-                        controller: descriptionController,
-                        style: SafeGoogleFont(
-                          'Lato',
-                          fontSize: 14 * ffem,
-                          fontWeight: FontWeight.w400,
-                          height: 1.2 * ffem / fem,
-                          color: const Color(0xff000000),
-                        ),
-                        decoration: InputDecoration(
-                          hintText: 'Description',
-                          hintStyle: SafeGoogleFont(
-                            'Lato',
-                            fontSize: 14 * ffem,
-                            fontWeight: FontWeight.w400,
-                            height: 1.2 * ffem / fem,
-                            color: const Color(0xff000000),
-                          ),
-                          filled: true,
-                          fillColor: const Color(0xfff3f3f3),
-                          enabledBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide:
-                                BorderSide(color: Color(0x59000000), width: 1),
-                          ),
-                          focusedBorder: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            borderSide: BorderSide(color: Color(0x59000000)),
-                          ),
-                        ),
-                      ),
-                    ),
-                    if (x.length > 0)
-                      Container(
-                          height: 100,
-                          width: double.infinity,
-                          margin: EdgeInsets.all(
-                              AppCommonHelper.isTablet(context) ? 1 : 5),
-                          padding: const EdgeInsets.all(5.0),
-                          child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              itemCount: x.length ?? 0,
-                              itemBuilder: (context, index) {
-                                return Image.file(
-                                  x.elementAt(index),
-                                  height: 120,
-                                  width: 120,
-                                  fit: BoxFit.cover,
-                                  alignment: Alignment.topCenter,
-                                  frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                                    return Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.white, width: 3),
+                          if (x.length > 0)
+                            Container(
+                                height: 150,
+                                width: double.infinity,
+                                margin: EdgeInsets.all(
+                                    AppCommonHelper.isTablet(context) ? 1 : 5),
+                                padding: const EdgeInsets.all(5.0),
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: x.length ?? 0,
+                                    itemBuilder: (context, index) {
+                                      return Stack(
+                                        children: [
+                                          Image.file(
+                                          x.elementAt(index),
+                                          height: 150,
+                                          width: 150,
+                                          fit: BoxFit.cover,
+                                          filterQuality: FilterQuality.low,
+                                          alignment: Alignment.topCenter,
+                                          frameBuilder: (context, child, frame,
+                                              wasSynchronouslyLoaded) {
+                                            return Padding(
+                                              padding: const EdgeInsets.all(5.0),
+                                              child: Container(
+
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                      color: Colors.white,
+                                                      width: 3),
+                                                ),
+                                                child: child,
+
+                                              ),
+                                            );
+
+                                          },
                                         ),
-                                        child: child,
-                                      ),
-                                    );
-                                  },
+                                          /*Positioned(
+                                            right: 10 * fem,
+                                            top: 10 * fem,
+                                            child: CircleAvatar(
+                                              backgroundColor: Colors.grey,
+                                              child: Center(
+                                                  child: IconButton(
+                                                    icon: Icon(
+                                                      Icons.close,
+                                                      color: primary,
+                                                    ),
+                                                    onPressed: () {
+
+                                                    },
+                                                  )),
+                                            ),
+                                          ),*/
+                                        ]
+                                      );
+
+                                      // return Text(result?.files[index].name ?? '', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold));
+                                    })
+                            ),
+                          Center(
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                result = await FilePicker.platform.pickFiles(
+                                  allowMultiple: true,
+                                  type: FileType.custom,
+                                  allowedExtensions: [
+                                    'jpg',
+                                    'png',
+                                    'jpeg',
+                                    'mp4'
+                                  ],
                                 );
-                                // return Text(result?.files[index].name ?? '', style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold));
-                              })),
-                    Center(
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          result = await FilePicker.platform.pickFiles(
-                            allowMultiple: true,
-                            type: FileType.custom,
-                            allowedExtensions: ['jpg', 'png', 'jpeg', 'mp4'],
-                          );
-                          if (result == null) {
-                            print("No file selected");
-                          } else {
-                            result?.files.forEach((element) {
-                              print(element.name);
-                              if (element.extension == "mp4") {
-                                _generateThumbnail(element.path.toString())
-                                    .then((value) {
-                                  x.add(value);
-                                  setState(() {});
-                                });
-                              } else {
-                                x.add(File(element.path.toString()));
-                                //x.clear();
-                                setState(() {});
-                              }
-                            });
-                          }
-                        },
-                        child: Text(
-                          "Select File",
-                          style: TextStyle(
-                              fontSize:
-                                  AppCommonHelper.isTablet(context) ? 30 : 16),
-                        ),
+                                if (result == null) {
+                                  print("No file selected");
+                                } else {
+                                  result?.files.forEach((element) {
+                                    print(element.name);
+                                    if (element.extension == "mp4") {
+                                      _generateThumbnail(
+                                              element.path.toString())
+                                          .then((value) {
+                                        x.add(value);
+                                        setState(() {});
+                                      });
+                                    } else {
+                                      x.add(File(element.path.toString()));
+                                      //x.clear();
+                                      setState(() {});
+                                    }
+                                  });
+                                }
+                              },
+                              child: Text(
+                                "Select File",
+                                style: TextStyle(
+                                    fontSize: AppCommonHelper.isTablet(context)
+                                        ? 30
+                                        : 16),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Text(
-                "Select Category",
-                style: TextStyle(
-                    fontSize: AppCommonHelper.isTablet(context) ? 30 : 14),
-              ),
-               Container(
+                    Text(
+                      "Select Category",
+                      style: TextStyle(
+                          fontSize:
+                              AppCommonHelper.isTablet(context) ? 30 : 14),
+                    ),
+                    Container(
                       height: AppCommonHelper.isTablet(context) ? 120 : 85,
                       margin: EdgeInsets.all(
                           AppCommonHelper.isTablet(context) ? 1 : 10),
@@ -439,121 +499,125 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         ],
                       ),
                     ),
+                    Container(
+                        margin: EdgeInsets.fromLTRB(
+                            5 * fem,
+                            AppCommonHelper.isTablet(context) ? 5 : 15 * fem,
+                            5 * fem,
+                            0 * fem),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Checkbox(
+                                  focusColor: Colors.lightBlue,
+                                  activeColor: primary,
+                                  value: term,
+                                  onChanged: (newValue) {
+                                    term = newValue!;
+                                    setState(() {});
+                                  }),
+                              GestureDetector(
+                                  onTap: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) =>
+                                          _buildAboutDialog(context),
+                                    );
+                                  },
+                                  child: Text(
+                                    'I agree with Terms & Conditions and privacy policy',
+                                    style: TextStyle(
+                                        color: Colors.grey, fontSize: 10),
+                                  )),
+                            ])),
+                    Container(
+                      margin: EdgeInsets.fromLTRB(
+                          AppCommonHelper.isTablet(context) ? 50 : 20 * fem,
+                          15 * fem,
+                          AppCommonHelper.isTablet(context) ? 50 : 16 * fem,
+                          0 * fem),
+                      child: TextButton(
+                        onPressed: () {
+                          if (titleController.text.isEmpty) {
+                            showCustomSnackBar("Title Required", context);
+                          } else if (descriptionController.text.isEmpty) {
+                            showCustomSnackBar("Description Required", context);
+                          } else if (!term) {
+                            showCustomSnackBar(
+                                "Please accept our Terms & Conditions",
+                                context);
+                          } else {
+                            _onLoading(context);
+                            HasTagModel hastag = HasTagModel();
+                            hastag.name = hasTagController.text.toString();
+                            PostRequestModel registerModel = PostRequestModel();
+                            registerModel.name = titleController.text;
+                            registerModel.desc =
+                                descriptionController.text.toString();
+                            registerModel.postTags = [hastag];
+                            registerModel.interestId = selected;
+                            registerModel.latitude = "123";
+                            registerModel.longitude = "123";
 
-              Container(
-                  margin: EdgeInsets.fromLTRB(
-                      5 * fem,
-                      AppCommonHelper.isTablet(context) ? 5 : 15 * fem,
-                      5 * fem,
-                      0 * fem),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Checkbox(
-                            focusColor: Colors.lightBlue,
-                            activeColor: primary,
-                            value: term,
-                            onChanged: (newValue) {
-                              term = newValue!;
-                              setState(() {});
-                            }),
-                        GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) =>
-                                    _buildAboutDialog(context),
-                              );
-                            },
+                            postPresenter.addPost(registerModel).then((value) {
+                              if (result != null) {
+                                result?.files.forEach((element) {
+                                  print(element.extension);
+                                  print(element.name);
+                                  if (element.extension == "mp4") {
+                                    print("Post Video");
+                                    postPresenter.postVideoUpload(
+                                        value.id.toString(),
+                                        File(element.path.toString()));
+                                  } else {
+                                    postPresenter.postImageUpload(
+                                        value.id.toString(),
+                                        File(element.path.toString()));
+                                  }
+                                });
+                              }
+                              Navigator.pop(context);
+                              showCustomSnackBar(
+                                  "Post Added Successfully", context,
+                                  isError: false);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => DashBoardScreen()));
+                            });
+                          }
+                        },
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                        ),
+                        child: Container(
+                          width: double.infinity,
+                          height:
+                              AppCommonHelper.isTablet(context) ? 60 : 60 * fem,
+                          decoration: BoxDecoration(
+                            color: Color(0xff080053),
+                            borderRadius: BorderRadius.circular(5 * fem),
+                          ),
+                          child: Center(
                             child: Text(
-                              'I agree with Terms & Conditions and privacy policy',
-                              style:
-                                  TextStyle(color: Colors.grey, fontSize: 10),
-                            )),
-                      ])),
-              Container(
-                margin: EdgeInsets.fromLTRB(
-                    AppCommonHelper.isTablet(context) ? 50 : 20 * fem,
-                    15 * fem,
-                    AppCommonHelper.isTablet(context) ? 50 : 16 * fem,
-                    0 * fem),
-                child: TextButton(
-                  onPressed: () {
-                    if (titleController.text.isEmpty) {
-                      showCustomSnackBar("Title Required", context);
-                    } else if (descriptionController.text.isEmpty) {
-                      showCustomSnackBar("Description Required", context);
-                    } else if (!term) {
-                      showCustomSnackBar(
-                          "Please accept our Terms & Conditions", context);
-                    } else {
-                      _onLoading(context);
-                      HasTagModel hastag = HasTagModel();
-                      hastag.name = hasTagController.text.toString();
-                      PostRequestModel registerModel = PostRequestModel();
-                      registerModel.name = titleController.text;
-                      registerModel.desc =
-                          descriptionController.text.toString();
-                      registerModel.postTags = [hastag];
-                      registerModel.interestId = selected;
-                      registerModel.latitude = "123";
-                      registerModel.longitude = "123";
-
-                      postPresenter.addPost(registerModel).then((value) {
-                        if (result != null) {
-                          result?.files.forEach((element) {
-                            print(element.extension);
-                            print(element.name);
-                            if (element.extension == "mp4") {
-                              print("Post Video");
-                              postPresenter.postVideoUpload(value.id.toString(),
-                                  File(element.path.toString()));
-                            } else {
-                              postPresenter.postImageUpload(value.id.toString(),
-                                  File(element.path.toString()));
-                            }
-                          });
-                        }
-                        Navigator.pop(context);
-                        showCustomSnackBar("Post Added Successfully", context,
-                            isError: false);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => DashBoardScreen()));
-                      });
-                    }
-                  },
-                  style: TextButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                  ),
-                  child: Container(
-                    width: double.infinity,
-                    height: AppCommonHelper.isTablet(context) ? 60 : 60 * fem,
-                    decoration: BoxDecoration(
-                      color: Color(0xff080053),
-                      borderRadius: BorderRadius.circular(5 * fem),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Review & Submit',
-                        textAlign: TextAlign.center,
-                        style: SafeGoogleFont(
-                          'Lato',
-                          fontSize: AppCommonHelper.isTablet(context)
-                              ? 18
-                              : 20 * ffem,
-                          fontWeight: FontWeight.w800,
-                          height: 1.2 * ffem / fem,
-                          color: Color(0xffffffff),
+                              'Review & Submit',
+                              textAlign: TextAlign.center,
+                              style: SafeGoogleFont(
+                                'Lato',
+                                fontSize: AppCommonHelper.isTablet(context)
+                                    ? 18
+                                    : 20 * ffem,
+                                fontWeight: FontWeight.w800,
+                                height: 1.2 * ffem / fem,
+                                color: Color(0xffffffff),
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ),
       ),
     );
