@@ -198,11 +198,15 @@ class ApiClient with RouteAware {
       },
     ).catchError(_onUnknownError);
   }
+
   Future<http.Response> deleteRequest(String url, String content) async {
+    print("DeleteURL "+baseUrl+url+content);
+
     await getToken();
     Map<String, String> extraHeaders = Map.from(_headers!);
     return http.delete(Uri.parse(baseUrl+url+content), headers: extraHeaders).then(
       (response) {
+
         return _responseManager(response);
       },
     ).catchError(_onUnknownError);

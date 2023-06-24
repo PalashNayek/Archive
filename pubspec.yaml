@@ -193,6 +193,8 @@ flutter:
     - assets/page-1/images/icon-edit.png
     - assets/page-1/images/india.png
     - assets/page-1/images/loading.png
+    - assets/page-1/images/image_load_error.png
+    - assets/page-1/images/list_is_empty.png
     - assets/l10n/
     - assets/translations/
 

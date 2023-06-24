@@ -24,14 +24,13 @@ class HomeContent extends StatefulWidget {
 }
 
 class _HomeContentState extends State<HomeContent> {
-  AuthPresenter _authPresenter = AuthPresenter();
   SharedPresenter sharedPresenter = SharedPresenter();
   List<BannerModel> bannerList = [];
   AuthPresenter authPresenter = AuthPresenter();
   ProfileModel profileModel = ProfileModel();
 
   PostPresenter postPresenter = PostPresenter();
-  PostListModel postListModel = new PostListModel();
+  PostListModel postListModel = PostListModel();
   List<PostModelData> postListData = [];
   int perPage = 10; //default- perPage = 10;
   int offset = 0; //default- offset = 0;
@@ -54,6 +53,7 @@ class _HomeContentState extends State<HomeContent> {
       getPostDat(offset);
     });
   }
+
 
   void getPostDat(int off) {
     postPresenter.getAllPost("", perPage, off).then((value) {
@@ -86,7 +86,7 @@ class _HomeContentState extends State<HomeContent> {
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
-    return SingleChildScrollView(
+    return RefreshIndicator( child: SingleChildScrollView(
         physics: ScrollPhysics(),
         child: Container(
           width: double.infinity,
@@ -490,7 +490,7 @@ class _HomeContentState extends State<HomeContent> {
               ],
             ),
           ),
-        ));
+        )),onRefresh: _pullRefresh,);
   }
 
   Future<void> _pullRefresh() async {

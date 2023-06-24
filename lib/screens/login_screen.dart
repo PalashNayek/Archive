@@ -31,6 +31,12 @@ class _loginScreenState extends State<LoginScreen> {
   FocusNode focusNodeMobile = FocusNode();
 
   @override
+  void dispose() {
+    mobileController.dispose(); // The framework will automatically dispose of the controller
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;

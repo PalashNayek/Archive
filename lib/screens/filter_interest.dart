@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:visibility_detector/visibility_detector.dart';
-
 import '../models/post_list_model.dart';
 import '../models/profile_model.dart';
 import '../presenter/auth_presenter.dart';
@@ -104,22 +102,43 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                     isLoaded
                         ? totalPostLength == 0
                         ? Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 100),
-                          child: Text(
-                            'No post available',
-                            style: SafeGoogleFont(
-                              'Lato',
-                              fontSize: 18 * ffem,
-                              fontWeight: FontWeight.w700,
-                              height: 15.2 * ffem / fem,
-                              color: Color(0xff404040),
+
+                        child: Center(
+
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(
+                                5 * fem, 100 * fem, 0 * fem, 11 * fem),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/page-1/images/list_is_empty.png',
+                                  fit: BoxFit.cover,
+                                  height: 150,
+                                  width: 150,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'List is empty',
+                                  textAlign: TextAlign.center,
+                                  style: SafeGoogleFont(
+                                    'Lato',
+                                    fontSize: 20 * ffem,
+                                    fontWeight: FontWeight.w800,
+                                    height: 1.2 * ffem / fem,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ],
                             ),
-                            textAlign: TextAlign.center,
                           ),
-                        )) : ListView.builder(
+                        ))
+                        : ListView.builder(
                       itemCount: postListModel.result!.length,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, i) {
                         return MyPostWidgetItem(
@@ -137,6 +156,8 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
   }
   Shimmer getShimmerLoading() {
     return Shimmer.fromColors(
+        baseColor: Colors.grey[300]!,
+        highlightColor: Colors.grey[100]!,
         child: Column(
           children: [
             Row(
@@ -154,7 +175,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -162,7 +183,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                           height: 18.0,
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -170,7 +191,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                           height: 18.0,
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -182,7 +203,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                     )),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -200,7 +221,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -208,7 +229,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                           height: 18.0,
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -216,7 +237,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                           height: 18.0,
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -228,7 +249,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                     )),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -246,7 +267,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -254,7 +275,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                           height: 18.0,
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -262,7 +283,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                           height: 18.0,
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -274,7 +295,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                     )),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
@@ -292,7 +313,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -300,7 +321,7 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                           height: 18.0,
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -308,7 +329,99 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
                           height: 18.0,
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    )),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                      ],
+                    )),
+              ],
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.white,
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          height: 18.0,
+                          color: Colors.white,
+                        ),
+                        const SizedBox(
                           height: 10,
                         ),
                         Container(
@@ -321,8 +434,6 @@ class _FilterIntestScreenState extends State<FilterIntestScreen> {
               ],
             ),
           ],
-        ),
-        baseColor: Colors.grey[300]!,
-        highlightColor: Colors.grey[100]!);
+        ));
   }
 }

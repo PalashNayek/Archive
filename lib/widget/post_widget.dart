@@ -138,33 +138,33 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                   width: 50 * fem,
                                   height: 50 * fem,
                                   errorBuilder: (context, error, stackTrace) {
-                                    return Image.asset("assets/page-1/images/user_profile_male.png",
+                                    return Image.asset(
+                                        "assets/page-1/images/user_profile_male.png",
                                         width: 50 * fem,
                                         height: 50 * fem,
                                         fit: BoxFit.cover);
-
                                   },
-                                  fit: BoxFit.cover, loadingBuilder:
-                                      (BuildContext context, Widget child,
-                                          ImageChunkEvent? loadingProgress) {
-                                  if (loadingProgress == null) {
-                                    isLoading = false;
-                                    return child;
-                                  } else {
-                                    isLoading = true;
-                                    return CircularProgressIndicator(
-                                      value:
-                                          loadingProgress.expectedTotalBytes !=
-                                                  null
-                                              ? loadingProgress
-                                                      .cumulativeBytesLoaded /
-                                                  loadingProgress
-                                                      .expectedTotalBytes!
-                                              : null,
-                                    );
-                                  }
-                                }
-                                ),
+                                  fit: BoxFit.cover,
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      isLoading = false;
+                                      return child;
+                                    } else {
+                                      isLoading = true;
+                                      return CircularProgressIndicator(
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                loadingProgress
+                                                    .expectedTotalBytes!
+                                            : null,
+                                      );
+                                    }
+                                  }),
                         ))),
                 /*if (isLoading) CircularProgressIndicator(),*/
 
@@ -316,56 +316,64 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                         .image
                                         .toString(),
                                     width: double.infinity,
-                                    fit: BoxFit.fill, loadingBuilder:
-                                        (BuildContext context, Widget child,
-                                            ImageChunkEvent? loadingProgress) {
-                                    if (loadingProgress == null) {
-                                      isLoading = false;
-                                      return child;
-                                    } else {
-                                      isLoading = true;
-                                      progress =
-                                          loadingProgress.expectedTotalBytes !=
-                                                  null
-                                              ? loadingProgress
-                                                      .cumulativeBytesLoaded /
-                                                  loadingProgress
-                                                      .expectedTotalBytes!
-                                              : 0.0;
-                                      return Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          child,
-                                          /*CircularProgressIndicator(
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Image.asset(
+                                          "assets/page-1/images/image_load_error.png",
+                                          width: 50 * fem,
+                                          height: 50 * fem,
+                                          fit: BoxFit.cover);
+                                    },
+                                    fit: BoxFit.fill,
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) {
+                                        isLoading = false;
+                                        return child;
+                                      } else {
+                                        isLoading = true;
+                                        progress = loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                loadingProgress
+                                                    .expectedTotalBytes!
+                                            : 0.0;
+                                        return Stack(
+                                          alignment: Alignment.center,
+                                          children: [
+                                            child,
+                                            /*CircularProgressIndicator(
                                           value: progress,
                                         ),*/
-                                          SizedBox(
-                                            child: Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                              value: progress,
-                                            )),
-                                            height: 100.0,
-                                            width: 100.0,
-                                          ),
-                                          Text(
-                                            '${(progress * 100).toStringAsFixed(1)}%',
-                                            style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.bold,
+                                            SizedBox(
+                                              child: Center(
+                                                  child:
+                                                      CircularProgressIndicator(
+                                                value: progress,
+                                              )),
+                                              height: 100.0,
+                                              width: 100.0,
                                             ),
-                                          ),
-                                        ],
-                                      );
+                                            Text(
+                                              '${(progress * 100).toStringAsFixed(1)}%',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
+                                        );
 
-                                      /*CircularProgressIndicator(
+                                        /*CircularProgressIndicator(
                                       value: loadingProgress.expectedTotalBytes != null
                                           ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
                                           : null,
                                     );*/
-                                    }
-                                  }),
+                                      }
+                                    }),
                           ),
                           /*if (isLoading) CircularProgressIndicator(),*/
                           getFileExtension(widget.postModelData.postImage!
@@ -427,15 +435,26 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                         activePage)))
                           ],
                         )
-                  : Align(
-                      alignment: Alignment.center,
-                      child: Text(
-                        widget.postModelData.desc.toString(),
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: AppCommonHelper.isTablet(context) ? 40 : 24,
-                        ),
-                      )),
+                  : Container(
+                      color: Colors.black26,
+                      child: Align(
+                          alignment: Alignment.center,
+                          child: Text(
+                            widget.postModelData.desc.toString(),
+                            /*style: TextStyle(
+                              color: Colors.black,
+                              fontSize:
+                                  AppCommonHelper.isTablet(context) ? 40 : 24,
+                            ),*/
+                            style: SafeGoogleFont(
+                              'Lato',
+                              fontSize: AppCommonHelper.isTablet(context) ? 40 : 24,
+                              fontWeight: FontWeight.w700,
+                              height: 1.2 * ffem / fem,
+                              color: Color(0xff000000),
+                            ),
+                          )),
+                    ),
 
               /* ClipRRect(
             borderRadius: BorderRadius.circular(5.0),
@@ -654,57 +673,166 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
   }
 
   Future<void> _displayTextInputDialogReport(BuildContext context) async {
-    TextEditingController _textFieldController = new TextEditingController();
+    TextEditingController _textFieldController = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-              title: Text('Report Post'),
-              content: Container(
-                  height: 150,
-                  width: 200,
-                  child: Column(
-                    children: [
-                      TextField(
-                        onChanged: (value) {},
-                        keyboardType: TextInputType.text,
-                        controller: _textFieldController,
-                        decoration: InputDecoration(hintText: "Enter reason"),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            if (_textFieldController.text.isNotEmpty) {
-                              postPresenter
-                                  .addReport(widget.postModelData.id.toString(),
-                                      _textFieldController.text.toString())
-                                  .then((value) {
-                                showCustomSnackBar(
-                                    "Post Report Successfully", context,
-                                    isError: false);
-                                Navigator.pop(context);
-                              });
-                            } else {
-                              showCustomSnackBar("Please Enter Reason", context,
-                                  isError: true);
-                            }
-                          },
-                          child: Text(
-                            "Submit",
-                          ))
-                    ],
-                  )));
+          /*return AlertDialog(
+                title: Text('Report Post'),
+                content: Container(
+                    height: 150,
+                    width: 200,
+                    child: Column(
+                      children: [
+                        TextField(
+                          onChanged: (value) {},
+                          keyboardType: TextInputType.text,
+                          controller: _textFieldController,
+                          decoration: InputDecoration(hintText: "Enter reason"),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                            onPressed: () {
+                              if (_textFieldController.text.isNotEmpty) {
+                                postPresenter
+                                    .addReport(widget.postModelData.id.toString(),
+                                        _textFieldController.text.toString())
+                                    .then((value) {
+                                  showCustomSnackBar(
+                                      "Post Report Successfully", context,
+                                      isError: false);
+                                  Navigator.pop(context);
+                                });
+                              } else {
+                                showCustomSnackBar("Please Enter Reason", context,
+                                    isError: true);
+                              }
+                            },
+                            child: const Text(
+                              "Submit",
+                            ))
+                      ],
+                    )));*/
+          return AnimatedPadding(
+            padding: MediaQuery.of(context).viewInsets +
+                const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+            duration: Duration(milliseconds: 100),
+            curve: Curves.decelerate,
+            child: MediaQuery.removeViewInsets(
+              removeLeft: true,
+              removeTop: true,
+              removeRight: true,
+              removeBottom: true,
+              context: context,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(minWidth: 280.0),
+                  child: Material(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    elevation: 30.0,
+                    color: Theme.of(context).dialogBackgroundColor,
+                    type: MaterialType.card,
+                    child: Container(
+                        height: 250,
+                        width: double.infinity,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Report Post",
+                              textAlign: TextAlign.left,
+                              style: SafeGoogleFont(
+                                'Lato',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                height: 2,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: TextField(
+                                autocorrect: true,
+                                maxLines: 4,
+                                minLines: 4,
+                                keyboardType: TextInputType.multiline,
+                                controller: _textFieldController,
+                                style: SafeGoogleFont(
+                                  'Lato',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.2,
+                                  color: const Color(0xff000000),
+                                ),
+                                decoration: InputDecoration(
+                                  hintText: 'Enter reason',
+                                  hintStyle: SafeGoogleFont(
+                                    'Lato',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.2,
+                                    color: const Color(0xff000000),
+                                  ),
+                                  filled: true,
+                                  fillColor: const Color(0xfff3f3f3),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    borderSide: BorderSide(
+                                        color: Color(0x59000000), width: 1),
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    borderSide:
+                                        BorderSide(color: Color(0x59000000)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  if (_textFieldController.text.isNotEmpty) {
+                                    postPresenter
+                                        .addReport(
+                                            widget.postModelData.id.toString(),
+                                            _textFieldController.text
+                                                .toString())
+                                        .then((value) {
+                                      showCustomSnackBar(
+                                          "Post Report Successfully", context,
+                                          isError: false);
+                                      Navigator.pop(context);
+                                    });
+                                  } else {
+                                    showCustomSnackBar(
+                                        "Please Enter Reason", context,
+                                        isError: true);
+                                  }
+                                },
+                                child: const Text(
+                                  "Submit",
+                                ))
+                          ],
+                        )),
+                  ),
+                ),
+              ),
+            ),
+          );
         });
   }
 
   Future<void> _displayTextInputDialogBlock(BuildContext context) async {
-    TextEditingController _textFieldController = new TextEditingController();
+    TextEditingController _textFieldController = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          /*return AlertDialog(
               title: Text('Block Post'),
               content: Container(
                   height: 150,
@@ -743,16 +871,131 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                             "Submit",
                           ))
                     ],
-                  )));
+                  )));*/
+          return AnimatedPadding(
+            padding: MediaQuery.of(context).viewInsets +
+                const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+            duration: Duration(milliseconds: 100),
+            curve: Curves.decelerate,
+            child: MediaQuery.removeViewInsets(
+              removeLeft: true,
+              removeTop: true,
+              removeRight: true,
+              removeBottom: true,
+              context: context,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(minWidth: 280.0),
+                  child: Material(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    elevation: 30.0,
+                    color: Theme.of(context).dialogBackgroundColor,
+                    type: MaterialType.card,
+                    child: Container(
+                        height: 250,
+                        width: double.infinity,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Block Post",
+                              textAlign: TextAlign.left,
+                              style: SafeGoogleFont(
+                                'Lato',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                height: 2,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: TextField(
+                                /*onChanged: (value) {},
+                                keyboardType: TextInputType.text,
+                                controller: _textFieldController,
+                                decoration: InputDecoration(hintText: "Enter reason"),*/
+                                autocorrect: true,
+                                maxLines: 4,
+                                minLines: 4,
+                                keyboardType: TextInputType.multiline,
+                                controller: _textFieldController,
+                                style: SafeGoogleFont(
+                                  'Lato',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.2,
+                                  color: const Color(0xff000000),
+                                ),
+                                decoration: InputDecoration(
+                                  hintText: 'Enter reason',
+                                  hintStyle: SafeGoogleFont(
+                                    'Lato',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.2,
+                                    color: const Color(0xff000000),
+                                  ),
+                                  filled: true,
+                                  fillColor: const Color(0xfff3f3f3),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    borderSide: BorderSide(
+                                        color: Color(0x59000000), width: 1),
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    borderSide:
+                                        BorderSide(color: Color(0x59000000)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  if (_textFieldController.text.isNotEmpty) {
+                                    postPresenter
+                                        .addBlock(
+                                            widget.postModelData.id.toString(),
+                                            _textFieldController.text
+                                                .toString())
+                                        .then((value) {
+                                      // Fluttertoast.showToast(msg: "Post Block Successfully");
+                                      showCustomSnackBar(
+                                          "Post Block Successfully", context,
+                                          isError: false);
+                                      Navigator.pop(context);
+                                    });
+                                  } else {
+                                    showCustomSnackBar(
+                                        "Please Enter Reason", context,
+                                        isError: true);
+                                    // Fluttertoast.showToast(msg: "Please Enter Reason");
+                                  }
+                                },
+                                child: Text(
+                                  "Submit",
+                                ))
+                          ],
+                        )),
+                  ),
+                ),
+              ),
+            ),
+          );
         });
   }
 
   Future<void> _displayTextInputDialogUserReport(BuildContext context) async {
-    TextEditingController _textFieldController = new TextEditingController();
+    TextEditingController _textFieldController = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          /*return AlertDialog(
               title: Text('Report User'),
               content: Container(
                   height: 150,
@@ -792,16 +1035,128 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                             "Submit",
                           ))
                     ],
-                  )));
+                  )));*/
+          return AnimatedPadding(
+            padding: MediaQuery.of(context).viewInsets +
+                const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+            duration: Duration(milliseconds: 100),
+            curve: Curves.decelerate,
+            child: MediaQuery.removeViewInsets(
+              removeLeft: true,
+              removeTop: true,
+              removeRight: true,
+              removeBottom: true,
+              context: context,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(minWidth: 280.0),
+                  child: Material(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    elevation: 30.0,
+                    color: Theme.of(context).dialogBackgroundColor,
+                    type: MaterialType.card,
+                    child: Container(
+                        height: 250,
+                        width: double.infinity,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Report User",
+                              textAlign: TextAlign.left,
+                              style: SafeGoogleFont(
+                                'Lato',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                height: 2,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: TextField(
+                                autocorrect: true,
+                                maxLines: 4,
+                                minLines: 4,
+                                keyboardType: TextInputType.multiline,
+                                controller: _textFieldController,
+                                style: SafeGoogleFont(
+                                  'Lato',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.2,
+                                  color: const Color(0xff000000),
+                                ),
+                                decoration: InputDecoration(
+                                  hintText: 'Enter reason',
+                                  hintStyle: SafeGoogleFont(
+                                    'Lato',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.2,
+                                    color: const Color(0xff000000),
+                                  ),
+                                  filled: true,
+                                  fillColor: const Color(0xfff3f3f3),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    borderSide: BorderSide(
+                                        color: Color(0x59000000), width: 1),
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    borderSide:
+                                        BorderSide(color: Color(0x59000000)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  if (_textFieldController.text.isNotEmpty) {
+                                    postPresenter
+                                        .addUserReport(
+                                            widget.postModelData.account!.id
+                                                .toString(),
+                                            _textFieldController.text
+                                                .toString())
+                                        .then((value) {
+                                      showCustomSnackBar(
+                                          "User Report Successfully", context,
+                                          isError: false);
+                                      Navigator.pop(context);
+                                    });
+                                  } else {
+                                    showCustomSnackBar(
+                                        "Please Enter Reason", context,
+                                        isError: true);
+                                    // Fluttertoast.showToast(msg: "Please Enter Reason");
+                                  }
+                                },
+                                child: Text(
+                                  "Submit",
+                                ))
+                          ],
+                        )),
+                  ),
+                ),
+              ),
+            ),
+          );
         });
   }
 
   Future<void> _displayTextInputDialogUserBlock(BuildContext context) async {
-    TextEditingController _textFieldController = new TextEditingController();
+    TextEditingController _textFieldController = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          //return
+          /*AlertDialog(
               title: Text('Block User'),
               content: Container(
                   height: 150,
@@ -842,7 +1197,119 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                             "Submit",
                           ))
                     ],
-                  )));
+                  )));*/
+          return AnimatedPadding(
+            padding: MediaQuery.of(context).viewInsets +
+                const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
+            duration: Duration(milliseconds: 100),
+            curve: Curves.decelerate,
+            child: MediaQuery.removeViewInsets(
+              removeLeft: true,
+              removeTop: true,
+              removeRight: true,
+              removeBottom: true,
+              context: context,
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(minWidth: 280.0),
+                  child: Material(
+                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    elevation: 30.0,
+                    color: Theme.of(context).dialogBackgroundColor,
+                    type: MaterialType.card,
+                    child: Container(
+                        height: 250,
+                        width: double.infinity,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Block User",
+                              textAlign: TextAlign.left,
+                              style: SafeGoogleFont(
+                                'Lato',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                height: 2,
+                                color: Color(0xff000000),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: TextField(
+                                autocorrect: true,
+                                maxLines: 4,
+                                minLines: 4,
+                                keyboardType: TextInputType.multiline,
+                                controller: _textFieldController,
+                                style: SafeGoogleFont(
+                                  'Lato',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.2,
+                                  color: const Color(0xff000000),
+                                ),
+                                decoration: InputDecoration(
+                                  hintText: 'Enter reason',
+                                  hintStyle: SafeGoogleFont(
+                                    'Lato',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    height: 1.2,
+                                    color: const Color(0xff000000),
+                                  ),
+                                  filled: true,
+                                  fillColor: const Color(0xfff3f3f3),
+                                  enabledBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    borderSide: BorderSide(
+                                        color: Color(0x59000000), width: 1),
+                                  ),
+                                  focusedBorder: const OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    borderSide:
+                                        BorderSide(color: Color(0x59000000)),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            ElevatedButton(
+                                onPressed: () {
+                                  if (_textFieldController.text.isNotEmpty) {
+                                    postPresenter
+                                        .addUserBlock(
+                                            widget.postModelData.account!.id
+                                                .toString(),
+                                            _textFieldController.text
+                                                .toString())
+                                        .then((value) {
+                                      // Fluttertoast.showToast(msg: "User Block Successfully");
+                                      Navigator.pop(context);
+                                      showCustomSnackBar(
+                                          "User Block Successfully", context,
+                                          isError: false);
+                                    });
+                                  } else {
+                                    // Fluttertoast.showToast(msg: "Please Enter Reason");
+                                    showCustomSnackBar(
+                                        "Please Enter Reason", context,
+                                        isError: true);
+                                  }
+                                },
+                                child: Text(
+                                  "Submit",
+                                ))
+                          ],
+                        )),
+                  ),
+                ),
+              ),
+            ),
+          );
         });
   }
 
@@ -880,5 +1347,100 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
         _displayTextInputDialogUserBlock(context);
       }
     });
+  }
+
+  openAlertBox() {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32.0))),
+            contentPadding: EdgeInsets.only(top: 10.0),
+            content: Container(
+              width: 300.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Text(
+                        "Rate",
+                        style: TextStyle(fontSize: 24.0),
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          Icon(
+                            Icons.star_border,
+                            color: Colors.red,
+                            size: 30.0,
+                          ),
+                          Icon(
+                            Icons.star_border,
+                            color: Colors.red,
+                            size: 30.0,
+                          ),
+                          Icon(
+                            Icons.star_border,
+                            color: Colors.red,
+                            size: 30.0,
+                          ),
+                          Icon(
+                            Icons.star_border,
+                            color: Colors.red,
+                            size: 30.0,
+                          ),
+                          Icon(
+                            Icons.star_border,
+                            color: Colors.red,
+                            size: 30.0,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Divider(
+                    color: Colors.grey,
+                    height: 4.0,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: "Add Review",
+                        border: InputBorder.none,
+                      ),
+                      maxLines: 8,
+                    ),
+                  ),
+                  InkWell(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                      decoration: BoxDecoration(
+                        color: Colors.red,
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(32.0),
+                            bottomRight: Radius.circular(32.0)),
+                      ),
+                      child: Text(
+                        "Rate Product",
+                        style: TextStyle(color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

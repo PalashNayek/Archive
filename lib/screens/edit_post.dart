@@ -61,10 +61,11 @@ class _EditPostScreenState extends State<EditPostScreen> {
     });
     postPresenter.getPostDetails(widget.postId.toString()).then((value) {
       postModelData = value;
-      print("postModelPalash->$postModelData.name");
       load = true;
       titleController.text = postModelData.name.toString();
-      //imgUrl = postModelData.postImage.toString();
+      //imgUrl = postModelData.postImage.
+      //imgUrl = postList
+      print("ImgURL->$imgUrl");
       descriptionController.text = postModelData.desc.toString();
       selected = postModelData.interestId.toString();
       setState(() {});
@@ -219,7 +220,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5 * fem),
                       ),
-                      child:CachedNetworkImage(
+                      /*child:CachedNetworkImage(
                         filterQuality: FilterQuality.low,
                         height: 200,
                         width: 200,
@@ -227,7 +228,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
                         imageUrl: postModelData.postImage.toString(),
                         placeholder: (context, url) => CircularProgressIndicator(),
                         errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
+                      ),*/
                     ),
                    /* if (result != null)
                       Container(

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 //import 'package:fluttertoast/fluttertoast.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 import 'package:s2w/page-1/search-page-.dart';
 import 'package:s2w/screens/edit_post.dart';
 import 'package:s2w/screens/other_account.dart';
@@ -574,6 +576,19 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                     )));
       } else if (itemSelected == "2") {
         //code here
+        showAlert();
+      } else {
+        //code here
+      }
+    });
+  }
+  showAlert(){
+    QuickAlert.show(
+      context: context,
+      type: QuickAlertType.confirm,
+      text: 'Want to post delete',
+      confirmBtnText: 'Yes',
+      onConfirmBtnTap: () async {
         postPresenter
             .deletePost(widget.postModelData.id.toString())
             .then((value) {
@@ -581,9 +596,9 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) => DashBoardScreen()));
         });
-      } else {
-        //code here
-      }
-    });
+      },
+      cancelBtnText: 'No',
+      confirmBtnColor: Colors.green,
+    );
   }
 }

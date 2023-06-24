@@ -38,7 +38,7 @@ class PostService extends ApiClient with UiHelper {
   String _otherPostListUrl = "posts/list/user/";
 
   Future<PostResponse> addPost(PostRequestModel postRequestModel) {
-    print(json.encode(postRequestModel));
+    print("addPostURL-> $_postUrl");
     return postRequest(_postUrl, json.encode(postRequestModel))
         .then((response) async {
       print(response.body);
@@ -57,6 +57,8 @@ class PostService extends ApiClient with UiHelper {
       }
     });
   }
+
+
   Future<PostResponse> addLike(String postId,bool like) {
     print(json.encode({"postId":postId,"like":like}));
     return postRequest(_addLikeUrl, json.encode({"postId":postId,"like":like}))
@@ -78,6 +80,7 @@ class PostService extends ApiClient with UiHelper {
     });
   }
   Future<PostResponse> addReport(String postId,String reason) {
+    print("addReportParams-> $_postReportUrl " " $postId" "$reason");
     return postRequest(_postReportUrl, json.encode({"postId":postId,"reason":reason,"longitude":"123", "latitude":"123"}))
         .then((response) async {
       print(response.body);
