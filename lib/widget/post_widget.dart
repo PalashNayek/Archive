@@ -76,6 +76,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
         });
       }
     }
+
     List<Widget> indicators(imagesLength, currentIndex) {
       return List<Widget>.generate(imagesLength, (index) {
         return Container(

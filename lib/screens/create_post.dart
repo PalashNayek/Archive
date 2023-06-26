@@ -415,6 +415,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                   print("No file selected");
                                 } else {
                                   result?.files.forEach((element) {
+                                    print("Palash1--");
                                     print(element.name);
                                     if (element.extension == "mp4") {
                                       _generateThumbnail(
@@ -424,8 +425,15 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                         setState(() {});
                                       });
                                     } else {
+                                      //mutiple item upload editing by Palash
+                                      int? myElement = x.length;
+                                      print("MyFileLen->$File(element.path.toString())");
+
+
+                                      ////////////
+
+
                                       x.add(File(element.path.toString()));
-                                      //x.clear();
                                       setState(() {});
                                     }
                                   });
@@ -573,20 +581,24 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                             registerModel.latitude = "123";
                             registerModel.longitude = "123";
 
+                            //print("button click$registerModel");
+
                             postPresenter.addPost(registerModel).then((value) {
+                              print("button click$registerModel");
+
                               if (result != null) {
                                 result?.files.forEach((element) {
                                   print(element.extension);
                                   print(element.name);
                                   if (element.extension == "mp4") {
-                                    print("Post Video");
-                                    postPresenter.postVideoUpload(
-                                        value.id.toString(),
-                                        File(element.path.toString()));
+                                    print("Palash2 - > Post Video");
+                                    postPresenter.postVideoUpload(value.id.toString(), File(element.path.toString()));
                                   } else {
-                                    postPresenter.postImageUpload(
-                                        value.id.toString(),
-                                        File(element.path.toString()));
+                                        postPresenter.postImageUpload(value.id.toString(), File(element.path.toString())).then((value) {
+                                          print("Upload Images:"+value.toString());
+                                        });
+
+                                        print(result?.count.toString());
                                   }
                                 });
                               }

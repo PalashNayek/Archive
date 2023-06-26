@@ -38,15 +38,14 @@ class PostService extends ApiClient with UiHelper {
   String _otherPostListUrl = "posts/list/user/";
 
   Future<PostResponse> addPost(PostRequestModel postRequestModel) {
-    print("addPostURL-> $_postUrl");
     return postRequest(_postUrl, json.encode(postRequestModel))
         .then((response) async {
-      print(response.body);
+      print("CreateMyPost-> $response");
       if (response != null) {
-        print(response.body);
         var result = json.decode(response.body);
         if (response.statusCode==201) {
           PostResponse auth = PostResponse.fromJson(result);
+          print(auth);
          return auth;
         } else {
           AppCommonHelper.customToast(result['message'] ?? "");
@@ -384,11 +383,16 @@ class PostService extends ApiClient with UiHelper {
     });
   }
   Future<bool> postImageUpload(String postId,File file) async {
+    print(_imageUploadUrl);
 
     return multipartImageUploadPOST(_imageUploadUrl+postId,file).then((response) async {
+      print("ImgUploadRes$response");
       return response;
     });
   }
+
+
+
   Future<bool> postVideoUpload(String postId,File file) async {
 
     return multipartVideoUploadPOST(_imageUploadUrl+postId,file).then((response) async {

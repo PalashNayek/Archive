@@ -39,6 +39,7 @@ class ApiClient with RouteAware {
   }
 
   Future<http.Response> postRequest(String url, String content) async {
+    print("PostResquest"+url+content);
     await getToken();
     return http.post(Uri.parse(baseUrl + url), body: content, headers: _headers).then(
       (response) {
@@ -58,7 +59,10 @@ class ApiClient with RouteAware {
     request.headers.addAll(_headers!);
     var multipartFile = await http.MultipartFile.fromPath('file', image.path,contentType:  MediaType("image", "jpg")); //returns a Future<MultipartFile>
     request.files.add(multipartFile);
+
     http.StreamedResponse response = await request.send();
+    print("Hahahah");
+    print(response.request);
     final respStr = await response.stream.bytesToString();
     print(respStr);
     var jsonData = jsonDecode(respStr);

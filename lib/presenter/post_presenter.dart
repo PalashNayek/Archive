@@ -88,8 +88,10 @@ class PostPresenter {
     return _postService!.getMyFollowing("my/following");
   }
   Future<bool> postImageUpload(String  postId,File image) async {
+    print("MyImg->$image");
     return _postService!.postImageUpload(postId,image);
   }
+
   Future<bool> postVideoUpload(String  postId,File image) async {
     return _postService!.postVideoUpload(postId,image);
   }
