@@ -55,6 +55,14 @@ class CategoryItem extends StatelessWidget{
                               filterQuality: FilterQuality.low,
                               fit: BoxFit.cover,
                               image: NetworkImage (image,),
+                              onError: (exception, stackTrace) {
+                                Image.asset(
+                                    "assets/page-1/images/user_profile_male.png",
+                                    width: 50 * fem,
+                                    height: 50 * fem,
+                                    fit: BoxFit.cover);
+                              },
+
 
                             ),
                           ),

@@ -168,9 +168,7 @@ class _loginScreenState extends State<LoginScreen> {
                                         : 15 * fem),
                                 width: double.infinity,
                                 height: 80 * fem,
-                                /* decoration: BoxDecoration (
-                      borderRadius: BorderRadius.circular(5*fem),
-                    ),*/
+
                                 child: IntlPhoneField(
                                   decoration: InputDecoration(
                                     labelText: 'Phone Number',
@@ -198,50 +196,7 @@ class _loginScreenState extends State<LoginScreen> {
                                     print(phone.completeNumber);
                                   },
                                 )
-                                /*
-                    TextField(
-                      autocorrect: true,
-                      focusNode: focusNodeMobile,
-                      controller: mobileController,
-                      keyboardType: TextInputType.number,
-                      style: SafeGoogleFont (
-                        'Lato',
-                        fontSize: 20*ffem,
-                        fontWeight: FontWeight.w400,
-                        height: 1.2*ffem/fem,
-                        color: Color(0xff000000),
-                      ),
-                      inputFormatters: [
-                        new LengthLimitingTextInputFormatter(10),
-                      ],
-                      onChanged: (value){
-                        if(value.length>10){
-                          showCustomSnackBar("Enter 10 digit mobile no",context);
-                        }
-                      },
-                      decoration: InputDecoration(
-                        hintText: 'Mobile Number',
-                        hintStyle: SafeGoogleFont (
-                          'Lato',
-                          fontSize: 20*ffem,
-                          fontWeight: FontWeight.w400,
-                          height: 1.2*ffem/fem,
-                          color: Color(0xff000000),
-                        ),
-
-                        filled: true,
-                        fillColor: Color(0xfff3f3f3),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: Color(0x59000000), width: 1),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)),
-                          borderSide: BorderSide(color: Color(0x59000000)),
-                        ),
-                      ),),*/
-
-                                ),
+                            ),
                             Container(
                                 margin: EdgeInsets.fromLTRB(
                                     5 * fem, 1 * fem, 1 * fem, 0 * fem),
@@ -338,41 +293,6 @@ class _loginScreenState extends State<LoginScreen> {
                 ))));
   }
 
-  /*Widget _buildAboutDialog(BuildContext context) {
-    return AlertDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      title: Text(
-        'Terms & Conditions'.tr(),
-      ),
-      content: new Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(
-            "By accepting all terms and conditions for privacy and data security visit our link: https://way2success.team/userpolicy.html",
-            style: TextStyle(
-                fontSize: AppCommonHelper.isTablet(context) ? 30 : 13,
-                color: Colors.grey),
-          )
-        ],
-      ),
-      actions: <Widget>[
-        new ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => _buildAboutDialog2(context),
-            );
-          },
-          child: const Text('Accept'),
-        ),
-      ],
-    );
-  }*/
-
   showDialogBox() {
     showDialog(
         barrierDismissible: false,
@@ -427,40 +347,4 @@ class _loginScreenState extends State<LoginScreen> {
               ],
             ));
   }
-
-/*Widget _buildAboutDialog2(BuildContext context) {
-    return SingleChildScrollView(
-      child: AlertDialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        title: const Text('End User Licence Agreement'),
-        content: new Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              AppConstants.terms,
-              style: TextStyle(
-                  fontSize: AppCommonHelper.isTablet(context) ? 30 : 10,
-                  color: Colors.grey),
-            )
-          ],
-        ),
-        actions: <Widget>[
-          new ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          OTPScreen(phoneNumber.number.toString())));
-            },
-            child: const Text('Agree'),
-          ),
-        ],
-      ),
-    );
-  }*/
 }

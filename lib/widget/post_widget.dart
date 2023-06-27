@@ -127,11 +127,31 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                       .elementAt(0)
                                       .profile ==
                                   null
-                              ? Image.asset("assets/page-1/images/user.png",
+                              ? Image.asset("assets/page-1/images/user_profile_male.png",
                                   width: 50 * fem,
                                   height: 50 * fem,
                                   fit: BoxFit.cover)
                               : Image.network(
+                              loadingBuilder: (BuildContext context,
+                                  Widget child,
+                                  ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) {
+                                  isLoading = false;
+                                  return child;
+                                } else {
+                                  isLoading = true;
+                                  return CircularProgressIndicator(
+                                    value: loadingProgress
+                                        .expectedTotalBytes !=
+                                        null
+                                        ? loadingProgress
+                                        .cumulativeBytesLoaded /
+                                        loadingProgress
+                                            .expectedTotalBytes!
+                                        : null,
+                                  );
+                                }
+                              },
                                   widget.postModelData.account!.personalDetail!
                                       .elementAt(0)
                                       .profile
@@ -146,26 +166,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                         fit: BoxFit.cover);
                                   },
                                   fit: BoxFit.cover,
-                                  loadingBuilder: (BuildContext context,
-                                      Widget child,
-                                      ImageChunkEvent? loadingProgress) {
-                                    if (loadingProgress == null) {
-                                      isLoading = false;
-                                      return child;
-                                    } else {
-                                      isLoading = true;
-                                      return CircularProgressIndicator(
-                                        value: loadingProgress
-                                                    .expectedTotalBytes !=
-                                                null
-                                            ? loadingProgress
-                                                    .cumulativeBytesLoaded /
-                                                loadingProgress
-                                                    .expectedTotalBytes!
-                                            : null,
-                                      );
-                                    }
-                                  }),
+                                  ),
                         ))),
                 /*if (isLoading) CircularProgressIndicator(),*/
 
@@ -424,7 +425,37 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                         .elementAt(pagePosition)
                                         .image
                                         .toString(),
+                                    filterQuality: FilterQuality.low,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Center(
+                                        child: Image.asset("assets/page-1/images/image_load_error",
+                                            width: 50 * fem,
+                                            height: 50 * fem,
+                                            fit: BoxFit.cover),
+                                      );
+                                    },
                                     fit: BoxFit.cover,
+                                    loadingBuilder:
+                                        (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent?
+                                        loadingProgress) {
+                                      if (loadingProgress == null)
+                                        return child;
+                                      return Center(
+                                        child:
+                                        CircularProgressIndicator(
+                                          value: loadingProgress
+                                              .expectedTotalBytes !=
+                                              null
+                                              ? loadingProgress
+                                              .cumulativeBytesLoaded /
+                                              loadingProgress
+                                                  .expectedTotalBytes!
+                                              : null,
+                                        ),
+                                      );
+                                    },
                                   );
                                 }),
                             Align(
@@ -673,49 +704,12 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
     return File(_path!);
   }
 
+  //Post report..................................
   Future<void> _displayTextInputDialogReport(BuildContext context) async {
     TextEditingController _textFieldController = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
-          /*return AlertDialog(
-                title: Text('Report Post'),
-                content: Container(
-                    height: 150,
-                    width: 200,
-                    child: Column(
-                      children: [
-                        TextField(
-                          onChanged: (value) {},
-                          keyboardType: TextInputType.text,
-                          controller: _textFieldController,
-                          decoration: InputDecoration(hintText: "Enter reason"),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        ElevatedButton(
-                            onPressed: () {
-                              if (_textFieldController.text.isNotEmpty) {
-                                postPresenter
-                                    .addReport(widget.postModelData.id.toString(),
-                                        _textFieldController.text.toString())
-                                    .then((value) {
-                                  showCustomSnackBar(
-                                      "Post Report Successfully", context,
-                                      isError: false);
-                                  Navigator.pop(context);
-                                });
-                              } else {
-                                showCustomSnackBar("Please Enter Reason", context,
-                                    isError: true);
-                              }
-                            },
-                            child: const Text(
-                              "Submit",
-                            ))
-                      ],
-                    )));*/
           return AnimatedPadding(
             padding: MediaQuery.of(context).viewInsets +
                 const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
@@ -828,51 +822,12 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
         });
   }
 
+  //Post block....................................
   Future<void> _displayTextInputDialogBlock(BuildContext context) async {
     TextEditingController _textFieldController = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
-          /*return AlertDialog(
-              title: Text('Block Post'),
-              content: Container(
-                  height: 150,
-                  width: 200,
-                  child: Column(
-                    children: [
-                      TextField(
-                        onChanged: (value) {},
-                        keyboardType: TextInputType.text,
-                        controller: _textFieldController,
-                        decoration: InputDecoration(hintText: "Enter reason"),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            if (_textFieldController.text.isNotEmpty) {
-                              postPresenter
-                                  .addBlock(widget.postModelData.id.toString(),
-                                      _textFieldController.text.toString())
-                                  .then((value) {
-                                // Fluttertoast.showToast(msg: "Post Block Successfully");
-                                showCustomSnackBar(
-                                    "Post Block Successfully", context,
-                                    isError: false);
-                                Navigator.pop(context);
-                              });
-                            } else {
-                              showCustomSnackBar("Please Enter Reason", context,
-                                  isError: true);
-                              // Fluttertoast.showToast(msg: "Please Enter Reason");
-                            }
-                          },
-                          child: Text(
-                            "Submit",
-                          ))
-                    ],
-                  )));*/
           return AnimatedPadding(
             padding: MediaQuery.of(context).viewInsets +
                 const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
@@ -991,52 +946,12 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
         });
   }
 
+  //User report.........................
   Future<void> _displayTextInputDialogUserReport(BuildContext context) async {
     TextEditingController _textFieldController = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
-          /*return AlertDialog(
-              title: Text('Report User'),
-              content: Container(
-                  height: 150,
-                  width: 200,
-                  child: Column(
-                    children: [
-                      TextField(
-                        onChanged: (value) {},
-                        keyboardType: TextInputType.text,
-                        controller: _textFieldController,
-                        decoration: InputDecoration(hintText: "Enter reason"),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            if (_textFieldController.text.isNotEmpty) {
-                              postPresenter
-                                  .addUserReport(
-                                      widget.postModelData.account!.id
-                                          .toString(),
-                                      _textFieldController.text.toString())
-                                  .then((value) {
-                                showCustomSnackBar(
-                                    "User Report Successfully", context,
-                                    isError: false);
-                                Navigator.pop(context);
-                              });
-                            } else {
-                              showCustomSnackBar("Please Enter Reason", context,
-                                  isError: true);
-                              // Fluttertoast.showToast(msg: "Please Enter Reason");
-                            }
-                          },
-                          child: Text(
-                            "Submit",
-                          ))
-                    ],
-                  )));*/
           return AnimatedPadding(
             padding: MediaQuery.of(context).viewInsets +
                 const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
@@ -1151,54 +1066,12 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
         });
   }
 
+  //User block.................
   Future<void> _displayTextInputDialogUserBlock(BuildContext context) async {
     TextEditingController _textFieldController = TextEditingController();
     return showDialog(
         context: context,
         builder: (context) {
-          //return
-          /*AlertDialog(
-              title: Text('Block User'),
-              content: Container(
-                  height: 150,
-                  width: 200,
-                  child: Column(
-                    children: [
-                      TextField(
-                        onChanged: (value) {},
-                        keyboardType: TextInputType.text,
-                        controller: _textFieldController,
-                        decoration: InputDecoration(hintText: "Enter reason"),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                          onPressed: () {
-                            if (_textFieldController.text.isNotEmpty) {
-                              postPresenter
-                                  .addUserBlock(
-                                      widget.postModelData.account!.id
-                                          .toString(),
-                                      _textFieldController.text.toString())
-                                  .then((value) {
-                                // Fluttertoast.showToast(msg: "User Block Successfully");
-                                showCustomSnackBar(
-                                    "User Block Successfully", context,
-                                    isError: false);
-                                Navigator.pop(context);
-                              });
-                            } else {
-                              // Fluttertoast.showToast(msg: "Please Enter Reason");
-                              showCustomSnackBar("Please Enter Reason", context,
-                                  isError: true);
-                            }
-                          },
-                          child: Text(
-                            "Submit",
-                          ))
-                    ],
-                  )));*/
           return AnimatedPadding(
             padding: MediaQuery.of(context).viewInsets +
                 const EdgeInsets.symmetric(horizontal: 40.0, vertical: 24.0),
@@ -1349,6 +1222,9 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
       }
     });
   }
+
+
+
 
   openAlertBox() {
     return showDialog(

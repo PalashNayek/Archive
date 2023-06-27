@@ -17,6 +17,7 @@ import 'package:s2w/utils.dart';
 
 import '../utilities/app_common_helper.dart';
 import '../utilities/app_local_data_util.dart';
+import '../utilities/getReferenceInfo.dart';
 import '../widget/custom_snackbar.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -39,6 +40,9 @@ class SplashScreenState extends State<SplashScreen> {
     setState(() {
       startSteaming();
     });
+     //var deviceId = GetRef.getDeviceId().toString();
+
+    //print(object)
   }
 
   checkInternet() async {

@@ -20,9 +20,6 @@ class AuthPresenter {
   }
 
   Future<AuthInfo> sendOtp(String mobile, BuildContext context) async {
-    String onlyMobileNo = mobile.trim().substring(mobile.trim().length - 10);
-  //  FirebaseMessaging _fm = FirebaseMessaging.instance;
-
     return _authService!.sendOtp(mobile,"1234567890", context);
   }
 

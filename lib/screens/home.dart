@@ -587,7 +587,7 @@ class _HomeContentState extends State<HomeContent> {
                                               Container(
                                                 color: Colors.blue,
                                                 width: 345,
-                                                height: 245,
+                                                height: 235,
                                                 child: Center(
                                                   child: Text("Required API",style: SafeGoogleFont(
                                                     'Lato',
@@ -615,8 +615,14 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   Future<void> _pullRefresh() async {
-    getData();
-    getPostDat(0);
+    Future.delayed(const Duration(seconds: 3000), () {
+      isLoaded = true;
+    });
+
+    setState(() {
+      //getData();
+      getPostDat(offset);
+    });
   }
 
   Shimmer getShimmerLoading() {

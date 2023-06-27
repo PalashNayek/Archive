@@ -397,6 +397,38 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                                         .image
                                         .toString(),
                                     fit: BoxFit.cover,
+
+                                    loadingBuilder:
+                                        (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent?
+                                        loadingProgress) {
+                                      if (loadingProgress == null)
+                                        return child;
+                                      return Center(
+                                        child:
+                                        CircularProgressIndicator(
+                                          value: loadingProgress
+                                              .expectedTotalBytes !=
+                                              null
+                                              ? loadingProgress
+                                              .cumulativeBytesLoaded /
+                                              loadingProgress
+                                                  .expectedTotalBytes!
+                                              : null,
+                                        ),
+                                      );
+                                    },
+
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Center(
+                                        child: Image.asset("assets/page-1/images/image_load_error",
+                                            width: 50 * fem,
+                                            height: 50 * fem,
+                                            fit: BoxFit.cover),
+                                      );
+                                    },
+
                                   );
                                 }),
                             Align(

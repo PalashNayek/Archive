@@ -102,7 +102,7 @@ class _OtherAccountContentState extends State<OtherAccountContent> {
                       child: Column(
                         children: [
                           Container(
-                              height: 420,
+                              height: 440,
                               width: double.infinity,
                               child: Stack(
                                 children: [

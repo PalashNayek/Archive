@@ -602,10 +602,12 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                   }
                                 });
                               }
+
                               Navigator.pop(context);
                               showCustomSnackBar(
                                   "Post Added Successfully", context,
                                   isError: false);
+
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

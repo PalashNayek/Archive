@@ -40,7 +40,7 @@ class PostService extends ApiClient with UiHelper {
   Future<PostResponse> addPost(PostRequestModel postRequestModel) {
     return postRequest(_postUrl, json.encode(postRequestModel))
         .then((response) async {
-      print("CreateMyPost-> $response");
+      print("updatePost-> $response");
       if (response != null) {
         var result = json.decode(response.body);
         if (response.statusCode==201) {
@@ -79,9 +79,11 @@ class PostService extends ApiClient with UiHelper {
     });
   }
   Future<PostResponse> addReport(String postId,String reason) {
-    print("addReportParams-> $_postReportUrl " " $postId" "$reason");
+    print("postReportParams-> $_postReportUrl");
     return postRequest(_postReportUrl, json.encode({"postId":postId,"reason":reason,"longitude":"123", "latitude":"123"}))
         .then((response) async {
+
+      print("postReport");
       print(response.body);
       if (response != null) {
         print(response.body);
@@ -117,6 +119,7 @@ class PostService extends ApiClient with UiHelper {
     });
   }
   Future<PostResponse> addUserReport(String reportUserId,String reason) {
+    print("reportUserId->$reportUserId");
     return postRequest(_userReportUrl, json.encode({"reportUserId":reportUserId,"reason":reason,"longitude":"123", "latitude":"123"}))
         .then((response) async {
       print(response.body);

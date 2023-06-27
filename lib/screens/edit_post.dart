@@ -352,11 +352,12 @@ class _EditPostScreenState extends State<EditPostScreen> {
                       registerModel.name = titleController.text;
                       registerModel.desc = descriptionController.text.toString();
                       registerModel.postTags = [hastag];
-                      registerModel.interestId = selected;
+                      registerModel.interestId = "c5f756f6-d496-11ed-b4a9-e4f89ca223bc";
                       registerModel.latitude = "123";
                       registerModel.longitude = "123";
 
                       postPresenter.updatePost(registerModel).then((value) {
+                        print("updatePost->$value");
                         if (result != null) {
                           result?.files.forEach((element) {
                             print(element.name);
