@@ -21,12 +21,13 @@ class _SearchPageState extends State<SearchPage> {
   int perPage = 10;
   int offset = 0;
   int present = 0;
+  String type = "All";
 
   @override
   void initState() {
     super.initState();
 
-    getPostDat(offset, "");
+    getPostDat(offset, "",type);
   }
 
   String getFileExtension(String fileName) {
@@ -37,8 +38,8 @@ class _SearchPageState extends State<SearchPage> {
     }
   }
 
-  void getPostDat(int off, String keyword) {
-    postPresenter.getAllPost(keyword, perPage, off).then((value) {
+  void getPostDat(int off, String keyword, String type) {
+    postPresenter.getAllPost(keyword, perPage, off, type).then((value) {
       postListModel = value;
       postList.clear();
       postListData.clear();
@@ -60,7 +61,7 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void getSearchPostData(int off, String keyword) {
-    postPresenter.getAllPost(keyword, perPage, off).then((value) {
+    postPresenter.getAllPost(keyword, perPage, off, type).then((value) {
       postListModel = value;
       postList.clear();
       postListData.clear();
@@ -96,12 +97,12 @@ class _SearchPageState extends State<SearchPage> {
             if (value.isNotEmpty) {
               getSearchPostData(offset, value);
             } else {
-              getPostDat(offset, value);
+              getPostDat(offset, value, type);
             }
           },
           onChanged: (value) {
             if (value.isEmpty) {
-              getPostDat(offset, "");
+              getPostDat(offset, "", type);
             }
           },
           decoration: InputDecoration(

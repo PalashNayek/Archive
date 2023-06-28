@@ -64,8 +64,7 @@ class _PostDetailsState extends State<PostDetailsScreen> {
   void initState() {
     super.initState();
     circleLoader = true;
-    if( widget.postModelData.account!
-        .personalDetail!.isNotEmpty){
+    if (widget.postModelData.account!.personalDetail!.isNotEmpty) {
       circleLoader = false;
     }
     if (widget.postModelData.postImage!.length > 0) {
@@ -109,294 +108,345 @@ class _PostDetailsState extends State<PostDetailsScreen> {
           ),
         ),
         body: Container(
-      width: double.infinity,
-      child: circleLoader? Center(
-          child: Padding(
-            padding: EdgeInsets.only(top: 250),
-            child: CircularProgressIndicator(),
-          )
-      ):Container(
-        padding: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 9 * fem),
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Color(0xffffffff),
-        ),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Container(
-                  margin:
-                      EdgeInsets.fromLTRB(11 * fem, 0 * fem, 12 * fem, 79 * fem),
+          width: double.infinity,
+          child: circleLoader
+              ? Center(
+                  child: Padding(
+                  padding: EdgeInsets.only(top: 250),
+                  child: CircularProgressIndicator(),
+                ))
+              : Container(
+                  padding:
+                      EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 9 * fem),
                   width: double.infinity,
-                  height: 485 * fem,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(7 * fem),
-                    border: Border.all(color: Color(0x99d6d6d6)),
                     color: Color(0xffffffff),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          //user
-
-                          Container(
-                              margin: EdgeInsets.all(5.0),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(30.0),
-                                child: widget.postModelData.account!.personalDetail!
-                                            .elementAt(0)
-                                            .profile ==
-                                        null
-                                    ? Image.asset("assets/page-1/images/user_profile_male.png",
-                                        width: 50 * fem,
-                                        height: 50 * fem,
-                                        fit: BoxFit.cover)
-                                    : Image.network(
-                                        widget
-                                            .postModelData.account!.personalDetail!
-                                            .elementAt(0)
-                                            .profile
-                                            .toString(),
-                                        width: 50 * fem,
-                                        height: 50 * fem,
-                                        fit: BoxFit.cover),
-                              )),
-
-                          Expanded(
-                              child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(left: 10, top: 10),
-                                child: Column(
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Container(
+                            margin: EdgeInsets.fromLTRB(
+                                11 * fem, 0 * fem, 12 * fem, 79 * fem),
+                            width: double.infinity,
+                            height: 485 * fem,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(7 * fem),
+                              border: Border.all(color: Color(0x99d6d6d6)),
+                              color: Color(0xffffffff),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    RichText(
-                                      text: TextSpan(
-                                        style: SafeGoogleFont(
-                                          'Netflix Sans',
-                                          fontSize: 16 * ffem,
-                                          fontWeight: FontWeight.w500,
-                                          height: 1.171875 * ffem / fem,
-                                          color: Color(0xff000000),
-                                        ),
-                                        children: [
-                                          TextSpan(
-                                            text: widget.postModelData.account!
-                                                .personalDetail!
-                                                .elementAt(0)
-                                                .firstName,
-                                            style: SafeGoogleFont(
-                                              'Lato',
-                                              fontSize: 16 * ffem,
-                                              fontWeight: FontWeight.w700,
-                                              height: 1.2 * ffem / fem,
-                                              color: Color(0xff000000),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      AppCommonHelper.timeAgoCustom(widget
-                                          .postModelData.createdAt
-                                          .toString()),
-                                      style: SafeGoogleFont(
-                                        'Lato',
-                                        fontSize: 9 * ffem,
-                                        fontWeight: FontWeight.w400,
-                                        height: 1.2 * ffem / fem,
-                                        color: Color(0xff9496a1),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
+                                    //user
 
-                              //option/more icon
-                              /*GestureDetector(child: Container(
+                                    Container(
+                                        margin: EdgeInsets.all(5.0),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                          child: widget.postModelData.account!
+                                                      .personalDetail!
+                                                      .elementAt(0)
+                                                      .profile ==
+                                                  null
+                                              ? Image.asset(
+                                                  "assets/page-1/images/user_profile_male.png",
+                                                  width: 50 * fem,
+                                                  height: 50 * fem,
+                                                  fit: BoxFit.cover)
+                                              : Image.network(
+                                                  widget.postModelData.account!
+                                                      .personalDetail!
+                                                      .elementAt(0)
+                                                      .profile
+                                                      .toString(),
+                                                  width: 50 * fem,
+                                                  height: 50 * fem,
+                                                  fit: BoxFit.cover),
+                                        )),
+
+                                    Expanded(
+                                        child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(
+                                              left: 10, top: 10),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              RichText(
+                                                text: TextSpan(
+                                                  style: SafeGoogleFont(
+                                                    'Netflix Sans',
+                                                    fontSize: 16 * ffem,
+                                                    fontWeight: FontWeight.w500,
+                                                    height:
+                                                        1.171875 * ffem / fem,
+                                                    color: Color(0xff000000),
+                                                  ),
+                                                  children: [
+                                                    TextSpan(
+                                                      text: widget
+                                                          .postModelData
+                                                          .account!
+                                                          .personalDetail!
+                                                          .elementAt(0)
+                                                          .firstName,
+                                                      style: SafeGoogleFont(
+                                                        'Lato',
+                                                        fontSize: 16 * ffem,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                        height:
+                                                            1.2 * ffem / fem,
+                                                        color:
+                                                            Color(0xff000000),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Text(
+                                                AppCommonHelper.timeAgoCustom(
+                                                    widget
+                                                        .postModelData.createdAt
+                                                        .toString()),
+                                                style: SafeGoogleFont(
+                                                  'Lato',
+                                                  fontSize: 9 * ffem,
+                                                  fontWeight: FontWeight.w400,
+                                                  height: 1.2 * ffem / fem,
+                                                  color: Color(0xff9496a1),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+
+                                        //option/more icon
+                                        /*GestureDetector(child: Container(
                                   margin: EdgeInsets.only(right: 10),
                                   child: Icon(Icons.more_vert)
                               ),onTapDown: (details){
                                 showPopupMenu(context,details);
                               },)*/
-                            ],
-                          ))
-
-
-                          //username
-                        ],
-                      ),
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Divider(
-                        height: 1,
-                        color: Colors.grey,
-                      ),///////////////////////////////////////////////
-
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Align(
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                widget.postModelData.name.toString(),
-                                textAlign: TextAlign.left,
-                                style: SafeGoogleFont(
-                                  'Lato',
-                                  fontSize: 16 * ffem,
-                                  fontWeight: FontWeight.w700,
-                                  height: 1.2 * ffem / fem,
-                                  color: Color(0xff000000),
-                                ),
-                              ))),
-                      Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Text(
-                              widget.postModelData.desc.toString(),
-                              style: SafeGoogleFont(
-                                'Lato',
-                                fontSize: 12 * ffem,
-                                fontWeight: FontWeight.w400,
-                                height: 2 * ffem / fem,
-                                color: Color(0xff080053),
-                              ),
-                            ),
-                          )),
-
-                      SizedBox(
-                        height: 5,
-                      ),
-                      //header End
-
-                      GestureDetector(
-                        onTap: () {},
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(
-                              6 * fem, 0 * fem, 7 * fem, 7 * fem),
-                          width: double.infinity,
-                          height: 300 * fem,
-                          child: widget.postModelData.postImage!.length > 0
-                              ? widget.postModelData.postImage!.length == 1
-                                  ? Center(
-                                      child: Stack(children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(5.0),
-                                        child: getFileExtension(widget
-                                                    .postModelData.postImage!
-                                                    .elementAt(0)
-                                                    .image
-                                                    .toString()) ==
-                                                "mp4"
-                                            ? files.length > 0
-                                                ? Image.file(
-                                                    files.elementAt(0),
-                                                    width: double.infinity,
-                                                    fit: BoxFit.cover,
-                                                  )
-                                                : Image.asset(
-                                                    "assets/page-1/images/loading.png",
-                                                    width: double.infinity,
-                                                    fit: BoxFit.fill,
-                                                  )
-                                            : Image.network(
-                                          filterQuality: FilterQuality.low,
-                                                widget.postModelData.postImage!
-                                                    .elementAt(0)
-                                                    .image
-                                                    .toString(),
-                                                width: double.infinity,
-                                                fit: BoxFit.fill,
-                                              ),
-                                      ),
-                                      getFileExtension(widget
-                                                  .postModelData.postImage!
-                                                  .elementAt(0)
-                                                  .image
-                                                  .toString()) ==
-                                              "mp4"
-                                          ? Align(
-                                              alignment: Alignment.center,
-                                              child: IconButton(
-                                                onPressed: () {
-                                                  Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              VideoApp(
-                                                                url: widget
-                                                                    .postModelData
-                                                                    .postImage!
-                                                                    .elementAt(0)
-                                                                    .image
-                                                                    .toString(),
-                                                              )));
-                                                },
-                                                icon: Icon(Icons.play_circle,
-                                                    size: 50, color: third),
-                                              ))
-                                          : SizedBox(
-                                              width: 1,
-                                            )
-                                    ]))
-                                  : Stack(
-                                      children: [
-                                        PageView.builder(
-                                            itemCount: widget
-                                                .postModelData.postImage!.length,
-                                            pageSnapping: true,
-                                            controller: _pageController,
-                                            onPageChanged: (page) {
-                                              setState(() {
-                                                activePage = page;
-                                              });
-                                            },
-                                            itemBuilder: (context, pagePosition) {
-                                              return Image.network(
-                                                widget.postModelData.postImage!
-                                                    .elementAt(pagePosition)
-                                                    .image
-                                                    .toString(),
-                                                fit: BoxFit.cover,
-                                              );
-                                            }),
-                                        Align(
-                                            alignment: Alignment.bottomCenter,
-                                            child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: indicators(
-                                                    widget.postModelData.postImage!
-                                                        .length,
-                                                    activePage)))
                                       ],
-                                    )
-                              : Align(
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    widget.postModelData.desc.toString(),
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: AppCommonHelper.isTablet(context)
-                                          ? 40
-                                          : 24,
-                                    ),
-                                  )),
+                                    ))
 
-                          /* ClipRRect(
+                                    //username
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Divider(
+                                  height: 1,
+                                  color: Colors.grey,
+                                ), ///////////////////////////////////////////////
+
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Align(
+                                        alignment: Alignment.topLeft,
+                                        child: Text(
+                                          widget.postModelData.name.toString(),
+                                          textAlign: TextAlign.left,
+                                          style: SafeGoogleFont(
+                                            'Lato',
+                                            fontSize: 16 * ffem,
+                                            fontWeight: FontWeight.w700,
+                                            height: 1.2 * ffem / fem,
+                                            color: Color(0xff000000),
+                                          ),
+                                        ))),
+                                Padding(
+                                    padding: EdgeInsets.only(left: 10),
+                                    child: Align(
+                                      alignment: Alignment.topLeft,
+                                      child: Text(
+                                        widget.postModelData.desc.toString(),
+                                        style: SafeGoogleFont(
+                                          'Lato',
+                                          fontSize: 12 * ffem,
+                                          fontWeight: FontWeight.w400,
+                                          height: 2 * ffem / fem,
+                                          color: Color(0xff080053),
+                                        ),
+                                      ),
+                                    )),
+
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                //header End
+
+                                GestureDetector(
+                                  onTap: () {},
+                                  child: Container(
+                                    margin: EdgeInsets.fromLTRB(
+                                        6 * fem, 0 * fem, 7 * fem, 7 * fem),
+                                    width: double.infinity,
+                                    height: 300 * fem,
+                                    child: widget.postModelData.postImage!
+                                                .length >
+                                            0
+                                        ? widget.postModelData.postImage!
+                                                    .length ==
+                                                1
+                                            ? Center(
+                                                child: Stack(children: [
+                                                ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          5.0),
+                                                  child: getFileExtension(widget
+                                                              .postModelData
+                                                              .postImage!
+                                                              .elementAt(0)
+                                                              .image
+                                                              .toString()) ==
+                                                          "mp4"
+                                                      ? files.length > 0
+                                                          ? Image.file(
+                                                              files
+                                                                  .elementAt(0),
+                                                              width: double
+                                                                  .infinity,
+                                                              fit: BoxFit.cover,
+                                                            )
+                                                          : Center(
+                                                              child: Padding(
+                                                                padding:
+                                                                    const EdgeInsets
+                                                                            .only(
+                                                                        top: 17,
+                                                                        left:
+                                                                            17),
+                                                                child:
+                                                                    Container(
+                                                                  height: 42,
+                                                                  width: 42,
+                                                                  child:
+                                                                      CircularProgressIndicator(),
+                                                                ),
+                                                              ),
+                                                            )
+                                                      : Image.network(
+                                                          filterQuality:
+                                                              FilterQuality.low,
+                                                          widget.postModelData
+                                                              .postImage!
+                                                              .elementAt(0)
+                                                              .image
+                                                              .toString(),
+                                                          width:
+                                                              double.infinity,
+                                                          fit: BoxFit.fill,
+                                                        ),
+                                                ),
+                                                getFileExtension(widget
+                                                            .postModelData
+                                                            .postImage!
+                                                            .elementAt(0)
+                                                            .image
+                                                            .toString()) ==
+                                                        "mp4"
+                                                    ? Align(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        child: IconButton(
+                                                          onPressed: () {
+                                                            Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            VideoApp(
+                                                                              url: widget.postModelData.postImage!.elementAt(0).image.toString(),
+                                                                            )));
+                                                          },
+                                                          icon: Icon(
+                                                              Icons.play_circle,
+                                                              size: 50,
+                                                              color: third),
+                                                        ))
+                                                    : SizedBox(
+                                                        width: 1,
+                                                      )
+                                              ]))
+                                            : Stack(
+                                                children: [
+                                                  PageView.builder(
+                                                      itemCount: widget
+                                                          .postModelData
+                                                          .postImage!
+                                                          .length,
+                                                      pageSnapping: true,
+                                                      controller:
+                                                          _pageController,
+                                                      onPageChanged: (page) {
+                                                        setState(() {
+                                                          activePage = page;
+                                                        });
+                                                      },
+                                                      itemBuilder: (context,
+                                                          pagePosition) {
+                                                        return Image.network(
+                                                          widget.postModelData
+                                                              .postImage!
+                                                              .elementAt(
+                                                                  pagePosition)
+                                                              .image
+                                                              .toString(),
+                                                          fit: BoxFit.cover,
+                                                        );
+                                                      }),
+                                                  Align(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: indicators(
+                                                              widget
+                                                                  .postModelData
+                                                                  .postImage!
+                                                                  .length,
+                                                              activePage)))
+                                                ],
+                                              )
+                                        : Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              widget.postModelData.desc
+                                                  .toString(),
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize:
+                                                    AppCommonHelper.isTablet(
+                                                            context)
+                                                        ? 40
+                                                        : 24,
+                                              ),
+                                            )),
+
+                                    /* ClipRRect(
                 borderRadius: BorderRadius.circular(5.0),
                 child:
 
@@ -437,134 +487,163 @@ class _PostDetailsState extends State<PostDetailsScreen> {
                 Align(alignment: Alignment.center, child:Text(widget.postModelData.desc.toString(),style: TextStyle(color: Colors.black),)),
 
             ),*/
-                        ),
-                      ),
-
-                      SizedBox(
-                        height: 3,
-                      ),
-                      Divider(
-                        height: 1,
-                        color: Colors.grey,
-                      ),
-                      Container(
-                        width: double.infinity,
-                        height: 24.00 * fem,
-                        margin: EdgeInsets.only(
-                            left: 20, top: 10, right: 20, bottom: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            GestureDetector(
-                                onTap: () {
-                                  postPresenter
-                                      .addLike(
-                                          widget.postModelData.id.toString(),
-                                          widget.postModelData.postLike!.length > 0
-                                              ? false
-                                              : true)
-                                      .then((value) {
-                                    if (widget.postModelData.postLike!.length > 0) {
-                                      // Fluttertoast.showToast(msg: "UnLike Successfully");
-                                      int? i = widget.postModelData.likeCount;
-                                      widget.postModelData.likeCount = (i! - 1);
-                                      widget.postModelData.postLike = [];
-                                    } else {
-                                      // Fluttertoast.showToast(msg: "Liked Successfully");
-                                      int? i = widget.postModelData.likeCount;
-                                      widget.postModelData.likeCount = (i! + 1);
-                                      PostLike postLike = PostLike();
-                                      postLike.id = "uheuithgiurth";
-                                      widget.postModelData.postLike!.add(postLike);
-                                    }
-                                    setState(() {});
-                                  });
-                                },
-                                child: Container(
-                                  child: Row(
-                                    children: [
-                                      Icon(Icons.thumb_up,
-                                          size: 24,
-                                          color: widget.postModelData.postLike!
-                                                      .length >
-                                                  0
-                                              ? secondary
-                                              : primary),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        widget.postModelData.likeCount.toString(),
-                                        style: TextStyle(color: Colors.grey),
-                                      )
-                                    ],
                                   ),
-                                )),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            CommentScreen(widget.postModelData)));
-                              },
-                              child: Container(
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.comment,
-                                      size: 24,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      widget.postModelData.commentCount.toString(),
-                                      style: TextStyle(color: Colors.grey),
-                                    )
-                                  ],
                                 ),
-                              ),
-                            ),
-                            GestureDetector(
-                                onTapDown: (down) {
-                                  if (widget.postModelData.postImage!.length > 0) {
-                                    shareNetworkImage(widget
-                                        .postModelData.postImage!
-                                        .elementAt(0)
-                                        .image
-                                        .toString());
-                                  } else {
-                                    shareText(widget.postModelData.desc.toString());
-                                  }
-                                },
-                                child: Container(
+
+                                SizedBox(
+                                  height: 3,
+                                ),
+                                Divider(
+                                  height: 1,
+                                  color: Colors.grey,
+                                ),
+                                Container(
+                                  width: double.infinity,
+                                  height: 24.00 * fem,
+                                  margin: EdgeInsets.only(
+                                      left: 20, top: 10, right: 20, bottom: 10),
                                   child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
-                                      Icon(
-                                        Icons.ios_share_outlined,
-                                        size: AppCommonHelper.isTablet(context)
-                                            ? 40
-                                            : 24,
+                                      GestureDetector(
+                                          onTap: () {
+                                            postPresenter
+                                                .addLike(
+                                                    widget.postModelData.id
+                                                        .toString(),
+                                                    widget
+                                                                .postModelData
+                                                                .postLike!
+                                                                .length >
+                                                            0
+                                                        ? false
+                                                        : true)
+                                                .then((value) {
+                                              if (widget.postModelData.postLike!
+                                                      .length >
+                                                  0) {
+                                                // Fluttertoast.showToast(msg: "UnLike Successfully");
+                                                int? i = widget
+                                                    .postModelData.likeCount;
+                                                widget.postModelData.likeCount =
+                                                    (i! - 1);
+                                                widget.postModelData.postLike =
+                                                    [];
+                                              } else {
+                                                // Fluttertoast.showToast(msg: "Liked Successfully");
+                                                int? i = widget
+                                                    .postModelData.likeCount;
+                                                widget.postModelData.likeCount =
+                                                    (i! + 1);
+                                                PostLike postLike = PostLike();
+                                                postLike.id = "uheuithgiurth";
+                                                widget.postModelData.postLike!
+                                                    .add(postLike);
+                                              }
+                                              setState(() {});
+                                            });
+                                          },
+                                          child: Container(
+                                            child: Row(
+                                              children: [
+                                                Icon(Icons.thumb_up,
+                                                    size: 24,
+                                                    color: widget
+                                                                .postModelData
+                                                                .postLike!
+                                                                .length >
+                                                            0
+                                                        ? secondary
+                                                        : primary),
+                                                SizedBox(
+                                                  width: 5,
+                                                ),
+                                                Text(
+                                                  widget.postModelData.likeCount
+                                                      .toString(),
+                                                  style: TextStyle(
+                                                      color: Colors.grey),
+                                                )
+                                              ],
+                                            ),
+                                          )),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      CommentScreen(widget
+                                                          .postModelData)));
+                                        },
+                                        child: Container(
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.comment,
+                                                size: 24,
+                                              ),
+                                              SizedBox(
+                                                width: 5,
+                                              ),
+                                              Text(
+                                                widget
+                                                    .postModelData.commentCount
+                                                    .toString(),
+                                                style: TextStyle(
+                                                    color: Colors.grey),
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                       ),
-                                      // SizedBox(width: 5,),
-                                      // Text(widget.postModelData.shareCount.toString(),style: TextStyle(color: Colors.grey),)
+                                      GestureDetector(
+                                          onTapDown: (down) {
+                                            if (widget.postModelData.postImage!
+                                                    .length >
+                                                0) {
+                                              shareNetworkImage(widget
+                                                  .postModelData.postImage!
+                                                  .elementAt(0)
+                                                  .image
+                                                  .toString());
+                                            } else {
+                                              shareText(widget
+                                                  .postModelData.desc
+                                                  .toString());
+                                            }
+                                          },
+                                          child: Container(
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.ios_share_outlined,
+                                                  size:
+                                                      AppCommonHelper.isTablet(
+                                                              context)
+                                                          ? 40
+                                                          : 24,
+                                                ),
+                                                // SizedBox(width: 5,),
+                                                // Text(widget.postModelData.shareCount.toString(),style: TextStyle(color: Colors.grey),)
+                                              ],
+                                            ),
+                                          )),
                                     ],
                                   ),
-                                )),
-                          ],
+                                ), //////////////////////
+                              ],
+                            ),
+                          ),
                         ),
-                      ),//////////////////////
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    ));
+        ));
   }
 
   Future<void> shareNetworkImage(String imageUrl) async {

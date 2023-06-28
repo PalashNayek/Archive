@@ -30,8 +30,8 @@ class PostPresenter {
   Future<PostListModel> getOtherPost(String userId) {
     return _postService!.getOtherPost(userId,"");
   }
-  Future<PostListModel> getAllPost(String keyword,int limit,int offset) {
-    return _postService!.getAllPost(keyword,limit,offset);
+  Future<PostListModel> getAllPost(String keyword, int limit, int offset, String type) {
+    return _postService!.getAllPost(keyword, limit, offset, type);
   }
 
   //get filter ........

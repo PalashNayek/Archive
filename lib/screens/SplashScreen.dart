@@ -17,8 +17,8 @@ import 'package:s2w/utils.dart';
 
 import '../utilities/app_common_helper.dart';
 import '../utilities/app_local_data_util.dart';
-import '../utilities/getReferenceInfo.dart';
 import '../widget/custom_snackbar.dart';
+import '../widget/deviceInfoView.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

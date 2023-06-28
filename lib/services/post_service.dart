@@ -308,8 +308,8 @@ class PostService extends ApiClient with UiHelper {
     });
   }
 
-  Future<PostListModel> getAllPost(String keyword,int limit,int offset) {
-    return getRequest(_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&keyword="+keyword, "",isCompleteUrl: false).then((response) {
+  Future<PostListModel> getAllPost(String keyword, int limit,int offset, String type) {
+    return getRequest(_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&type="+type.toString()+"&keyword="+keyword, "",isCompleteUrl: false).then((response) {
       if (response != null) {
         var result = json.decode(response.body);
         return PostListModel.fromJson(result);

@@ -19,6 +19,8 @@ import '../page-1/search-page--dL4.dart';
 import '../player/video_player.dart';
 import '../presenter/post_presenter.dart';
 import '../screens/comment_screen.dart';
+import '../screens/dashboard/fluid_nav_bar.dart';
+import '../screens/home.dart';
 import '../utilities/app_common_helper.dart';
 import '../utils.dart';
 import 'package:http/http.dart' as http;
@@ -127,31 +129,32 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                       .elementAt(0)
                                       .profile ==
                                   null
-                              ? Image.asset("assets/page-1/images/user_profile_male.png",
+                              ? Image.asset(
+                                  "assets/page-1/images/user_profile_male.png",
                                   width: 50 * fem,
                                   height: 50 * fem,
                                   fit: BoxFit.cover)
                               : Image.network(
-                              loadingBuilder: (BuildContext context,
-                                  Widget child,
-                                  ImageChunkEvent? loadingProgress) {
-                                if (loadingProgress == null) {
-                                  isLoading = false;
-                                  return child;
-                                } else {
-                                  isLoading = true;
-                                  return CircularProgressIndicator(
-                                    value: loadingProgress
-                                        .expectedTotalBytes !=
-                                        null
-                                        ? loadingProgress
-                                        .cumulativeBytesLoaded /
-                                        loadingProgress
-                                            .expectedTotalBytes!
-                                        : null,
-                                  );
-                                }
-                              },
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
+                                      ImageChunkEvent? loadingProgress) {
+                                    if (loadingProgress == null) {
+                                      isLoading = false;
+                                      return child;
+                                    } else {
+                                      isLoading = true;
+                                      return CircularProgressIndicator(
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                loadingProgress
+                                                    .expectedTotalBytes!
+                                            : null,
+                                      );
+                                    }
+                                  },
                                   widget.postModelData.account!.personalDetail!
                                       .elementAt(0)
                                       .profile
@@ -166,7 +169,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                         fit: BoxFit.cover);
                                   },
                                   fit: BoxFit.cover,
-                                  ),
+                                ),
                         ))),
                 /*if (isLoading) CircularProgressIndicator(),*/
 
@@ -307,11 +310,23 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                         width: double.infinity,
                                         fit: BoxFit.cover,
                                       )
-                                    : Image.asset(
-                                        "assets/page-1/images/loading.png",
-                                        width: double.infinity,
-                                        fit: BoxFit.fill,
+                                    : Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 17, left: 17),
+                                          child: Container(
+                                            height: 42,
+                                            width: 42,
+                                            child: CircularProgressIndicator(),
+                                          ),
+                                        ),
                                       )
+
+                                /*Image.asset(
+                                        "",
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      )*/
                                 : Image.network(
                                     widget.postModelData.postImage!
                                         .elementAt(0)
@@ -428,30 +443,27 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                     filterQuality: FilterQuality.low,
                                     errorBuilder: (context, error, stackTrace) {
                                       return Center(
-                                        child: Image.asset("assets/page-1/images/image_load_error",
+                                        child: Image.asset(
+                                            "assets/page-1/images/image_load_error",
                                             width: 50 * fem,
                                             height: 50 * fem,
                                             fit: BoxFit.cover),
                                       );
                                     },
                                     fit: BoxFit.cover,
-                                    loadingBuilder:
-                                        (BuildContext context,
+                                    loadingBuilder: (BuildContext context,
                                         Widget child,
-                                        ImageChunkEvent?
-                                        loadingProgress) {
-                                      if (loadingProgress == null)
-                                        return child;
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) return child;
                                       return Center(
-                                        child:
-                                        CircularProgressIndicator(
+                                        child: CircularProgressIndicator(
                                           value: loadingProgress
-                                              .expectedTotalBytes !=
-                                              null
+                                                      .expectedTotalBytes !=
+                                                  null
                                               ? loadingProgress
-                                              .cumulativeBytesLoaded /
-                                              loadingProgress
-                                                  .expectedTotalBytes!
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
                                               : null,
                                         ),
                                       );
@@ -480,7 +492,8 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                             ),*/
                             style: SafeGoogleFont(
                               'Lato',
-                              fontSize: AppCommonHelper.isTablet(context) ? 40 : 24,
+                              fontSize:
+                                  AppCommonHelper.isTablet(context) ? 40 : 24,
                               fontWeight: FontWeight.w700,
                               height: 1.2 * ffem / fem,
                               color: Color(0xff000000),
@@ -924,7 +937,9 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                       showCustomSnackBar(
                                           "Post Block Successfully", context,
                                           isError: false);
-                                      Navigator.pop(context);
+                                      Navigator.pushReplacement(context,
+                                          MaterialPageRoute(builder: (context) => DashBoardScreen()));
+                                      //Navigator.pop(context);
                                     });
                                   } else {
                                     showCustomSnackBar(
@@ -1222,9 +1237,6 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
       }
     });
   }
-
-
-
 
   openAlertBox() {
     return showDialog(

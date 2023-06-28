@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:custom_alert_dialog_box/custom_alert_dialog_box.dart';
+import 'package:device_info/device_info.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:intl_phone_field/phone_number.dart';
+import 'package:provider/provider.dart';
 
 //import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:ui';
@@ -16,6 +19,7 @@ import 'package:s2w/widget/custom_snackbar.dart';
 
 import '../utilities/app_common_helper.dart';
 import '../utils/app_constants.dart';
+import '../view_model/DeviceViewModel.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -32,12 +36,31 @@ class _loginScreenState extends State<LoginScreen> {
 
   @override
   void dispose() {
-    mobileController.dispose(); // The framework will automatically dispose of the controller
+    mobileController
+        .dispose(); // The framework will automatically dispose of the controller
     super.dispose();
   }
 
+  /*Future<String> getDeviceId() async {
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+    if (Platform.isAndroid) {
+      AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+      return androidInfo.androidId; // Use Android ID as the device ID
+    } else if (Platform.isIOS) {
+      IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+      return iosInfo.identifierForVendor; // Use Identifier for Vendor as the device ID
+    }
+    return ''; // Return an empty string for unsupported platforms
+  }*/
+
+
   @override
   Widget build(BuildContext context) {
+
+
+    //DeviceInfoViewModel viewModel = Provider.of<DeviceInfoViewModel>(context);
+    print("device id");
+    //print(viewModel.deviceInfo?.deviceId ?? 'N/A');
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
@@ -168,7 +191,6 @@ class _loginScreenState extends State<LoginScreen> {
                                         : 15 * fem),
                                 width: double.infinity,
                                 height: 80 * fem,
-
                                 child: IntlPhoneField(
                                   decoration: InputDecoration(
                                     labelText: 'Phone Number',
@@ -195,8 +217,7 @@ class _loginScreenState extends State<LoginScreen> {
                                     phoneNumber = phone;
                                     print(phone.completeNumber);
                                   },
-                                )
-                            ),
+                                )),
                             Container(
                                 margin: EdgeInsets.fromLTRB(
                                     5 * fem, 1 * fem, 1 * fem, 0 * fem),
@@ -328,23 +349,32 @@ class _loginScreenState extends State<LoginScreen> {
               title: const Text("End User Licence Agreement"),
               content: Text(AppConstants.terms,
                   style: TextStyle(
-                      fontSize: AppCommonHelper.isTablet(context) ? 30 : 15,
-                      )),
+                    fontSize: AppCommonHelper.isTablet(context) ? 30 : 15,
+                  )),
               actions: [
                 CupertinoButton.filled(
                     child: const Text(
                       "Agree",
                       style: TextStyle(color: Colors.white),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
+                      /*getDeviceId();
+                      String deviceId = await getDeviceId();
+                      print('Device ID: $deviceId');
+                      print("device id");*/
                       Navigator.of(context).pop();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
                                   OTPScreen(phoneNumber.number.toString())));
-                    })
+
+                      //
+                    }
+                )
               ],
             ));
   }
+
+
 }

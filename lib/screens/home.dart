@@ -40,6 +40,7 @@ class _HomeContentState extends State<HomeContent> {
   bool isLoaded = false;
   bool internetConnection = true;
   int totalPostLength = 0;
+  String type = "All";
 
   @override
   void initState() {
@@ -55,7 +56,7 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   void getPostDat(int off) {
-    postPresenter.getAllPost("", perPage, off).then((value) {
+    postPresenter.getAllPost("", perPage, off, type).then((value) {
       postListModel = value;
       postListData.addAll(value.result as Iterable<PostModelData>);
       totalPostLength = postListData.length.toInt();
@@ -503,68 +504,98 @@ class _HomeContentState extends State<HomeContent> {
                                         height: 300,
                                         width: 200,
                                         child: Container(
-                                          margin: EdgeInsets.fromLTRB(6 * fem, 0 * fem, 7 * fem, 7 * fem),
+                                          margin: EdgeInsets.fromLTRB(6 * fem,
+                                              0 * fem, 7 * fem, 7 * fem),
                                           width: double.infinity,
                                           height: 450 * fem,
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(7 * fem),
-                                            border: Border.all(color: Color(0x99d6d6d6)),
+                                            borderRadius:
+                                                BorderRadius.circular(7 * fem),
+                                            border: Border.all(
+                                                color: Color(0x99d6d6d6)),
                                             color: Color(0xffffffff),
                                           ),
                                           child: Column(
                                             children: [
                                               //header
                                               Padding(
-                                                padding: const EdgeInsets.all(3.0),
+                                                padding:
+                                                    const EdgeInsets.all(3.0),
                                                 child: Row(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                                  mainAxisAlignment: MainAxisAlignment.start,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
                                                   children: <Widget>[
                                                     //user
                                                     /*if (isLoading) CircularProgressIndicator(),*/
 
                                                     Expanded(
                                                         child: Row(
-                                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                                          children: [
-                                                            Container(
-                                                              margin: EdgeInsets.only(left: 10, top: 10),
-                                                              child: Column(
-                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                children: [
-                                                                  RichText(
-                                                                    text: TextSpan(
-                                                                      style: SafeGoogleFont(
-                                                                        'Netflix Sans',
-                                                                        fontSize: 16 * ffem,
-                                                                        fontWeight: FontWeight.w500,
-                                                                        height: 1.171875 * ffem / fem,
-                                                                        color: Color(0xff000000),
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 10,
+                                                                  top: 10),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              RichText(
+                                                                text: TextSpan(
+                                                                  style:
+                                                                      SafeGoogleFont(
+                                                                    'Netflix Sans',
+                                                                    fontSize:
+                                                                        16 *
+                                                                            ffem,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                    height:
+                                                                        1.171875 *
+                                                                            ffem /
+                                                                            fem,
+                                                                    color: Color(
+                                                                        0xff000000),
+                                                                  ),
+                                                                  children: [
+                                                                    TextSpan(
+                                                                      text:
+                                                                          "Shorts",
+                                                                      style:
+                                                                          SafeGoogleFont(
+                                                                        'Lato',
+                                                                        fontSize:
+                                                                            20 *
+                                                                                ffem,
+                                                                        fontWeight:
+                                                                            FontWeight.w700,
+                                                                        height: 1.2 *
+                                                                            ffem /
+                                                                            fem,
+                                                                        color: Color(
+                                                                            0xff000000),
                                                                       ),
-                                                                      children: [
-                                                                        TextSpan(
-                                                                          text: "Shorts",
-                                                                          style: SafeGoogleFont(
-                                                                            'Lato',
-                                                                            fontSize: 20 * ffem,
-                                                                            fontWeight: FontWeight.w700,
-                                                                            height: 1.2 * ffem / fem,
-                                                                            color: Color(0xff000000),
-                                                                          ),
-                                                                        ),
-                                                                      ],
                                                                     ),
-                                                                  ),
-                                                                  SizedBox(
-                                                                    height: 5,
-                                                                  ),
-                                                                ],
+                                                                  ],
+                                                                ),
                                                               ),
-                                                            ),
+                                                              SizedBox(
+                                                                height: 5,
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
 
-                                                            //option/more icon
-                                                          ],
-                                                        ))
+                                                        //option/more icon
+                                                      ],
+                                                    ))
                                                     //username
                                                   ],
                                                 ),
@@ -578,30 +609,33 @@ class _HomeContentState extends State<HomeContent> {
                                                 color: Colors.grey,
                                               ),
                                               Padding(
-                                                  padding: EdgeInsets.only(left: 10),
+                                                  padding:
+                                                      EdgeInsets.only(left: 10),
                                                   child: Align(
-                                                    alignment: Alignment.topLeft,
+                                                    alignment:
+                                                        Alignment.topLeft,
                                                   )),
-
-
                                               Container(
                                                 color: Colors.blue,
                                                 width: 345,
                                                 height: 235,
                                                 child: Center(
-                                                  child: Text("Required API",style: SafeGoogleFont(
-                                                    'Lato',
-                                                    fontSize: 15 * ffem,
-                                                    fontWeight: FontWeight.w700,
-                                                    height: 1.2 * ffem / fem,
-                                                    color: Color(0xffffffff),
-                                                  ),),
+                                                  child: Text(
+                                                    "Required API",
+                                                    style: SafeGoogleFont(
+                                                      'Lato',
+                                                      fontSize: 15 * ffem,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      height: 1.2 * ffem / fem,
+                                                      color: Color(0xffffffff),
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ],
                                           ),
-                                        )
-                                      )
+                                        ))
                                     : PostWidgetItem(postListData.elementAt(i),
                                         profileModel);
                           },
@@ -617,12 +651,13 @@ class _HomeContentState extends State<HomeContent> {
   Future<void> _pullRefresh() async {
     Future.delayed(const Duration(seconds: 3000), () {
       isLoaded = true;
-    });
-
-    setState(() {
-      //getData();
       getPostDat(offset);
     });
+
+    /*setState(() {
+      //getData();
+      getPostDat(offset);
+    });*/
   }
 
   Shimmer getShimmerLoading() {

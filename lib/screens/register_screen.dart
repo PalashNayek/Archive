@@ -53,6 +53,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   List<InterestListModel> interestList1 = [];
   List<InterestListModel> interestList2 = [];
   List<InterestListModel> interestList3 = [];
+  bool isLoading = false;
+  double progress = 0.0;
 
   Gender selected = Gender.Male;
   List<String> language = [];
@@ -508,6 +510,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                                     as String,
                                                                 width: 20,
                                                                 height: 20,
+                                                                filterQuality: FilterQuality.low,
+                                                                errorBuilder: (context, error, stackTrace) {
+                                                                  return Image.asset(
+                                                                      "assets/page-1/images/image_load_error.png",
+                                                                      width: 50 * fem,
+                                                                      height: 50 * fem,
+                                                                      fit: BoxFit.cover);
+                                                                },
+                                                                loadingBuilder:
+                                                                    (BuildContext context,
+                                                                    Widget child,
+                                                                    ImageChunkEvent?
+                                                                    loadingProgress) {
+                                                                  if (loadingProgress == null)
+                                                                    return child;
+                                                                  return Center(
+                                                                    child:
+                                                                    CircularProgressIndicator(
+                                                                      value: loadingProgress
+                                                                          .expectedTotalBytes !=
+                                                                          null
+                                                                          ? loadingProgress
+                                                                          .cumulativeBytesLoaded /
+                                                                          loadingProgress
+                                                                              .expectedTotalBytes!
+                                                                          : null,
+                                                                    ),
+                                                                  );
+                                                                },
                                                               ),
                                                             ),
                                                             Padding(

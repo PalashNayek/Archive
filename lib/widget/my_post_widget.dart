@@ -319,10 +319,17 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                                         width: double.infinity,
                                         fit: BoxFit.cover,
                                       )
-                                    : Image.asset(
-                                        "assets/page-1/images/loading.png",
-                                        width: double.infinity,
-                                        fit: BoxFit.fill,
+                                    : Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(top: 17, left: 17),
+                                          child: Container(
+                                            height: 42,
+                                            width: 42,
+                                            child: CircularProgressIndicator(
+
+                                            ),
+                                          ),
+                                        ),
                                       )
                                 : Image.network(
                                     widget.postModelData.postImage!
@@ -397,38 +404,32 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                                         .image
                                         .toString(),
                                     fit: BoxFit.cover,
-
-                                    loadingBuilder:
-                                        (BuildContext context,
+                                    loadingBuilder: (BuildContext context,
                                         Widget child,
-                                        ImageChunkEvent?
-                                        loadingProgress) {
-                                      if (loadingProgress == null)
-                                        return child;
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) return child;
                                       return Center(
-                                        child:
-                                        CircularProgressIndicator(
+                                        child: CircularProgressIndicator(
                                           value: loadingProgress
-                                              .expectedTotalBytes !=
-                                              null
+                                                      .expectedTotalBytes !=
+                                                  null
                                               ? loadingProgress
-                                              .cumulativeBytesLoaded /
-                                              loadingProgress
-                                                  .expectedTotalBytes!
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
                                               : null,
                                         ),
                                       );
                                     },
-
                                     errorBuilder: (context, error, stackTrace) {
                                       return Center(
-                                        child: Image.asset("assets/page-1/images/image_load_error",
+                                        child: Image.asset(
+                                            "assets/page-1/images/image_load_error",
                                             width: 50 * fem,
                                             height: 50 * fem,
                                             fit: BoxFit.cover),
                                       );
                                     },
-
                                   );
                                 }),
                             Align(
@@ -614,7 +615,8 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
       }
     });
   }
-  showAlert(){
+
+  showAlert() {
     QuickAlert.show(
       context: context,
       type: QuickAlertType.confirm,

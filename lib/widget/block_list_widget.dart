@@ -54,6 +54,13 @@ class BlockListWidgetItem extends StatelessWidget
                        height: 56*fem,
                        filterQuality: FilterQuality.low,
                        fit: BoxFit.cover,
+                       errorBuilder: (context, error, stackTrace) {
+                         return Image.asset(
+                             "assets/page-1/images/user_profile_male.png",
+                             width: 50 * fem,
+                             height: 50 * fem,
+                             fit: BoxFit.cover);
+                       },
                        loadingBuilder: (BuildContext context,
                            Widget child,
                            ImageChunkEvent? loadingProgress) {
