@@ -499,7 +499,7 @@ class _HomeContentState extends State<HomeContent> {
                                 )),
                           ),
                         ),
-                      )
+                      )//hhhhhhhhhhh
                           : i == 2
                           ? Container(
                         padding:
@@ -528,7 +528,7 @@ class _HomeContentState extends State<HomeContent> {
                                           itemBuilder: (BuildContext context,
                                               int index, int realIdx) {
                                             return BannerItem(bannerList
-                                                .elementAt(index)
+                                                .elementAt(index)//
                                                 .image!);
                                           },
                                           options: CarouselOptions(
