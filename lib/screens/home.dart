@@ -442,6 +442,110 @@ class _HomeContentState extends State<HomeContent> {
                       ],
                     ),
                   ),
+
+                  SizedBox(
+                      height: 300,
+                      width: double.infinity,
+                      child: Container(
+                        margin: EdgeInsets.fromLTRB(7 * fem,
+                            0 * fem, 7 * fem, 7 * fem),
+                        width: double.infinity,
+                        height: 450 * fem,
+                        decoration: BoxDecoration(
+                          borderRadius:
+                          BorderRadius.circular(7 * fem),
+                          border: Border.all(
+                              color: Color(0x99d6d6d6)),
+                          color: Color(0xffffffff),
+                        ),
+                        child: Column(
+                          children: [
+                            //header
+                            Padding(
+                              padding:
+                              const EdgeInsets.all(3.0),
+                              child: Row(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                MainAxisAlignment.start,
+                                children: <Widget>[
+                                  Expanded(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment
+                                            .spaceBetween,
+                                        children: [
+                                          Container(
+                                            margin:
+                                            EdgeInsets.only(
+                                                left: 10,
+                                                top: 10),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment
+                                                  .start,
+                                              children: [
+                                                Column(
+                                                  children: [
+                                                    RichText(
+                                                      text: TextSpan(
+                                                        style:
+                                                        SafeGoogleFont(
+                                                          'Netflix Sans',
+                                                          fontSize:
+                                                          16 *
+                                                              ffem,
+                                                          fontWeight:
+                                                          FontWeight
+                                                              .w500,
+                                                          height:
+                                                          1.171875 *
+                                                              ffem /
+                                                              fem,
+                                                          color: Color(
+                                                              0xff000000),
+                                                        ),
+                                                        children: [
+                                                          TextSpan(text: "Shorts",
+                                                            style: SafeGoogleFont('Lato',
+                                                              fontSize: 20 * ffem,
+                                                              fontWeight: FontWeight.w700,
+                                                              height: 1.2 * ffem / fem,
+                                                              color: Color(0xff000000),
+                                                            ),
+                                                          ),
+
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    ////////////////////////////'
+                                                   /* ListView.builder(
+                                                      itemCount: postListData.length ,
+                                                      scrollDirection: Axis.horizontal,
+                                                      itemBuilder: (context, i) {
+                                                        return PostWidgetItem(postListData.elementAt(i),
+                                                            profileModel);
+                                                      },
+                                                    ),*/
+
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+
+                                          //option/more icon
+                                        ],
+                                      ))
+                                  //username
+                                ],
+                              ),
+                            ),
+                            //header End
+                          ],
+                        ),
+                      )),
                   /*ListView.builder(
                     itemCount: postListData.length ,
                     scrollDirection: Axis.horizontal,
@@ -509,166 +613,7 @@ class _HomeContentState extends State<HomeContent> {
                                               )),
                                             ),
                                     ),
-                                  ) //hhhhhhhhhhh
-                                /*: i == 2
-                                    ?
-                            SizedBox(
-                                        height: 500,
-                                        width: 300,
-                                        child: Container(
-                                          margin: EdgeInsets.fromLTRB(6 * fem,
-                                              0 * fem, 7 * fem, 7 * fem),
-                                          width: double.infinity,
-                                          height: 450 * fem,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(7 * fem),
-                                            border: Border.all(
-                                                color: Color(0x99d6d6d6)),
-                                            color: Color(0xffffffff),
-                                          ),
-                                          child: Column(
-                                            children: [
-                                              //header
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.all(3.0),
-                                                child: Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: <Widget>[
-                                                    Expanded(
-                                                        child: Row(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceBetween,
-                                                      children: [
-                                                        Container(
-                                                          margin:
-                                                              EdgeInsets.only(
-                                                                  left: 10,
-                                                                  top: 10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Column(
-                                                                children: [
-                                                                  RichText(
-                                                                    text: TextSpan(
-                                                                      style:
-                                                                      SafeGoogleFont(
-                                                                        'Netflix Sans',
-                                                                        fontSize:
-                                                                        16 *
-                                                                            ffem,
-                                                                        fontWeight:
-                                                                        FontWeight
-                                                                            .w500,
-                                                                        height:
-                                                                        1.171875 *
-                                                                            ffem /
-                                                                            fem,
-                                                                        color: Color(
-                                                                            0xff000000),
-                                                                      ),
-                                                                      children: [
-                                                                        TextSpan(text: "Shorts",
-                                                                          style: SafeGoogleFont('Lato',
-                                                                            fontSize: 20 * ffem,
-                                                                            fontWeight: FontWeight.w700,
-                                                                            height: 1.2 * ffem / fem,
-                                                                            color: Color(0xff000000),
-                                                                          ),
-                                                                        ),
-
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                  ////////////////////////////'
-
-                                                                  ListView.builder(
-                                                                      scrollDirection: Axis.horizontal,
-                                                                      itemCount: postListData.length,
-                                                                      physics: NeverScrollableScrollPhysics(),
-                                                                      shrinkWrap: true,
-                                                                      itemBuilder: (context, i) {
-                                                                         return (i == postListData.length)
-                                                                             ? Container(
-                                                                           margin:
-                                                                           EdgeInsets.only(left: 20, right: 20),
-                                                                           child:
-                                                                           VisibilityDetector(
-                                                                             key: Key('your_button_key'),
-                                                                             // Provide a unique key to the widget
-                                                                             onVisibilityChanged: (visibilityInfo) {
-                                                                               if (visibilityInfo.visibleFraction ==
-                                                                                   1.0) {
-                                                                                 moreLoadPostCircleProgressbar = true;
-                                                                                 offset = offset + perPage;
-                                                                                 getPostDat(offset);
-                                                                               } else {
-                                                                                 moreLoadPostCircleProgressbar = false;
-                                                                               }
-                                                                             },
-                                                                             child: moreLoadPostCircleProgressbar
-                                                                                 ? postListData.length >
-                                                                                 totalPostLength
-                                                                                 ? Text("")
-                                                                                 : Center(
-                                                                                 child: Padding(
-                                                                                   padding:
-                                                                                   const EdgeInsets.only(
-                                                                                       top: 25),
-                                                                                   child: Text(
-                                                                                     'No post available',
-                                                                                     style: SafeGoogleFont(
-                                                                                       'Lato',
-                                                                                       fontSize: 12 * ffem,
-                                                                                       fontWeight:
-                                                                                       FontWeight.w700,
-                                                                                       height: 1.2 * ffem / fem,
-                                                                                       color: Color(0xff404040),
-                                                                                     ),
-                                                                                   ),
-                                                                                 ))
-                                                                                 : const SizedBox(
-                                                                               height: 64.0,
-                                                                               width: 24.0,
-                                                                               child: Center(
-                                                                                   child: Padding(
-                                                                                     padding:
-                                                                                     EdgeInsets.only(top: 25),
-                                                                                     child:
-                                                                                     CircularProgressIndicator(),
-                                                                                   )),
-                                                                             ),
-                                                                           ),
-                                                                         ): PostWidgetItem(postListData.elementAt(i),
-                                                                             profileModel);
-                                                                       }
-
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-
-                                                        //option/more icon
-                                                      ],
-                                                    ))
-                                                    //username
-                                                  ],
-                                                ),
-                                              ),
-                                              //header End
-                                            ],
-                                          ),
-                                        ))*/
+                                  )
                                     : PostWidgetItem(postListData.elementAt(i),
                                         profileModel);
                           },
