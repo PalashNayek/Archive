@@ -139,7 +139,7 @@ class _HomeContentState extends State<HomeContent> {
                                 Icons.search,
                                 color: Colors.white,
                                 size:
-                                AppCommonHelper.isTablet(context) ? 40 : 24,
+                                    AppCommonHelper.isTablet(context) ? 40 : 24,
                               ))
                         ],
                       ),
@@ -147,7 +147,7 @@ class _HomeContentState extends State<HomeContent> {
                   ),
                   Container(
                     padding:
-                    EdgeInsets.fromLTRB(6 * fem, 6 * fem, 4 * fem, 0 * fem),
+                        EdgeInsets.fromLTRB(6 * fem, 6 * fem, 4 * fem, 0 * fem),
                     width: double.infinity,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -167,35 +167,35 @@ class _HomeContentState extends State<HomeContent> {
                                     height: 150 * fem,
                                     child: bannerList.isNotEmpty
                                         ? CarouselSlider.builder(
-                                      itemCount: bannerList.length,
-                                      itemBuilder: (BuildContext context,
-                                          int index, int realIdx) {
-                                        return BannerItem(bannerList
-                                            .elementAt(index)
-                                            .image!);
-                                      },
-                                      options: CarouselOptions(
-                                        height: AppCommonHelper.isTablet(
-                                            context)
-                                            ? 400
-                                            : 140.0,
-                                        enlargeCenterPage: true,
-                                        autoPlay: true,
-                                        aspectRatio: 16 / 9,
-                                        autoPlayCurve:
-                                        Curves.fastOutSlowIn,
-                                        enableInfiniteScroll: true,
-                                        autoPlayAnimationDuration:
-                                        Duration(milliseconds: 1000),
-                                        viewportFraction: 0.8,
-                                      ),
-                                    )
+                                            itemCount: bannerList.length,
+                                            itemBuilder: (BuildContext context,
+                                                int index, int realIdx) {
+                                              return BannerItem(bannerList
+                                                  .elementAt(index)
+                                                  .image!);
+                                            },
+                                            options: CarouselOptions(
+                                              height: AppCommonHelper.isTablet(
+                                                      context)
+                                                  ? 400
+                                                  : 140.0,
+                                              enlargeCenterPage: true,
+                                              autoPlay: true,
+                                              aspectRatio: 16 / 9,
+                                              autoPlayCurve:
+                                                  Curves.fastOutSlowIn,
+                                              enableInfiniteScroll: true,
+                                              autoPlayAnimationDuration:
+                                                  Duration(milliseconds: 1000),
+                                              viewportFraction: 0.8,
+                                            ),
+                                          )
                                         : Image(
-                                      width: 367 * fem,
-                                      height: 150 * fem,
-                                      image: AssetImage(
-                                          "assets/page-1/images/bannerdefaultimage.png"),
-                                    ),
+                                            width: 367 * fem,
+                                            height: 150 * fem,
+                                            image: AssetImage(
+                                                "assets/page-1/images/bannerdefaultimage.png"),
+                                          ),
                                   )),
                               ///////////////////////////////////////////////////////////////////////
 
@@ -228,8 +228,8 @@ class _HomeContentState extends State<HomeContent> {
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(
-                                                    5 * fem),
+                                                    BorderRadius.circular(
+                                                        5 * fem),
                                                 border: Border.all(
                                                     color: Color(0xffe7e7e7)),
                                                 color: Color(0xffffffff),
@@ -266,7 +266,7 @@ class _HomeContentState extends State<HomeContent> {
                                           height: 90 * fem,
                                           child: Row(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.end,
+                                                CrossAxisAlignment.end,
                                             children: [
                                               GestureDetector(
                                                   onTap: () {
@@ -286,18 +286,18 @@ class _HomeContentState extends State<HomeContent> {
                                                     height: double.infinity,
                                                     child: Column(
                                                       crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .center,
+                                                          CrossAxisAlignment
+                                                              .center,
                                                       children: [
                                                         Container(
                                                           margin: EdgeInsets
                                                               .fromLTRB(
-                                                              0 * fem,
-                                                              0 * fem,
-                                                              0 * fem,
-                                                              6 * fem),
+                                                                  0 * fem,
+                                                                  0 * fem,
+                                                                  0 * fem,
+                                                                  6 * fem),
                                                           width:
-                                                          double.infinity,
+                                                              double.infinity,
                                                           height: 60 * fem,
                                                           child: Stack(
                                                             children: [
@@ -306,18 +306,18 @@ class _HomeContentState extends State<HomeContent> {
                                                                 top: 3 * fem,
                                                                 child: Align(
                                                                   child:
-                                                                  SizedBox(
+                                                                      SizedBox(
                                                                     width: 54 *
                                                                         fem,
                                                                     height: 54 *
                                                                         fem,
                                                                     child:
-                                                                    Container(
+                                                                        Container(
                                                                       decoration:
-                                                                      BoxDecoration(
+                                                                          BoxDecoration(
                                                                         borderRadius:
-                                                                        BorderRadius.circular(27 *
-                                                                            fem),
+                                                                            BorderRadius.circular(27 *
+                                                                                fem),
                                                                         color: Color(
                                                                             0xff080053),
                                                                       ),
@@ -330,13 +330,13 @@ class _HomeContentState extends State<HomeContent> {
                                                                 top: 9 * fem,
                                                                 child: Align(
                                                                   child:
-                                                                  SizedBox(
+                                                                      SizedBox(
                                                                     width: 42 *
                                                                         fem,
                                                                     height: 42 *
                                                                         fem,
                                                                     child:
-                                                                    TextButton(
+                                                                        TextButton(
                                                                       onPressed:
                                                                           () {
                                                                         Navigator.push(
@@ -346,7 +346,7 @@ class _HomeContentState extends State<HomeContent> {
                                                                       style: TextButton
                                                                           .styleFrom(
                                                                         padding:
-                                                                        EdgeInsets.zero,
+                                                                            EdgeInsets.zero,
                                                                       ),
                                                                       child: Image
                                                                           .asset(
@@ -367,13 +367,13 @@ class _HomeContentState extends State<HomeContent> {
                                                             textAlign: TextAlign
                                                                 .center,
                                                             style:
-                                                            SafeGoogleFont(
+                                                                SafeGoogleFont(
                                                               'Lato',
                                                               fontSize:
-                                                              14 * ffem,
+                                                                  14 * ffem,
                                                               fontWeight:
-                                                              FontWeight
-                                                                  .w400,
+                                                                  FontWeight
+                                                                      .w400,
                                                               height: 1 *
                                                                   ffem /
                                                                   fem,
@@ -387,46 +387,46 @@ class _HomeContentState extends State<HomeContent> {
                                                   )),
                                               isLoaded
                                                   ? CategoryItem(
-                                                  profileModel.user!
-                                                      .primaryInetrest!.id
-                                                      .toString(),
-                                                  profileModel.user!
-                                                      .primaryInetrest!.name
-                                                      .toString(),
-                                                  profileModel
-                                                      .user!
-                                                      .primaryInetrest!
-                                                      .image
-                                                      .toString())
+                                                      profileModel.user!
+                                                          .primaryInetrest!.id
+                                                          .toString(),
+                                                      profileModel.user!
+                                                          .primaryInetrest!.name
+                                                          .toString(),
+                                                      profileModel
+                                                          .user!
+                                                          .primaryInetrest!
+                                                          .image
+                                                          .toString())
                                                   : Container(),
                                               isLoaded
                                                   ? CategoryItem(
-                                                  profileModel.user!
-                                                      .secondaryInetrest!.id
-                                                      .toString(),
-                                                  profileModel
-                                                      .user!
-                                                      .secondaryInetrest!
-                                                      .name
-                                                      .toString(),
-                                                  profileModel
-                                                      .user!
-                                                      .secondaryInetrest!
-                                                      .image
-                                                      .toString())
+                                                      profileModel.user!
+                                                          .secondaryInetrest!.id
+                                                          .toString(),
+                                                      profileModel
+                                                          .user!
+                                                          .secondaryInetrest!
+                                                          .name
+                                                          .toString(),
+                                                      profileModel
+                                                          .user!
+                                                          .secondaryInetrest!
+                                                          .image
+                                                          .toString())
                                                   : Container(),
                                               isLoaded
                                                   ? CategoryItem(
-                                                profileModel.user!
-                                                    .thirdInetrest!.id
-                                                    .toString(),
-                                                profileModel.user!
-                                                    .thirdInetrest!.name
-                                                    .toString(),
-                                                profileModel.user!
-                                                    .thirdInetrest!.image
-                                                    .toString(),
-                                              )
+                                                      profileModel.user!
+                                                          .thirdInetrest!.id
+                                                          .toString(),
+                                                      profileModel.user!
+                                                          .thirdInetrest!.name
+                                                          .toString(),
+                                                      profileModel.user!
+                                                          .thirdInetrest!.image
+                                                          .toString(),
+                                                    )
                                                   : Container(),
                                             ],
                                           ),
@@ -442,265 +442,244 @@ class _HomeContentState extends State<HomeContent> {
                       ],
                     ),
                   ),
+                  /*ListView.builder(
+                    itemCount: postListData.length ,
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, i) {
+                      return PostWidgetItem(postListData.elementAt(i),
+                          profileModel);
+                    },
+                  ),*/
+
                   isLoaded
                       ? ListView.builder(
-                    itemCount: postListData.length + 1,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemBuilder: (context, i) {
-                      return (i == postListData.length)
-                          ? Container(
-                        margin:
-                        EdgeInsets.only(left: 20, right: 20),
-                        child: /*moreLoadPostCircleProgressbar? postListData.length < totalPostLength ?*/
-                        VisibilityDetector(
-                          key: Key('your_button_key'),
-                          // Provide a unique key to the widget
-                          onVisibilityChanged: (visibilityInfo) {
-                            if (visibilityInfo.visibleFraction ==
-                                1.0) {
-                              moreLoadPostCircleProgressbar = true;
-                              offset = offset + perPage;
-                              getPostDat(offset);
-                            } else {
-                              moreLoadPostCircleProgressbar = false;
-                            }
-                          },
-                          child: moreLoadPostCircleProgressbar
-                              ? postListData.length >
-                              totalPostLength
-                              ? Text("")
-                              : Center(
-                              child: Padding(
-                                padding:
-                                const EdgeInsets.only(
-                                    top: 25),
-                                child: Text(
-                                  'No post available',
-                                  style: SafeGoogleFont(
-                                    'Lato',
-                                    fontSize: 12 * ffem,
-                                    fontWeight:
-                                    FontWeight.w700,
-                                    height: 1.2 * ffem / fem,
-                                    color: Color(0xff404040),
-                                  ),
-                                ),
-                              ))
-                              : const SizedBox(
-                            height: 64.0,
-                            width: 24.0,
-                            child: Center(
-                                child: Padding(
-                                  padding:
-                                  EdgeInsets.only(top: 25),
-                                  child:
-                                  CircularProgressIndicator(),
-                                )),
-                          ),
-                        ),
-                      )//hhhhhhhhhhh
-                          : i == 2
-                          ? Container(
-                        padding:
-                        EdgeInsets.fromLTRB(6 * fem, 6 * fem, 4 * fem, 0 * fem),
-                        width: double.infinity,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.fromLTRB(
-                                  4 * fem, 0 * fem, 9 * fem, 6 * fem),
-                              width: double.infinity,
-                              height: 283 * fem,
-                              child: Stack(
-                                children: [
-                                  Positioned(
-                                      left: 5 * fem,
-                                      right: 5 * fem,
-                                      top: 0 * fem,
-                                      child: Container(
-                                        width: 367 * fem,
-                                        height: 250 * fem,
-                                        child: bannerList.isNotEmpty
-                                            ? CarouselSlider.builder(
-                                          itemCount: bannerList.length,
-                                          itemBuilder: (BuildContext context,
-                                              int index, int realIdx) {
-                                            return BannerItem(bannerList
-                                                .elementAt(index)//
-                                                .image!);
-                                          },
-                                          options: CarouselOptions(
-                                            height: AppCommonHelper.isTablet(
-                                                context)
-                                                ? 400
-                                                : 140.0,
-                                            enlargeCenterPage: true,
-                                            aspectRatio: 2,
-                                            autoPlayCurve:
-                                            Curves.fastOutSlowIn,
-                                            viewportFraction: 0.6,////////////////////////////////////
+                          itemCount: postListData.length + 1,
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, i) {
+                            return (i == postListData.length)
+                                ? Container(
+                                    margin:
+                                        EdgeInsets.only(left: 20, right: 20),
+                                    child: /*moreLoadPostCircleProgressbar? postListData.length < totalPostLength ?*/
+                                        VisibilityDetector(
+                                      key: Key('your_button_key'),
+                                      // Provide a unique key to the widget
+                                      onVisibilityChanged: (visibilityInfo) {
+                                        if (visibilityInfo.visibleFraction ==
+                                            1.0) {
+                                          moreLoadPostCircleProgressbar = true;
+                                          offset = offset + perPage;
+                                          getPostDat(offset);
+                                        } else {
+                                          moreLoadPostCircleProgressbar = false;
+                                        }
+                                      },
+                                      child: moreLoadPostCircleProgressbar
+                                          ? postListData.length >
+                                                  totalPostLength
+                                              ? Text("")
+                                              : Center(
+                                                  child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 25),
+                                                  child: Text(
+                                                    'No post available',
+                                                    style: SafeGoogleFont(
+                                                      'Lato',
+                                                      fontSize: 12 * ffem,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      height: 1.2 * ffem / fem,
+                                                      color: Color(0xff404040),
+                                                    ),
+                                                  ),
+                                                ))
 
+                                          : const SizedBox(
+                                              height: 64.0,
+                                              width: 24.0,
+                                              child: Center(
+                                                  child: Padding(
+                                                padding:
+                                                    EdgeInsets.only(top: 25),
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              )),
+                                            ),
+                                    ),
+                                  ) //hhhhhhhhhhh
+                                /*: i == 2
+                                    ?
+                            SizedBox(
+                                        height: 500,
+                                        width: 300,
+                                        child: Container(
+                                          margin: EdgeInsets.fromLTRB(6 * fem,
+                                              0 * fem, 7 * fem, 7 * fem),
+                                          width: double.infinity,
+                                          height: 450 * fem,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(7 * fem),
+                                            border: Border.all(
+                                                color: Color(0x99d6d6d6)),
+                                            color: Color(0xffffffff),
                                           ),
-                                        )
-                                            : Image(
-                                          width: 367 * fem,
-                                          height: 150 * fem,
-                                          image: AssetImage(
-                                              "assets/page-1/images/bannerdefaultimage.png"),
-                                        ),
-                                      )),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-
-                      /*SizedBox(
-                          height: 300,
-                          width: 200,
-                          child: Container(
-                            margin: EdgeInsets.fromLTRB(6 * fem,
-                                0 * fem, 7 * fem, 7 * fem),
-                            width: double.infinity,
-                            height: 450 * fem,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                              BorderRadius.circular(7 * fem),
-                              border: Border.all(
-                                  color: Color(0x99d6d6d6)),
-                              color: Color(0xffffffff),
-                            ),
-                            child: Column(
-                              children: [
-                                //header
-                                Padding(
-                                  padding:
-                                  const EdgeInsets.all(3.0),
-                                  child: Row(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.start,
-                                    children: <Widget>[
-
-                                      Expanded(
-                                          child: Row(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .spaceBetween,
+                                          child: Column(
                                             children: [
-                                              Container(
-                                                margin:
-                                                EdgeInsets.only(
-                                                    left: 10,
-                                                    top: 10),
-                                                child: Column(
+                                              //header
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.all(3.0),
+                                                child: Row(
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment
-                                                      .start,
-                                                  children: [
-                                                    RichText(
-                                                      text: TextSpan(
-                                                        style:
-                                                        SafeGoogleFont(
-                                                          'Netflix Sans',
-                                                          fontSize:
-                                                          16 *
-                                                              ffem,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .w500,
-                                                          height:
-                                                          1.171875 *
-                                                              ffem /
-                                                              fem,
-                                                          color: Color(
-                                                              0xff000000),
-                                                        ),
-                                                        children: [
-                                                          TextSpan(
-                                                            text:
-                                                            "Shorts",
-                                                            style:
-                                                            SafeGoogleFont(
-                                                              'Lato',
-                                                              fontSize:
-                                                              20 *
-                                                                  ffem,
-                                                              fontWeight:
-                                                              FontWeight.w700,
-                                                              height: 1.2 *
-                                                                  ffem /
-                                                                  fem,
-                                                              color: Color(
-                                                                  0xff000000),
-                                                            ),
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: <Widget>[
+                                                    Expanded(
+                                                        child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 10,
+                                                                  top: 10),
+                                                          child: Column(
+                                                            crossAxisAlignment:
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            children: [
+                                                              Column(
+                                                                children: [
+                                                                  RichText(
+                                                                    text: TextSpan(
+                                                                      style:
+                                                                      SafeGoogleFont(
+                                                                        'Netflix Sans',
+                                                                        fontSize:
+                                                                        16 *
+                                                                            ffem,
+                                                                        fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                        height:
+                                                                        1.171875 *
+                                                                            ffem /
+                                                                            fem,
+                                                                        color: Color(
+                                                                            0xff000000),
+                                                                      ),
+                                                                      children: [
+                                                                        TextSpan(text: "Shorts",
+                                                                          style: SafeGoogleFont('Lato',
+                                                                            fontSize: 20 * ffem,
+                                                                            fontWeight: FontWeight.w700,
+                                                                            height: 1.2 * ffem / fem,
+                                                                            color: Color(0xff000000),
+                                                                          ),
+                                                                        ),
+
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  ////////////////////////////'
+
+                                                                  ListView.builder(
+                                                                      scrollDirection: Axis.horizontal,
+                                                                      itemCount: postListData.length,
+                                                                      physics: NeverScrollableScrollPhysics(),
+                                                                      shrinkWrap: true,
+                                                                      itemBuilder: (context, i) {
+                                                                         return (i == postListData.length)
+                                                                             ? Container(
+                                                                           margin:
+                                                                           EdgeInsets.only(left: 20, right: 20),
+                                                                           child:
+                                                                           VisibilityDetector(
+                                                                             key: Key('your_button_key'),
+                                                                             // Provide a unique key to the widget
+                                                                             onVisibilityChanged: (visibilityInfo) {
+                                                                               if (visibilityInfo.visibleFraction ==
+                                                                                   1.0) {
+                                                                                 moreLoadPostCircleProgressbar = true;
+                                                                                 offset = offset + perPage;
+                                                                                 getPostDat(offset);
+                                                                               } else {
+                                                                                 moreLoadPostCircleProgressbar = false;
+                                                                               }
+                                                                             },
+                                                                             child: moreLoadPostCircleProgressbar
+                                                                                 ? postListData.length >
+                                                                                 totalPostLength
+                                                                                 ? Text("")
+                                                                                 : Center(
+                                                                                 child: Padding(
+                                                                                   padding:
+                                                                                   const EdgeInsets.only(
+                                                                                       top: 25),
+                                                                                   child: Text(
+                                                                                     'No post available',
+                                                                                     style: SafeGoogleFont(
+                                                                                       'Lato',
+                                                                                       fontSize: 12 * ffem,
+                                                                                       fontWeight:
+                                                                                       FontWeight.w700,
+                                                                                       height: 1.2 * ffem / fem,
+                                                                                       color: Color(0xff404040),
+                                                                                     ),
+                                                                                   ),
+                                                                                 ))
+                                                                                 : const SizedBox(
+                                                                               height: 64.0,
+                                                                               width: 24.0,
+                                                                               child: Center(
+                                                                                   child: Padding(
+                                                                                     padding:
+                                                                                     EdgeInsets.only(top: 25),
+                                                                                     child:
+                                                                                     CircularProgressIndicator(),
+                                                                                   )),
+                                                                             ),
+                                                                           ),
+                                                                         ): PostWidgetItem(postListData.elementAt(i),
+                                                                             profileModel);
+                                                                       }
+
+                                                                  )
+                                                                ],
+                                                              ),
+                                                            ],
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 5,
-                                                    ),
+                                                        ),
+
+                                                        //option/more icon
+                                                      ],
+                                                    ))
+                                                    //username
                                                   ],
                                                 ),
                                               ),
-
-                                              //option/more icon
+                                              //header End
                                             ],
-                                          ))
-                                      //username
-                                    ],
-                                  ),
-                                ),
-                                //header End
-                                SizedBox(
-                                  height: 3,
-                                ),
-                                Divider(
-                                  height: 1,
-                                  color: Colors.grey,
-                                ),
-                                Padding(
-                                    padding:
-                                    EdgeInsets.only(left: 10),
-                                    child: Align(
-                                      alignment:
-                                      Alignment.topLeft,
-                                    )),
-                                Container(
-                                  color: Colors.blue,
-                                  width: 345,
-                                  height: 235,
-                                  child: Center(
-                                    child: Text(
-                                      "Required API",
-                                      style: SafeGoogleFont(
-                                        'Lato',
-                                        fontSize: 15 * ffem,
-                                        fontWeight:
-                                        FontWeight.w700,
-                                        height: 1.2 * ffem / fem,
-                                        color: Color(0xffffffff),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ))*/
-                          : PostWidgetItem(postListData.elementAt(i),
-                          profileModel);
-                    },
-                  )
-                      : getShimmerLoading()
+                                          ),
+                                        ))*/
+                                    : PostWidgetItem(postListData.elementAt(i),
+                                        profileModel);
+                          },
+                        )
+                      : getShimmerLoading(),
+
                 ],
               ),
             ),
-          )),
+          )
+      ),
     );
   }
 
@@ -733,34 +712,34 @@ class _HomeContentState extends State<HomeContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
             SizedBox(
@@ -779,34 +758,34 @@ class _HomeContentState extends State<HomeContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
             SizedBox(
@@ -825,34 +804,34 @@ class _HomeContentState extends State<HomeContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
             SizedBox(
@@ -871,34 +850,34 @@ class _HomeContentState extends State<HomeContent> {
                 ),
                 Expanded(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          height: 18.0,
-                          color: Colors.white,
-                        ),
-                      ],
-                    )),
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      height: 18.0,
+                      color: Colors.white,
+                    ),
+                  ],
+                )),
               ],
             ),
           ],
