@@ -540,7 +540,7 @@ class _HomeContentState extends State<HomeContent> {
                                             aspectRatio: 2,
                                             autoPlayCurve:
                                             Curves.fastOutSlowIn,
-                                            viewportFraction: 0.6,
+                                            viewportFraction: 0.6,////////////////////////////////////
 
                                           ),
                                         )
