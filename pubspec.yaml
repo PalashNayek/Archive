@@ -48,6 +48,7 @@ dependencies:
   #fluttertoast: ^8.2.1
   intl: ^0.18.0
   video_player: ^2.6.1
+ # flutter_swiper: ^1.0.2-nullsafety.2.12
   comment_tree: ^0.3.0
   #flutter_html: ^2.2.1
   share_plus: ^6.3.4
