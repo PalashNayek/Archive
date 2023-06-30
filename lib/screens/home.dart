@@ -41,10 +41,12 @@ class _HomeContentState extends State<HomeContent> {
   bool internetConnection = true;
   int totalPostLength = 0;
   String type = "All";
+  late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
     Future.delayed(const Duration(seconds: 3000), () {
       isLoaded = true;
     });
@@ -79,6 +81,12 @@ class _HomeContentState extends State<HomeContent> {
       isLoaded = true;
       setState(() {});
     });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -427,7 +435,14 @@ class _HomeContentState extends State<HomeContent> {
                                                           .thirdInetrest!.image
                                                           .toString(),
                                                     )
-                                                  : CircularProgressIndicator(),
+                                                  : const Padding(
+                                                    padding: EdgeInsets.only(left: 30, bottom: 30),
+                                                    child: SizedBox(
+                                                        height: 30,
+                                                        width: 30,
+                                                        child:
+                                                            CircularProgressIndicator()),
+                                                  ),
                                             ],
                                           ),
                                         ),
@@ -442,85 +457,72 @@ class _HomeContentState extends State<HomeContent> {
                       ],
                     ),
                   ),
-
                   SizedBox(
                       height: 300,
                       width: double.infinity,
                       child: Container(
-                        margin: EdgeInsets.fromLTRB(7 * fem,
-                            0 * fem, 7 * fem, 7 * fem),
+                        margin: EdgeInsets.fromLTRB(
+                            7 * fem, 0 * fem, 7 * fem, 7 * fem),
                         width: double.infinity,
                         height: 450 * fem,
                         decoration: BoxDecoration(
-                          borderRadius:
-                          BorderRadius.circular(7 * fem),
-                          border: Border.all(
-                              color: Color(0x99d6d6d6)),
+                          borderRadius: BorderRadius.circular(7 * fem),
+                          border: Border.all(color: Color(0x99d6d6d6)),
                           color: Color(0xffffffff),
                         ),
                         child: Column(
                           children: [
                             //header
                             Padding(
-                              padding:
-                              const EdgeInsets.all(3.0),
+                              padding: const EdgeInsets.all(3.0),
                               child: Row(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
                                   Expanded(
                                       child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment
-                                            .spaceBetween,
-                                        children: [
-                                          Container(
-                                            margin:
-                                            EdgeInsets.only(
-                                                left: 10,
-                                                top: 10),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                              CrossAxisAlignment
-                                                  .start,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        margin:
+                                            EdgeInsets.only(left: 10, top: 10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Column(
                                               children: [
-                                                Column(
-                                                  children: [
-                                                    RichText(
-                                                      text: TextSpan(
-                                                        style:
-                                                        SafeGoogleFont(
-                                                          'Netflix Sans',
-                                                          fontSize:
-                                                          16 *
-                                                              ffem,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .w500,
-                                                          height:
-                                                          1.171875 *
-                                                              ffem /
-                                                              fem,
-                                                          color: Color(
-                                                              0xff000000),
-                                                        ),
-                                                        children: [
-                                                          TextSpan(text: "Shorts",
-                                                            style: SafeGoogleFont('Lato',
-                                                              fontSize: 20 * ffem,
-                                                              fontWeight: FontWeight.w700,
-                                                              height: 1.2 * ffem / fem,
-                                                              color: Color(0xff000000),
-                                                            ),
-                                                          ),
-
-                                                        ],
-                                                      ),
+                                                RichText(
+                                                  text: TextSpan(
+                                                    style: SafeGoogleFont(
+                                                      'Netflix Sans',
+                                                      fontSize: 16 * ffem,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      height:
+                                                          1.171875 * ffem / fem,
+                                                      color: Color(0xff000000),
                                                     ),
-                                                    ////////////////////////////'
-                                                   /* ListView.builder(
+                                                    children: [
+                                                      TextSpan(
+                                                        text: "Shorts",
+                                                        style: SafeGoogleFont(
+                                                          'Lato',
+                                                          fontSize: 20 * ffem,
+                                                          fontWeight:
+                                                              FontWeight.w700,
+                                                          height:
+                                                              1.2 * ffem / fem,
+                                                          color:
+                                                              Color(0xff000000),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                                ////////////////////////////'
+                                                /* ListView.builder(
                                                       itemCount: postListModel.result!.length+1,
                                                       physics: NeverScrollableScrollPhysics(),
                                                       shrinkWrap: true,
@@ -532,16 +534,15 @@ class _HomeContentState extends State<HomeContent> {
                                                               profileModel);
                                                       },
                                                     )*/
-
-                                                  ],
-                                                ),
                                               ],
                                             ),
-                                          ),
+                                          ],
+                                        ),
+                                      ),
 
-                                          //option/more icon
-                                        ],
-                                      ))
+                                      //option/more icon
+                                    ],
+                                  ))
                                   //username
                                 ],
                               ),
@@ -550,13 +551,12 @@ class _HomeContentState extends State<HomeContent> {
                           ],
                         ),
                       )),
-
                   isLoaded
                       ? ListView.builder(
                           itemCount: postListData.length + 1,
-
+                          controller: _scrollController,
                           physics: AlwaysScrollableScrollPhysics(),
-                          shrinkWrap: true,/////////////////////////////////
+                          shrinkWrap: true, /////////////////////////////////
                           itemBuilder: (context, i) {
                             return (i == postListData.length)
                                 ? Container(
@@ -597,7 +597,6 @@ class _HomeContentState extends State<HomeContent> {
                                                     ),
                                                   ),
                                                 ))
-
                                           : const SizedBox(
                                               height: 64.0,
                                               width: 24.0,
@@ -611,19 +610,19 @@ class _HomeContentState extends State<HomeContent> {
                                             ),
                                     ),
                                   )
-                                    : PostWidgetItem(postListData.elementAt(i),
-                                        profileModel);
+                                : PostWidgetItem(
+                                    postListData.elementAt(i), profileModel);
                           },
                         )
                       : getShimmerLoading(),
-
                 ],
               ),
             ),
-          )
-      ),
+          )),
     );
   }
+
+
 
   Future<void> _pullRefresh() async {
     Future.delayed(const Duration(seconds: 3000), () {
