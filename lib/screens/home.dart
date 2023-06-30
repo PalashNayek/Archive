@@ -556,7 +556,7 @@ class _HomeContentState extends State<HomeContent> {
                           itemCount: postListData.length + 1,
 
                           physics: AlwaysScrollableScrollPhysics(),
-                          shrinkWrap: true,
+                          shrinkWrap: true,/////////////////////////////////
                           itemBuilder: (context, i) {
                             return (i == postListData.length)
                                 ? Container(
