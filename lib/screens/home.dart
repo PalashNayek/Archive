@@ -427,7 +427,7 @@ class _HomeContentState extends State<HomeContent> {
                                                           .thirdInetrest!.image
                                                           .toString(),
                                                     )
-                                                  : Container(),
+                                                  : CircularProgressIndicator(),
                                             ],
                                           ),
                                         ),
@@ -521,13 +521,17 @@ class _HomeContentState extends State<HomeContent> {
                                                     ),
                                                     ////////////////////////////'
                                                    /* ListView.builder(
-                                                      itemCount: postListData.length ,
-                                                      scrollDirection: Axis.horizontal,
+                                                      itemCount: postListModel.result!.length+1,
+                                                      physics: NeverScrollableScrollPhysics(),
+                                                      shrinkWrap: true,
                                                       itemBuilder: (context, i) {
-                                                        return PostWidgetItem(postListData.elementAt(i),
-                                                            profileModel);
+                                                        return PostWidgetItem(
+                                                            postListModel.result!.elementAt(i),
+                                                            profileModel.user!.accountId.toString() as ProfileModel);
+                                                          PostWidgetItem(postListData.elementAt(i),
+                                                              profileModel);
                                                       },
-                                                    ),*/
+                                                    )*/
 
                                                   ],
                                                 ),
@@ -546,14 +550,6 @@ class _HomeContentState extends State<HomeContent> {
                           ],
                         ),
                       )),
-                  /*ListView.builder(
-                    itemCount: postListData.length ,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (context, i) {
-                      return PostWidgetItem(postListData.elementAt(i),
-                          profileModel);
-                    },
-                  ),*/
 
                   isLoaded
                       ? ListView.builder(

@@ -11,6 +11,7 @@ class CategoryItem extends StatelessWidget{
   String name;
   String image;
 
+
   @override
   Widget build(BuildContext context){
     double baseWidth = 390;
@@ -54,10 +55,10 @@ class CategoryItem extends StatelessWidget{
                             image: DecorationImage (
                               filterQuality: FilterQuality.low,
                               fit: BoxFit.cover,
-                              image: NetworkImage (image,),
+                              image: NetworkImage (image),
                               onError: (exception, stackTrace) {
                                 Image.asset(
-                                    "assets/page-1/images/user_profile_male.png",
+                                    "assets/page-1/images/image_load_error.png",
                                     width: 50 * fem,
                                     height: 50 * fem,
                                     fit: BoxFit.cover);
@@ -65,8 +66,11 @@ class CategoryItem extends StatelessWidget{
 
 
                             ),
+
                           ),
+
                         ),
+                        //CircularProgressIndicator(),
                       ),
                     ),
                   ),
