@@ -44,36 +44,28 @@ class _EditPostScreenState extends State<EditPostScreen> {
   PostDetails postModelData = PostDetails();
   bool load = false;
   String selected = "";
-  late String imgUrl;
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     getData();
   }
 
   void getData() {
-    load = true;
     authPresenter.getProfile().then((value) {
       profileModel = value;
 
       setState(() {});
     });
-
-
-
     postPresenter.getPostDetails(widget.postId.toString()).then((value) {
       postModelData = value;
+      load = true;
       titleController.text = postModelData.name.toString();
+      //print("ImgURL->$imgUrl");
       descriptionController.text = postModelData.desc.toString();
       selected = postModelData.interestId.toString();
-      print("PalashEditPost->"+selected);
-      if(selected.isNotEmpty){
-        load = false;
-      }
-      setState(() {
-
-      });
+      setState(() {});
     });
   }
 
