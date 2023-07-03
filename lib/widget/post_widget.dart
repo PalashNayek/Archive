@@ -28,10 +28,12 @@ import 'package:http/http.dart' as http;
 import 'custom_snackbar.dart';
 
 class PostWidgetItem extends StatefulWidget {
+
   PostWidgetItem(this.postModelData, this.profileModel);
 
   PostModelData postModelData;
   ProfileModel profileModel;
+
 
   @override
   _PostWidgetItemState createState() => _PostWidgetItemState();
@@ -44,6 +46,9 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
   PostPresenter postPresenter = PostPresenter();
   bool isLoading = false;
   double progress = 0.0;
+  bool isExpanded = false;
+  //int maxLines= 2;
+
 
   @override
   void initState() {
@@ -65,6 +70,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
+
 
     if (widget.postModelData.postImage!.length > 0) {
       if (getFileExtension(
@@ -92,11 +98,12 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
       });
     }
 
+    var maxLines=2;
     return ////////////////////////////////////////////////////////////////////////////
         Container(
       margin: EdgeInsets.fromLTRB(6 * fem, 0 * fem, 7 * fem, 7 * fem),
       width: double.infinity,
-      height: 450 * fem,
+      height: 550 * fem,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7 * fem),
         border: Border.all(color: Color(0x99d6d6d6)),
@@ -266,17 +273,122 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
               padding: EdgeInsets.only(left: 10),
               child: Align(
                   alignment: Alignment.topLeft,
-                  child: Text(
-                    widget.postModelData.name.toString(),
-                    textAlign: TextAlign.left,
-                    style: SafeGoogleFont(
-                      'Lato',
-                      fontSize: 18 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.2 * ffem / fem,
-                      color: Color(0xff000000),
-                    ),
-                  ))),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      /*Text(
+                        widget.postModelData.name.toString(),
+                        textAlign: TextAlign.left,
+                        style: SafeGoogleFont(
+                          'Lato',
+                          fontSize: 18 * ffem,
+                          fontWeight: FontWeight.w700,
+                          height: 1.2 * ffem / fem,
+                          color: Color(0xff000000),
+                        ),
+                        maxLines: isExpanded ? null : widget.,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+
+                      if (!isExpanded)
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              isExpanded = true;
+                            });
+                          },
+                          child: Text(
+                            '...more',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ),*/
+                      AnimatedCrossFade(
+                        firstChild: Expanded(
+                          child: Text(
+                            widget.postModelData.name.toString(),
+                            maxLines: maxLines,
+                            overflow: TextOverflow.ellipsis,
+                            style: SafeGoogleFont(
+                              'Lato',
+                              fontSize: 18 * ffem,
+                              fontWeight: FontWeight.w700,
+                              height: 1.2 * ffem / fem,
+                              color: Color(0xff000000),
+                            ),
+                          ),
+                        ),
+                        secondChild: Text(
+                          "",
+                          style: SafeGoogleFont(
+                            'Lato',
+                            fontSize: 18 * ffem,
+                            fontWeight: FontWeight.w700,
+                            height: 1.2 * ffem / fem,
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                        crossFadeState: isExpanded
+                            ? CrossFadeState.showSecond
+                            : CrossFadeState.showFirst,
+                        duration: const Duration(milliseconds: 300),
+                      ),
+                      if (!isExpanded/* && _isTextOverflowed()*/)
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              isExpanded = true;
+                            });
+                          },
+                          child: Text(
+                            'Read More',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ),
+                      /*AnimatedCrossFade(
+                        firstChild: Text(
+                          widget.postModelData.name.toString(),
+                          maxLines: maxLines,
+                          overflow: TextOverflow.ellipsis,
+                          style: SafeGoogleFont(
+                            'Lato',
+                            fontSize: 18 * ffem,
+                            fontWeight: FontWeight.w700,
+                            height: 1.2 * ffem / fem,
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                        secondChild: Text(
+                          widget.postModelData.name.toString(),
+                          style: SafeGoogleFont(
+                            'Lato',
+                            fontSize: 18 * ffem,
+                            fontWeight: FontWeight.w700,
+                            height: 1.2 * ffem / fem,
+                            color: Color(0xff000000),
+                          ),
+                        ),
+                        crossFadeState: isExpanded
+                            ? CrossFadeState.showSecond
+                            : CrossFadeState.showFirst,
+                        duration: const Duration(milliseconds: 300),
+                      ),
+                      if (!isExpanded)
+                        TextButton(
+                          onPressed: () {
+                            setState(() {
+                              isExpanded = true;
+                            });
+                          },
+                          child: Text(
+                            'more',
+                            style: TextStyle(color: Colors.blue),
+                          ),
+                        ),*/
+
+                    ],
+                  ),
+
+              )),
           SizedBox(
             height: 5,
           ),
@@ -1332,4 +1444,13 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
           );
         });
   }
+
+  /*bool _isTextOverflowed() {
+    final renderObject = context.findRenderObject();
+    if (renderObject is RenderBox) {
+      final constraints = renderObject.constraints;
+      return renderObject.getMaxIntrinsicHeight(constraints as double) > constraints.maxHeight;
+    }
+    return false;
+  }*/
 }

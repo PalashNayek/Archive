@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 import '../utilities/app_common_helper.dart';
@@ -27,7 +28,11 @@ class OtpInput extends StatelessWidget {
         onChanged: (value) {
           if (value.length == 1) {
             FocusScope.of(context).nextFocus();
-          }
+          }/*else{
+            *//*if(controller==""){
+              FocusScope.of(context).previousFocus();
+            }*//*
+          }*/
         },
       ),
     );

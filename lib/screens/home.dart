@@ -555,8 +555,8 @@ class _HomeContentState extends State<HomeContent> {
                       ? ListView.builder(
                           itemCount: postListData.length + 1,
                           controller: _scrollController,
-                          physics: AlwaysScrollableScrollPhysics(),
-                          shrinkWrap: true, /////////////////////////////////
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
                           itemBuilder: (context, i) {
                             return (i == postListData.length)
                                 ? Container(
