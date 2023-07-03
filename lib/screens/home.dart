@@ -53,19 +53,8 @@ class _HomeContentState extends State<HomeContent> {
 
     setState(() {
       getData();
+      getLatestPostData(2);
       getPostDat(offset);
-    });
-  }
-
-  void getPostDat(int off) {
-    postPresenter.getAllPost("", perPage, off, type).then((value) {
-      postListModel = value;
-      postListData.addAll(value.result as Iterable<PostModelData>);
-      totalPostLength = postListData.length.toInt();
-      print("postTotal->$totalPostLength");
-      setState(() {
-        isLoaded = true;
-      });
     });
   }
 
@@ -80,6 +69,26 @@ class _HomeContentState extends State<HomeContent> {
       profileModel = value;
       isLoaded = true;
       setState(() {});
+    });
+  }
+  void getPostDat(int off) {
+    postPresenter.getAllPost("", perPage, off, type).then((value) {
+      postListModel = value;
+      postListData.addAll(value.result as Iterable<PostModelData>);
+      setState(() {
+        isLoaded = true;
+      });
+    });
+  }
+  void getLatestPostData(int off) {
+    postPresenter.getLatestPost("", perPage=2, off, type="All").then((value) {
+      postListModel = value;
+      postListData.addAll(value.result as Iterable<PostModelData>);
+      totalPostLength = postListData.length.toInt();
+      print("latestPostTotal->$totalPostLength");
+      setState(() {
+        isLoaded = true;
+      });
     });
   }
 
@@ -457,6 +466,18 @@ class _HomeContentState extends State<HomeContent> {
                       ],
                     ),
                   ),
+                  /*isLoaded
+                      ? ListView.builder(
+                    itemCount: postListData.length + 1,
+                    controller: _scrollController,
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, i) {
+                      return PostWidgetItem(
+                          postListData.elementAt(i), profileModel);
+                    },
+                  )
+                      : getShimmerLoading(),*/
                   SizedBox(
                       height: 300,
                       width: double.infinity,
@@ -562,7 +583,7 @@ class _HomeContentState extends State<HomeContent> {
                                 ? Container(
                                     margin:
                                         EdgeInsets.only(left: 20, right: 20),
-                                    child: /*moreLoadPostCircleProgressbar? postListData.length < totalPostLength ?*/
+                                    child:
                                         VisibilityDetector(
                                       key: Key('your_button_key'),
                                       // Provide a unique key to the widget

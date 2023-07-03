@@ -75,12 +75,6 @@ class _AccountContentState extends State<AccountContent> {
 
   @override
   void dispose() {
-    //coverImg.cancel();
-    //userProfile.cancel();
-    //userGender.cancel();
-    //postCount.cancel();
-    //itemCountLen.cancel();
-    /*postListResult.cancel();*/
     super.dispose();
   }
 
@@ -99,378 +93,376 @@ class _AccountContentState extends State<AccountContent> {
                     child: CircularProgressIndicator(),
                   ))
                 : Center(
-                    child: Container(
-                        child: Column(
+                    child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
-                          child: Container(
-                              height: 380,
-                              width: double.infinity,
-                              child: Stack(
-                                children: [
-                                  //cover Image
-                                  Positioned(
-                                    left: 0 * fem,
-                                    top: 0 * fem,
-                                    child: Align(
-                                      child: SizedBox(
-                                        width: 390 * fem,
-                                        height: 280 * fem,
-                                        child: profileModel.user?.cover == null
-                                            ? Image.asset(
-                                                'assets/page-1/images/bannerdefaultimage.png',
-                                                fit: BoxFit.cover)
-                                            : Image.network(
-                                                profileModel.user!.cover
-                                                    .toString(),
-                                                fit: BoxFit.cover,
-                                                filterQuality: FilterQuality.low,
-                                                loadingBuilder:
-                                                    (BuildContext context,
-                                                        Widget child,
-                                                        ImageChunkEvent?
-                                                            loadingProgress) {
-                                                  if (loadingProgress == null)
-                                                    return child;
-                                                  return Center(
-                                                    child:
-                                                        CircularProgressIndicator(
-                                                      value: loadingProgress
-                                                                  .expectedTotalBytes !=
-                                                              null
-                                                          ? loadingProgress
-                                                                  .cumulativeBytesLoaded /
-                                                              loadingProgress
-                                                                  .expectedTotalBytes!
-                                                          : null,
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  Positioned(
-                                    left: 0 * fem,
-                                    top: 213 * fem,
-                                    child: Align(
-                                      child: SizedBox(
-                                        width: 390 * fem,
-                                        height: 1486 * fem,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(50 * fem),
-                                            color: Color(0xffffffff),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: SizedBox(
+                          height: 380,
+                          width: double.infinity,
+                          child: Stack(
+                            children: [
+                              //cover Image
+                              Positioned(
+                                left: 0 * fem,
+                                top: 0 * fem,
+                                child: Align(
+                                  child: SizedBox(
+                                    width: 390 * fem,
+                                    height: 280 * fem,
+                                    child: profileModel.user?.cover == null
+                                        ? Image.asset(
+                                            'assets/page-1/images/bannerdefaultimage.png',
+                                            fit: BoxFit.cover)
+                                        : Image.network(
+                                            profileModel.user!.cover
+                                                .toString(),
+                                            fit: BoxFit.cover,
+                                            filterQuality: FilterQuality.low,
+                                            loadingBuilder:
+                                                (BuildContext context,
+                                                    Widget child,
+                                                    ImageChunkEvent?
+                                                        loadingProgress) {
+                                              if (loadingProgress == null)
+                                                return child;
+                                              return Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  value: loadingProgress
+                                                              .expectedTotalBytes !=
+                                                          null
+                                                      ? loadingProgress
+                                                              .cumulativeBytesLoaded /
+                                                          loadingProgress
+                                                              .expectedTotalBytes!
+                                                      : null,
+                                                ),
+                                              );
+                                            },
                                           ),
-                                        ),
-                                      ),
-                                    ),
                                   ),
+                                ),
+                              ),
 
-                                  //user Image
-                                  Positioned(
-                                    left: 129 * fem,
-                                    top: 180 * fem,
-                                    child: Align(
-                                      child: SizedBox(
-                                        width: 131 * fem,
-                                        height: 131 * fem,
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(65.5 * fem),
-                                            border: Border.all(
-                                                color: Color(0xffffffff)),
-                                            image: profileModel.user?.profile ==
-                                                    null
-                                                ? DecorationImage(
-                                                    fit: BoxFit.cover,
-                                                    filterQuality:
-                                                        FilterQuality.low,
-                                                    image: profileModel
-                                                                .user?.gender ==
-                                                            "Male"
-                                                        ? AssetImage(
-                                                            'assets/page-1/images/user_profile_male.png',
-                                                          )
-                                                        : AssetImage(
-                                                            'assets/page-1/images/user_profile_female.png',
-                                                          ),
-                                                  )
-                                                : DecorationImage(
-                                                    fit: BoxFit.cover,
-                                                    filterQuality:
-                                                        FilterQuality.low,
-                                                    image: NetworkImage(
-                                                      profileModel.user!.profile
-                                                          .toString(),
-                                                    ),
-                                                  ),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Color(0x3f000000),
-                                                offset: Offset(0 * fem, 4 * fem),
-                                                blurRadius: 2 * fem,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-
-                                  //Full Name
-                                  Positioned(
-                                    left: 133 * fem,
-                                    top: 311 * fem,
+                              /*Positioned(
+                                left: 0 * fem,
+                                top: 213 * fem,
+                                child: Align(
+                                  child: SizedBox(
+                                    width: 390 * fem,
+                                    height: 1486 * fem,
                                     child: Container(
-                                      width: 204 * fem,
-                                      height: 38 * fem,
-                                      child: Stack(
-                                        children: [
-                                          Positioned(
-                                            left: 0 * fem,
-                                            top: 0 * fem,
-                                            child: Align(
-                                              child: SizedBox(
-                                                width: 124 * fem,
-                                                height: 28 * fem,
-                                                child: Text(
-                                                  profileModel.user!.firstName
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(50 * fem),
+                                        color: Color(0xffffffff),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),*/
+
+                              //user Image
+                              Positioned(
+                                left: 129 * fem,
+                                top: 180 * fem,
+                                child: Align(
+                                  child: SizedBox(
+                                    width: 131 * fem,
+                                    height: 131 * fem,
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(65.5 * fem),
+                                        border: Border.all(
+                                            color: Color(0xffffffff)),
+                                        image: profileModel.user?.profile ==
+                                                null
+                                            ? DecorationImage(
+                                                fit: BoxFit.cover,
+                                                filterQuality:
+                                                    FilterQuality.low,
+                                                image: profileModel
+                                                            .user?.gender ==
+                                                        "Male"
+                                                    ? AssetImage(
+                                                        'assets/page-1/images/user_profile_male.png',
+                                                      )
+                                                    : AssetImage(
+                                                        'assets/page-1/images/user_profile_female.png',
+                                                      ),
+                                              )
+                                            : DecorationImage(
+                                                fit: BoxFit.cover,
+                                                filterQuality:
+                                                    FilterQuality.low,
+                                                image: NetworkImage(
+                                                  profileModel.user!.profile
                                                       .toString(),
-                                                  textAlign: TextAlign.center,
-                                                  style: SafeGoogleFont(
-                                                    'Lato',
-                                                    fontSize: 25 * ffem,
-                                                    fontWeight: FontWeight.w400,
-                                                    height: 1.2 * ffem / fem,
-                                                    color: Color(0xff000000),
-                                                  ),
                                                 ),
                                               ),
-                                            ),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Color(0x3f000000),
+                                            offset: Offset(0 * fem, 4 * fem),
+                                            blurRadius: 2 * fem,
                                           ),
                                         ],
                                       ),
                                     ),
                                   ),
+                                ),
+                              ),
 
-                                  //user Post,follower,following
-                                  Positioned(
-                                    left: 48.6691894531 * fem,
-                                    top: 344 * fem,
-                                    child: Container(
-                                      width: 300 * fem,
-                                      height: 50 * fem,
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          Container(
-                                              margin: EdgeInsets.fromLTRB(0 * fem,
-                                                  0 * fem, 65.83 * fem, 0 * fem),
+                              //Full Name
+                              Positioned(
+                                left: 133 * fem,
+                                top: 311 * fem,
+                                child: Container(
+                                  width: 204 * fem,
+                                  height: 38 * fem,
+                                  child: Stack(
+                                    children: [
+                                      Positioned(
+                                        left: 0 * fem,
+                                        top: 0 * fem,
+                                        child: Align(
+                                          child: SizedBox(
+                                            width: 124 * fem,
+                                            height: 28 * fem,
+                                            child: Text(
+                                              profileModel.user!.firstName
+                                                  .toString(),
+                                              textAlign: TextAlign.center,
+                                              style: SafeGoogleFont(
+                                                'Lato',
+                                                fontSize: 25 * ffem,
+                                                fontWeight: FontWeight.w400,
+                                                height: 1.2 * ffem / fem,
+                                                color: Color(0xff000000),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+
+                              //user Post,follower,following
+                              Positioned(
+                                left: 48.6691894531 * fem,
+                                top: 344 * fem,
+                                child: Container(
+                                  width: 300 * fem,
+                                  height: 50 * fem,
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                          margin: EdgeInsets.fromLTRB(0 * fem,
+                                              0 * fem, 65.83 * fem, 0 * fem),
+                                          child: Column(
+                                            children: [
+                                              Text(
+                                                'Post',
+                                                textAlign: TextAlign.center,
+                                                style: SafeGoogleFont(
+                                                  'Lato',
+                                                  fontSize: 15 * ffem,
+                                                  fontWeight: FontWeight.w700,
+                                                  height: 1.2 * ffem / fem,
+                                                  color: Color(0xff000000),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Text(
+                                                myCount.toString(),
+                                                style: SafeGoogleFont(
+                                                  'Lato',
+                                                  fontSize: 15 * ffem,
+                                                  fontWeight: FontWeight.w700,
+                                                  height: 1.2 * ffem / fem,
+                                                  color: Color(0x8c080053),
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                      GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        MyFollowerListContent(
+                                                          type: "my",
+                                                          userId: profileModel
+                                                              .user!.id
+                                                              .toString(),
+                                                        )));
+                                          },
+                                          child: Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  0 * fem,
+                                                  0 * fem,
+                                                  63.82 * fem,
+                                                  0 * fem),
                                               child: Column(
                                                 children: [
                                                   Text(
-                                                    'Post',
-                                                    textAlign: TextAlign.center,
+                                                    'Followers',
+                                                    textAlign:
+                                                        TextAlign.center,
                                                     style: SafeGoogleFont(
                                                       'Lato',
                                                       fontSize: 15 * ffem,
-                                                      fontWeight: FontWeight.w700,
-                                                      height: 1.2 * ffem / fem,
-                                                      color: Color(0xff000000),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      height:
+                                                          1.2 * ffem / fem,
+                                                      color:
+                                                          Color(0xff000000),
                                                     ),
                                                   ),
                                                   SizedBox(
                                                     height: 10,
                                                   ),
                                                   Text(
-                                                    myCount.toString(),
+                                                    profileModel.follower
+                                                        .toString(),
                                                     style: SafeGoogleFont(
                                                       'Lato',
                                                       fontSize: 15 * ffem,
-                                                      fontWeight: FontWeight.w700,
-                                                      height: 1.2 * ffem / fem,
-                                                      color: Color(0x8c080053),
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      height:
+                                                          1.2 * ffem / fem,
+                                                      color:
+                                                          Color(0x8c080053),
                                                     ),
                                                   ),
                                                 ],
-                                              )),
-                                          GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            MyFollowerListContent(
-                                                              type: "my",
-                                                              userId: profileModel
-                                                                  .user!.id
-                                                                  .toString(),
-                                                            )));
-                                              },
-                                              child: Container(
-                                                  margin: EdgeInsets.fromLTRB(
-                                                      0 * fem,
-                                                      0 * fem,
-                                                      63.82 * fem,
-                                                      0 * fem),
-                                                  child: Column(
-                                                    children: [
-                                                      Text(
-                                                        'Followers',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: SafeGoogleFont(
-                                                          'Lato',
-                                                          fontSize: 15 * ffem,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          height:
-                                                              1.2 * ffem / fem,
-                                                          color:
-                                                              Color(0xff000000),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Text(
-                                                        profileModel.follower
-                                                            .toString(),
-                                                        style: SafeGoogleFont(
-                                                          'Lato',
-                                                          fontSize: 15 * ffem,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          height:
-                                                              1.2 * ffem / fem,
-                                                          color:
-                                                              Color(0x8c080053),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ))),
-                                          GestureDetector(
-                                              onTap: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            MyFollowingListContent(
-                                                              type: "my",
-                                                              userId: profileModel
-                                                                  .user!.id
-                                                                  .toString(),
-                                                            )));
-                                              },
-                                              child: Container(
-                                                  margin: EdgeInsets.fromLTRB(
-                                                      0 * fem,
-                                                      0 * fem,
-                                                      0 * fem,
-                                                      0 * fem),
-                                                  child: Column(
-                                                    children: [
-                                                      Text(
-                                                        'Following',
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style: SafeGoogleFont(
-                                                          'Lato',
-                                                          fontSize: 15 * ffem,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          height:
-                                                              1.2 * ffem / fem,
-                                                          color:
-                                                              Color(0xff000000),
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Text(
-                                                        profileModel.following
-                                                            .toString(),
-                                                        style: SafeGoogleFont(
-                                                          'Lato',
-                                                          fontSize: 15 * ffem,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          height:
-                                                              1.2 * ffem / fem,
-                                                          color:
-                                                              Color(0x8c080053),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ))),
-                                        ],
-                                      ),
-                                    ),
+                                              ))),
+                                      GestureDetector(
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        MyFollowingListContent(
+                                                          type: "my",
+                                                          userId: profileModel
+                                                              .user!.id
+                                                              .toString(),
+                                                        )));
+                                          },
+                                          child: Container(
+                                              margin: EdgeInsets.fromLTRB(
+                                                  0 * fem,
+                                                  0 * fem,
+                                                  0 * fem,
+                                                  0 * fem),
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                    'Following',
+                                                    textAlign:
+                                                        TextAlign.center,
+                                                    style: SafeGoogleFont(
+                                                      'Lato',
+                                                      fontSize: 15 * ffem,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      height:
+                                                          1.2 * ffem / fem,
+                                                      color:
+                                                          Color(0xff000000),
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10,
+                                                  ),
+                                                  Text(
+                                                    profileModel.following
+                                                        .toString(),
+                                                    style: SafeGoogleFont(
+                                                      'Lato',
+                                                      fontSize: 15 * ffem,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                      height:
+                                                          1.2 * ffem / fem,
+                                                      color:
+                                                          Color(0x8c080053),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ))),
+                                    ],
                                   ),
+                                ),
+                              ),
 
-                                  //edit icon section......
-                                  Positioned(
-                                    right: 20 * fem,
-                                    top: 40 * fem,
-                                    child: CircleAvatar(
-                                      backgroundColor: Colors.grey,
-                                      child: Center(
-                                          child: IconButton(
-                                        icon: Icon(
-                                          Icons.settings,
-                                          color: primary,
-                                        ),
-                                        onPressed: () {
-                                          // Navigator.push(context,MaterialPageRoute(builder: (context) =>EditProfileScreen()));
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      SettingsPage()));
-                                        },
-                                      )),
+                              //edit icon section......
+                              Positioned(
+                                right: 20 * fem,
+                                top: 40 * fem,
+                                child: CircleAvatar(
+                                  backgroundColor: Colors.grey,
+                                  child: Center(
+                                      child: IconButton(
+                                    icon: Icon(
+                                      Icons.settings,
+                                      color: primary,
                                     ),
-                                  ),
-                                ],
-                              )),
-                        ),
-                        isLoaded
-                            ? myCount == 0
-                                ? Center(
-                                    child: Padding(
-                                    padding: const EdgeInsets.only(top: 100),
-                                    child: Text(
-                                      'No post',
-                                      style: SafeGoogleFont(
-                                        'Lato',
-                                        fontSize: 18 * ffem,
-                                        fontWeight: FontWeight.w700,
-                                        height: 1.2 * ffem / fem,
-                                        color: Color(0xff404040),
-                                      ),
-                                    ),
-                                  ))
-                                : ListView.builder(
-                                    itemCount: postListModel.result!.length,
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, i) {
-                                      return MyPostWidgetItem(
-                                          postListModel.result!.elementAt(i),
-                                          profileModel.user!.accountId
-                                              .toString());
+                                    onPressed: () {
+                                      // Navigator.push(context,MaterialPageRoute(builder: (context) =>EditProfileScreen()));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  SettingsPage()));
                                     },
-                                  )
-                            : getShimmerLoading()
+                                  )),
+                                ),
+                              ),
+
+                            ],
+                          )
+                      ),
+                    ),
+                    isLoaded
+                        ? myCount == 0
+                            ? Center(
+                                child: Text(
+                                  'No post',
+                                  style: SafeGoogleFont(
+                                    'Lato',
+                                    fontSize: 18 * ffem,
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.2 * ffem / fem,
+                                    color: Color(0xff404040),
+                                  ),
+                                ))
+                            : ListView.builder(
+                                itemCount: postListModel.result!.length,
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemBuilder: (context, i) {
+                                  return MyPostWidgetItem(
+                                      postListModel.result!.elementAt(i),
+                                      profileModel.user!.accountId
+                                          .toString());
+                                },
+                              )
+                        : getShimmerLoading()
                       ],
-                    )),
+                    ),
                   )));
   }
 

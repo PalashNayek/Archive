@@ -105,13 +105,18 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
     return Container(
       margin: EdgeInsets.fromLTRB(6 * fem, 0 * fem, 7 * fem, 7 * fem),
       width: double.infinity,
-      height: 450 * fem,
+      constraints: BoxConstraints(
+        maxHeight: double.infinity,
+        minHeight: 0,
+      ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7 * fem),
         border: Border.all(color: Color(0x99d6d6d6)),
         color: Color(0xffffffff),
       ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //header
           Row(
@@ -269,20 +274,11 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
               child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    /* widget.postModelData.name.toString(),
-                    textAlign: TextAlign.left,
-                    style: SafeGoogleFont(
-                      'Lato',
-                      fontSize: 18 * ffem,
-                      fontWeight: FontWeight.w700,
-                      height: 1.2 * ffem / fem,
-                      color: Color(0xff000000),
-                    ),*/
                     widget.postModelData.name.toString(),
                     textAlign: TextAlign.left,
                     style: SafeGoogleFont(
                       'Lato',
-                      fontSize: 18 * ffem,
+                      fontSize: 16 * ffem,
                       fontWeight: FontWeight.w700,
                       height: 1.2 * ffem / fem,
                       color: Color(0xff000000),

@@ -242,7 +242,6 @@ class _OTPScreenState extends State<OTPScreen> {
                                                   ? 30
                                                   : 20,
                                             ),
-                                            // auto focus
                                             OtpInput(_fieldTwo, false),
                                             SizedBox(
                                               width: AppCommonHelper.isTablet(
@@ -291,7 +290,7 @@ class _OTPScreenState extends State<OTPScreen> {
                                         ? 400
                                         : 185 * fem,
                                     child: Container(
-                                      width: 403 * fem,
+                                      width: 200,
                                       height: 18 * fem,
                                       child: Row(
                                         crossAxisAlignment:
@@ -347,50 +346,6 @@ class _OTPScreenState extends State<OTPScreen> {
                                                     ),
                                                   ),
                                                 ],
-                                              ),
-                                            ),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              OtpInput(_fieldFour, true);
-                                              _fieldFour.clear();
-
-                                              OtpInput(_fieldThree, false);
-                                              _fieldThree.clear();
-
-                                              OtpInput(_fieldTwo, false);
-                                              _fieldTwo.clear();
-
-                                              OtpInput(_fieldOne, false);
-                                              _fieldOne.clear();
-                                            },
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 55),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                  style: SafeGoogleFont(
-                                                    'Lato',
-                                                    fontSize: 15 * ffem,
-                                                    fontWeight: FontWeight.w400,
-                                                    height: 1.2 * ffem / fem,
-                                                    color: Color(0xff1c1b1b),
-                                                  ),
-                                                  children: [
-                                                    TextSpan(
-                                                      text: 'Clear OTP ',
-                                                      style: SafeGoogleFont(
-                                                        'Lato',
-                                                        fontSize: 15 * ffem,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                        height:
-                                                            1.2 * ffem / fem,
-                                                        color: Colors.red,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
                                               ),
                                             ),
                                           ),

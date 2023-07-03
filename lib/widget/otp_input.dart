@@ -19,19 +19,29 @@ class OtpInput extends StatelessWidget {
         keyboardType: TextInputType.number,
         controller: controller,
         maxLength: 1,
+
         cursorColor: Theme.of(context).primaryColor,
         style: TextStyle(color: Colors.black, fontSize: 20.0),
         decoration: const InputDecoration(
             border: OutlineInputBorder(),
             counterText: '',
             hintStyle: TextStyle(color: Colors.black, fontSize: 20.0)),
+          /*onEditingComplete: () {
+            FocusScope.of(context).previousFocus();
+            controller.clear();
+            FocusScope.of(context).unfocus();
+          },*/
         onChanged: (value) {
           if (value.length == 1) {
             FocusScope.of(context).nextFocus();
-          }/*else{
-            *//*if(controller==""){
-              FocusScope.of(context).previousFocus();
-            }*//*
+          }else{
+            FocusScope.of(context).previousFocus();
+          }
+
+          /*else{
+            FocusScope.of(context).previousFocus();
+            controller.clear();
+            FocusScope.of(context).unfocus();
           }*/
         },
       ),

@@ -479,10 +479,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 .then((value) {
                               showCustomSnackBar("Update Successful", context,
                                   isError: false);
-                              /*Navigator.push(
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => DashBoardScreen()));*/
+                                      builder: (context) => AccountContent()));
                             });
                           }
                         },

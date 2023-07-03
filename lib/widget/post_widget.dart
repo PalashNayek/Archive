@@ -98,213 +98,255 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
       });
     }
 
-    var maxLines=2;
     return ////////////////////////////////////////////////////////////////////////////
         Container(
       margin: EdgeInsets.fromLTRB(6 * fem, 0 * fem, 7 * fem, 7 * fem),
       width: double.infinity,
-      height: 550 * fem,
+          constraints: BoxConstraints(
+            maxHeight: double.infinity,
+            minHeight: 0,
+          ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(7 * fem),
         border: Border.all(color: Color(0x99d6d6d6)),
         color: Color(0xffffffff),
       ),
-      child: Column(
-        children: [
-          //header
-          Padding(
-            padding: const EdgeInsets.all(3.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                //user
-                GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OtherAccountContent(widget
-                                  .postModelData.account!.id
-                                  .toString())));
-                    },
-                    child: Container(
-                        margin: EdgeInsets.all(5.0),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(30.0),
-                          child: widget.postModelData.account!.personalDetail!
-                                      .elementAt(0)
-                                      .profile ==
-                                  null
-                              ? Image.asset(
-                                  "assets/page-1/images/user_profile_male.png",
-                                  width: 50 * fem,
-                                  height: 50 * fem,
-                                  fit: BoxFit.cover)
-                              : Image.network(
-                                  loadingBuilder: (BuildContext context,
-                                      Widget child,
-                                      ImageChunkEvent? loadingProgress) {
-                                    if (loadingProgress == null) {
-                                      isLoading = false;
-                                      return child;
-                                    } else {
-                                      isLoading = true;
-                                      return CircularProgressIndicator(
-                                        value: loadingProgress
-                                                    .expectedTotalBytes !=
-                                                null
-                                            ? loadingProgress
-                                                    .cumulativeBytesLoaded /
-                                                loadingProgress
-                                                    .expectedTotalBytes!
-                                            : null,
-                                      );
-                                    }
-                                  },
-                                  widget.postModelData.account!.personalDetail!
-                                      .elementAt(0)
-                                      .profile
-                                      .toString(),
-                                  width: 50 * fem,
-                                  height: 50 * fem,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Image.asset(
-                                        "assets/page-1/images/user_profile_male.png",
-                                        width: 50 * fem,
-                                        height: 50 * fem,
-                                        fit: BoxFit.cover);
-                                  },
-                                  fit: BoxFit.cover,
-                                ),
-                        ))),
-                /*if (isLoading) CircularProgressIndicator(),*/
+      child: Center(
+        child: Column(
+          children: [
+            //header
+            Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  //user
+                  GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OtherAccountContent(widget
+                                    .postModelData.account!.id
+                                    .toString())));
+                      },
+                      child: Container(
+                          margin: EdgeInsets.all(5.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(30.0),
+                            child: widget.postModelData.account!.personalDetail!
+                                        .elementAt(0)
+                                        .profile ==
+                                    null
+                                ? Image.asset(
+                                    "assets/page-1/images/user_profile_male.png",
+                                    width: 50 * fem,
+                                    height: 50 * fem,
+                                    fit: BoxFit.cover)
+                                : Image.network(
+                                    loadingBuilder: (BuildContext context,
+                                        Widget child,
+                                        ImageChunkEvent? loadingProgress) {
+                                      if (loadingProgress == null) {
+                                        isLoading = false;
+                                        return child;
+                                      } else {
+                                        isLoading = true;
+                                        return CircularProgressIndicator(
+                                          value: loadingProgress
+                                                      .expectedTotalBytes !=
+                                                  null
+                                              ? loadingProgress
+                                                      .cumulativeBytesLoaded /
+                                                  loadingProgress
+                                                      .expectedTotalBytes!
+                                              : null,
+                                        );
+                                      }
+                                    },
+                                    widget.postModelData.account!.personalDetail!
+                                        .elementAt(0)
+                                        .profile
+                                        .toString(),
+                                    width: 50 * fem,
+                                    height: 50 * fem,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Image.asset(
+                                          "assets/page-1/images/user_profile_male.png",
+                                          width: 50 * fem,
+                                          height: 50 * fem,
+                                          fit: BoxFit.cover);
+                                    },
+                                    fit: BoxFit.cover,
+                                  ),
+                          ))),
+                  /*if (isLoading) CircularProgressIndicator(),*/
 
-                Expanded(
-                    child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(left: 10, top: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          RichText(
-                            text: TextSpan(
+                  Expanded(
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 10, top: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                style: SafeGoogleFont(
+                                  'Netflix Sans',
+                                  fontSize: 16 * ffem,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.171875 * ffem / fem,
+                                  color: Color(0xff000000),
+                                ),
+                                children: [
+                                  TextSpan(
+                                    text: widget
+                                        .postModelData.account!.personalDetail!
+                                        .elementAt(0)
+                                        .firstName,
+                                    style: SafeGoogleFont(
+                                      'Lato',
+                                      fontSize: 16 * ffem,
+                                      fontWeight: FontWeight.w700,
+                                      height: 1.2 * ffem / fem,
+                                      color: Color(0xff000000),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              AppCommonHelper.timeAgoCustom(
+                                  widget.postModelData.createdAt.toString()),
                               style: SafeGoogleFont(
-                                'Netflix Sans',
-                                fontSize: 16 * ffem,
-                                fontWeight: FontWeight.w500,
-                                height: 1.171875 * ffem / fem,
+                                'Lato',
+                                fontSize: 9 * ffem,
+                                fontWeight: FontWeight.w400,
+                                height: 1.2 * ffem / fem,
+                                color: Color(0xff9496a1),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      //option/more icon
+                      widget.postModelData.account!.id !=
+                              widget.profileModel.user!.accountId.toString()
+                          ? GestureDetector(
+                              child: Container(
+                                  margin: EdgeInsets.only(right: 10),
+                                  child: Icon(
+                                    Icons.more_vert,
+                                    size: AppCommonHelper.isTablet(context)
+                                        ? 40
+                                        : 24,
+                                  )),
+                              onTapDown: (details) {
+                                showPopupMenu(context, details);
+                              },
+                            )
+                          : SizedBox(
+                              width: 1,
+                            )
+                    ],
+                  ))
+                  //username
+                ],
+              ),
+            ),
+            //header End
+            SizedBox(
+              height: 3,
+            ),
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            SizedBox(
+              height: 3,
+            ),
+            Padding(
+                padding: EdgeInsets.only(left: 10),
+                child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          widget.postModelData.name.toString(),
+                          textAlign: TextAlign.left,
+                          style: SafeGoogleFont(
+                            'Lato',
+                            fontSize: 16 * ffem,
+                            fontWeight: FontWeight.w700,
+                            height: 1.2 * ffem / fem,
+                            color: Color(0xff000000),
+                          ),
+                        ),
+
+                        /*if (!isExpanded)
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                isExpanded = true;
+                              });
+                            },
+                            child: Text(
+                              '...more',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          ),*/
+                        /*AnimatedCrossFade(
+                          firstChild: Expanded(
+                            child: Text(
+                              widget.postModelData.name.toString(),
+                              maxLines: maxLines,
+                              overflow: TextOverflow.ellipsis,
+                              style: SafeGoogleFont(
+                                'Lato',
+                                fontSize: 18 * ffem,
+                                fontWeight: FontWeight.w700,
+                                height: 1.2 * ffem / fem,
                                 color: Color(0xff000000),
                               ),
-                              children: [
-                                TextSpan(
-                                  text: widget
-                                      .postModelData.account!.personalDetail!
-                                      .elementAt(0)
-                                      .firstName,
-                                  style: SafeGoogleFont(
-                                    'Lato',
-                                    fontSize: 16 * ffem,
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.2 * ffem / fem,
-                                    color: Color(0xff000000),
-                                  ),
-                                ),
-                              ],
                             ),
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            AppCommonHelper.timeAgoCustom(
-                                widget.postModelData.createdAt.toString()),
+                          secondChild: Text(
+                            "",
                             style: SafeGoogleFont(
                               'Lato',
-                              fontSize: 9 * ffem,
-                              fontWeight: FontWeight.w400,
+                              fontSize: 18 * ffem,
+                              fontWeight: FontWeight.w700,
                               height: 1.2 * ffem / fem,
-                              color: Color(0xff9496a1),
+                              color: Color(0xff000000),
                             ),
                           ),
-                        ],
-                      ),
-                    ),
-
-                    //option/more icon
-                    widget.postModelData.account!.id !=
-                            widget.profileModel.user!.accountId.toString()
-                        ? GestureDetector(
-                            child: Container(
-                                margin: EdgeInsets.only(right: 10),
-                                child: Icon(
-                                  Icons.more_vert,
-                                  size: AppCommonHelper.isTablet(context)
-                                      ? 40
-                                      : 24,
-                                )),
-                            onTapDown: (details) {
-                              showPopupMenu(context, details);
-                            },
-                          )
-                        : SizedBox(
-                            width: 1,
-                          )
-                  ],
-                ))
-                //username
-              ],
-            ),
-          ),
-          //header End
-          SizedBox(
-            height: 3,
-          ),
-          Divider(
-            height: 1,
-            color: Colors.grey,
-          ),
-          SizedBox(
-            height: 3,
-          ),
-          Padding(
-              padding: EdgeInsets.only(left: 10),
-              child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      /*Text(
-                        widget.postModelData.name.toString(),
-                        textAlign: TextAlign.left,
-                        style: SafeGoogleFont(
-                          'Lato',
-                          fontSize: 18 * ffem,
-                          fontWeight: FontWeight.w700,
-                          height: 1.2 * ffem / fem,
-                          color: Color(0xff000000),
+                          crossFadeState: isExpanded
+                              ? CrossFadeState.showSecond
+                              : CrossFadeState.showFirst,
+                          duration: const Duration(milliseconds: 300),
                         ),
-                        maxLines: isExpanded ? null : widget.,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-
-                      if (!isExpanded)
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              isExpanded = true;
-                            });
-                          },
-                          child: Text(
-                            '...more',
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                        ),*/
-                      AnimatedCrossFade(
-                        firstChild: Expanded(
-                          child: Text(
+                        if (!isExpanded*//* && _isTextOverflowed()*//*)
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                isExpanded = true;
+                              });
+                            },
+                            child: Text(
+                              'Read More',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          ),*/
+                        /*AnimatedCrossFade(
+                          firstChild: Text(
                             widget.postModelData.name.toString(),
                             maxLines: maxLines,
                             overflow: TextOverflow.ellipsis,
@@ -316,473 +358,438 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                               color: Color(0xff000000),
                             ),
                           ),
-                        ),
-                        secondChild: Text(
-                          "",
-                          style: SafeGoogleFont(
-                            'Lato',
-                            fontSize: 18 * ffem,
-                            fontWeight: FontWeight.w700,
-                            height: 1.2 * ffem / fem,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                        crossFadeState: isExpanded
-                            ? CrossFadeState.showSecond
-                            : CrossFadeState.showFirst,
-                        duration: const Duration(milliseconds: 300),
-                      ),
-                      if (!isExpanded/* && _isTextOverflowed()*/)
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              isExpanded = true;
-                            });
-                          },
-                          child: Text(
-                            'Read More',
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                        ),
-                      /*AnimatedCrossFade(
-                        firstChild: Text(
-                          widget.postModelData.name.toString(),
-                          maxLines: maxLines,
-                          overflow: TextOverflow.ellipsis,
-                          style: SafeGoogleFont(
-                            'Lato',
-                            fontSize: 18 * ffem,
-                            fontWeight: FontWeight.w700,
-                            height: 1.2 * ffem / fem,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                        secondChild: Text(
-                          widget.postModelData.name.toString(),
-                          style: SafeGoogleFont(
-                            'Lato',
-                            fontSize: 18 * ffem,
-                            fontWeight: FontWeight.w700,
-                            height: 1.2 * ffem / fem,
-                            color: Color(0xff000000),
-                          ),
-                        ),
-                        crossFadeState: isExpanded
-                            ? CrossFadeState.showSecond
-                            : CrossFadeState.showFirst,
-                        duration: const Duration(milliseconds: 300),
-                      ),
-                      if (!isExpanded)
-                        TextButton(
-                          onPressed: () {
-                            setState(() {
-                              isExpanded = true;
-                            });
-                          },
-                          child: Text(
-                            'more',
-                            style: TextStyle(color: Colors.blue),
-                          ),
-                        ),*/
-
-                    ],
-                  ),
-
-              )),
-          SizedBox(
-            height: 5,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          PostDetailsScreen(widget.postModelData)));
-            },
-            child: Container(
-              margin: EdgeInsets.fromLTRB(6 * fem, 0 * fem, 7 * fem, 7 * fem),
-              width: double.infinity,
-              height: 300 * fem,
-              child: widget.postModelData.postImage!.length > 0
-                  ? widget.postModelData.postImage!.length == 1
-                      ? Center(
-                          child: Stack(children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(5.0),
-                            child: getFileExtension(widget
-                                        .postModelData.postImage!
-                                        .elementAt(0)
-                                        .image
-                                        .toString()) ==
-                                    "mp4"
-                                ? files.length > 0
-                                    ? Image.file(
-                                        files.elementAt(0),
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : Center(
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 17, left: 17),
-                                          child: Container(
-                                            height: 42,
-                                            width: 42,
-                                            child: CircularProgressIndicator(),
-                                          ),
-                                        ),
-                                      )
-
-                                /*Image.asset(
-                                        "",
-                                        width: double.infinity,
-                                        fit: BoxFit.cover,
-                                      )*/
-                                : Image.network(
-                                    widget.postModelData.postImage!
-                                        .elementAt(0)
-                                        .image
-                                        .toString(),
-                                    width: double.infinity,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Image.asset(
-                                          "assets/page-1/images/image_load_error.png",
-                                          width: 50 * fem,
-                                          height: 50 * fem,
-                                          fit: BoxFit.cover);
-                                    },
-                                    fit: BoxFit.fill,
-                                    loadingBuilder: (BuildContext context,
-                                        Widget child,
-                                        ImageChunkEvent? loadingProgress) {
-                                      if (loadingProgress == null) {
-                                        isLoading = false;
-                                        return child;
-                                      } else {
-                                        isLoading = true;
-                                        progress = loadingProgress
-                                                    .expectedTotalBytes !=
-                                                null
-                                            ? loadingProgress
-                                                    .cumulativeBytesLoaded /
-                                                loadingProgress
-                                                    .expectedTotalBytes!
-                                            : 0.0;
-                                        return Stack(
-                                          alignment: Alignment.center,
-                                          children: [
-                                            child,
-                                            /*CircularProgressIndicator(
-                                          value: progress,
-                                        ),*/
-                                            SizedBox(
-                                              child: Center(
-                                                  child:
-                                                      CircularProgressIndicator(
-                                                value: progress,
-                                              )),
-                                              height: 100.0,
-                                              width: 100.0,
-                                            ),
-                                            Text(
-                                              '${(progress * 100).toStringAsFixed(1)}%',
-                                              style: TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        );
-
-                                        /*CircularProgressIndicator(
-                                      value: loadingProgress.expectedTotalBytes != null
-                                          ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
-                                          : null,
-                                    );*/
-                                      }
-                                    }),
-                          ),
-                          /*if (isLoading) CircularProgressIndicator(),*/
-                          getFileExtension(widget.postModelData.postImage!
-                                      .elementAt(0)
-                                      .image
-                                      .toString()) ==
-                                  "mp4"
-                              ? Align(
-                                  alignment: Alignment.center,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) => VideoApp(
-                                                    url: widget.postModelData
-                                                        .postImage!
-                                                        .elementAt(0)
-                                                        .image
-                                                        .toString(),
-                                                  )));
-                                    },
-                                    icon: Center(
-                                      child: Icon(Icons.play_circle,
-                                          size: 50, color: third),
-                                    ),
-                                  ))
-                              : SizedBox(
-                                  width: 1,
-                                )
-                        ]))
-                      : Stack(
-                          children: [
-                            PageView.builder(
-                                itemCount:
-                                    widget.postModelData.postImage!.length,
-                                pageSnapping: true,
-                                controller: _pageController,
-                                onPageChanged: (page) {
-                                  setState(() {
-                                    activePage = page;
-                                  });
-                                },
-                                itemBuilder: (context, pagePosition) {
-                                  return Image.network(
-                                    widget.postModelData.postImage!
-                                        .elementAt(pagePosition)
-                                        .image
-                                        .toString(),
-                                    filterQuality: FilterQuality.low,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Center(
-                                        child: Image.asset(
-                                            "assets/page-1/images/image_load_error",
-                                            width: 50 * fem,
-                                            height: 50 * fem,
-                                            fit: BoxFit.cover),
-                                      );
-                                    },
-                                    fit: BoxFit.cover,
-                                    loadingBuilder: (BuildContext context,
-                                        Widget child,
-                                        ImageChunkEvent? loadingProgress) {
-                                      if (loadingProgress == null) return child;
-                                      return Center(
-                                        child: CircularProgressIndicator(
-                                          value: loadingProgress
-                                                      .expectedTotalBytes !=
-                                                  null
-                                              ? loadingProgress
-                                                      .cumulativeBytesLoaded /
-                                                  loadingProgress
-                                                      .expectedTotalBytes!
-                                              : null,
-                                        ),
-                                      );
-                                    },
-                                  );
-                                }),
-                            Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: indicators(
-                                        widget.postModelData.postImage!.length,
-                                        activePage)))
-                          ],
-                        )
-                  : Container(
-                      color: Colors.black26,
-                      child: Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            widget.postModelData.desc.toString(),
-                            /*style: TextStyle(
-                              color: Colors.black,
-                              fontSize:
-                                  AppCommonHelper.isTablet(context) ? 40 : 24,
-                            ),*/
+                          secondChild: Text(
+                            widget.postModelData.name.toString(),
                             style: SafeGoogleFont(
                               'Lato',
-                              fontSize:
-                                  AppCommonHelper.isTablet(context) ? 40 : 24,
+                              fontSize: 18 * ffem,
                               fontWeight: FontWeight.w700,
                               height: 1.2 * ffem / fem,
                               color: Color(0xff000000),
                             ),
-                          )),
-                    ),
-
-              /* ClipRRect(
-            borderRadius: BorderRadius.circular(5.0),
-            child:
-
-            widget.postModelData.postImage!.length>0? widget.postModelData.postImage!.length==1?
-               // Center(child:Stack(children: [
-                  Image.network(widget.postModelData.postImage!.elementAt(0).image.toString(),
-                    fit: BoxFit.cover,)
-                  */ /* Align(
-                    alignment: Alignment.center,
-                    child:  IconButton(onPressed: (){
-                    Navigator.push(context,MaterialPageRoute(builder: (context) =>VideoApp()));
-                  }, icon:   Icon(Icons.play_circle,
-                      size: 50,
-                      color: third
-                  ),))*/ /*
-
-             //   ],))
-            :
-            Stack(children: [
-              PageView.builder(
-                  itemCount: widget.postModelData.postImage!.length,
-                  pageSnapping: true,
-                  controller: _pageController,
-                  onPageChanged: (page) {
-                    setState(() {
-                      activePage = page;
-                    });
-                  },
-                  itemBuilder: (context,pagePosition){
-                    return  Image.network(widget.postModelData.postImage!.elementAt(pagePosition).image.toString(),fit: BoxFit.cover,);
-                  }),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child:  Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: indicators(widget.postModelData.postImage!.length,activePage)))
-            ],) :
-            Align(alignment: Alignment.center, child:Text(widget.postModelData.desc.toString(),style: TextStyle(color: Colors.black),)),
-
-          ),*/
-            ),
-          ),
-          Divider(
-            height: 1,
-            color: Colors.grey,
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Container(
-            width: double.infinity,
-            height: 25.00 * fem,
-            margin: EdgeInsets.only(left: 20, right: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                GestureDetector(
-                    onTap: () {
-                      postPresenter
-                          .addLike(
-                              widget.postModelData.id.toString(),
-                              widget.postModelData.postLike!.length > 0
-                                  ? false
-                                  : true)
-                          .then((value) {
-                        if (widget.postModelData.postLike!.length > 0) {
-                          showCustomSnackBar("UnLike Successfully", context,
-                              isError: false);
-                          int? i = widget.postModelData.likeCount;
-                          widget.postModelData.likeCount = (i! - 1);
-                          widget.postModelData.postLike = [];
-                        } else {
-                          showCustomSnackBar("Liked Successfully", context,
-                              isError: false);
-                          int? i = widget.postModelData.likeCount;
-                          widget.postModelData.likeCount = (i! + 1);
-                          PostLike postLike = PostLike();
-                          postLike.id = "uheuithgiurth";
-                          widget.postModelData.postLike!.add(postLike);
-                        }
-                        setState(() {});
-                      });
-                    },
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Icon(Icons.thumb_up,
-                              size: AppCommonHelper.isTablet(context) ? 40 : 24,
-                              color: widget.postModelData.postLike!.length > 0
-                                  ? secondary
-                                  : primary),
-                          SizedBox(
-                            width: 5,
                           ),
-                          Text(
-                            widget.postModelData.likeCount.toString(),
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: AppCommonHelper.isTablet(context)
-                                    ? 30
-                                    : 16),
-                          )
-                        ],
-                      ),
-                    )),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                CommentScreen(widget.postModelData)));
-                  },
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.comment,
-                          size: AppCommonHelper.isTablet(context) ? 40 : 24,
+                          crossFadeState: isExpanded
+                              ? CrossFadeState.showSecond
+                              : CrossFadeState.showFirst,
+                          duration: const Duration(milliseconds: 300),
                         ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          widget.postModelData.commentCount.toString(),
-                          style: TextStyle(
-                              color: Colors.grey,
-                              fontSize:
-                                  AppCommonHelper.isTablet(context) ? 30 : 16),
-                        )
+                        if (!isExpanded)
+                          TextButton(
+                            onPressed: () {
+                              setState(() {
+                                isExpanded = true;
+                              });
+                            },
+                            child: Text(
+                              'more',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          ),*/
+
                       ],
                     ),
+
+                )),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            PostDetailsScreen(widget.postModelData)));
+              },
+              child: Center(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(0 * fem, 10 * fem, 0 * fem, 0 * fem),
+                    width: double.infinity,
+                    height: 300 * fem,
+                    child: widget.postModelData.postImage!.length > 0
+                        ? widget.postModelData.postImage!.length == 1
+                            ? Center(
+                                child: Stack(children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                  child: getFileExtension(widget
+                                              .postModelData.postImage!
+                                              .elementAt(0)
+                                              .image
+                                              .toString()) ==
+                                          "mp4"
+                                      ? files.length > 0
+                                          ? Image.file(
+                                              files.elementAt(0),
+                                              width: double.infinity,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Center(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 17, left: 17),
+                                                child: Container(
+                                                  height: 42,
+                                                  width: 42,
+                                                  child: CircularProgressIndicator(),
+                                                ),
+                                              ),
+                                            )
+
+                                      /*Image.asset(
+                                              "",
+                                              width: double.infinity,
+                                              fit: BoxFit.cover,
+                                            )*/
+                                      : Image.network(
+                                          widget.postModelData.postImage!
+                                              .elementAt(0)
+                                              .image
+                                              .toString(),
+                                          width: double.infinity,
+                                          errorBuilder: (context, error, stackTrace) {
+                                            return Image.asset(
+                                                "assets/page-1/images/image_load_error.png",
+                                                width: 50 * fem,
+                                                height: 50 * fem,
+                                                fit: BoxFit.cover);
+                                          },
+                                          fit: BoxFit.fill,
+                                          loadingBuilder: (BuildContext context,
+                                              Widget child,
+                                              ImageChunkEvent? loadingProgress) {
+                                            if (loadingProgress == null) {
+                                              isLoading = false;
+                                              return child;
+                                            } else {
+                                              isLoading = true;
+                                              progress = loadingProgress
+                                                          .expectedTotalBytes !=
+                                                      null
+                                                  ? loadingProgress
+                                                          .cumulativeBytesLoaded /
+                                                      loadingProgress
+                                                          .expectedTotalBytes!
+                                                  : 0.0;
+                                              return Stack(
+                                                alignment: Alignment.center,
+                                                children: [
+                                                  child,
+                                                  /*CircularProgressIndicator(
+                                                value: progress,
+                                              ),*/
+                                                  SizedBox(
+                                                    child: Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                      value: progress,
+                                                    )),
+                                                    height: 100.0,
+                                                    width: 100.0,
+                                                  ),
+                                                  Text(
+                                                    '${(progress * 100).toStringAsFixed(1)}%',
+                                                    style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 12,
+                                                      fontWeight: FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+
+                                              /*CircularProgressIndicator(
+                                            value: loadingProgress.expectedTotalBytes != null
+                                                ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!
+                                                : null,
+                                          );*/
+                                            }
+                                          }),
+                                ),
+                                /*if (isLoading) CircularProgressIndicator(),*/
+                                getFileExtension(widget.postModelData.postImage!
+                                            .elementAt(0)
+                                            .image
+                                            .toString()) ==
+                                        "mp4"
+                                    ? Align(
+                                        alignment: Alignment.center,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => VideoApp(
+                                                          url: widget.postModelData
+                                                              .postImage!
+                                                              .elementAt(0)
+                                                              .image
+                                                              .toString(),
+                                                        )));
+                                          },
+                                          icon: Center(
+                                            child: Icon(Icons.play_circle,
+                                                size: 50, color: third),
+                                          ),
+                                        ))
+                                    : SizedBox(
+                                        width: 1,
+                                      )
+                              ]))
+                            : Stack(
+                                children: [
+                                  PageView.builder(
+                                      itemCount:
+                                          widget.postModelData.postImage!.length,
+                                      pageSnapping: true,
+                                      controller: _pageController,
+                                      onPageChanged: (page) {
+                                        setState(() {
+                                          activePage = page;
+                                        });
+                                      },
+                                      itemBuilder: (context, pagePosition) {
+                                        return Image.network(
+                                          widget.postModelData.postImage!
+                                              .elementAt(pagePosition)
+                                              .image
+                                              .toString(),
+                                          filterQuality: FilterQuality.low,
+                                          errorBuilder: (context, error, stackTrace) {
+                                            return Center(
+                                              child: Image.asset(
+                                                  "assets/page-1/images/image_load_error",
+                                                  width: 50 * fem,
+                                                  height: 50 * fem,
+                                                  fit: BoxFit.cover),
+                                            );
+                                          },
+                                          fit: BoxFit.cover,
+                                          loadingBuilder: (BuildContext context,
+                                              Widget child,
+                                              ImageChunkEvent? loadingProgress) {
+                                            if (loadingProgress == null) return child;
+                                            return Center(
+                                              child: CircularProgressIndicator(
+                                                value: loadingProgress
+                                                            .expectedTotalBytes !=
+                                                        null
+                                                    ? loadingProgress
+                                                            .cumulativeBytesLoaded /
+                                                        loadingProgress
+                                                            .expectedTotalBytes!
+                                                    : null,
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      }),
+                                  Align(
+                                      alignment: Alignment.bottomCenter,
+                                      child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: indicators(
+                                              widget.postModelData.postImage!.length,
+                                              activePage)))
+                                ],
+                              )
+                        : Container(
+                            color: Colors.black26,
+                            child: Align(
+                                alignment: Alignment.center,
+                                child: Text(
+                                  widget.postModelData.desc.toString(),
+                                  /*style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize:
+                                        AppCommonHelper.isTablet(context) ? 40 : 24,
+                                  ),*/
+                                  style: SafeGoogleFont(
+                                    'Lato',
+                                    fontSize:
+                                        AppCommonHelper.isTablet(context) ? 40 : 24,
+                                    fontWeight: FontWeight.w700,
+                                    height: 1.2 * ffem / fem,
+                                    color: Color(0xff000000),
+                                  ),
+                                )),
+                          ),
+
+                    /* ClipRRect(
+                  borderRadius: BorderRadius.circular(5.0),
+                  child:
+
+                  widget.postModelData.postImage!.length>0? widget.postModelData.postImage!.length==1?
+                     // Center(child:Stack(children: [
+                        Image.network(widget.postModelData.postImage!.elementAt(0).image.toString(),
+                          fit: BoxFit.cover,)
+                        */ /* Align(
+                          alignment: Alignment.center,
+                          child:  IconButton(onPressed: (){
+                          Navigator.push(context,MaterialPageRoute(builder: (context) =>VideoApp()));
+                        }, icon:   Icon(Icons.play_circle,
+                            size: 50,
+                            color: third
+                        ),))*/ /*
+
+                   //   ],))
+                  :
+                  Stack(children: [
+                    PageView.builder(
+                        itemCount: widget.postModelData.postImage!.length,
+                        pageSnapping: true,
+                        controller: _pageController,
+                        onPageChanged: (page) {
+                          setState(() {
+                            activePage = page;
+                          });
+                        },
+                        itemBuilder: (context,pagePosition){
+                          return  Image.network(widget.postModelData.postImage!.elementAt(pagePosition).image.toString(),fit: BoxFit.cover,);
+                        }),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child:  Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: indicators(widget.postModelData.postImage!.length,activePage)))
+                  ],) :
+                  Align(alignment: Alignment.center, child:Text(widget.postModelData.desc.toString(),style: TextStyle(color: Colors.black),)),
+
+            ),*/
                   ),
                 ),
-                /*Container(child: Row(children: [
-                    Icon(Icons.remove_red_eye_sharp,
-                      size: 24,
-                    ),
-                    SizedBox(width: 5,),
-                    Text("12K",style: TextStyle(color: Colors.grey),)
-                  ],),),*/
-                GestureDetector(
-                    onTapDown: (down) {
-                      if (widget.postModelData.postImage!.length > 0) {
-                        shareNetworkImage(widget.postModelData.postImage!
-                            .elementAt(0)
-                            .image
-                            .toString());
-                      } else {
-                        shareText(widget.postModelData.desc.toString());
-                      }
-                    },
-                    child: Container(
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.ios_share_outlined,
-                            size: AppCommonHelper.isTablet(context) ? 40 : 24,
-                          ),
-                          // SizedBox(width: 5,),
-                          // Text(widget.postModelData.shareCount.toString(),style: TextStyle(color: Colors.grey),)
-                        ],
-                      ),
-                    )),
-              ],
+              ),
             ),
-          ),
-        ],
+            Divider(
+              height: 1,
+              color: Colors.grey,
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: double.infinity,
+                height: 28.00 * fem,
+                margin: EdgeInsets.only(left: 20, right: 20, bottom: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          postPresenter
+                              .addLike(
+                                  widget.postModelData.id.toString(),
+                                  widget.postModelData.postLike!.length > 0
+                                      ? false
+                                      : true)
+                              .then((value) {
+                            if (widget.postModelData.postLike!.length > 0) {
+                              showCustomSnackBar("UnLike Successfully", context,
+                                  isError: false);
+                              int? i = widget.postModelData.likeCount;
+                              widget.postModelData.likeCount = (i! - 1);
+                              widget.postModelData.postLike = [];
+                            } else {
+                              showCustomSnackBar("Liked Successfully", context,
+                                  isError: false);
+                              int? i = widget.postModelData.likeCount;
+                              widget.postModelData.likeCount = (i! + 1);
+                              PostLike postLike = PostLike();
+                              postLike.id = "uheuithgiurth";
+                              widget.postModelData.postLike!.add(postLike);
+                            }
+                            setState(() {});
+                          });
+                        },
+                        child: Container(
+                          child: Row(
+                            children: [
+                              Icon(Icons.thumb_up,
+                                  size: AppCommonHelper.isTablet(context) ? 40 : 24,
+                                  color: widget.postModelData.postLike!.length > 0
+                                      ? secondary
+                                      : primary),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                widget.postModelData.likeCount.toString(),
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: AppCommonHelper.isTablet(context)
+                                        ? 30
+                                        : 16),
+                              )
+                            ],
+                          ),
+                        )),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    CommentScreen(widget.postModelData)));
+                      },
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.comment,
+                              size: AppCommonHelper.isTablet(context) ? 40 : 24,
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            Text(
+                              widget.postModelData.commentCount.toString(),
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize:
+                                      AppCommonHelper.isTablet(context) ? 30 : 16),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    /*Container(child: Row(children: [
+                        Icon(Icons.remove_red_eye_sharp,
+                          size: 24,
+                        ),
+                        SizedBox(width: 5,),
+                        Text("12K",style: TextStyle(color: Colors.grey),)
+                      ],),),*/
+                    GestureDetector(
+                        onTapDown: (down) {
+                          if (widget.postModelData.postImage!.length > 0) {
+                            shareNetworkImage(widget.postModelData.postImage!
+                                .elementAt(0)
+                                .image
+                                .toString());
+                          } else {
+                            shareText(widget.postModelData.desc.toString());
+                          }
+                        },
+                        child: Container(
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.ios_share_outlined,
+                                size: AppCommonHelper.isTablet(context) ? 40 : 24,
+                              ),
+                              // SizedBox(width: 5,),
+                              // Text(widget.postModelData.shareCount.toString(),style: TextStyle(color: Colors.grey),)
+                            ],
+                          ),
+                        )),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     ); ////////////////////////////////////////////////////////////////////
   }

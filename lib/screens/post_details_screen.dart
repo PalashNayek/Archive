@@ -132,7 +132,11 @@ class _PostDetailsState extends State<PostDetailsScreen> {
                             margin: EdgeInsets.fromLTRB(
                                 11 * fem, 0 * fem, 12 * fem, 79 * fem),
                             width: double.infinity,
-                            height: 485 * fem,
+                            constraints: BoxConstraints(
+                              maxHeight: double.infinity,
+                              minHeight: 0,
+                            ),
+
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(7 * fem),
                               border: Border.all(color: Color(0x99d6d6d6)),
