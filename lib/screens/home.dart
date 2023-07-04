@@ -32,7 +32,7 @@ class _HomeContentState extends State<HomeContent> {
   PostPresenter postPresenter = PostPresenter();
   PostListModel postListModel = PostListModel();
   List<PostModelData> postListData = [];
-  int limit = 10; //default- perPage = 10;
+  int perPage = 10; //default- perPage = 10;
   int offset = 0; //default- offset = 0;
   int allOffset = 2; //default- offset = 0;
   int present = 0;
@@ -43,6 +43,7 @@ class _HomeContentState extends State<HomeContent> {
   int latestTwoPostLength = 0;
   int totalAllPostLength = 0;
   String type = "All";
+  final adjustedIndex =0 ;
 
   @override
   void initState() {
@@ -85,10 +86,11 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   void getPostDat(int off) {
-    postPresenter.getAllPost("", limit, off, type).then((value) {
+    postPresenter.getAllPost("", perPage, off, type).then((value) {
       postListModel = value;
       postListData.addAll(value.result as Iterable<PostModelData>);
       totalAllPostLength = postListData.length.toInt();
+      print("postTotal->$totalAllPostLength");
       setState(() {
         isLoaded = true;
       });
@@ -575,64 +577,65 @@ class _HomeContentState extends State<HomeContent> {
                       )),
                   isLoaded
                       ? ListView.builder(
-                          itemCount: totalAllPostLength + 1,
+                          itemCount: totalAllPostLength -1,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, i) {
-                            return (i == totalAllPostLength)
+                            final adjustedIndex = i + 2;
+                            return (adjustedIndex == postListData.length)
                                 ? Container(
-                                    margin:
-                                        EdgeInsets.only(left: 20, right: 20),
-                                    child:
-                                        VisibilityDetector(
-                                      key: Key('your_button_key'),
-                                      // Provide a unique key to the widget
-                                      onVisibilityChanged: (visibilityInfo) {
-                                        if (visibilityInfo.visibleFraction ==
-                                            1.0) {
-                                          moreLoadPostCircleProgressbar = true;
-                                          //offset = offset + perPage;
-                                          getPostDat(allOffset);
-                                        } else {
-                                          moreLoadPostCircleProgressbar = false;
-                                        }
-                                      },
-                                      child: moreLoadPostCircleProgressbar
-                                          ? postListData.length >
-                                          totalAllPostLength
-                                              ? Text("")
-                                              : Center(
-                                                  child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 25),
-                                                  child: Text(
-                                                    'No post available',
-                                                    style: SafeGoogleFont(
-                                                      'Lato',
-                                                      fontSize: 12 * ffem,
-                                                      fontWeight:
-                                                          FontWeight.w700,
-                                                      height: 1.2 * ffem / fem,
-                                                      color: Color(0xff404040),
-                                                    ),
-                                                  ),
-                                                ))
-                                          : const SizedBox(
-                                              height: 64.0,
-                                              width: 24.0,
-                                              child: Center(
-                                                  child: Padding(
-                                                padding:
-                                                    EdgeInsets.only(top: 25),
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              )),
-                                            ),
-                                    ),
-                                  )
+                              margin:
+                              EdgeInsets.only(left: 20, right: 20),
+                              child:
+                              VisibilityDetector(
+                                key: Key('your_button_key'),
+                                // Provide a unique key to the widget
+                                onVisibilityChanged: (visibilityInfo) {
+                                  if (visibilityInfo.visibleFraction ==
+                                      1.0) {
+                                    moreLoadPostCircleProgressbar = true;
+                                    offset = offset + perPage;
+                                    getPostDat(offset);
+                                  } else {
+                                    moreLoadPostCircleProgressbar = false;
+                                  }
+                                },
+                                child: moreLoadPostCircleProgressbar
+                                    ? postListData.length >
+                                    totalAllPostLength
+                                    ? Text("")
+                                    : Center(
+                                    child: Padding(
+                                      padding:
+                                      const EdgeInsets.only(
+                                          top: 25),
+                                      child: Text(
+                                        'No post available',
+                                        style: SafeGoogleFont(
+                                          'Lato',
+                                          fontSize: 12 * ffem,
+                                          fontWeight:
+                                          FontWeight.w700,
+                                          height: 1.2 * ffem / fem,
+                                          color: Color(0xff404040),
+                                        ),
+                                      ),
+                                    ))
+                                    : const SizedBox(
+                                  height: 64.0,
+                                  width: 24.0,
+                                  child: Center(
+                                      child: Padding(
+                                        padding:
+                                        EdgeInsets.only(top: 25),
+                                        child:
+                                        CircularProgressIndicator(),
+                                      )),
+                                ),
+                              ),
+                            )
                                 : PostWidgetItem(
-                                    postListData.elementAt(i), profileModel);
+                                postListData.elementAt(adjustedIndex), profileModel);
                           },
                         )
                       : getShimmerLoading(),
