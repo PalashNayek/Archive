@@ -44,6 +44,7 @@ class _HomeContentState extends State<HomeContent> {
   int totalAllPostLength = 0;
   String type = "All";
   final adjustedIndex =0 ;
+  final List<String> items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 
   @override
   void initState() {
@@ -482,7 +483,7 @@ class _HomeContentState extends State<HomeContent> {
                   )
                       : getShimmerLoading(),
                   SizedBox(
-                      height: 300,
+                      height: 400,
                       width: double.infinity,
                       child: Container(
                         margin: EdgeInsets.fromLTRB(
@@ -492,7 +493,7 @@ class _HomeContentState extends State<HomeContent> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(7 * fem),
                           border: Border.all(color: Color(0x99d6d6d6)),
-                          color: Color(0xffff0000),
+                          color: Color(0xffffffff),
                         ),
                         child: Column(
                           children: [
@@ -558,6 +559,27 @@ class _HomeContentState extends State<HomeContent> {
                                                               profileModel);
                                                       },
                                                     )*/
+                                                /*ListView.builder(
+                                                  scrollDirection: Axis.horizontal, // Set scrollDirection to horizontal
+                                                  itemCount: items.length,
+                                                  itemBuilder: (context, index) {
+                                                    return Padding(
+                                                      padding: EdgeInsets.all(8.0),
+                                                      child: Container(
+                                                        width: 200,
+                                                        height: 200,
+                                                        color: Colors.blue,
+                                                        child: Center(
+                                                          child: Text(
+                                                            items[index],
+                                                            style: TextStyle(color: Colors.white, fontSize: 18),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                ),*/
+
                                               ],
                                             ),
                                           ],
