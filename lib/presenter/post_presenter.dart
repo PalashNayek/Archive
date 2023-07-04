@@ -49,8 +49,8 @@ class PostPresenter {
   Future<PostResponse> addPost(PostRequestModel postRequestModel) async {
     return _postService!.addPost(postRequestModel);
   }
-  Future<PostResponse> updatePost(PostRequestModel postRequestModel) async {
-    return _postService!.addPost(postRequestModel);
+  Future<PostResponse> updatePost(String postId, PostRequestModel postRequestModel) async {
+    return _postService!.updatePost(postId, postRequestModel);
   }
   Future<CommentResponseModel> addComment(String postId,String message) async {
     return _postService!.addComment(message,postId);

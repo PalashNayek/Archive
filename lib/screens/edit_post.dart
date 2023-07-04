@@ -44,6 +44,8 @@ class _EditPostScreenState extends State<EditPostScreen> {
   PostDetails postModelData = PostDetails();
   bool load = false;
   String selected = "";
+  String postId = "";
+
 
   @override
   void initState() {
@@ -61,8 +63,9 @@ class _EditPostScreenState extends State<EditPostScreen> {
     postPresenter.getPostDetails(widget.postId.toString()).then((value) {
       postModelData = value;
       load = true;
+      postId = postModelData.id.toString();
+      //print("PostId->"+postId);
       titleController.text = postModelData.name.toString();
-      //print("ImgURL->$imgUrl");
       descriptionController.text = postModelData.desc.toString();
       selected = postModelData.interestId.toString();
       setState(() {});
@@ -349,19 +352,20 @@ class _EditPostScreenState extends State<EditPostScreen> {
                       registerModel.name = titleController.text;
                       registerModel.desc = descriptionController.text.toString();
                       registerModel.postTags = [hastag];
-                      registerModel.interestId = "c5f756f6-d496-11ed-b4a9-e4f89ca223bc";
+                      registerModel.interestId = selected;
                       registerModel.latitude = "123";
                       registerModel.longitude = "123";
 
-                      postPresenter.updatePost(registerModel).then((value) {
-                        print("updatePost->$value");
-                        if (result != null) {
+
+
+                      postPresenter.updatePost(postId, registerModel).then((value) {
+                        /*if (result != null) {
                           result?.files.forEach((element) {
                             print(element.name);
                             postPresenter.postImageUpload(value.id.toString(),
                                 File(element.path.toString()));
                           });
-                        }
+                        }*/
                         // Fluttertoast.showToast(msg: "Post Updated Successfully");
                         Navigator.push(
                             context,

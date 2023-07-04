@@ -57,6 +57,27 @@ class PostService extends ApiClient with UiHelper {
     });
   }
 
+  //update post...............
+  Future<PostResponse> updatePost(String postId, PostRequestModel postRequestModel) {
+    return patchRequest(_postUrl+"/"+postId, json.encode(postRequestModel))
+        .then((response) async {
+
+      if (response != null) {
+        var result = json.decode(response.body);
+        print("updatePostResult-> $result");
+        if (response.statusCode==201) {
+          PostResponse auth = PostResponse.fromJson(result);
+          print(auth);
+          return auth;
+        } else {
+          AppCommonHelper.customToast(result['message'] ?? "");
+          return PostResponse();
+        }
+      } else {
+        return PostResponse();
+      }
+    });
+  }
 
   Future<PostResponse> addLike(String postId,bool like) {
     print(json.encode({"postId":postId,"like":like}));
@@ -217,6 +238,7 @@ class PostService extends ApiClient with UiHelper {
   Future<PostDetails> getPostDetails(String postId) {
 
     return getRequest(_postUrl+"/"+postId, "",isCompleteUrl: false).then((response) {
+
       if (response != null) {
         print(response.body);
         var result = json.decode(response.body);
