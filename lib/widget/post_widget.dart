@@ -593,23 +593,21 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                 ],
                               )
                         : Container(
-                            color: Colors.black26,
+                            color: Colors.white,
                             child: Align(
                                 alignment: Alignment.center,
-                                child: Text(
-                                  widget.postModelData.desc.toString(),
-                                  /*style: TextStyle(
-                                    color: Colors.black,
-                                    fontSize:
-                                        AppCommonHelper.isTablet(context) ? 40 : 24,
-                                  ),*/
-                                  style: SafeGoogleFont(
-                                    'Lato',
-                                    fontSize:
-                                        AppCommonHelper.isTablet(context) ? 40 : 24,
-                                    fontWeight: FontWeight.w700,
-                                    height: 1.2 * ffem / fem,
-                                    color: Color(0xff000000),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    widget.postModelData.desc.toString(),
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize:
+                                      AppCommonHelper.isTablet(
+                                          context)
+                                          ? 40
+                                          : 24,
+                                    ),
                                   ),
                                 )),
                           ),

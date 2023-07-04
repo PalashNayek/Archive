@@ -49,6 +49,9 @@ class DisplayImageRect extends StatelessWidget {
         ? Image.network(
             filterQuality: FilterQuality.low,
             imagePath,
+            errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+              return const Text('Failed to load image');
+            },
             fit: BoxFit.cover,
           )
         : imagePath.contains('assets')

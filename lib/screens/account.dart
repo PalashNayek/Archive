@@ -201,6 +201,8 @@ class _AccountContentState extends State<AccountContent> {
                                                   profileModel.user!.profile
                                                       .toString(),
                                                 ),
+
+
                                               ),
                                         boxShadow: [
                                           BoxShadow(

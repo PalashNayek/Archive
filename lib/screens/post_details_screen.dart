@@ -38,6 +38,7 @@ class _PostDetailsState extends State<PostDetailsScreen> {
   PageController _pageController =
       PageController(viewportFraction: 1, initialPage: 0);
   bool circleLoader = false;
+  bool isLoading = false;
 
   String getFileExtension(String fileName) {
     try {
@@ -165,6 +166,26 @@ class _PostDetailsState extends State<PostDetailsScreen> {
                                                   height: 50 * fem,
                                                   fit: BoxFit.cover)
                                               : Image.network(
+                                              loadingBuilder: (BuildContext context,
+                                                  Widget child,
+                                                  ImageChunkEvent? loadingProgress) {
+                                                if (loadingProgress == null) {
+                                                  isLoading = false;
+                                                  return child;
+                                                } else {
+                                                  isLoading = true;
+                                                  return CircularProgressIndicator(
+                                                    value: loadingProgress
+                                                        .expectedTotalBytes !=
+                                                        null
+                                                        ? loadingProgress
+                                                        .cumulativeBytesLoaded /
+                                                        loadingProgress
+                                                            .expectedTotalBytes!
+                                                        : null,
+                                                  );
+                                                }
+                                              },
                                                   widget.postModelData.account!
                                                       .personalDetail!
                                                       .elementAt(0)

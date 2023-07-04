@@ -141,8 +141,11 @@ class _SearchPageState extends State<SearchPage> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Container(
-                              height: 320,
-                              width: 500,
+                              width: double.infinity,
+                              constraints: BoxConstraints(
+                                maxHeight: double.infinity,
+                                minHeight: 0,
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(7),
                                 border: Border.all(color: Color(0x99d6d6d6)),
@@ -192,6 +195,9 @@ class _SearchPageState extends State<SearchPage> {
                                   Padding(
                                     padding: const EdgeInsets.only(top: 10),
                                     child: Image.network(
+                                      height: 250,
+                                      width: 300,
+                                      fit: BoxFit.cover,
                                       filterQuality: FilterQuality.low,
                                       postListData
                                               .elementAt(index)
@@ -204,9 +210,7 @@ class _SearchPageState extends State<SearchPage> {
                                               .image
                                               .toString()
                                           : "",
-                                      height: 250,
-                                      width: 300,
-                                      fit: BoxFit.cover,
+
                                       loadingBuilder: (BuildContext context,
                                           Widget child,
                                           ImageChunkEvent? loadingProgress) {

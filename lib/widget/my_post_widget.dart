@@ -294,7 +294,7 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                           PostDetailsScreen(widget.postModelData)));
             },
             child: Container(
-              margin: EdgeInsets.fromLTRB(6 * fem, 0 * fem, 7 * fem, 7 * fem),
+              margin: EdgeInsets.fromLTRB(0 * fem, 10 * fem, 0 * fem, 0 * fem),
               width: double.infinity,
               height: 300 * fem,
               child: widget.postModelData.postImage!.length > 0
