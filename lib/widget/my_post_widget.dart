@@ -54,7 +54,9 @@ class _PostWidgetItemState extends State<MyPostWidgetItem> {
                 widget.postModelData.postImage!.elementAt(0).image.toString())
             .then((value) {
           files.add(value);
-          setState(() {});
+          setState(() {
+
+          });
         });
       }
     }

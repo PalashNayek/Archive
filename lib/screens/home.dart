@@ -32,29 +32,29 @@ class _HomeContentState extends State<HomeContent> {
   PostPresenter postPresenter = PostPresenter();
   PostListModel postListModel = PostListModel();
   List<PostModelData> postListData = [];
-  int perPage = 10; //default- perPage = 10;
+  int limit = 10; //default- perPage = 10;
   int offset = 0; //default- offset = 0;
+  int allOffset = 2; //default- offset = 0;
   int present = 0;
   bool moreLoadPostCircleProgressbar = false;
 
   bool isLoaded = false;
   bool internetConnection = true;
-  int totalPostLength = 0;
+  int totalPostLength=0;
+  int latestTwoPostLength=0;
   String type = "All";
-  late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
     Future.delayed(const Duration(seconds: 3000), () {
       isLoaded = true;
     });
 
     setState(() {
       getData();
-      getLatestPostData(2);
-      getPostDat(offset);
+      getLatestPostData(offset);
+      getPostDat(allOffset);
     });
   }
 
@@ -72,20 +72,21 @@ class _HomeContentState extends State<HomeContent> {
     });
   }
   void getPostDat(int off) {
-    postPresenter.getAllPost("", perPage, off, type).then((value) {
+    postPresenter.getAllPost("", limit, off, type).then((value) {
       postListModel = value;
       postListData.addAll(value.result as Iterable<PostModelData>);
+      totalPostLength = postListData.length.toInt();
       setState(() {
         isLoaded = true;
       });
     });
   }
   void getLatestPostData(int off) {
-    postPresenter.getLatestPost("", perPage=2, off, type="All").then((value) {
+    postPresenter.getLatestPost("",  2, off, type).then((value) {
       postListModel = value;
       postListData.addAll(value.result as Iterable<PostModelData>);
-      totalPostLength = postListData.length.toInt();
-      print("latestPostTotal->$totalPostLength");
+      latestTwoPostLength = postListData.length.toInt();
+      print("latestPostTotal->$latestTwoPostLength");//
       setState(() {
         isLoaded = true;
       });
@@ -94,7 +95,6 @@ class _HomeContentState extends State<HomeContent> {
 
   @override
   void dispose() {
-    _scrollController.dispose();
     super.dispose();
   }
 
@@ -466,10 +466,9 @@ class _HomeContentState extends State<HomeContent> {
                       ],
                     ),
                   ),
-                  /*isLoaded
+                  isLoaded
                       ? ListView.builder(
-                    itemCount: postListData.length + 1,
-                    controller: _scrollController,
+                    itemCount: latestTwoPostLength,
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemBuilder: (context, i) {
@@ -477,7 +476,7 @@ class _HomeContentState extends State<HomeContent> {
                           postListData.elementAt(i), profileModel);
                     },
                   )
-                      : getShimmerLoading(),*/
+                      : getShimmerLoading(),
                   SizedBox(
                       height: 300,
                       width: double.infinity,
@@ -575,7 +574,6 @@ class _HomeContentState extends State<HomeContent> {
                   isLoaded
                       ? ListView.builder(
                           itemCount: postListData.length + 1,
-                          controller: _scrollController,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, i) {
@@ -591,8 +589,8 @@ class _HomeContentState extends State<HomeContent> {
                                         if (visibilityInfo.visibleFraction ==
                                             1.0) {
                                           moreLoadPostCircleProgressbar = true;
-                                          offset = offset + perPage;
-                                          getPostDat(offset);
+                                          //offset = offset + perPage;
+                                          getPostDat(allOffset);
                                         } else {
                                           moreLoadPostCircleProgressbar = false;
                                         }
