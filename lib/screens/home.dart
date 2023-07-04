@@ -40,8 +40,8 @@ class _HomeContentState extends State<HomeContent> {
 
   bool isLoaded = false;
   bool internetConnection = true;
-  int totalPostLength=0;
-  int latestTwoPostLength=0;
+  int latestTwoPostLength = 0;
+  int totalAllPostLength = 0;
   String type = "All";
 
   @override
@@ -71,22 +71,24 @@ class _HomeContentState extends State<HomeContent> {
       setState(() {});
     });
   }
-  void getPostDat(int off) {
-    postPresenter.getAllPost("", limit, off, type).then((value) {
-      postListModel = value;
-      postListData.addAll(value.result as Iterable<PostModelData>);
-      totalPostLength = postListData.length.toInt();
-      setState(() {
-        isLoaded = true;
-      });
-    });
-  }
+
   void getLatestPostData(int off) {
     postPresenter.getLatestPost("",  2, off, type).then((value) {
       postListModel = value;
       postListData.addAll(value.result as Iterable<PostModelData>);
       latestTwoPostLength = postListData.length.toInt();
       print("latestPostTotal->$latestTwoPostLength");//
+      setState(() {
+        isLoaded = true;
+      });
+    });
+  }
+
+  void getPostDat(int off) {
+    postPresenter.getAllPost("", limit, off, type).then((value) {
+      postListModel = value;
+      postListData.addAll(value.result as Iterable<PostModelData>);
+      totalAllPostLength = postListData.length.toInt();
       setState(() {
         isLoaded = true;
       });
@@ -488,7 +490,7 @@ class _HomeContentState extends State<HomeContent> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(7 * fem),
                           border: Border.all(color: Color(0x99d6d6d6)),
-                          color: Color(0xffffffff),
+                          color: Color(0xffff0000),
                         ),
                         child: Column(
                           children: [
@@ -573,11 +575,11 @@ class _HomeContentState extends State<HomeContent> {
                       )),
                   isLoaded
                       ? ListView.builder(
-                          itemCount: postListData.length + 1,
+                          itemCount: totalAllPostLength + 1,
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemBuilder: (context, i) {
-                            return (i == postListData.length)
+                            return (i == totalAllPostLength)
                                 ? Container(
                                     margin:
                                         EdgeInsets.only(left: 20, right: 20),
@@ -597,7 +599,7 @@ class _HomeContentState extends State<HomeContent> {
                                       },
                                       child: moreLoadPostCircleProgressbar
                                           ? postListData.length >
-                                                  totalPostLength
+                                          totalAllPostLength
                                               ? Text("")
                                               : Center(
                                                   child: Padding(

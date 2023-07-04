@@ -30,12 +30,15 @@ class PostPresenter {
   Future<PostListModel> getOtherPost(String userId) {
     return _postService!.getOtherPost(userId,"");
   }
-  Future<PostListModel> getAllPost(String keyword, int limit, int offset, String type) {
-    return _postService!.getAllPost(keyword, limit, offset, type);
-  }
 
   Future<PostListModel> getLatestPost(String keyword, int limit, int offset, String type) {
+    print("getLatestPostParams->"+keyword+","+limit.toString()+","+offset.toString()+", "+type);
     return _postService!.getLatestPost(keyword, limit, offset, type);
+  }
+
+  Future<PostListModel> getAllPost(String keyword, int limit, int offset, String type) {
+    print("getAllPostParams->"+keyword+","+limit.toString()+","+offset.toString()+", "+type);
+    return _postService!.getAllPost(keyword, limit, offset, type);
   }
 
   //get filter ........

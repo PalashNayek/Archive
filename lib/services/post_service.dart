@@ -330,30 +330,26 @@ class PostService extends ApiClient with UiHelper {
     });
   }
 
-  Future<PostListModel> getAllPost(String keyword, int limit,int offset, String type) {
+  //latest two post..............
+  Future<PostListModel> getLatestPost(String keyword, int limit,int offset, String type) {
     return getRequest(_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&type="+type.toString()+"&keyword="+keyword, "",isCompleteUrl: false).then((response) {
       if (response != null) {
         var result = json.decode(response.body);
+        print("getTwoPost->"+result.toString());
         return PostListModel.fromJson(result);
-        /* Iterable iterable = result;
-        return iterable
-            .map((element) => PostListModel.fromJson(element))
-            .toList();*/
       } else {
         return PostListModel();
       }
     });
   }
 
-  Future<PostListModel> getLatestPost(String keyword, int limit,int offset, String type) {
+  //get all post.........
+  Future<PostListModel> getAllPost(String keyword, int limit,int offset, String type) {
     return getRequest(_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&type="+type.toString()+"&keyword="+keyword, "",isCompleteUrl: false).then((response) {
       if (response != null) {
         var result = json.decode(response.body);
+        print("getAllPost->"+result.toString());
         return PostListModel.fromJson(result);
-        /* Iterable iterable = result;
-        return iterable
-            .map((element) => PostListModel.fromJson(element))
-            .toList();*/
       } else {
         return PostListModel();
       }
