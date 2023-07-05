@@ -285,12 +285,12 @@ class _OTPScreenState extends State<OTPScreen> {
                                     ),
                                   ),
                                   Positioned(
-                                    left: 41 * fem,
+                                    left: 31 * fem,
                                     top: AppCommonHelper.isTablet(context)
                                         ? 400
                                         : 185 * fem,
                                     child: Container(
-                                      width: 200,
+                                      width: 30610,
                                       height: 18 * fem,
                                       child: Row(
                                         crossAxisAlignment:

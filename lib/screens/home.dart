@@ -11,8 +11,10 @@ import 'package:visibility_detector/visibility_detector.dart';
 import '../models/banner_model.dart';
 import '../models/post_list_model.dart';
 import '../models/profile_model.dart';
+import '../player/video_player.dart';
 import '../presenter/auth_presenter.dart';
 import '../presenter/post_presenter.dart';
+import '../theme/color.dart';
 import '../utilities/app_common_helper.dart';
 import '../utils.dart';
 import '../widget/banner_item.dart';
@@ -32,7 +34,7 @@ class _HomeContentState extends State<HomeContent> {
   PostPresenter postPresenter = PostPresenter();
   PostListModel postListModel = PostListModel();
   List<PostModelData> postListData = [];
-  List<PostModelData> shortsListDataArray = [];
+  List<PostModelData> shortsListData = [];
   int perPage = 10; //default- perPage = 10;
   int offset = 0; //default- offset = 0;
   int allOffset = 2; //default- offset = 0;
@@ -41,13 +43,14 @@ class _HomeContentState extends State<HomeContent> {
 
   bool isLoaded = false;
   bool internetConnection = true;
-  int latestTwoPostLength = 0;
-  int shortsVideoPostLength = 0;
-  int totalAllPostLength = 0;
+  late int latestTwoPostLength;
+  late int shortsVideoPostLength;
+  late int totalAllPostLength;
+  late int totalShortsPostLength;
   String type = "All";
   String shortVideoType = "Shorts";
-  final adjustedIndex =0 ;
-  final List<String> items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
+  int adjustedIndex =0 ;
+  var profileModelUser;
 
   @override
   void initState() {
@@ -77,7 +80,10 @@ class _HomeContentState extends State<HomeContent> {
     });
     authPresenter.getProfile().then((value) {
       profileModel = value;
-      isLoaded = true;
+      profileModelUser = profileModel.user!;
+      if(profileModelUser && profileModelUser ==null){
+        isLoaded = true;
+      }
       setState(() {});
     });
   }
@@ -96,12 +102,11 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   void getShortsVideo(int off) {
-    postPresenter.getShortsVideoPost("",  perPage, off, shortVideoType).then((value) {
-      print("getShortsVideoList"+value.result.toString());
+    postPresenter.getAllPost("", perPage, off, shortVideoType).then((value) {
       postListModel = value;
-      shortsListDataArray.addAll(value.result as Iterable<PostModelData>);
-      shortsVideoPostLength = shortsListDataArray.length.toInt();
-      print("shortsVideoPostTotal->$shortsVideoPostLength");//
+      shortsListData.addAll(value.result as Iterable<PostModelData>);
+      totalShortsPostLength = shortsListData.length.toInt();
+      print("shortsVideoLen->$totalShortsPostLength");
       setState(() {
         isLoaded = true;
       });
@@ -122,6 +127,8 @@ class _HomeContentState extends State<HomeContent> {
 
   @override
   void dispose() {
+    postListData.clear();
+    shortsListData.clear();
     super.dispose();
   }
 
@@ -431,10 +438,10 @@ class _HomeContentState extends State<HomeContent> {
                                                   )),
                                               isLoaded
                                                   ? CategoryItem(
-                                                      profileModel.user!
+                                                  profileModelUser
                                                           .primaryInetrest!.id
                                                           .toString(),
-                                                      profileModel.user!
+                                                  profileModelUser
                                                           .primaryInetrest!.name
                                                           .toString(),
                                                       profileModel
@@ -445,7 +452,7 @@ class _HomeContentState extends State<HomeContent> {
                                                   : Container(),
                                               isLoaded
                                                   ? CategoryItem(
-                                                      profileModel.user!
+                                                  profileModelUser
                                                           .secondaryInetrest!.id
                                                           .toString(),
                                                       profileModel
@@ -461,13 +468,13 @@ class _HomeContentState extends State<HomeContent> {
                                                   : Container(),
                                               isLoaded
                                                   ? CategoryItem(
-                                                      profileModel.user!
+                                                profileModelUser
                                                           .thirdInetrest!.id
                                                           .toString(),
-                                                      profileModel.user!
+                                                profileModelUser
                                                           .thirdInetrest!.name
                                                           .toString(),
-                                                      profileModel.user!
+                                                profileModelUser
                                                           .thirdInetrest!.image
                                                           .toString(),
                                                     )
@@ -504,14 +511,19 @@ class _HomeContentState extends State<HomeContent> {
                     },
                   )
                       : getShimmerLoading(),
-                  /*Container(
-                      height: 400,
+
+                  Container(
+                      //height: 355,
+                      height: AppCommonHelper.isTablet(
+                          context)
+                          ? 200 * fem
+                          : 355 ,
                       width: double.infinity,
                       child: Container(
                         margin: EdgeInsets.fromLTRB(
                             7 * fem, 0 * fem, 7 * fem, 7 * fem),
                         width: double.infinity,
-                        height: 450 * fem,
+                        height: 460 * fem,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(7 * fem),
                           border: Border.all(color: Color(0x99d6d6d6)),
@@ -531,84 +543,103 @@ class _HomeContentState extends State<HomeContent> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(left: 10, top: 10),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Column(
-                                              children: [
-                                                *//*RichText(
-                                                  text: TextSpan(
-                                                    style: SafeGoogleFont(
-                                                      'Netflix Sans',
-                                                      fontSize: 16 * ffem,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      height:
-                                                          1.171875 * ffem / fem,
-                                                      color: Color(0xff000000),
-                                                    ),
-                                                    children: [
-                                                      TextSpan(
-                                                        text: "Shorts",
-                                                        style: SafeGoogleFont(
-                                                          'Lato',
-                                                          fontSize: 20 * ffem,
-                                                          fontWeight:
-                                                              FontWeight.w700,
-                                                          height:
-                                                              1.2 * ffem / fem,
-                                                          color:
-                                                              Color(0xff000000),
-                                                        ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.all(8.0),
+                                                child: Align(
+
+                                                  alignment: Alignment.topLeft,
+                                                  child: RichText(
+
+                                                    text: TextSpan(
+                                                      style: SafeGoogleFont(
+                                                        'Netflix Sans',
+                                                        fontSize: 16 * ffem,
+                                                        fontWeight:
+                                                        FontWeight.w500,
+                                                        height:
+                                                        1.171875 * ffem / fem,
+                                                        color: Color(0xff000000),
                                                       ),
-                                                    ],
-                                                  ),
-                                                ),*//*
-                                                ////////////////////////////'
-                                                *//* ListView.builder(
-                                                      itemCount: postListModel.result!.length+1,
-                                                      physics: NeverScrollableScrollPhysics(),
-                                                      shrinkWrap: true,
-                                                      itemBuilder: (context, i) {
-                                                        return PostWidgetItem(
-                                                            postListModel.result!.elementAt(i),
-                                                            profileModel.user!.accountId.toString() as ProfileModel);
-                                                          PostWidgetItem(postListData.elementAt(i),
-                                                              profileModel);
-                                                      },
-                                                    )*//*
+                                                      children: [
 
-                                                Container(
-                                                  height: 200,
-                                                  width: 320,
-                                                  child: ListView.builder(
-                                                    scrollDirection: Axis.horizontal,
-                                                    itemCount: 10,
-                                                    itemBuilder: (BuildContext context, int index) {
-                                                      return Container(
-                                                        width: 150,
-                                                        height: 150,
-                                                        color: Colors.blue,
-                                                        margin: EdgeInsets.symmetric(horizontal: 10),
-                                                        child: Center(
-                                                          child: Text('Item $index', style: TextStyle(color: Colors.red)),
+                                                        TextSpan(
+                                                          text: "Shorts",
+                                                          style: SafeGoogleFont(
+                                                            'Lato',
+                                                            fontSize: 20 * ffem,
+                                                            fontWeight:
+                                                            FontWeight.w700,
+                                                            height:
+                                                            1.2 * ffem / fem,
+                                                            color:
+                                                            Color(0xff000000),
+                                                          ),
                                                         ),
-                                                      );
-                                                    },
+                                                      ],
+                                                    ),
                                                   ),
-                                                )
+                                                ),
+                                              ),
 
+                                              ////////////////////////////
 
-
-
-                                              ],
-                                            ),
-                                          ],
-                                        ),
+                                              Container(
+                                                height: 300,
+                                                width: 338,
+                                                child: ListView.builder(
+                                                  scrollDirection: Axis.horizontal,
+                                                  itemCount: shortsListData.length,
+                                                  itemBuilder: (context, i) {
+                                                    //print()
+                                                    return Container(
+                                                      width: 160,
+                                                      height: 150,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(12 * fem),
+                                                        border: Border.all(color: Color(0x99d6d6d6)),
+                                                        color: Color(0xffffffff),
+                                                      ),
+                                                      margin: EdgeInsets.symmetric(horizontal: 5),
+                                                      child: Center(
+                                                        child: Align(
+                                                            alignment: Alignment.center,
+                                                            child: IconButton(
+                                                              onPressed: () {
+                                                                Navigator.push(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder: (context) => VideoApp(
+                                                                          url: /*postListModel.post
+                                                                              .postImage!
+                                                                              .elementAt(0)
+                                                                              .image
+                                                                              .toString()*/
+                                                                          'https://socialstorage.b-cdn.net/posts/1687965597567.mp4'
+                                                                          //postListData.postImage!.elementAt(0).image.toString()
+                                                                          //postListData.elementAt(i).postImage!.elementAt(shortsListData.length).image.toString()
+                                                                          ,
+                                                                        )));
+                                                              },
+                                                              icon: Center(
+                                                                child: Icon(Icons.play_circle,
+                                                                    size: 50, color: third),
+                                                              ),
+                                                            ))
+                                                      ),
+                                                    );
+                                                  },
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ],
                                       ),
 
                                       //option/more icon
@@ -621,7 +652,7 @@ class _HomeContentState extends State<HomeContent> {
                             //header End
                           ],
                         ),
-                      )),*/
+                      )),
                   isLoaded
                       ? ListView.builder(
                           itemCount: totalAllPostLength -1,

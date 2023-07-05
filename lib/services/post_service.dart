@@ -345,7 +345,7 @@ class PostService extends ApiClient with UiHelper {
 
   //Shorts video post..............
   Future<PostListModel> getShortsVideosPost(String keyword, int limit,int offset, String type) {
-    print("getShortVideoReq"+_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&type="+type.toString()+"&keyword="+keyword);
+    print("getShortVideoReq"+keyword+","+limit.toString()+","+offset.toString()+","+type.toString());
     return getRequest(_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&type="+type.toString()+"&keyword="+keyword, "",isCompleteUrl: false).then((response) {
       print("getShortsVideoRes"+json.decode(response.body));
       if (response != null) {

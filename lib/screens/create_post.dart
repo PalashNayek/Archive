@@ -458,7 +458,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                               AppCommonHelper.isTablet(context) ? 30 : 14),
                     ),
                     Container(
-                      height: AppCommonHelper.isTablet(context) ? 120 : 85,
+                      height: AppCommonHelper.isTablet(context) ? 120 : 100,
                       margin: EdgeInsets.all(
                           AppCommonHelper.isTablet(context) ? 1 : 10),
                       decoration: BoxDecoration(

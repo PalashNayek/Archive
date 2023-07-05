@@ -38,7 +38,7 @@ class PostPresenter {
 
   //shorts video posts
   Future<PostListModel> getShortsVideoPost(String keyword, int limit, int offset, String type) {
-    //print("getLatestPostParams->"+keyword+","+limit.toString()+","+offset.toString()+", "+type);
+    print("getVideoPostParams->"+keyword+","+limit.toString()+","+offset.toString()+", "+type);
     return _postService!.getShortsVideosPost(keyword, limit, offset, type);
   }
 
