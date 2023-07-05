@@ -343,6 +343,20 @@ class PostService extends ApiClient with UiHelper {
     });
   }
 
+  //Shorts video post..............
+  Future<PostListModel> getShortsVideosPost(String keyword, int limit,int offset, String type) {
+    print("getShortVideoReq"+_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&type="+type.toString()+"&keyword="+keyword);
+    return getRequest(_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&type="+type.toString()+"&keyword="+keyword, "",isCompleteUrl: false).then((response) {
+      print("getShortsVideoRes"+json.decode(response.body));
+      if (response != null) {
+        var result = json.decode(response.body);
+        return PostListModel.fromJson(result);
+      } else {
+        return PostListModel();
+      }
+    });
+  }
+
   //get all post.........
   Future<PostListModel> getAllPost(String keyword, int limit,int offset, String type) {
     return getRequest(_allPostListUrl+"&limit="+limit.toString()+"&offset="+offset.toString()+"&type="+type.toString()+"&keyword="+keyword, "",isCompleteUrl: false).then((response) {
@@ -419,10 +433,10 @@ class PostService extends ApiClient with UiHelper {
     });
   }
   Future<bool> postImageUpload(String postId,File file) async {
-    print(_imageUploadUrl);
+    print("postImageUploadReq->"+_imageUploadUrl+postId+","+file.toString());
 
     return multipartImageUploadPOST(_imageUploadUrl+postId,file).then((response) async {
-      print("ImgUploadRes$response");
+      print("postImageUploadRes"+response.toString());
       return response;
     });
   }

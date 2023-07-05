@@ -6,7 +6,6 @@ import 'package:s2w/models/following_list_model.dart';
 import 'package:s2w/models/post_list_model.dart';
 import 'package:s2w/models/post_request_model.dart';
 import 'package:s2w/services/post_service.dart';
-
 import '../models/auth_model.dart';
 import '../models/comment_list_model.dart';
 import '../models/comment_response_model.dart';
@@ -31,13 +30,21 @@ class PostPresenter {
     return _postService!.getOtherPost(userId,"");
   }
 
+  //latest two posts
   Future<PostListModel> getLatestPost(String keyword, int limit, int offset, String type) {
-    print("getLatestPostParams->"+keyword+","+limit.toString()+","+offset.toString()+", "+type);
+    //print("getLatestPostParams->"+keyword+","+limit.toString()+","+offset.toString()+", "+type);
     return _postService!.getLatestPost(keyword, limit, offset, type);
   }
 
+  //shorts video posts
+  Future<PostListModel> getShortsVideoPost(String keyword, int limit, int offset, String type) {
+    //print("getLatestPostParams->"+keyword+","+limit.toString()+","+offset.toString()+", "+type);
+    return _postService!.getShortsVideosPost(keyword, limit, offset, type);
+  }
+
+  //all posts
   Future<PostListModel> getAllPost(String keyword, int limit, int offset, String type) {
-    print("getAllPostParams->"+keyword+","+limit.toString()+","+offset.toString()+", "+type);
+    //print("getAllPostParams->"+keyword+","+limit.toString()+","+offset.toString()+", "+type);
     return _postService!.getAllPost(keyword, limit, offset, type);
   }
 

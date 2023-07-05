@@ -32,6 +32,7 @@ class _HomeContentState extends State<HomeContent> {
   PostPresenter postPresenter = PostPresenter();
   PostListModel postListModel = PostListModel();
   List<PostModelData> postListData = [];
+  List<PostModelData> shortsListDataArray = [];
   int perPage = 10; //default- perPage = 10;
   int offset = 0; //default- offset = 0;
   int allOffset = 2; //default- offset = 0;
@@ -41,8 +42,10 @@ class _HomeContentState extends State<HomeContent> {
   bool isLoaded = false;
   bool internetConnection = true;
   int latestTwoPostLength = 0;
+  int shortsVideoPostLength = 0;
   int totalAllPostLength = 0;
   String type = "All";
+  String shortVideoType = "Shorts";
   final adjustedIndex =0 ;
   final List<String> items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
 
@@ -51,11 +54,16 @@ class _HomeContentState extends State<HomeContent> {
     super.initState();
     Future.delayed(const Duration(seconds: 3000), () {
       isLoaded = true;
+      getData();
+      getLatestPostData(offset);
+      getShortsVideo(offset);
+      getPostDat(allOffset);
     });
 
     setState(() {
       getData();
       getLatestPostData(offset);
+      getShortsVideo(offset);
       getPostDat(allOffset);
     });
   }
@@ -75,11 +83,25 @@ class _HomeContentState extends State<HomeContent> {
   }
 
   void getLatestPostData(int off) {
+    isLoaded = true;
     postPresenter.getLatestPost("",  2, off, type).then((value) {
       postListModel = value;
       postListData.addAll(value.result as Iterable<PostModelData>);
       latestTwoPostLength = postListData.length.toInt();
       print("latestPostTotal->$latestTwoPostLength");//
+      setState(() {
+
+      });
+    });
+  }
+
+  void getShortsVideo(int off) {
+    postPresenter.getShortsVideoPost("",  perPage, off, shortVideoType).then((value) {
+      print("getShortsVideoList"+value.result.toString());
+      postListModel = value;
+      shortsListDataArray.addAll(value.result as Iterable<PostModelData>);
+      shortsVideoPostLength = shortsListDataArray.length.toInt();
+      print("shortsVideoPostTotal->$shortsVideoPostLength");//
       setState(() {
         isLoaded = true;
       });
@@ -482,7 +504,7 @@ class _HomeContentState extends State<HomeContent> {
                     },
                   )
                       : getShimmerLoading(),
-                  Container(
+                  /*Container(
                       height: 400,
                       width: double.infinity,
                       child: Container(
@@ -518,7 +540,7 @@ class _HomeContentState extends State<HomeContent> {
                                           children: [
                                             Column(
                                               children: [
-                                                /*RichText(
+                                                *//*RichText(
                                                   text: TextSpan(
                                                     style: SafeGoogleFont(
                                                       'Netflix Sans',
@@ -545,9 +567,9 @@ class _HomeContentState extends State<HomeContent> {
                                                       ),
                                                     ],
                                                   ),
-                                                ),*/
+                                                ),*//*
                                                 ////////////////////////////'
-                                                /* ListView.builder(
+                                                *//* ListView.builder(
                                                       itemCount: postListModel.result!.length+1,
                                                       physics: NeverScrollableScrollPhysics(),
                                                       shrinkWrap: true,
@@ -558,7 +580,7 @@ class _HomeContentState extends State<HomeContent> {
                                                           PostWidgetItem(postListData.elementAt(i),
                                                               profileModel);
                                                       },
-                                                    )*/
+                                                    )*//*
 
                                                 Container(
                                                   height: 200,
@@ -599,7 +621,7 @@ class _HomeContentState extends State<HomeContent> {
                             //header End
                           ],
                         ),
-                      )),
+                      )),*/
                   isLoaded
                       ? ListView.builder(
                           itemCount: totalAllPostLength -1,
