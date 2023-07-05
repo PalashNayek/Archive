@@ -404,7 +404,7 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                   child: Container(
                     margin: EdgeInsets.fromLTRB(0 * fem, 10 * fem, 0 * fem, 0 * fem),
                     width: double.infinity,
-                    height: 300 * fem,
+                    height: 330 * fem,
                     child: widget.postModelData.postImage!.length > 0
                         ? widget.postModelData.postImage!.length == 1
                             ? Center(
@@ -434,12 +434,6 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                                 ),
                                               ),
                                             )
-
-                                      /*Image.asset(
-                                              "",
-                                              width: double.infinity,
-                                              fit: BoxFit.cover,
-                                            )*/
                                       : Image.network(
                                           widget.postModelData.postImage!
                                               .elementAt(0)

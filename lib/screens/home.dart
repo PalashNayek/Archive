@@ -482,7 +482,7 @@ class _HomeContentState extends State<HomeContent> {
                     },
                   )
                       : getShimmerLoading(),
-                  SizedBox(
+                  Container(
                       height: 400,
                       width: double.infinity,
                       child: Container(
@@ -518,7 +518,7 @@ class _HomeContentState extends State<HomeContent> {
                                           children: [
                                             Column(
                                               children: [
-                                                RichText(
+                                                /*RichText(
                                                   text: TextSpan(
                                                     style: SafeGoogleFont(
                                                       'Netflix Sans',
@@ -545,7 +545,7 @@ class _HomeContentState extends State<HomeContent> {
                                                       ),
                                                     ],
                                                   ),
-                                                ),
+                                                ),*/
                                                 ////////////////////////////'
                                                 /* ListView.builder(
                                                       itemCount: postListModel.result!.length+1,
@@ -559,26 +559,29 @@ class _HomeContentState extends State<HomeContent> {
                                                               profileModel);
                                                       },
                                                     )*/
-                                                /*ListView.builder(
-                                                  scrollDirection: Axis.horizontal, // Set scrollDirection to horizontal
-                                                  itemCount: items.length,
-                                                  itemBuilder: (context, index) {
-                                                    return Padding(
-                                                      padding: EdgeInsets.all(8.0),
-                                                      child: Container(
-                                                        width: 200,
-                                                        height: 200,
+
+                                                Container(
+                                                  height: 200,
+                                                  width: 320,
+                                                  child: ListView.builder(
+                                                    scrollDirection: Axis.horizontal,
+                                                    itemCount: 10,
+                                                    itemBuilder: (BuildContext context, int index) {
+                                                      return Container(
+                                                        width: 150,
+                                                        height: 150,
                                                         color: Colors.blue,
+                                                        margin: EdgeInsets.symmetric(horizontal: 10),
                                                         child: Center(
-                                                          child: Text(
-                                                            items[index],
-                                                            style: TextStyle(color: Colors.white, fontSize: 18),
-                                                          ),
+                                                          child: Text('Item $index', style: TextStyle(color: Colors.red)),
                                                         ),
-                                                      ),
-                                                    );
-                                                  },
-                                                ),*/
+                                                      );
+                                                    },
+                                                  ),
+                                                )
+
+
+
 
                                               ],
                                             ),
