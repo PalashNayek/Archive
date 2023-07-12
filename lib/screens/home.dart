@@ -125,6 +125,16 @@ class _HomeContentState extends State<HomeContent> {
     });
   }
 
+  String getFileExtension(String fileName) {
+    try {
+      return fileName.split('.').last;
+    } catch (e) {
+      return "";
+    }
+  }
+
+
+
   @override
   void dispose() {
     postListData.clear();
@@ -137,6 +147,9 @@ class _HomeContentState extends State<HomeContent> {
     double baseWidth = 390;
     double fem = MediaQuery.of(context).size.width / baseWidth;
     double ffem = fem * 0.97;
+
+
+
     return RefreshIndicator(
       onRefresh: _pullRefresh,
       child: SingleChildScrollView(
@@ -608,7 +621,12 @@ class _HomeContentState extends State<HomeContent> {
                                                       ),
                                                       margin: EdgeInsets.symmetric(horizontal: 5),
                                                       child: Center(
-                                                        child: Align(
+                                                        child: /*getFileExtension(widget.postModelData.postImage!
+                                                            .elementAt(0)
+                                                            .image
+                                                            .toString()) ==
+                                                            "mp4"
+                                                            ? Align(
                                                             alignment: Alignment.center,
                                                             child: IconButton(
                                                               onPressed: () {
@@ -616,11 +634,29 @@ class _HomeContentState extends State<HomeContent> {
                                                                     context,
                                                                     MaterialPageRoute(
                                                                         builder: (context) => VideoApp(
-                                                                          url: /*postListModel.post
+                                                                          url: widget.postModelData
                                                                               .postImage!
                                                                               .elementAt(0)
                                                                               .image
-                                                                              .toString()*/
+                                                                              .toString(),
+                                                                        )));
+                                                              },
+                                                              icon: Center(
+                                                                child: Icon(Icons.play_circle,
+                                                                    size: 50, color: third),
+                                                              ),
+                                                            ))*/
+
+                                                        Align(
+                                                            alignment: Alignment.center,
+                                                            child: IconButton(
+                                                              onPressed: () {
+                                                                Navigator.push(
+                                                                    context,
+                                                                    MaterialPageRoute(
+                                                                        builder: (context) => VideoApp(
+                                                                          url:
+
                                                                           'https://socialstorage.b-cdn.net/posts/1687965597567.mp4'
                                                                           //postListData.postImage!.elementAt(0).image.toString()
                                                                           //postListData.elementAt(i).postImage!.elementAt(shortsListData.length).image.toString()
