@@ -11,6 +11,7 @@ import 'package:s2w/screens/other_account.dart';
 import 'package:s2w/screens/post_details_screen.dart';
 import 'package:s2w/theme/color.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:video_player/video_player.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
 
 //import 'package:share_plus/share_plus.dart';
@@ -35,6 +36,7 @@ class PostWidgetItem extends StatefulWidget {
   ProfileModel profileModel;
 
 
+
   @override
   _PostWidgetItemState createState() => _PostWidgetItemState();
 }
@@ -48,11 +50,20 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
   double progress = 0.0;
   bool isExpanded = false;
   //int maxLines= 2;
+  late VideoPlayerController _controller;
 
 
   @override
   void initState() {
     super.initState();
+    /*_controller = VideoPlayerController.network(widget.postModelData
+        .postImage!
+        .elementAt(0)
+        .image
+        .toString().file.path)
+      ..initialize().then((_) {
+        setState(() {});  //when your thumbnail will show.
+      });*/
   }
 
   String getFileExtension(String fileName) {
@@ -518,7 +529,8 @@ class _PostWidgetItemState extends State<PostWidgetItem> {
                                                               .elementAt(0)
                                                               .image
                                                               .toString(),
-                                                        )));
+                                                        )
+                                                ));
                                           },
                                           icon: Center(
                                             child: Icon(Icons.play_circle,

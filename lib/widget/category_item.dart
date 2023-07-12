@@ -103,7 +103,7 @@ class CategoryItem extends StatelessWidget{
                   'Lato',
                   fontSize: 14*ffem,
                   fontWeight: FontWeight.w400,
-                  height: 1.2*ffem/fem,
+                  height: 0.9*ffem/fem,
                   color: Color(0xff000000),
                 ),
               ),
