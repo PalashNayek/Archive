@@ -847,6 +847,7 @@ class _HomeContentState extends State<HomeContent> {
             SizedBox(
               height: 20,
             ),
+            /////////
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
