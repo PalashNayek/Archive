@@ -578,8 +578,9 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                                 descriptionController.text.toString();
                             registerModel.postTags = [hastag];
                             registerModel.interestId = selected;
-                            registerModel.latitude = "123";
-                            registerModel.longitude = "123";
+                            registerModel.latitude = "123123";
+                            registerModel.longitude = "123123";
+                            registerModel.type = "Post";
 
                             //print("button click$registerModel");
 

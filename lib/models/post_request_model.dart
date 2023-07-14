@@ -7,8 +7,9 @@ class PostRequestModel {
   List<HasTagModel>? postTags;
   String? latitude;
   String? longitude;
+  String? type;
 
-  PostRequestModel({this.name, this.desc, this.interestId, this.postTags,this.longitude,this.latitude});
+  PostRequestModel({this.name, this.desc, this.interestId, this.postTags,this.longitude,this.latitude, this.type});
 
   PostRequestModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -22,6 +23,7 @@ class PostRequestModel {
     }
     latitude=json['latitude'];
     longitude=json['longitude'];
+    type=json['type'];
   }
 
   Map<String, dynamic> toJson() {
@@ -31,6 +33,7 @@ class PostRequestModel {
     data['interestId'] = this.interestId;
     data['longitude']=this.longitude;
     data['latitude']=this.latitude;
+    data['type']=this.type;
     if (this.postTags != null) {
       data['postTags'] =
           this.postTags!.map((v) => v.toJson()).toList();

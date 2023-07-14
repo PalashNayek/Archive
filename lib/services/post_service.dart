@@ -59,6 +59,8 @@ class PostService extends ApiClient with UiHelper {
 
   //update post...............
   Future<PostResponse> updatePost(String postId, PostRequestModel postRequestModel) {
+    print("MYPOSTID$postId");
+    print(json.encode(postRequestModel));
     return patchRequest(_postUrl+"/"+postId, json.encode(postRequestModel))
         .then((response) async {
 

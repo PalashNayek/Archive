@@ -60,6 +60,13 @@ class _HomeContentState extends State<HomeContent> {
     shortsVideoPostLength = 0;
     totalAllPostLength = 0;
     totalShortsPostLength = 0;
+    postListData.clear();
+    shortsListData.clear();
+
+    getData();
+    getLatestPostData(offset);
+    getShortsVideo(offset);
+    getPostDat(allOffset);
 
     super.initState();
     Future.delayed(const Duration(seconds: 3000), () {
@@ -71,13 +78,7 @@ class _HomeContentState extends State<HomeContent> {
     });
 
     setState(() {
-      postListData.clear();
-      shortsListData.clear();
 
-      getData();
-      getLatestPostData(offset);
-      getShortsVideo(offset);
-      getPostDat(allOffset);
     });
   }
 
@@ -92,7 +93,7 @@ class _HomeContentState extends State<HomeContent> {
       profileModel = value;
       profileModelUser = profileModel.user!;
       primaryInterestId = profileModelUser.primaryInetrest!.id.toString();
-      if (profileModelUser && primaryInterestId == null) {
+      if (primaryInterestId.isEmpty) {
         isLoaded = true;
       }
       setState(() {});

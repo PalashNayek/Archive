@@ -355,6 +355,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
                       registerModel.interestId = selected;
                       registerModel.latitude = "123";
                       registerModel.longitude = "123";
+                      registerModel.type = "Post";
 
 
 
