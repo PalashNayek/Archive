@@ -105,13 +105,6 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     double ffem = fem * 0.97;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: primary,
-        title: Text(
-          "Create Post",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.fromLTRB(0 * fem, 0 * fem, 0 * fem, 9 * fem),

@@ -1,6 +1,7 @@
+import 'dart:ui';
+import 'package:s2w/theme/color.dart';
+import 'create_post.dart';
 import 'package:flutter/material.dart';
-import 'package:s2w/screens/postImage.dart';
-
 
 class PostOnBoard extends StatefulWidget {
   const PostOnBoard({super.key});
@@ -10,11 +11,11 @@ class PostOnBoard extends StatefulWidget {
 }
 
 class _PostOnBoardState extends State<PostOnBoard> {
+  Widget? _child;
   int _selectedIndex = 0;
-
   static List<Widget> _widgetOptions = <Widget>[
-    //Container(),
-    Text('POST'),
+    //Text('POST'),
+    CreatePostScreen(),
     Text('STORY'),
     Text('REEL'),
     Text('LIVE'),
@@ -23,18 +24,39 @@ class _PostOnBoardState extends State<PostOnBoard> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
-      /*if (_selectedIndex == 0) {
-        *//*Navigator.push(
-            context, MaterialPageRoute(builder: (context) => UserPostImages()));*//*
-      }*/
+      switch (index) {
+        case 0:
+          _child = CreatePostScreen();
+          break;
+        /*case 1:
+          _child = NotificationContent();
+          break;
+        case 2:
+          _child=ConversationList();
+          // _child =UserListContent(); //SettingsContent();
+          break;
+        case 3:
+          _child = AccountContent();
+          break;*/
+      }
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Post'),
+        backgroundColor: primary,
+        title: Text(
+          "New Post",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
@@ -67,8 +89,11 @@ class _PostOnBoardState extends State<PostOnBoard> {
         currentIndex: _selectedIndex,
         selectedIconTheme: IconThemeData(opacity: 0.0, size: 0),
         unselectedIconTheme: IconThemeData(opacity: 0.0, size: 0),
-        selectedItemColor: Colors.amber[800],
-        unselectedItemColor: Colors.white,
+        selectedItemColor: Colors.white, // Color of the selected item
+        unselectedItemColor: Colors.grey, // Color of the unselected items
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold), // Style of the selected label
+        unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
+        showUnselectedLabels: true,
         onTap: _onItemTapped,
       ),
     );

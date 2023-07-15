@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:s2w/presenter/shared_presenter.dart';
+import 'package:s2w/screens/postOnboard.dart';
 import 'package:s2w/screens/searchPageScreen.dart';
 import 'package:s2w/widget/category_item.dart';
 import 'package:s2w/widget/post_widget.dart';
@@ -43,23 +44,32 @@ class _HomeContentState extends State<HomeContent> {
 
   bool isLoaded = false;
   bool internetConnection = true;
-  late int latestTwoPostLength;
-  late int shortsVideoPostLength;
-  late int totalAllPostLength;
-  late int totalShortsPostLength;
+  int latestTwoPostLength=0;
+  int shortsVideoPostLength=0;
+  int totalAllPostLength=1;
+  int totalShortsPostLength=0;
   String type = "All";
   String shortVideoType = "Shorts";
   int adjustedIndex = 0;
 
   var profileModelUser;
-  late String primaryInterestId;
+  String primaryInterestId="";
+  String primaryInterestName="";
+  String profileModelUsers="";
+  String profileModelUserSecondaryInetrestId="";
+  String profileModelUserSecondaryInetrestName="";
+  String profileModelUserSecondaryInetrestImage="";
+  String thirdIntestId="";
+  String thirdIntestName="";
+  String thirdIntestImage="";
 
   @override
   void initState() {
-    latestTwoPostLength = 0;
+    //primaryInterestId = 1;
+    /*latestTwoPostLength = 0;
     shortsVideoPostLength = 0;
     totalAllPostLength = 0;
-    totalShortsPostLength = 0;
+    totalShortsPostLength = 0;*/
     postListData.clear();
     shortsListData.clear();
 
@@ -93,6 +103,14 @@ class _HomeContentState extends State<HomeContent> {
       profileModel = value;
       profileModelUser = profileModel.user!;
       primaryInterestId = profileModelUser.primaryInetrest!.id.toString();
+      primaryInterestName = profileModelUser.primaryInetrest!.name.toString();
+      profileModelUsers = profileModel.user!.primaryInetrest!.image.toString();
+      profileModelUserSecondaryInetrestId = profileModelUser.secondaryInetrest!.id.toString();
+      profileModelUserSecondaryInetrestName = profileModel.user!.secondaryInetrest!.name.toString();
+      profileModelUserSecondaryInetrestImage = profileModel.user!.secondaryInetrest!.image.toString();
+      thirdIntestId = profileModelUser.thirdInetrest!.id.toString();
+      thirdIntestName = profileModelUser.thirdInetrest!.name.toString();
+      thirdIntestImage = profileModelUser.thirdInetrest!.image.toString();
       if (primaryInterestId.isEmpty) {
         isLoaded = true;
       }
@@ -117,7 +135,7 @@ class _HomeContentState extends State<HomeContent> {
       totalShortsPostLength = shortsListData.length.toInt();
       print("shortsVideoLen->$totalShortsPostLength");
       setState(() {
-        isLoaded = true;
+        //isLoaded = true;
       });
     });
   }
@@ -129,7 +147,7 @@ class _HomeContentState extends State<HomeContent> {
       totalAllPostLength = postListData.length.toInt();
       print("postTotal->$totalAllPostLength");
       setState(() {
-        isLoaded = true;
+        //isLoaded = true;
       });
     });
   }
@@ -345,7 +363,7 @@ class _HomeContentState extends State<HomeContent> {
                                                           context,
                                                           MaterialPageRoute(
                                                               builder: (context) =>
-                                                                  CreatePostScreen()));
+                                                                  PostOnBoard()));
                                                     },
                                                     child: Container(
                                                       margin: EdgeInsets.fromLTRB(
@@ -412,7 +430,7 @@ class _HomeContentState extends State<HomeContent> {
                                                                             () {
                                                                           Navigator.push(
                                                                               context,
-                                                                              MaterialPageRoute(builder: (context) => CreatePostScreen()));
+                                                                              MaterialPageRoute(builder: (context) => PostOnBoard()));
                                                                         },
                                                                         style: TextButton
                                                                             .styleFrom(
@@ -459,42 +477,23 @@ class _HomeContentState extends State<HomeContent> {
                                                 isLoaded
                                                     ? CategoryItem(
                                                         primaryInterestId,
-                                                        profileModelUser
-                                                            .primaryInetrest!.name
-                                                            .toString(),
-                                                        profileModel
-                                                            .user!
-                                                            .primaryInetrest!
-                                                            .image
-                                                            .toString())
+                                                        primaryInterestName,
+                                                        profileModelUsers)
                                                     : Container(),
                                                 isLoaded
                                                     ? CategoryItem(
-                                                        profileModelUser
-                                                            .secondaryInetrest!.id
-                                                            .toString(),
-                                                        profileModel
-                                                            .user!
-                                                            .secondaryInetrest!
-                                                            .name
-                                                            .toString(),
-                                                        profileModel
-                                                            .user!
-                                                            .secondaryInetrest!
-                                                            .image
-                                                            .toString())
+                                                        profileModelUserSecondaryInetrestId,
+                                                        profileModelUserSecondaryInetrestName,
+                                                        profileModelUserSecondaryInetrestImage,
+
+                                                        )
                                                     : Container(),
                                                 isLoaded
                                                     ? CategoryItem(
-                                                        profileModelUser
-                                                            .thirdInetrest!.id
-                                                            .toString(),
-                                                        profileModelUser
-                                                            .thirdInetrest!.name
-                                                            .toString(),
-                                                        profileModelUser
-                                                            .thirdInetrest!.image
-                                                            .toString(),
+                                                        thirdIntestId,
+                                                        thirdIntestName,
+                                                        thirdIntestImage,
+
                                                       )
                                                     : const Padding(
                                                         padding: EdgeInsets.only(
